@@ -5,7 +5,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import IndexPage from "views/index/IndexPage";
+import MainPage from "views/main/MainPage";
 
 export default function App() {
   return (
@@ -14,7 +14,7 @@ export default function App() {
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/">
-              <Route index element={<IndexPage />} />
+              <Route index element={<MainPage />} />
             </Route>
           </Routes>
         </Suspense>

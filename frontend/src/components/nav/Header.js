@@ -24,7 +24,7 @@ export default function Header() {
 const StyledWrapper = styled.div`
   #container {
     width: 100%;
-    height: 100px;
+    height: 80px;
     position: sticky;
     background-color: white;
     display: flex;
@@ -42,8 +42,8 @@ const StyledWrapper = styled.div`
     justify-content: center;
   }
   #logo-image {
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
   }
   #logo-letter {
     font-size: 32px;    
