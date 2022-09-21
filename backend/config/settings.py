@@ -25,12 +25,13 @@ SECRET_KEY = 'django-insecure-4=by2b#9l1+wp7&gof$qod-r1dt+-vsmn=!q7r)i*)(sg5e6*j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'user.apps.UserConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -73,10 +74,21 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+DATABASES={
+    'default' :{
+        'ENGINE' : 'django.db.backends.mysql',
+        'NAME' : 'o1a4',
+        'USER' :'o1a4',
+        'PASSWORD' : 'a402o1a4!!',
+        'HOST' : 'j7a402.p.ssafy.io',
+        'PORT'  :'3306',
     }
 }
 
@@ -105,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'KST'
 
 USE_I18N = True
 
