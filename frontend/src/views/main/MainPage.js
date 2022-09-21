@@ -5,7 +5,7 @@ import styled from "styled-components";
 import PopularWordCard from "components/main/PopularWordCard";
 import RecentReviewCard from "components/main/RecentReviewCard";
 
-export default function IndexPage() {
+export default function MainPage() {
   return(
     <StyledWrapper>
       <Header />

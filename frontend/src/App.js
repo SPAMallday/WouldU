@@ -3,9 +3,9 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
 } from "react-router-dom";
 import MainPage from "views/main/MainPage";
+import SearchPage from "views/search/SearchPage";
 
 export default function App() {
   return (
@@ -15,6 +15,10 @@ export default function App() {
           <Routes>
             <Route path="/">
               <Route index element={<MainPage />} />
+              <Route
+                path="search"
+                element={<SearchPage />}
+              />
             </Route>
           </Routes>
         </Suspense>

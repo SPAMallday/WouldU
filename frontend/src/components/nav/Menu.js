@@ -9,7 +9,7 @@ export default function Menu() {
   return(
     <StyledWrapper>
       <div id="menubuttons">
-        <Link to="/">
+        <Link to="search">
           <div id="search">
             검색
           </div>
