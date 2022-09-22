@@ -6,6 +6,7 @@ import Login from "views/login/Login";
 import Join from "views/login/joinID";
 import Join2 from "views/login/joinQ";
 import MyPage from "views/mypage/MyPage";
+import SearchOnce from "views/search/SearchOnce";
 
 export default function App() {
   return (
@@ -19,7 +20,8 @@ export default function App() {
               <Route path="login" element={<Login />}></Route>
               <Route path="join" element={<Join />}></Route>
               <Route path="survey" element={<Join2 />}></Route>
-              <Route path="/mypage" element={<MyPage />}></Route>
+              <Route path="mypage" element={<MyPage />}></Route>
+              <Route path="once" element={<SearchOnce />}></Route>
             </Route>
           </Routes>
         </Suspense>
