@@ -6,49 +6,40 @@ import { Link } from "react-router-dom";
  */
 export default function Menu() {
   const logged = window.sessionStorage.getItem("logged");
-  return(
+  return (
     <StyledWrapper>
       <div id="menubuttons">
-        <Link to="search">
-          <div id="search">
-            검색
-          </div>
+        <Link to="/search">
+          <div id="search">검색</div>
         </Link>
         <Link to="/">
-          <div id="recommend">
-            추천
-          </div>
+          <div id="recommend">추천</div>
         </Link>
-        {logged ?
+        {logged ? (
           <>
             <Link to="/">
-              <div id="mypage">
-                마이페이지
-              </div>
+              <div id="mypage">마이페이지</div>
             </Link>
             <Link to="/">
-              <div id="logout">
-                로그아웃
-              </div>
+              <div id="logout">로그아웃</div>
             </Link>
-          </> :
-          <Link to="/">
-            <div id="login">
-              로그인
-            </div>
+          </>
+        ) : (
+          <Link to="/login">
+            <div id="login">로그인</div>
           </Link>
-        }
+        )}
       </div>
     </StyledWrapper>
   );
-};
+}
 
 const StyledWrapper = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
   justify-content: center;
-  
+
   #menubuttons {
     display: flex;
   }
