@@ -1,6 +1,6 @@
 
 
-export default function SearchResult() {
+export default function SearchFrame() {
   return (
     <div>
       

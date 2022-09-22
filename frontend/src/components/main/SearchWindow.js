@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function SearchWindow() {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = React.useState("");
   // const dataFiltered = filterData(searchQuery, data);
 
   const SearchBar = ({setSearchQuery}) => (
@@ -21,9 +22,11 @@ export default function SearchWindow() {
         size="small"
         sx={{ width: 700 }}
       />
-      <IconButton type="submit" aria-label="search">
-        <SearchIcon style={{ fill: "grey" }} />
-      </IconButton>
+      <Link to="search">
+        <IconButton type="submit" aria-label="search">
+          <SearchIcon style={{ fill: "grey" }} />
+        </IconButton>
+      </Link>
     </form>
   );
   // const filterData = (query, data) => {
