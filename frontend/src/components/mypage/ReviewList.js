@@ -3,19 +3,23 @@ import styled from "@emotion/styled";
 import ex from "assets/img/장수.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
-import { HiOutlineStar } from "react-icons/hi";
-import { AiFillStar } from "react-icons/ai";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
+import Rating from "@mui/material/Rating";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 
-export default function LikeList(prop) {
+/**
+ * 술 이미지 교체 필요, 리뷰 보여주는 컴포, 리뷰 삭제 post보내야함
+ * @param {*} prop 리뷰리스트 받아야함
+ * @returns
+ */
+export default function ReviewList(prop) {
   //dialog용 변수
   const [open, setOpen] = React.useState(false);
 
@@ -35,64 +39,6 @@ export default function LikeList(prop) {
     console.log(item);
   };
 
-  //별표 만드는 것
-  const star = rating => {
-    if (rating === 1) {
-      return (
-        <h4 id="tx_rating">
-          별점 :
-          <AiFillStar color="yellow" size="20" />
-          <HiOutlineStar color="yellow" size="20" />
-          <HiOutlineStar color="yellow" size="20" />
-          <HiOutlineStar color="yellow" size="20" />
-          <HiOutlineStar color="yellow" size="20" />
-        </h4>
-      );
-    } else if (rating === 2) {
-      return (
-        <h4 id="tx_rating">
-          별점 :
-          <AiFillStar color="yellow" size="20" />
-          <AiFillStar color="yellow" size="20" />
-          <HiOutlineStar color="yellow" size="20" />
-          <HiOutlineStar color="yellow" size="20" />
-          <HiOutlineStar color="yellow" size="20" />
-        </h4>
-      );
-    } else if (rating === 3) {
-      return (
-        <h4 id="tx_rating">
-          별점 :
-          <AiFillStar color="yellow" size="20" />
-          <AiFillStar color="yellow" size="20" />
-          <AiFillStar color="yellow" size="20" />
-          <HiOutlineStar color="yellow" size="20" />
-          <HiOutlineStar color="yellow" size="20" />
-        </h4>
-      );
-    } else if (rating === 4) {
-      return (
-        <h4 id="tx_rating">
-          별점 : <AiFillStar color="yellow" size="20" />
-          <AiFillStar color="yellow" size="20" />
-          <AiFillStar color="yellow" size="20" />
-          <AiFillStar color="yellow" size="20" />
-          <HiOutlineStar color="yellow" size="20" />
-        </h4>
-      );
-    } else {
-      return (
-        <h4 id="tx_rating">
-          별점 : <AiFillStar color="yellow" size="20" />
-          <AiFillStar color="yellow" size="20" />
-          <AiFillStar color="yellow" size="20" />
-          <AiFillStar color="yellow" size="20" />
-          <AiFillStar color="yellow" size="20" />
-        </h4>
-      );
-    }
-  };
-
   // 술 리스트 반복으로 보여주기
   const like = () => {
     const result = [];
@@ -109,7 +55,14 @@ export default function LikeList(prop) {
               <img src={ex} alt="술" id="imgSool"></img>
               <h5 id="nameSool">{prop.reviewList[i].name}</h5>
             </div>
-            {star(prop.reviewList[i].rating)}
+            <div>
+              <h5 id="tx_star">평점 :</h5>
+              <Rating
+                name="read-only"
+                value={prop.reviewList[i].rating}
+                readOnly
+              />
+            </div>
             <h5 id="tx_rating">한줄평 : {prop.reviewList[i].comment}</h5>
           </div>
         </SwiperSlide>,
@@ -177,6 +130,13 @@ const StyledWrapper = styled.div`
     text-align: left;
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  #tx_star {
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: -25px;
     margin-left: 20px;
     margin-right: 20px;
   }

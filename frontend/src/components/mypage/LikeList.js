@@ -8,6 +8,12 @@ import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 
+/**
+ * 술 목록 받아서 보여주는 컴포
+ * 술 이미지 교체 필요
+ * @param {*} prop 좋아요 리스트 받아야함
+ * @returns
+ */
 export default function LikeList(prop) {
   const onClickItem = item => {
     console.log(item);
@@ -33,9 +39,7 @@ export default function LikeList(prop) {
     <StyledWrapper>
       <div id="main">
         <h3 id="title">좋아요 목록</h3>
-        <div id="space">
-          <div id="itemlist"></div>
-        </div>
+
         <Swiper
           modules={[Navigation]}
           spaceBetween={-50}

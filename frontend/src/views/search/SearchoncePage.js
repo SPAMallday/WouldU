@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import Header from "components/nav/Header";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import Button from "@mui/material/Button";
+import SelectType from "components/search/SelectType";
 
 //import axios from "axios";
 
+/**
+ * 신맛,단맛,바디감,향, 도수로 검색하는 페이지
+ * post 연결해야함
+ * @returns
+ */
 export default function SearchOnce() {
   const [sweet, setSweet] = useState(3);
   const [sour, setSour] = useState(3);
@@ -22,29 +28,6 @@ export default function SearchOnce() {
     console.log(smell);
     console.log(value);
   };
-
-  const marks = [
-    {
-      value: 1,
-      label: "1",
-    },
-    {
-      value: 2,
-      label: "2",
-    },
-    {
-      value: 3,
-      label: "3",
-    },
-    {
-      value: 4,
-      label: "4",
-    },
-    {
-      value: 5,
-      label: "5",
-    },
-  ];
 
   const alchol = [
     {
@@ -74,6 +57,7 @@ export default function SearchOnce() {
       label: "50",
     },
   ];
+
   const handleChange = (event, newValue) => {
     setSweet(newValue);
   };
@@ -86,6 +70,8 @@ export default function SearchOnce() {
   const handleChange3 = (event, newValue) => {
     setSmell(newValue);
   };
+
+  //도수
   const handleChange4 = (event, newValue) => {
     setValue(newValue);
   };
@@ -100,66 +86,12 @@ export default function SearchOnce() {
       <div id="main">
         <h2>일회성 검색</h2>
         <div id="searchForm">
-          <div>
-            <h5 id="textSub">단맛</h5>
-            <Box sx={{ width: 400 }} id="slider">
-              <Slider
-                defaultValue={3}
-                getAriaValueText={valuetext}
-                onChange={handleChange}
-                valueLabelDisplay="auto"
-                marks={marks}
-                min={1}
-                max={5}
-                color="secondary"
-              />
-            </Box>
-          </div>
-          <div>
-            <h5 id="textSub">신맛</h5>
-            <Box sx={{ width: 400 }} id="slider">
-              <Slider
-                defaultValue={3}
-                getAriaValueText={valuetext}
-                onChange={handleChange1}
-                valueLabelDisplay="auto"
-                marks={marks}
-                min={1}
-                max={5}
-                color="secondary"
-              />
-            </Box>
-          </div>
-          <div>
-            <h5 id="textSub">바디감</h5>
-            <Box sx={{ width: 400 }} id="slider">
-              <Slider
-                defaultValue={3}
-                getAriaValueText={valuetext}
-                onChange={handleChange2}
-                valueLabelDisplay="auto"
-                marks={marks}
-                min={1}
-                max={5}
-                color="secondary"
-              />
-            </Box>
-          </div>
-          <div>
-            <h5 id="textSub">향</h5>
-            <Box sx={{ width: 400 }} id="slider">
-              <Slider
-                defaultValue={3}
-                getAriaValueText={valuetext}
-                onChange={handleChange3}
-                valueLabelDisplay="auto"
-                marks={marks}
-                min={1}
-                max={5}
-                color="secondary"
-              />
-            </Box>
-          </div>
+          <SelectType
+            handleChange={handleChange}
+            handleChange1={handleChange1}
+            handleChange2={handleChange2}
+            handleChange3={handleChange3}
+          />
           <div>
             <h5 id="textSub">도수</h5>
             <Box sx={{ width: 400 }} id="slider">
