@@ -1,9 +1,8 @@
 from django.urls import path
-from . import views
+from .views import signup
 
 urlpatterns=[
-    path('', views.index, name='index'),
-    
+   
     #회원가입
-    
+    path('signup/', signup),
 ]
