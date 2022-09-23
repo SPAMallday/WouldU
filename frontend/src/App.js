@@ -6,7 +6,9 @@ import Login from "views/login/Login";
 import Join from "views/login/joinID";
 import Join2 from "views/login/joinQ";
 import MyPage from "views/mypage/MyPage";
-import SearchOnce from "views/search/SearchOnce";
+import SearchOnce from "views/search/SearchoncePage";
+import ReviewBefore from "views/rating/ReviewBefore";
+import ReviewSul from "views/rating/ReviewSul";
 
 export default function App() {
   return (
@@ -22,6 +24,8 @@ export default function App() {
               <Route path="survey" element={<Join2 />}></Route>
               <Route path="mypage" element={<MyPage />}></Route>
               <Route path="once" element={<SearchOnce />}></Route>
+              <Route path="before" element={<ReviewBefore />}></Route>
+              <Route path="rating" element={<ReviewSul />}></Route>
             </Route>
           </Routes>
         </Suspense>
