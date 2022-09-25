@@ -2,6 +2,7 @@ import styled from "styled-components";
 import * as React from "react";
 import testinput from "./testinput";
 import Element from "./Element";
+import { Link } from "react-router-dom";
 
 export default function SearchResult(props) {
   const { searchQuery, filterKinds } = props;
@@ -25,18 +26,20 @@ export default function SearchResult(props) {
       });
   
   const listItems = filterNameAndKinds.map(e => (
-    <Element
-      id={e.id}
-      img_link={e.img_link}
-      name={e.name}
-      brewery={e.brewery}
-      ingredients={e.ingredients}
-      size={e.size}
-      alcohol={e.alcohol}
-      desc={e.desc}
-      key={`${e.id}`}
-    />
-  ))
+    <Link to={"/detail/" + e.id} key={`detail + ${e.id}`}>
+      <Element
+        id={e.id}
+        img_link={e.img_link}
+        name={e.name}
+        brewery={e.brewery}
+        ingredients={e.ingredients}
+        size={e.size}
+        alcohol={e.alcohol}
+        desc={e.desc}
+        key={`${e.id}`}
+      />
+    </Link>
+  ));
 
   return (
     <StyledWrapper>

@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import MainPage from "views/main/MainPage";
 import SearchPage from "views/search/SearchPage";
+import DetailPage from "views/detail/DetailPage";
 
 export default function App() {
   return (
@@ -18,6 +19,10 @@ export default function App() {
               <Route
                 path="search"
                 element={<SearchPage />}
+              />
+              <Route
+                path="detail/:detail_id"
+                element={<DetailPage />}
               />
             </Route>
           </Routes>
