@@ -6,6 +6,8 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 
 from .models import User
+from survey.models import Survey
+
 from django.db import connection
 
 from django.contrib.auth import get_user_model
@@ -23,6 +25,8 @@ from user.serializer import UserSerializer
 @permission_classes([AllowAny])
 def signup(request):
     user = UserSerializer(data=request.data)
+    reply_list=''.join(str(x) for x in request.data['reply_list']) #json 리스트를 문자열로 
+    print(reply_list)
     if user.is_valid():
         user.save()
         return Response(status=status.HTTP_200_OK)
