@@ -25,12 +25,38 @@ from user.serializer import UserSerializer
 @permission_classes([AllowAny])
 def signup(request):
     user = UserSerializer(data=request.data)
-    reply_list=''.join(str(x) for x in request.data['reply_list']) #json 리스트를 문자열로 
+    reply_list= request.data['reply_list']
+    # reply_list=''.join(str(x) for x in request.data['reply_list']) #json 리스트를 문자열로 
     print(reply_list)
     if user.is_valid():
+        # Survey.objects.create(user_no = 16, reply_list= reply_list)
         user.save()
-        return Response(status=status.HTTP_200_OK)
-    return Response(user.errors, status=status.HTTP_400_BAD_REQUEST)
+        user_id = user['user_id'].value
+        id = User.objects.get(user_id = user_id) # user_no
+        Survey.objects.create(user_no = id, reply_list = reply_list)
+        result = "success"
+
+        # return Response(status=status.HTTP_200_OK)
+        return JsonResponse({'result' : "success"})
+    return JsonResponse({'result' : "fail"})
+    # return Response(user.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# 아이디 중복검사 
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def checkid(request, id):
+    try:
+        id = User.objects.get(user_id = id)    
+    except :
+        id = None 
+    if id is None :
+        duplicate ="success"
+    else : 
+        duplicate = "fail"
+    context= {'result' : duplicate}
+    return JsonResponse(context)
+
 
 # 로그인
 @api_view(['POST'])
@@ -45,14 +71,21 @@ def signin(request):
     size= len(json.loads(row))
     print(size)
     if(size == 0):
-        return Response("fail", status = status.HTTP_204_NO_CONTENT)
+        login ="fail"
+        nick =None
     else : 
         password_n = json.loads(row)[0]['fields']['password']
         nickname_n = json.loads(row)[0]['fields']['nickname']
         print("비밀번호 " , password_n)
         if(password != password_n):
-            return Response("fail", status = status.HTTP_204_NO_CONTENT)
-        return Response(nickname_n, status = status.HTTP_200_OK)
+            login = "fail"
+            nick = None
+        else:
+            login = "success"
+            nick =nickname_n
+    context= {'result' : login ,
+              'nickname' : nick }
+    return JsonResponse(context)
 
     
 
