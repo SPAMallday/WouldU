@@ -14,7 +14,7 @@ export default function DetailPage() {
       <Header />
       <StyledWrapper>
         <Information detailId={params.detail_id} />
-        <Similar />
+        <Similar detailId={params.detail_id}/>
         <Review />
       </StyledWrapper>
     </>
