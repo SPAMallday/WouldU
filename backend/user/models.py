@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
 from pytz import timezone
 
 class User_kind_code(models.Model):
