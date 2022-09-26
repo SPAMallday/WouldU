@@ -5,8 +5,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 
-from .models import User
-from survey.models import Survey
+from .models import User, Survey
 
 from django.db import connection
 
@@ -25,6 +24,7 @@ from user.serializer import UserSerializer
 @permission_classes([AllowAny])
 def signup(request):
     user = UserSerializer(data=request.data)
+    print(user)
     reply_list= request.data['reply_list']
     # reply_list=''.join(str(x) for x in request.data['reply_list']) #json 리스트를 문자열로 
     print(reply_list)
@@ -34,12 +34,17 @@ def signup(request):
         user_id = user['user_id'].value
         id = User.objects.get(user_id = user_id) # user_no
         Survey.objects.create(user_no = id, reply_list = reply_list)
-        result = "success"
-
+        # # return Response(status=status.HTTP_200_OK)
+        # nuser= user.save(commit=False)
+        # user_id = user['user_id'].value
+        # id = User.objects.get(user_id = user_id) # user_no
+        # Survey.objects.create(user_no = id, reply_list = reply_list)
+        # nuser.user_kind = 'A'
+        # nuser.save()
         # return Response(status=status.HTTP_200_OK)
         return JsonResponse({'result' : "success"})
     return JsonResponse({'result' : "fail"})
-    # return Response(user.errors, status=status.HTTP_400_BAD_REQUEST)
+    #return Response(user.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 # 아이디 중복검사 
