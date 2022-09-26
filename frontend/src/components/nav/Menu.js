@@ -12,7 +12,7 @@ export default function Menu() {
         <Link to="/search">
           <div id="search">검색</div>
         </Link>
-        <Link to="/">
+        <Link to="/recommend">
           <div id="recommend">추천</div>
         </Link>
         {logged ? (

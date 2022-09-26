@@ -10,6 +10,9 @@ import MyPage from "views/mypage/MyPage";
 import SearchOnce from "views/search/SearchoncePage";
 import ReviewBefore from "views/rating/ReviewBefore";
 import ReviewSul from "views/rating/ReviewSul";
+import RecommendPage from "views/recommend/RecommendPage";
+import BasedOnEvaluationPage from "views/recommend/BasedOnEvaluationPage";
+import BasedOnFilteringPage from "views/recommend/BasedOnFilteringPage";
 
 export default function App() {
   return (
@@ -31,6 +34,10 @@ export default function App() {
                 path="detail/:detail_id"
                 element={<DetailPage />}
               />
+              <Route path="recommend/" element={<RecommendPage />}>
+              <Route path="recommend/based_on_evaluation" element={<BasedOnEvaluationPage />} />
+                <Route path="based_on_filtering" element={<BasedOnFilteringPage />} />
+              </Route>
             </Route>
           </Routes>
         </Suspense>
