@@ -1,41 +1,47 @@
 import React from "react";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
-import TextField from "@mui/material/TextField";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import Paper from "@mui/material/Paper";
+import InputBase from "@mui/material/InputBase";
+import Divider from "@mui/material/Divider";
 
 export default function SearchWindow() {
-  const [searchQuery, setSearchQuery] = React.useState("");
-  // const dataFiltered = filterData(searchQuery, data);
 
-  const SearchBar = ({setSearchQuery}) => (
-    <form>
-      <TextField
-        id="search-bar"
-        className="text"
-        onInput={(e) => {
-          setSearchQuery(e.target.value);
+  function SearchBar(props) {
+    
+    return(
+      <Paper
+        component="span"
+        sx={{
+          p: "2px",
+          display: "flex",
+          alignItems: "center",
+          width: 700,
+          height: 50,
+          boxShadow: 0,
+          border: 1,
+          borderColor: "grey.400",
         }}
-        label="전통주 검색"
-        variant="outlined"
-        size="small"
-        sx={{ width: 700 }}
-      />
-      <Link to="search">
-        <IconButton type="submit" aria-label="search">
-          <SearchIcon style={{ fill: "grey" }} />
+      >
+        <InputBase
+          component="span"
+          sx={{ flex: 1, fontSize: 20, fontFamily: "Jua", ml: 2 }}
+          placeholder="전통주 검색"
+          inputProps={{ "aria-label": "input" }}
+        />
+        <Divider component="span" sx={{ height: 28 }} orientation="vertical" />
+        <IconButton
+          component="span"
+          type="submit"
+          sx={{ p: "10px" }}
+          aria-label="search"
+        >
+          <SearchIcon />
         </IconButton>
-      </Link>
-    </form>
-  );
-  // const filterData = (query, data) => {
-  //   if (!query) {
-  //     return data;
-  //   } else {
-  //     return data.filter((d) => d.toLowerCase().includes(query));
-  //   }
-  // };
+      </Paper>
+    );
+  }
   return (
     <StyledWrapper>
       <div
@@ -48,27 +54,7 @@ export default function SearchWindow() {
           padding: 10,
         }}
       >
-        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        {/* <div style={{ padding: 3 }}>
-          {dataFiltered.map((d) => (
-            <div
-              className="text"
-              style={{
-                padding: 5,
-                justifyContent: "normal",
-                fontSize: 20,
-                color: "blue",
-                margin: 1,
-                width: "250px",
-                BorderColor: "green",
-                borderWidth: "10px"
-              }}
-              key={d.id}
-            >
-              {d}
-            </div>
-          ))}
-        </div> */}
+        <SearchBar />
       </div>
     </StyledWrapper>
   );
