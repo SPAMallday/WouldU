@@ -21,17 +21,18 @@ class Region_code(models.Model):
 class Alcohol(models.Model):
     alco_no = models.AutoField(primary_key=True)
     alco_name=models.CharField(max_length=50)
-    alco_img= models.CharField(max_length=100)
+    alco_img= models.CharField(max_length=100, null=True)
     alco_code=models.ForeignKey(Alcol_code, on_delete=models.CASCADE, db_column='alco_code') #주종 (과실주, 증류주)
     abv =models.FloatField() #도수
     region_code=models.ForeignKey(Region_code, on_delete=models.CASCADE, db_column='region_code')
     material= models.CharField(max_length=100)
     detail = models.TextField()
-    brewery = models.CharField(max_length=50, null=True)
-    award= models.CharField(max_length=100, null=True)
+    brewery = models.CharField(max_length=100, null=True)
+    award= models.CharField(max_length=500, null=True)
     like_cnt = models.IntegerField(null=True, default=0)
-    food = models.CharField(max_length=100, null= True)
-    tags = models.JSONField(null=True)
+    food = models.CharField(max_length=500, null= True)
+    tags = models.CharField(max_length=50, null=True)
+    size = models.CharField(max_length=20, null=True)
     class Meta :
         db_table = 'alcohol'
 
