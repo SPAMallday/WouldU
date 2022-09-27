@@ -3,6 +3,11 @@ import styled from "@emotion/styled";
 import ex from "assets/img/장수.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { CardActionArea } from "@mui/material";
 
 // Import Swiper styles
 import "swiper/css";
@@ -26,8 +31,28 @@ export default function LikeList(prop) {
         <SwiperSlide>
           <div key={i} id="item" onClick={() => onClickItem(prop.likeList[i])}>
             {/** 술 이미지 교체 해야함. */}
-            <img src={ex} alt="술" id="imgSool"></img>
-            <h5 id="nameSool">{prop.likeList[i].name}</h5>
+
+            <Card
+              sx={{
+                width: 160,
+                height: 290,
+              }}
+            >
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="230"
+                  src={ex}
+                  alt="술"
+                  id="imgSool"
+                />
+                <CardContent>
+                  <Typography component="div" sx={{ fontSize: 20 }}>
+                    {prop.likeList[i].name}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
           </div>
         </SwiperSlide>,
       );
@@ -59,28 +84,20 @@ const StyledWrapper = styled.div`
   #main {
     width: 1300px;
     height: 400px;
-    background: yellow;
+    background: #bb9b9b;
   }
   #title {
     text-align: left;
     padding-top: 20px;
+    margin-bottom: 20px;
     margin-left: 30px;
   }
   #item {
     display: inline-block;
-    border: 1px solid;
-    margin-right: 30px;
-  }
-  #imgSool {
-    height: 250px;
-  }
-  #nameSool {
-    margin: 10px;
   }
 
-  #space {
+  .css-o69gx8-MuiCardMedia-root {
+    width: unset;
     margin: auto;
-    width: 1200px;
-    background: pink;
   }
 `;

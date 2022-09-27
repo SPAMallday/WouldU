@@ -23,7 +23,7 @@ const Piechart = prop => {
         /**
          * chart margin
          */
-        margin={{ top: 10, right: 40, bottom: 60, left: 40 }}
+        margin={{ top: 10, right: 40, bottom: 60, left: 30 }}
         /**
          * chart 중간 빈공간 반지름
          */
@@ -31,7 +31,7 @@ const Piechart = prop => {
         /**
          * pad 간격
          */
-        padAngle={1.8}
+        padAngle={2.0}
         /**
          * pad radius 설정 (pad별 간격이 있을 시 보임)
          */
