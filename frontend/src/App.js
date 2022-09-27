@@ -13,6 +13,7 @@ import ReviewSul from "views/rating/ReviewSul";
 import RecommendPage from "views/recommend/RecommendPage";
 import BasedOnEvaluationPage from "views/recommend/BasedOnEvaluationPage";
 import BasedOnFilteringPage from "views/recommend/BasedOnFilteringPage";
+import SearchForRecommendPage from "views/recommend/SearchForRecommendPage";
 
 export default function App() {
   return (
@@ -27,14 +28,20 @@ export default function App() {
               <Route path="join" element={<Join />}></Route>
               <Route path="survey" element={<Join2 />}></Route>
               <Route path="mypage" element={<MyPage />}></Route>
-              <Route path="once" element={<SearchOnce />}></Route>
+              {/* BasedOnFilteringPage와 동일하므로 주석처리
+              <Route path="once" element={<SearchOnce />}></Route> */}
               <Route path="before" element={<ReviewBefore />}></Route>
               <Route path="rating" element={<ReviewSul />}></Route>
               <Route path="detail/:detail_id" element={<DetailPage />} />
-              <Route path="recommend/" element={<RecommendPage />}>
+              <Route path="recommend">
+                <Route index element={<RecommendPage />} />
                 <Route
-                  path="recommend/based_on_evaluation"
+                  path="based_on_evaluation"
                   element={<BasedOnEvaluationPage />}
+                />
+                <Route
+                  path="search_for_recommend"
+                  element={<SearchForRecommendPage />}
                 />
                 <Route
                   path="based_on_filtering"

@@ -1,7 +1,8 @@
 import Header from "components/nav/Header";
 import styled from "styled-components";
 import * as React from "react";
-import Index from "components/recommend/Index";
+import RecommendIndex from "components/recommend/RecommendIndex";
+import space_example from "assets/img/space_example.jpg";
 
 export default function RecommendPage() {
   
@@ -9,7 +10,7 @@ export default function RecommendPage() {
     <>
       <Header />
       <StyledWrapper>
-        <Index />
+        <RecommendIndex />
       </StyledWrapper>
     </>
   );
@@ -20,4 +21,8 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
+// 그냥 예시로 넣어놨음
+  background-image: url(${ space_example });
+  height: 80vh;
 `;
