@@ -1,9 +1,9 @@
-from .models import Rank
+from .models import Ranking
 from rest_framework import serializers
 
 class RankSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Rank
+        model = Ranking
         fields = '__all__'
         
     # serializers.Serializer 일 경우
