@@ -11,14 +11,6 @@ export default function SearchResult(props) {
     return q.name.replace(" ","").toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase().replace(" ",""))
   });
 
-  // if (filterKinds.length > 0) {
-  //   const changedFilterKinds = filterKinds.slice()
-  //   for (let i = 0; i < filterKinds.length; i++) {
-  //     if (filterKinds[i].slice(0, 2) === "약주") {
-  //       changedFilterKinds[i] = "약주"
-  //     }
-  //   }
-  // }
   const filterNameAndKinds = (filterKinds.length === 0) ?
     filterName :
     filterName.filter(k => {

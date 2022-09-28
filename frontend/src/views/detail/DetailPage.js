@@ -1,6 +1,6 @@
 import Header from "components/nav/Header";
 import styled from "styled-components";
-import Information from "components/detail/Infomation";
+import Information from "components/detail/Information";
 import Similar from "components/detail/Similar";
 import Review from "components/detail/Review";
 import * as React from "react";
@@ -14,7 +14,7 @@ export default function DetailPage() {
       <Header />
       <StyledWrapper>
         <Information detailId={params.detail_id} />
-        <Similar />
+        <Similar detailId={params.detail_id}/>
         <Review />
       </StyledWrapper>
     </>
