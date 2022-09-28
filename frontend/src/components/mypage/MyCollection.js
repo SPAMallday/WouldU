@@ -123,7 +123,7 @@ const StyledWrapper = styled.div`
   #main {
     margin-top: 50px;
     width: 1300px;
-    height: 450px;
+    height: 500px;
     background: black;
   }
   #title {
@@ -135,6 +135,7 @@ const StyledWrapper = styled.div`
   }
 
   #space {
+    height: 400px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;

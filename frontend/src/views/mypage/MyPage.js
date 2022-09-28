@@ -23,6 +23,8 @@ export default function MyPage() {
       })
       .catch();
       */
+
+    //setUserName(sessionStorage.getItem("Nick"));
     setUserName("한재승");
     //주종차트데이터
     setCateData([
