@@ -11,6 +11,8 @@ import StarIcon from "@mui/icons-material/Star";
 //import axios from "axios";
 
 export default function MyPage() {
+  const [spaceData, setSpaceData] = useState([]);
+  const [userName, setUserName] = useState("");
   useEffect(() => {
     console.log("hi");
     /** 페이지 이동했을때 값들 전부 가져와야한다.
@@ -41,7 +43,6 @@ export default function MyPage() {
       { space: "서울", count: 4 },
       { space: "충청도", count: 2 },
     ]);
-
     setLikeList([
       { name: "장수", img: "" },
       { name: "무병장수", img: "" },
@@ -85,20 +86,19 @@ export default function MyPage() {
     ]);
   }, []);
 
-  const [userName, setUserName] = useState("");
-
   const [mpToggle, setToggle] = useState("true");
 
   //차트용 데이터들
   const [cateData, setCateData] = useState([]);
   const [rateData, setRateData] = useState([]);
-  const [spaceData, setSpaceData] = useState([]);
 
   //랭킹용 데이터들
   const [likeList, setLikeList] = useState([]);
   const [reviewList, setReviewList] = useState([]);
 
   const onClickSummary = () => {
+    console.log(cateData);
+    console.log(spaceData);
     setToggle(true);
   };
   const onClickList = () => {
