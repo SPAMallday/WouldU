@@ -119,6 +119,7 @@ export default function JoinID() {
     if (idOk === true) {
       console.log(true);
     } else {
+      swal("Error!", "아이디 중복확인 필수!", "error");
       console.log(false);
       //이동막기
       event.preventDefault();
