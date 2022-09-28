@@ -4,8 +4,8 @@ import Header from "components/nav/Header";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-
-//import axios from "axios";
+import axios from "axios";
+import swal from "sweetalert";
 
 export default function Login() {
   const [inputId, setInputId] = useState("");
@@ -19,28 +19,34 @@ export default function Login() {
     setInputPw(e.target.value);
   };
 
-  const onClickLogin = () => {
+  const onClickLogin = event => {
+    if (inputId !== "") {
+      if (inputPw !== "") {
+        const data = {
+          user_id: inputId,
+          password: inputPw,
+        };
+        axios
+          .post("http://localhost:8000/user/signin", data)
+          .then(res => {
+            console.log(res);
+            sessionStorage.setItem("ID", inputId);
+            sessionStorage.setItem("Nick", res.data.nickname);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        swal("Error!", "비밀번호를 입력해주세요!!", "error");
+        event.preventDefault();
+      }
+    } else {
+      swal("Error!", "아이디를 입력해주세요!!", "error");
+      event.preventDefault();
+    }
+
     console.log("ID", inputId);
     console.log("PW", inputPw);
-
-    // 유효성 검사 필요
-    // 로그인 axios 부분
-    /* 
-    axios.post("/user/signin", null, {
-      params: {
-        user_id: inputId,
-        password: inputPw,
-      },
-    })
-    .then(res => {
-      console.log(res)
-      //로그인 정보 세션에 저장
-      sessionStorage.setItem('user_id', inputId)
-      sessionStorage.setItem('user_nick',res.nickname)
-      //페이지 이동 필요
-    })
-    .catch()
-    */
   };
 
   return (
@@ -79,18 +85,20 @@ export default function Login() {
             </div>
 
             <div id="btBox">
-              <Button
-                id="btn_login"
-                color="secondary"
-                onClick={onClickLogin}
-                variant="contained"
-              >
-                Login
-              </Button>
+              <Link to="/">
+                <Button
+                  id="btn_login"
+                  color="secondary"
+                  onClick={onClickLogin}
+                  variant="contained"
+                >
+                  Login
+                </Button>
+              </Link>
             </div>
             <Link to="/join">
               <div id="textJoin">
-                <h5>회원가입</h5>
+                <h5 id="h_join">회원가입</h5>
               </div>
             </Link>
           </div>
@@ -135,5 +143,9 @@ const StyledWrapper = styled.div`
   #textJoin {
     width: 100px;
     margin: auto;
+  }
+
+  #h_join {
+    color: purple;
   }
 `;

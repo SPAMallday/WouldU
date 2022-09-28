@@ -9,8 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
-
-//import axios from "axios";
+import axios from "axios";
 
 export default function JoinID() {
   const [inputId, setInputId] = useState("");
@@ -22,7 +21,7 @@ export default function JoinID() {
   const [inputMonth, setInputMonth] = useState("");
   const [inputDay, setInputDay] = useState("");
   const [inputGender, setInputGender] = useState("");
-  const [idOk, setIdOk] = useState("false");
+  const [idOk, setIdOk] = useState(false);
   //const [passCheck, setPassCheck] = useState("숫자, 영문 포함한 8자 이상");
   const [passOk, setPassOk] = useState("불일치");
 
@@ -45,26 +44,34 @@ export default function JoinID() {
     }
   }, [inputPWD, inputPw]);
  */
-  //아이디 중복확인
 
+  //아이디 중복확인
   const onIdCheck = () => {
-    swal({
-      title: "Good ID!",
-      text: "사용가능한 아이디입니다.",
-      icon: "success",
-      button: {
-        text: "확인",
-      },
-    });
-    //swal("Error!", "사용불가한 아이디입니다.", "error");
-    /**
-    axios.get("/checkid/"+inputId).then(res => {
-      console.log(res)
-      //사용가능 보여주기 
-      setIdOk(true);
-    })
-    .catch((error) => swal("Error!", "사용불가한 아이디입니다.", "error"));
-    */
+    if (inputId !== "") {
+      axios
+        .get(`http://localhost:8000/user/checkid/${inputId}`)
+        .then(res => {
+          console.log(res);
+          if (res.data.result === "success") {
+            setIdOk(true);
+            swal({
+              title: "Good ID!",
+              text: "사용가능한 아이디입니다.",
+              icon: "success",
+              button: {
+                text: "확인",
+              },
+            });
+          } else {
+            swal("OMG!", "중복된 아이디입니다.", "error");
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } else {
+      swal("Error!", "아이디를 입력해주세요!!", "error");
+    }
   };
 
   const handleInputId = e => {
@@ -114,7 +121,7 @@ export default function JoinID() {
     } else {
       console.log(false);
       //이동막기
-      //event.preventDefault();
+      event.preventDefault();
     }
   };
 
@@ -349,5 +356,6 @@ const StyledWrapper = styled.div`
 
   #btn_check {
     margin-left: 20px;
+    color: purple;
   }
 `;
