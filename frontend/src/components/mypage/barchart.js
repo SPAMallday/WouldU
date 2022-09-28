@@ -16,6 +16,7 @@ const Barchart = prop => {
     // chart height이 100%이기 때문이 chart를 덮는 마크업 요소에 height 설정
     <div style={{ width: "800px", height: "500px", margin: "0 auto" }}>
       <ResponsiveBar
+        maxValue={5}
         /**
          * chart에 사용될 데이터
          */
@@ -31,15 +32,15 @@ const Barchart = prop => {
         /**
          * chart margin
          */
-        margin={{ top: 40, right: 190, bottom: 120, left: 50 }}
+        margin={{ top: 40, right: 190, bottom: 100, left: 50 }}
         /**
          * chart padding (bar간 간격)
          */
-        padding={0.4}
+        padding={0.5}
         /**
          * chart 색상
          */
-        colors={["olive", "brown", "orange", "red", "white"]} // 커스터하여 사용할 때
+        colors={["olive", "brown", "orange", "red"]} // 커스터하여 사용할 때
         // colors={{ scheme: 'nivo' }} // nivo에서 제공해주는 색상 조합 사용할 때
         /**
          * color 적용 방식
@@ -80,7 +81,7 @@ const Barchart = prop => {
              */
             ticks: {
               text: {
-                fontSize: 16,
+                fontSize: 20,
                 fill: "#000000",
               },
             },
@@ -90,8 +91,8 @@ const Barchart = prop => {
          * axis bottom 설정
          */
         axisBottom={{
-          tickSize: 5, // 값 설명하기 위해 튀어나오는 점 크기
-          tickPadding: 5, // tick padding
+          tickSize: 0, // 값 설명하기 위해 튀어나오는 점 크기
+          tickPadding: 10, // tick padding
           tickRotation: 0, // tick 기울기
           legend: "", // bottom 글씨
           legendPosition: "middle", // 글씨 위치

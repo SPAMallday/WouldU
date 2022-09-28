@@ -5,10 +5,14 @@ import MyCollection from "components/mypage/MyCollection";
 import LikeList from "components/mypage/LikeList";
 import ReviewList from "components/mypage/ReviewList";
 import Header from "components/nav/Header";
-
+import IconButton from "@mui/material/IconButton";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import StarIcon from "@mui/icons-material/Star";
 //import axios from "axios";
 
 export default function MyPage() {
+  const [spaceData, setSpaceData] = useState([]);
+  const [userName, setUserName] = useState("");
   useEffect(() => {
     console.log("hi");
     /** 페이지 이동했을때 값들 전부 가져와야한다.
@@ -32,10 +36,12 @@ export default function MyPage() {
       { subject: "바디감", rating: 3 },
       { subject: "향", rating: 2 },
     ]);
+    //데이터 받아왔을때 정렬하자
     setSpaceData([
-      { space: "경기도", rating: 3 },
-      { space: "경상도", rating: 2 },
-      { space: "서울", rating: 5 },
+      { space: "경기도", count: 8 },
+      { space: "경상도", count: 6 },
+      { space: "서울", count: 4 },
+      { space: "충청도", count: 2 },
     ]);
     setLikeList([
       { name: "장수", img: "" },
@@ -80,29 +86,19 @@ export default function MyPage() {
     ]);
   }, []);
 
-  const [userName, setUserName] = useState("");
-  //const [inputPw, setInputPw] = useState("");
   const [mpToggle, setToggle] = useState("true");
 
   //차트용 데이터들
   const [cateData, setCateData] = useState([]);
   const [rateData, setRateData] = useState([]);
-  const [spaceData, setSpaceData] = useState([]);
 
   //랭킹용 데이터들
   const [likeList, setLikeList] = useState([]);
   const [reviewList, setReviewList] = useState([]);
 
-  /**
-  const handleInputId = e => {
-    setInputId(e.target.value);
-  };
-
-  const handleInputPw = e => {
-    setInputPw(e.target.value);
-  };
-*/
   const onClickSummary = () => {
+    console.log(cateData);
+    console.log(spaceData);
     setToggle(true);
   };
   const onClickList = () => {
@@ -115,15 +111,19 @@ export default function MyPage() {
         <Header />
         <div id="main">
           <div id="mainPage">
-            <div>
-              <h1 id="nameText">{userName} 통계</h1>
+            <div id="mp_header">
+              <h1 id="nameText">{userName}님 통계</h1>
               <div id="btnGroup">
-                <button type="button" onClick={onClickSummary} id="btnSummary">
-                  통계
-                </button>
-                <button type="button" onClick={onClickList}>
-                  리뷰
-                </button>
+                <IconButton
+                  onClick={onClickSummary}
+                  id="btnSummary"
+                  size="large"
+                >
+                  <BarChartIcon sx={{ fontSize: 40, color: "orange" }} />
+                </IconButton>
+                <IconButton onClick={onClickList}>
+                  <StarIcon sx={{ fontSize: 40, color: "orange" }} />
+                </IconButton>
               </div>
             </div>
             <Chart
@@ -143,14 +143,18 @@ export default function MyPage() {
         <div id="main">
           <div id="mainPage">
             <div>
-              <h1 id="nameText">{userName} 리뷰</h1>
+              <h1 id="nameText">{userName}님 리뷰</h1>
               <div id="btnGroup">
-                <button type="button" onClick={onClickSummary} id="btnSummary">
-                  통계
-                </button>
-                <button type="button" onClick={onClickList}>
-                  리뷰
-                </button>
+                <IconButton
+                  onClick={onClickSummary}
+                  id="btnSummary"
+                  size="large"
+                >
+                  <BarChartIcon sx={{ fontSize: 40, color: "orange" }} />
+                </IconButton>
+                <IconButton onClick={onClickList}>
+                  <StarIcon sx={{ fontSize: 40, color: "orange" }} />
+                </IconButton>
               </div>
             </div>
             <LikeList likeList={likeList} />
@@ -171,14 +175,17 @@ const StyledWrapper = styled.div`
     width: 1300px;
     background: gray;
   }
+  #mp_header {
+    height: 100px;
+  }
   #nameText {
-    display: inline-block;
+    padding-top: 40px;
   }
   #btnGroup {
     text-align: right;
-    margin-top: -50px;
+    margin-top: -20px;
     margin-right: 50px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
   #btnSummary {
     margin-right: 50px;

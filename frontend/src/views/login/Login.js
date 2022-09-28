@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 import Header from "components/nav/Header";
 import { Link } from "react-router-dom";
-//import axios from "axios";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import axios from "axios";
+import swal from "sweetalert";
 
 export default function Login() {
   const [inputId, setInputId] = useState("");
@@ -16,27 +19,35 @@ export default function Login() {
     setInputPw(e.target.value);
   };
 
-  const onClickLogin = () => {
+  const onClickLogin = event => {
+    if (inputId !== "") {
+      if (inputPw !== "") {
+        const data = {
+          user_id: inputId,
+          password: inputPw,
+        };
+        axios
+          .post("http://localhost:8000/user/signin", data)
+          .then(res => {
+            console.log(res);
+            sessionStorage.setItem("ID", inputId);
+            sessionStorage.setItem("no", res.data.user_no);
+            sessionStorage.setItem("Nick", res.data.nickname);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        swal("Error!", "비밀번호를 입력해주세요!!", "error");
+        event.preventDefault();
+      }
+    } else {
+      swal("Error!", "아이디를 입력해주세요!!", "error");
+      event.preventDefault();
+    }
+
     console.log("ID", inputId);
     console.log("PW", inputPw);
-
-    // 유효성 검사 필요
-    // 로그인 axios 부분
-    /* 
-    axios.post("/login", null, {
-      params: {
-        id: inputId,
-        password: inputPw,
-      },
-    })
-    .then(res => {
-      console.log(res)
-      //로그인 정보 세션에 저장
-      sessionStorage.setItem('user_id', inputId)
-      //페이지 이동 필요
-    })
-    .catch()
-    */
   };
 
   return (
@@ -45,45 +56,50 @@ export default function Login() {
       <div id="main">
         <h2>Login</h2>
         <div id="loginForm">
-          <div id="logoBox"></div>
-
           <div id="loginBox">
             <div id="inputBox">
-              <div id="label_text">
-                <label> ID : </label>
-              </div>
               <div>
-                <input
-                  type="text"
-                  name="input_id"
+                <TextField
+                  label="아이디"
+                  variant="outlined"
+                  size="small"
                   value={inputId}
                   onChange={handleInputId}
-                ></input>
+                  id="input_area"
+                />
               </div>
             </div>
 
             <div id="inputBox">
-              <div id="label_text">
-                <label> PW : </label>
-              </div>
               <div>
-                <input
+                <TextField
+                  autoComplete="current-password"
+                  label="비밀번호"
                   type="password"
-                  name="input_pw"
+                  variant="outlined"
                   value={inputPw}
                   onChange={handleInputPw}
-                ></input>
+                  size="small"
+                  id="input_area"
+                />
               </div>
             </div>
 
             <div id="btBox">
-              <button type="button" id="btn_login" onClick={onClickLogin}>
-                Login
-              </button>
+              <Link to="/">
+                <Button
+                  id="btn_login"
+                  color="secondary"
+                  onClick={onClickLogin}
+                  variant="contained"
+                >
+                  Login
+                </Button>
+              </Link>
             </div>
             <Link to="/join">
               <div id="textJoin">
-                <h3>회원가입</h3>
+                <h5 id="h_join">회원가입</h5>
               </div>
             </Link>
           </div>
@@ -98,23 +114,18 @@ const StyledWrapper = styled.div`
     text-align: center;
   }
 
-  #logoBox {
-    width: 600px;
-    height: 700px;
-    background: black;
-    float: left;
-  }
-
   #loginBox {
     width: 600px;
     display: inline-block;
-    background: gray;
-    margin-top: 160px;
+  }
+
+  #input_area {
+    width: 250px;
   }
 
   #inputBox {
-    width: 200px;
-    margin: 40px auto;
+    width: 300px;
+    margin: 80px auto;
   }
 
   #btBox {
@@ -122,20 +133,20 @@ const StyledWrapper = styled.div`
   }
 
   #btn_login {
-    width: 170px;
-  }
-
-  #label_text {
-    text-align: left;
+    width: 280px;
   }
 
   #loginForm {
-    border: 1px solid;
     display: inline-block;
+    margin-top: 50px;
   }
 
   #textJoin {
-    margin-right: 30px;
-    text-align: right;
+    width: 100px;
+    margin: auto;
+  }
+
+  #h_join {
+    color: purple;
   }
 `;

@@ -19,7 +19,7 @@ export default function SearchOnce() {
   const [sour, setSour] = useState(3);
   const [body, setBody] = useState(3);
   const [smell, setSmell] = useState(3);
-  const [value, setValue] = useState([20, 30]);
+  const [value, setValue] = useState([0, 50]);
 
   const onClick = () => {
     console.log(sweet);
