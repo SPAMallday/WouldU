@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import Header from "components/nav/Header";
-//import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import Button from "@mui/material/Button";
 import SelectType from "components/search/SelectType";
+import ResultFiltering from "components/recommend/ResultFiltering";
 
 //import axios from "axios";
 
@@ -20,13 +20,10 @@ export default function BasedonFilteringPage() {
   const [body, setBody] = useState(3);
   const [smell, setSmell] = useState(3);
   const [value, setValue] = useState([0, 50]);
+  const [goToResult, setGoToResult] = useState(false);
 
   const onClick = () => {
-    console.log(sweet);
-    console.log(sour);
-    console.log(body);
-    console.log(smell);
-    console.log(value);
+    setGoToResult(true)    
   };
 
   const alchol = [
@@ -81,6 +78,7 @@ export default function BasedonFilteringPage() {
   return (
     <StyledWrapper>
       <Header />
+      {!goToResult ? (
       <div id="main">
         <h2>일회성 검색</h2>
         <div id="searchForm">
@@ -119,6 +117,12 @@ export default function BasedonFilteringPage() {
           </div>
         </div>
       </div>
+      ):
+      (
+        <div>
+          <ResultFiltering setGoToResult={setGoToResult} sweet={sweet} sour={sour} body={body} smell={smell} value={value} />
+        </div>
+      )}
     </StyledWrapper>
   );
 }

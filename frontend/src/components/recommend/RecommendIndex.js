@@ -6,6 +6,9 @@ import earth from "assets/img/earth.png"
 import planet1 from "assets/img/planet1.png"
 import planet2 from "assets/img/planet2.png"
 
+/**
+ * 리뷰를 한번도 하지 않은 유저에게는 '평가'만 활성화하여 보여지고, 안내 문구도 같이 출력해야 함
+ */
 export default function RecommendIndex() {
   return (
     <StyledWrapper>

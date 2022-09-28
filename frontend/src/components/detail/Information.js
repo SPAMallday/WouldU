@@ -1,9 +1,12 @@
 import styled from "styled-components";
 import testinput from "components/search/testinput";
 import RadarChart from "./RadarChart";
+import SendReviewDialog from "./SendReviewDialog";
+import * as React from 'react';
 
 export default function Information(props) {
   const { detailId } = props;
+  const [openReview, setOpenReview] = React.useState(false);
 
   const detailInformation = testinput[detailId - 1];
   const detailInformationTags = (detailInformation.tags === "" ?
@@ -63,11 +66,10 @@ export default function Information(props) {
           >
             <button>구매하러 가기</button>
           </a>
-          <a
-            href="#"
-          >
-            <button>리뷰하기</button>
-          </a>
+          <div>
+            <button onClick={()=>{setOpenReview(true)}}>리뷰하기</button>
+            <SendReviewDialog openReview={openReview} setOpenReview={setOpenReview} targetId={detailId}/>
+          </div>
           <div id="information-desc">{detailInformation.desc}</div>
           <div id="information-tags">{detailInformationTagslist}</div>
         </div>
