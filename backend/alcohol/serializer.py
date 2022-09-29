@@ -8,8 +8,9 @@ class AlcoholRecomSerializer(serializers.ModelSerializer):
         fields='__all__'
 
 class AlcoholSerializer(serializers.ModelSerializer):
-    alco_no = AlcoholRecomSerializer(read_only=True)
+    # alco_no = AlcoholRecomSerializer(read_only=True)
 
     class Meta:
         model=Alcohol
         fields='__all__'
+

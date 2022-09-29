@@ -29,7 +29,7 @@ class Alcohol(models.Model):
     detail = models.TextField()
     brewery = models.CharField(max_length=100, null=True)
     award= models.CharField(max_length=500, null=True)
-    like_count = models.IntegerField(null=True)
+    like_count = models.IntegerField(default=0)
     food = models.CharField(max_length=500, null= True)
     tag = models.CharField(max_length=50, null=True)
     size = models.CharField(max_length=20, null=True)
@@ -39,15 +39,14 @@ class Alcohol(models.Model):
 
 # 주류 추천 정보     
 class Alcohol_recommend(models.Model):
-    alcohol_no = models.ForeignKey(Alcohol, on_delete = models.CASCADE, db_column = 'alcohol_no', primary_key=True)
+    alcohol_no = models.OneToOneField(Alcohol, on_delete = models.CASCADE, db_column = 'alcohol_no', primary_key=True)
     sweet = models.IntegerField() #단맛
     sour = models.IntegerField() #신맛
     scent = models.IntegerField() #향
     body = models.IntegerField() #바디감
     abv_level= models.IntegerField() #도수 ( 1~7 )
-    score = models.IntegerField(default =0) # 리뷰 기준의 평균평점
+    score = models.IntegerField(default=0) # 리뷰 기준의 평균평점
     class Meta :
         db_table = 'alcohol_recommend'
 
     
-     

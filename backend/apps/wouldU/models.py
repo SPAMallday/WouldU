@@ -3,12 +3,12 @@ from django.db import models
 from user.models import User
 
 #주류 종류 (과실주 :A1) (증류주 :A2) (약주, 청주 :A3) (리큐르/기타주류 :A4) (탁주 :A5)
-class Alcohol_code(models.Model):
-    alcohol_code = models.CharField(max_length=3, primary_key=True)
-    alcohol_type = models.CharField(max_length=30)
+# class Alcohol_code(models.Model):
+#     alcohol_code = models.CharField(max_length=3, primary_key=True)
+#     alcohol_type = models.CharField(max_length=30)
 
-    class Meta :
-        db_table = 'alcohol_code'
+#     class Meta :
+#         db_table = 'alcohol_code'
 
 
 # class Region_code(models.Model):
