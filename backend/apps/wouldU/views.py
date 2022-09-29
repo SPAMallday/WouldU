@@ -4,15 +4,11 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 
 from django.db import connection
-from django.db import models
 
-from django.http.response import JsonResponse
-from django.core import serializers
 
-from .models import Ranking, Review
-from .serializers  import RankSerializer
+### MAINPAGE 
+### main page API
 
-# main page API
 # like ranking 
 # item : 10
 @api_view(['GET'])
@@ -30,6 +26,7 @@ def RankingAPI(request):
                        WHERE 1=1
                        AND a.alcohol_no = b.alcohol_no
                        ORDER BY a.ranking ''')
+
     results = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) \
                 for row in cursor.fetchall()]
 
@@ -93,6 +90,7 @@ def RecentReviewAPI(request):
 #         cursor.execute(query)
 #     except:
 #         return { 'resultCode':500, 'resultMsg': 'query execution fail : member info' }
+
     results = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) \
                 for row in cursor.fetchall()]
 

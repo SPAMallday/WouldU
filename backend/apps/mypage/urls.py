@@ -1,13 +1,16 @@
 from django.urls import path
 
+from apps.mypage.views import RegionalStatisticsAPI, MyAlcoholStatisticsAPI, MyFavAlcoholAPI
 
-    # url('post', PostViewSet.as_view({'get':'list', 'post':'create'})),
-    # url('comment', CommentViewSet.as_view({'get':'list', 'post':'create'})),
 urlpatterns=[
    
-    # 메인
-    # path('like-ranking', RankingAPI),
-    # path('review-ranking', RecentReviewAPI),
+    # mypage
+    # path('region-staticstic', RegionalStatisticsAPI),
+    # path('my-alcohol-staticstic', MyAlcoholStatisticsAPI),
+    # path('my-fav-alcohol-staticstic', MyFavAlcoholStatisticsAPI),
+    path('region', RegionalStatisticsAPI),
+    path('my-alcohol', MyAlcoholStatisticsAPI),
+    path('my-fav-alcohol', MyFavAlcoholAPI),
 ]
 
 

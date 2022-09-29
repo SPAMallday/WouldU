@@ -39,7 +39,7 @@ class Alcohol(models.Model):
 
 # 주류 추천 정보     
 class Alcohol_recommend(models.Model):
-    alcohol_no = models.ForeignKey(Alcohol, on_delete = models.CASCADE, db_column = 'alcohol_no', primary_key=True)
+    alcohol_no = models.OneToOneField(Alcohol, on_delete = models.CASCADE, db_column = 'alcohol_no', primary_key=True)
     sweet = models.IntegerField() #단맛
     sour = models.IntegerField() #신맛
     scent = models.IntegerField() #향
