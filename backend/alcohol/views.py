@@ -35,7 +35,7 @@ def alcoDetails(request, alco_no):
         'alco_name' : datas[1].replace("|", ","),
         'abv' : datas[2],
         'material' : datas[3].replace("|", ","),
-        'detail' : datas[4],
+        'detail' : datas[4].replace("\"", "'").replace("''", "'"),
         'brewery' : datas[5],
         'award' : datas[6].replace("|", ","),
         'like_count' : datas[7],
