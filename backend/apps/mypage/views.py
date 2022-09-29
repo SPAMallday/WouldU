@@ -6,8 +6,9 @@ from rest_framework.permissions import AllowAny
 from django.db import connection
 
 
-### MYPAGE
-### mypage API
+##### MYPAGE
+##### mypage API
+
 
 # statistics part
 # MyFavAlcoholStatisticsAPI
@@ -15,8 +16,8 @@ from django.db import connection
 @permission_classes([AllowAny])
 def MyFavAlcoholAPI(request):
     req_data = request.data
-    # user_no = req_data['user_no']
-    user_no = 1
+    user_no = req_data['user_no']
+    # user_no = 1
 
     cursor = connection.cursor()
     # 먹은 술 기준
@@ -68,7 +69,6 @@ def MyFavAlcoholAPI(request):
     # print(results)
     return Response(results)
 
-
 # statistics part
 # MyAlcoholStatisticsAPI
 @api_view(['GET'])
@@ -108,7 +108,6 @@ def MyAlcoholStatisticsAPI(request):
         result = results[0]
     # print(results)
     return Response(results)
-
     
 # statistics part
 # RegionalStatisticsAPI
@@ -148,4 +147,73 @@ def RegionalStatisticsAPI(request):
         result = results[0]
     # print(results)
 
+    return Response(results)
+    
+# review part
+# MyFavListAPI
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def MyFavListAPI(request):
+    req_data = request.data
+    user_no = req_data['user_no']
+    # user_no = 1
+
+    cursor = connection.cursor()
+    cursor.execute('''SELECT b.alcohol_no
+                           , b.alcohol_name
+                           , CONCAT('https://a402o1a4.s3.ap-northeast-2.amazonaws.com/', b.alcohol_no, '.png') alcohol_image
+                        FROM alcohol_like a
+                           , alcohol b
+                       WHERE 1=1
+                         AND a.user_no = %s
+                         AND a.is_like = 1
+                         AND a.alcohol_no = b.alcohol_no 
+                       ORDER BY a.reg_date DESC '''
+                  , [user_no])  
+
+#     try:
+#         cursor.execute(query)
+#     except:
+#         return { 'resultCode':500, 'resultMsg': 'query execution fail : member info' }
+    results = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) \
+                for row in cursor.fetchall()]
+
+    if results != None and len(results) > 0:
+        result = results[0]
+    # print(results)
+    return Response(results)
+    
+# review part
+# MyReviewListAPI
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def MyReviewListAPI(request):
+    req_data = request.data
+    # user_no = req_data['user_no']
+    user_no = 1
+
+    cursor = connection.cursor()
+    cursor.execute('''SELECT b.alcohol_no
+                           , b.alcohol_name
+                           , CONCAT('https://a402o1a4.s3.ap-northeast-2.amazonaws.com/', b.alcohol_no, '.png') alcohol_image
+                           , a.score
+                           , a.comment
+                        FROM review a
+                           , alcohol b
+                       WHERE 1=1
+                         AND a.user_no = %s
+                         AND a.alcohol_no = b.alcohol_no 
+                       ORDER BY a.reg_date DESC '''
+                  , [user_no])  
+
+#     try:
+#         cursor.execute(query)
+#     except:
+#         return { 'resultCode':500, 'resultMsg': 'query execution fail : member info' }
+    results = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) \
+                for row in cursor.fetchall()]
+
+    if results != None and len(results) > 0:
+        result = results[0]
+    # print(results)
     return Response(results)

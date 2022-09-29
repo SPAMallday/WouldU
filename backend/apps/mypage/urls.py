@@ -1,6 +1,7 @@
 from django.urls import path
 
 from apps.mypage.views import RegionalStatisticsAPI, MyAlcoholStatisticsAPI, MyFavAlcoholAPI
+from apps.mypage.views import MyFavListAPI, MyReviewListAPI
 
 urlpatterns=[
    
@@ -11,6 +12,8 @@ urlpatterns=[
     path('region', RegionalStatisticsAPI),
     path('my-alcohol', MyAlcoholStatisticsAPI),
     path('my-fav-alcohol', MyFavAlcoholAPI),
+    path('my-fav-list', MyFavListAPI),
+    path('my-review-list', MyReviewListAPI),
 ]
 
 
