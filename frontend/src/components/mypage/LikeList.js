@@ -82,6 +82,7 @@ export default function LikeList(prop) {
 
 const StyledWrapper = styled.div`
   #main {
+    margin-top: 50px;
     width: 1300px;
     height: 400px;
     background: #bb9b9b;

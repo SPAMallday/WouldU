@@ -134,8 +134,7 @@ export default function JoinQ() {
     <StyledWrapper>
       <Header />
       <div id="main">
-        <h3>Step 2</h3>
-        <h5>음주유형검사</h5>
+        <h2>음주유형검사</h2>
         <div id="surveyForm">
           <div id="surveyBox">
             {/*---1번 질문---*/}
@@ -144,7 +143,7 @@ export default function JoinQ() {
                 id="demo-row-radio-buttons-group-label"
                 color="secondary"
               >
-                Q1. 나는 조용하게 먹는것이 좋다.
+                <h5>Q1. 나는 조용하게 먹는것이 좋다.</h5>
               </FormLabel>
               <RadioGroup
                 row
@@ -173,7 +172,7 @@ export default function JoinQ() {
                 id="demo-row-radio-buttons-group-label"
                 color="secondary"
               >
-                Q2. 나는 나만의 향수가 3개 이상 있다.
+                <h5>Q2. 나는 나만의 향수가 3개 이상 있다.</h5>
               </FormLabel>
               <RadioGroup
                 row
@@ -202,7 +201,7 @@ export default function JoinQ() {
                 id="demo-row-radio-buttons-group-label"
                 color="secondary"
               >
-                Q3. 나는 낯을 많이 가린다.
+                <h5>Q3. 나는 낯을 많이 가린다.</h5>
               </FormLabel>
               <RadioGroup
                 row
@@ -231,7 +230,7 @@ export default function JoinQ() {
                 id="demo-row-radio-buttons-group-label"
                 color="secondary"
               >
-                Q4. 나는 디퓨저를 사용중이다.
+                <h5>Q4. 나는 디퓨저를 사용중이다.</h5>
               </FormLabel>
               <RadioGroup
                 row
@@ -260,7 +259,7 @@ export default function JoinQ() {
                 id="demo-row-radio-buttons-group-label"
                 color="secondary"
               >
-                Q5. 나는 친구들과 약속후에 다음날은 쉰다.
+                <h5>Q5. 나는 친구들과 약속후에 다음날은 쉰다.</h5>
               </FormLabel>
               <RadioGroup
                 row
@@ -289,7 +288,7 @@ export default function JoinQ() {
                 id="demo-row-radio-buttons-group-label"
                 color="secondary"
               >
-                Q6. 나는 맛집을 5군데 이상 알고있다.
+                <h5>Q6. 나는 맛집을 5군데 이상 알고있다.</h5>
               </FormLabel>
               <RadioGroup
                 row
@@ -318,7 +317,7 @@ export default function JoinQ() {
                 id="demo-row-radio-buttons-group-label"
                 color="secondary"
               >
-                Q7. 나는 사람들과 대화하는 게 어렵다.
+                <h5>Q7. 나는 사람들과 대화하는 게 어렵다.</h5>
               </FormLabel>
               <RadioGroup
                 row
@@ -347,7 +346,7 @@ export default function JoinQ() {
                 id="demo-row-radio-buttons-group-label"
                 color="secondary"
               >
-                Q8. 나는 누군가를 처음 만났을 때 향기가 났으면 좋겠다.
+                <h5>Q8. 나는 누군가를 처음 만났을 때 향기가 났으면 좋겠다.</h5>
               </FormLabel>
               <RadioGroup
                 row
@@ -376,7 +375,7 @@ export default function JoinQ() {
                 id="demo-row-radio-buttons-group-label"
                 color="secondary"
               >
-                Q9. 나는 대화를 먼저 시작하는 편이 아니다.
+                <h5>Q9. 나는 대화를 먼저 시작하는 편이 아니다.</h5>
               </FormLabel>
               <RadioGroup
                 row
@@ -405,7 +404,7 @@ export default function JoinQ() {
                 id="demo-row-radio-buttons-group-label"
                 color="secondary"
               >
-                Q10. 나는 새로운 음식을 즐기는 편이다.
+                <h5>Q10. 나는 새로운 음식을 즐기는 편이다.</h5>
               </FormLabel>
               <RadioGroup
                 row

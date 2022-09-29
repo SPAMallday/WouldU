@@ -15,6 +15,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import swal from "sweetalert";
+import space from "assets/img/space_example.jpg";
 
 // Import Swiper styles
 import "swiper/css";
@@ -168,10 +169,12 @@ export default function ReviewList(prop) {
 
 const StyledWrapper = styled.div`
   #main {
-    margin-top: 50px;
+    margin-top: 60px;
+    margin-bottom: 40px;
     width: 1300px;
-    background: #bb9b9b;
-    margin-bottom: 50px;
+    background: url("${space}");
+    background-size: 100% 100%;
+    color: white;
   }
   #title {
     text-align: left;

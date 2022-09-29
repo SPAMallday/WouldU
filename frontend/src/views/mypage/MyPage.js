@@ -8,6 +8,7 @@ import Header from "components/nav/Header";
 import IconButton from "@mui/material/IconButton";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import StarIcon from "@mui/icons-material/Star";
+import Card from "@mui/material/Card";
 //import axios from "axios";
 
 export default function MyPage() {
@@ -111,27 +112,29 @@ export default function MyPage() {
         <Header />
         <div id="main">
           <div id="mainPage">
-            <div id="mp_header">
-              <h1 id="nameText">{userName}님 통계</h1>
-              <div id="btnGroup">
-                <IconButton
-                  onClick={onClickSummary}
-                  id="btnSummary"
-                  size="large"
-                >
-                  <BarChartIcon sx={{ fontSize: 40, color: "orange" }} />
-                </IconButton>
-                <IconButton onClick={onClickList}>
-                  <StarIcon sx={{ fontSize: 40, color: "orange" }} />
-                </IconButton>
+            <Card>
+              <div id="mp_header">
+                <h1 id="nameText">{userName}님 통계</h1>
+                <div id="btnGroup">
+                  <IconButton
+                    onClick={onClickSummary}
+                    id="btnSummary"
+                    size="large"
+                  >
+                    <BarChartIcon sx={{ fontSize: 40, color: "purple" }} />
+                  </IconButton>
+                  <IconButton onClick={onClickList}>
+                    <StarIcon sx={{ fontSize: 40, color: "purple" }} />
+                  </IconButton>
+                </div>
               </div>
-            </div>
-            <Chart
-              userName={userName}
-              cateData={cateData}
-              rateData={rateData}
-            />
-            <MyCollection userName={userName} spaceData={spaceData} />
+              <Chart
+                userName={userName}
+                cateData={cateData}
+                rateData={rateData}
+              />
+              <MyCollection userName={userName} spaceData={spaceData} />
+            </Card>
           </div>
         </div>
       </StyledWrapper>
@@ -142,23 +145,25 @@ export default function MyPage() {
         <Header />
         <div id="main">
           <div id="mainPage">
-            <div>
-              <h1 id="nameText">{userName}님 리뷰</h1>
-              <div id="btnGroup">
-                <IconButton
-                  onClick={onClickSummary}
-                  id="btnSummary"
-                  size="large"
-                >
-                  <BarChartIcon sx={{ fontSize: 40, color: "orange" }} />
-                </IconButton>
-                <IconButton onClick={onClickList}>
-                  <StarIcon sx={{ fontSize: 40, color: "orange" }} />
-                </IconButton>
+            <Card>
+              <div id="mp_header">
+                <h1 id="nameText">{userName}님 리뷰</h1>
+                <div id="btnGroup">
+                  <IconButton
+                    onClick={onClickSummary}
+                    id="btnSummary"
+                    size="large"
+                  >
+                    <BarChartIcon sx={{ fontSize: 40, color: "purple" }} />
+                  </IconButton>
+                  <IconButton onClick={onClickList}>
+                    <StarIcon sx={{ fontSize: 40, color: "purple" }} />
+                  </IconButton>
+                </div>
               </div>
-            </div>
-            <LikeList likeList={likeList} />
-            <ReviewList reviewList={reviewList} />
+              <LikeList likeList={likeList} />
+              <ReviewList reviewList={reviewList} />
+            </Card>
           </div>
         </div>
       </StyledWrapper>
@@ -169,14 +174,19 @@ export default function MyPage() {
 const StyledWrapper = styled.div`
   #main {
     text-align: center;
+    background-color: #efeff7;
+  }
+  .css-bhp9pd-MuiPaper-root-MuiCard-root {
+    background-color: #efeff7;
+    box-shadow: none;
   }
   #mainPage {
     margin: auto;
     width: 1300px;
-    background: gray;
   }
   #mp_header {
     height: 100px;
+    margin-top: 50px;
   }
   #nameText {
     padding-top: 40px;
@@ -184,7 +194,7 @@ const StyledWrapper = styled.div`
   #btnGroup {
     text-align: right;
     margin-top: -20px;
-    margin-right: 50px;
+    margin-right: 10px;
     margin-bottom: 10px;
   }
   #btnSummary {

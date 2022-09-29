@@ -59,6 +59,7 @@ const StyledWrapper = styled.div`
     display: inline-block;
     width: 650px;
     height: 550px;
+    background-color: #bb9b9b;
   }
   #averageBox {
     width: 650px;

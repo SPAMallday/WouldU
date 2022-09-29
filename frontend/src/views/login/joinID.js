@@ -131,7 +131,7 @@ export default function JoinID() {
       <Header />
       <div id="main">
         <div id="joinForm">
-          <h3>step 1</h3>
+          <h2>회원 정보</h2>
           <div id="joinBox">
             <div id="tf_id">
               <TextField
