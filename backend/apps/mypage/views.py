@@ -5,6 +5,8 @@ from rest_framework.permissions import AllowAny
 
 from django.db import connection
 
+from apps.wouldU.models import Review
+
 
 ##### MYPAGE
 ##### mypage API
@@ -189,11 +191,12 @@ def MyFavListAPI(request):
 @permission_classes([AllowAny])
 def MyReviewListAPI(request):
     req_data = request.data
-    # user_no = req_data['user_no']
-    user_no = 1
+    user_no = req_data['user_no']
+    # user_no = 1
 
     cursor = connection.cursor()
-    cursor.execute('''SELECT b.alcohol_no
+    cursor.execute('''SELECT a.review_no
+                           , b.alcohol_no
                            , b.alcohol_name
                            , CONCAT('https://a402o1a4.s3.ap-northeast-2.amazonaws.com/', b.alcohol_no, '.png') alcohol_image
                            , a.score
@@ -217,3 +220,25 @@ def MyReviewListAPI(request):
         result = results[0]
     # print(results)
     return Response(results)
+
+# review part
+# DeleteReviewAPI
+@api_view(['DELETE'])
+@permission_classes([AllowAny])
+def DeleteReviewAPI(request, no):
+    req_data = request.data
+    user_no = req_data['user_no']
+    # user_no = 1
+    
+    try:
+        review_no = Review.objects.filter(review_no = no, user_no=user_no)    
+    except Review.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    print(review_no)
+    review_no.delete()
+
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+    
