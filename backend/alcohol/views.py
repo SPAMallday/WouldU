@@ -2,6 +2,8 @@ import http
 import json
 from user.models import User
 from .models import Alcohol
+from apps.wouldU.models import Review
+from apps.wouldU.serializers import ReviewSerializer
 from django.db import connection
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
@@ -100,3 +102,14 @@ def alcoIsLike(request):
         isLike.update(is_like= is_like)
         
     return Response("success")
+
+
+#상세페이지 리뷰 등록
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def alcoPostReview(request):
+    review = ReviewSerializer(data= request.data)
+    if(review.is_valid()):
+        review.save()
+
+    return Response("success")      
