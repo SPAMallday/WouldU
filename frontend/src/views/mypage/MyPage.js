@@ -10,6 +10,7 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import StarIcon from "@mui/icons-material/Star";
 import Card from "@mui/material/Card";
 import axios from "axios";
+import { category, average } from '../../api/myPageAPI';
 
 export default function MyPage() {
   const SERVER = "http://localhost:8000";
@@ -21,44 +22,45 @@ export default function MyPage() {
 
   const [spaceData, setSpaceData] = useState([]);
 
-  // 먹은 술 주종 카테고리 차트
-  const category = async (url, no) => {
-    try {
-      const res = await axios.get(`${SERVER}` + url, {
-        headers: { "user-no": no },
-      });
 
-      //console.log(res.data);
-      res.data.forEach(data => {
-        setCateData(cateData => [
-          ...cateData,
-          { id: data.alcohol_type, value: data.count },
-        ]);
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // 먹은 술 주종 카테고리 차트
+  // const category = async (url, no) => {
+  //   try {
+  //     const res = await axios.get(`${SERVER}` + url, {
+  //       headers: { "user-no": no },
+  //     });
+
+  //     //console.log(res.data);
+  //     res.data.forEach(data => {
+  //       setCateData(cateData => [
+  //         ...cateData,
+  //         { id: data.alcohol_type, value: data.count },
+  //       ]);
+  //     });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   // 먹은 술 평균값 차트
-  const average = async (url, no) => {
-    try {
-      const res = await axios.get(`${SERVER}` + url, {
-        headers: { "user-no": no },
-      });
+  // const average = async (url, no) => {
+  //   try {
+  //     const res = await axios.get(`${SERVER}` + url, {
+  //       headers: { "user-no": no },
+  //     });
 
-      console.log(res.data[0]);
+  //     console.log(res.data[0]);
 
-      setRateData([
-        { subject: "단맛", rating: res.data[0].단맛.toFixed(2) },
-        { subject: "신맛", rating: res.data[0].신맛.toFixed(2) },
-        { subject: "바디감", rating: res.data[0].바디감.toFixed(2) },
-        { subject: "향", rating: res.data[0].향.toFixed(2) },
-      ]);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //     setRateData([
+  //       { subject: "단맛", rating: res.data[0].단맛.toFixed(2) },
+  //       { subject: "신맛", rating: res.data[0].신맛.toFixed(2) },
+  //       { subject: "바디감", rating: res.data[0].바디감.toFixed(2) },
+  //       { subject: "향", rating: res.data[0].향.toFixed(2) },
+  //     ]);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   useEffect(() => {
     setUserName(sessionStorage.getItem("Nick"));
@@ -67,8 +69,28 @@ export default function MyPage() {
 
     const user_no = sessionStorage.getItem("no");
 
-    category("/mypage/my-fav-alcohol", user_no);
-    average("/mypage/my-alcohol", user_no);
+    // category("/mypage/my-fav-alcohol", user_no);
+    // average("/mypage/my-alcohol", user_no);
+
+
+    category().then((res) => {
+      res.forEach(data => {
+        setCateData(cateData => [
+          ...cateData,
+          { id: data.alcohol_type, value: data.count },
+        ]);
+      });
+    });
+    average().then((res) => {
+      setRateData([
+        { subject: "단맛", rating: res[0].단맛.toFixed(2) },
+        { subject: "신맛", rating: res[0].신맛.toFixed(2) },
+        { subject: "바디감", rating: res[0].바디감.toFixed(2) },
+        { subject: "향", rating: res[0].향.toFixed(2) },
+      ]);
+      // setRateData(res);
+    });
+
 
     //주종차트데이터
 
