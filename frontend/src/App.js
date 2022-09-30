@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import Join from "views/login/joinID";
 // import Join2 from "views/login/joinQ";
 import MyPage from "views/mypage/MyPage";
-import SearchOnce from "views/search/SearchoncePage";
+// import SearchOnce from "views/search/SearchoncePage";
 // import ReviewBefore from "views/rating/ReviewBefore";
 // import ReviewSul from "views/rating/ReviewSul";
 // import RecommendPage from "views/recommend/RecommendPage";
