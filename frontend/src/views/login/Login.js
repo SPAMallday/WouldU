@@ -35,7 +35,6 @@ export default function Login() {
           .then(res => {
             console.log(res);
             if (res.data.result === "success") {
-              event.preventDefault();
               sessionStorage.setItem("ID", inputId);
               sessionStorage.setItem("no", res.data.user_no);
               sessionStorage.setItem("Nick", res.data.nickname);

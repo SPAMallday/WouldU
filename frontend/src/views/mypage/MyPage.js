@@ -9,34 +9,69 @@ import IconButton from "@mui/material/IconButton";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import StarIcon from "@mui/icons-material/Star";
 import Card from "@mui/material/Card";
-//import axios from "axios";
+import axios from "axios";
 
 export default function MyPage() {
-  const [spaceData, setSpaceData] = useState([]);
+  const SERVER = "http://localhost:8000";
+
   const [userName, setUserName] = useState("");
+  //차트용 데이터들
+  const [cateData, setCateData] = useState([]);
+  const [rateData, setRateData] = useState([]);
+
+  const [spaceData, setSpaceData] = useState([]);
+
+  // 먹은 술 주종 카테고리 차트
+  const category = async (url, no) => {
+    try {
+      const res = await axios.get(`${SERVER}` + url, {
+        headers: { "user-no": no },
+      });
+
+      //console.log(res.data);
+      res.data.forEach(data => {
+        setCateData(cateData => [
+          ...cateData,
+          { id: data.alcohol_type, value: data.count },
+        ]);
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // 먹은 술 평균값 차트
+  const average = async (url, no) => {
+    try {
+      const res = await axios.get(`${SERVER}` + url, {
+        headers: { "user-no": no },
+      });
+
+      console.log(res.data[0]);
+
+      setRateData([
+        { subject: "단맛", rating: res.data[0].단맛.toFixed(2) },
+        { subject: "신맛", rating: res.data[0].신맛.toFixed(2) },
+        { subject: "바디감", rating: res.data[0].바디감.toFixed(2) },
+        { subject: "향", rating: res.data[0].향.toFixed(2) },
+      ]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    console.log("hi");
-    /** 페이지 이동했을때 값들 전부 가져와야한다.
-    axios
-      .get("/", null, {})
-      .then(res => {
-        console.log(res);
-      })
-      .catch();
-      */
-    setUserName("한재승");
+    setUserName(sessionStorage.getItem("Nick"));
+
+    /** 페이지 이동했을때 값들 전부 가져와야한다.*/
+
+    const user_no = sessionStorage.getItem("no");
+
+    category("/mypage/my-fav-alcohol", user_no);
+    average("/mypage/my-alcohol", user_no);
+
     //주종차트데이터
-    setCateData([
-      { id: "탁주", value: 324 },
-      { id: "과실주", value: 88 },
-      { id: "증류주", value: 221 },
-    ]);
-    setRateData([
-      { subject: "단맛", rating: 3 },
-      { subject: "신맛", rating: 2 },
-      { subject: "바디감", rating: 3 },
-      { subject: "향", rating: 2 },
-    ]);
+
     //데이터 받아왔을때 정렬하자
     setSpaceData([
       { space: "경기도", count: 8 },
@@ -88,10 +123,6 @@ export default function MyPage() {
   }, []);
 
   const [mpToggle, setToggle] = useState("true");
-
-  //차트용 데이터들
-  const [cateData, setCateData] = useState([]);
-  const [rateData, setRateData] = useState([]);
 
   //랭킹용 데이터들
   const [likeList, setLikeList] = useState([]);

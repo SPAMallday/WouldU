@@ -23,7 +23,7 @@ const Piechart = prop => {
         /**
          * chart margin
          */
-        margin={{ top: 10, right: 40, bottom: 60, left: 40 }}
+        margin={{ top: 40, right: 40, bottom: 40, left: 30 }}
         /**
          * chart 중간 빈공간 반지름
          */
@@ -39,7 +39,7 @@ const Piechart = prop => {
         /**
          * chart 색상
          */
-        colors={["olive", "brown", "orange"]} // 커스터하여 사용할 때
+        colors={{ scheme: "nivo" }} // 커스터하여 사용할 때
         // colors={{ scheme: 'nivo' }} // nivo에서 제공해주는 색상 조합 사용할 때
         /**
          * pad border 두께 설정
@@ -99,11 +99,11 @@ const Piechart = prop => {
             justify: false, // 글씨, 색상간 간격 justify 적용 여부
             translateX: 0, // chart와 X 간격
             translateY: 56, // chart와 Y 간격
-            itemsSpacing: 0, // item간 간격
-            itemWidth: 100, // item width
+            itemsSpacing: -30, // item간 간격
+            itemWidth: 150, // item width
             itemHeight: 18, // item height
             itemDirection: "left-to-right", // item 내부에 그려지는 방향
-            itemOpacity: 1, // item opacity
+            itemOpacity: 0, // item opacity
             symbolSize: 18, // symbol (색상 표기) 크기
             symbolShape: "circle", // symbol (색상 표기) 모양
             effects: [
