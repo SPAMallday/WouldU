@@ -1,5 +1,3 @@
-from dataclasses import field
-import json
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -7,16 +5,10 @@ from rest_framework.permissions import AllowAny
 
 from django.db import connection
 
-from django.contrib.auth import get_user_model
-from django.contrib.auth.hashers import check_password
-from django.shortcuts import get_object_or_404
-from django.http.response import JsonResponse
-from django.core import serializers
 
-from .models import Ranking, Review
-from .serializers  import RankSerializer
+### MAINPAGE 
+### main page API
 
-# main page API
 # like ranking 
 # item : 10
 @api_view(['GET'])
@@ -26,15 +18,22 @@ def RankingAPI(request):
     # serializer = RankSerializer(result)     ######### alcohol name 가져ㅑ오는법
     # print(serializer)
     # return Response(serializer.data)
-    result = Ranking.objects.raw('''SELECT b.alcohol_name
-                                         , a.ranking
-                                      FROM ranking a
-                                         , alcohol b
-                                     WHERE 1=1
-                                       AND a.alcohol_no = b.alcohol_no ''')
-    data = serializers.serialize('json', result, fields=('alcohol_name','ranking'))
-    print(data)
-    return Response(data)
+    cursor = connection.cursor()
+    cursor.execute('''SELECT b.alcohol_name 
+                           , a.ranking
+                       FROM ranking a
+                           , alcohol b
+                       WHERE 1=1
+                       AND a.alcohol_no = b.alcohol_no
+                       ORDER BY a.ranking ''')
+
+    results = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) \
+                for row in cursor.fetchall()]
+
+    if results != None and len(results) > 0:
+        result = results[0]
+    # print(results)
+    return Response(results)
 
 
 # by review
@@ -60,19 +59,44 @@ def RecentReviewAPI(request):
     #                                       ) a
     #                                     , (SELECT @ROWNUM := 0)
     #                                 ''')
-    result = Review.objects.raw('''SELECT distinct b.alcohol_name
-                                        , @ROWNUM := @ROWNUM + 1 
-                                        , a.reg_date
-                                    FROM review a
-                                        , alcohol b
-                                        , (SELECT @ROWNUM := 0) c
-                                    WHERE 1=1
-                                      AND a.alcohol_no = b.alcohol_no
-                                    ORDER BY a.reg_date desc 
-                                    LIMIT 0, 10
-                                    ''')
-    data = serializers.serialize('json', result, fields=('alcohol_name', 'rank', 'reg_date'))
-    print(data)
-    return Response(data)
+    # result = Review.objects.raw('''SELECT distinct b.alcohol_name as review_no
+    #                                     , (@ROWNUM := @ROWNUM + 1) 
+    #                                     , a.reg_date
+    #                                 FROM review a
+    #                                     , alcohol b
+    #                                     , (SELECT @ROWNUM := 0) c
+    #                                 WHERE 1=1
+    #                                   AND a.alcohol_no = b.alcohol_no
+    #                                 ORDER BY a.reg_date desc 
+    #                                 LIMIT 0, 10
+    #                                 ''')
+    # data = serializers.serialize('json', result, fields=('review_no', 'rank', 'reg_date'))
+    cursor = connection.cursor()
+    cursor.execute('''SELECT a.alcohol_name
+                           , @ROWNUM := @ROWNUM + 1 ranking
+                           , a.reg_date
+                        FROM (SELECT distinct b.alcohol_name as alcohol_name
+                                   , a.reg_date
+                                FROM review a
+                                   , alcohol b
+                               WHERE 1=1
+                                 AND a.alcohol_no = b.alcohol_no
+                               ORDER BY a.reg_date desc 
+                               LIMIT 0, 10 
+                             ) a
+                           , (SELECT @ROWNUM := 0) b
+                    ''')
+#     try:
+#         cursor.execute(query)
+#     except:
+#         return { 'resultCode':500, 'resultMsg': 'query execution fail : member info' }
+
+    results = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) \
+                for row in cursor.fetchall()]
+
+    if results != None and len(results) > 0:
+        result = results[0]
+    # print(results)
+    return Response(results)
 
     
