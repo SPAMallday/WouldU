@@ -9,6 +9,13 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import Rating from "@mui/material/Rating";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { CardActionArea } from "@mui/material";
+import swal from "sweetalert";
+import space from "assets/img/space_example.jpg";
 
 // Import Swiper styles
 import "swiper/css";
@@ -35,7 +42,36 @@ export default function ReviewList(prop) {
 
   //리뷰 클릭시 dialog띄우기
   const onClickItem = item => {
-    setOpen(true);
+    swal({
+      title: "Warning!",
+      text: "정말로 삭제하시겠습니까?",
+      icon: "warning",
+      dangerMode: true,
+      buttons: {
+        cancel: {
+          text: "취소",
+          value: "NO",
+          visible: true,
+        },
+        confirm: {
+          text: "삭제",
+          value: "OK",
+          color: "red",
+        },
+      },
+    }).then(value => {
+      switch (value) {
+        case "OK":
+          swal("Success!", "삭제되었습니다.", "success");
+          break;
+        case "NO":
+          console.log("NO");
+          break;
+        default:
+          console.log("error");
+      }
+    });
+
     console.log(item);
   };
 
@@ -50,20 +86,39 @@ export default function ReviewList(prop) {
             key={i}
             onClick={() => onClickItem(prop.reviewList[i])}
           >
-            <div id="item">
-              {/** 술 이미지 교체 해야함. */}
-              <img src={ex} alt="술" id="imgSool"></img>
-              <h5 id="nameSool">{prop.reviewList[i].name}</h5>
-            </div>
-            <div>
-              <h5 id="tx_star">평점 :</h5>
-              <Rating
-                name="read-only"
-                value={prop.reviewList[i].rating}
-                readOnly
-              />
-            </div>
-            <h5 id="tx_rating">한줄평 : {prop.reviewList[i].comment}</h5>
+            <Card
+              sx={{
+                maxWidth: 300,
+              }}
+            >
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="230"
+                  alt="술"
+                  id="imgSool"
+                  image={ex}
+                />
+                <CardContent>
+                  <Typography component="div" sx={{ fontSize: 20 }}>
+                    {prop.reviewList[i].name}
+                  </Typography>
+                  <Typography component="div" sx={{ fontSize: 20 }}>
+                    <h5 id="tx_star">평점 : </h5>
+                    <Rating
+                      name="read-only"
+                      value={prop.reviewList[i].rating}
+                      readOnly
+                    />
+                  </Typography>
+                  <Typography component="div" sx={{ fontSize: 20 }}>
+                    <h5 id="tx_rating">
+                      한줄평 : {prop.reviewList[i].comment}
+                    </h5>
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
           </div>
         </SwiperSlide>,
       );
@@ -82,7 +137,7 @@ export default function ReviewList(prop) {
           id="swiper"
           modules={[Navigation]}
           spaceBetween={50}
-          slidesPerView={4}
+          slidesPerView={3}
           navigation
           onSlideChange={() => console.log("slide change")}
           onSwiper={swiper => console.log(swiper)}
@@ -114,9 +169,12 @@ export default function ReviewList(prop) {
 
 const StyledWrapper = styled.div`
   #main {
+    margin-top: 60px;
+    margin-bottom: 40px;
     width: 1300px;
-    height: 500px;
-    background: pink;
+    background: url("${space}");
+    background-size: 100% 100%;
+    color: white;
   }
   #title {
     text-align: left;
@@ -124,37 +182,30 @@ const StyledWrapper = styled.div`
     margin-left: 30px;
   }
   #bigItem {
-    border: 1px solid;
+    margin-bottom: 30px;
+    margin-top: 20px;
   }
   #tx_rating {
     text-align: left;
     margin-top: 10px;
     margin-bottom: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
   #tx_star {
     text-align: left;
     margin-top: 10px;
     margin-bottom: -25px;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-  #item {
-    display: inline-block;
-    border: 1px solid;
-    margin-top: 10px;
-  }
-  #imgSool {
-    height: 250px;
-  }
-  #nameSool {
-    margin: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
-  #space {
+  .css-o69gx8-MuiCardMedia-root {
+    width: unset;
     margin: auto;
-    width: 1200px;
-    background: pink;
+  }
+
+  .swiper-wrapper {
+    margin-left: 50px;
   }
 `;

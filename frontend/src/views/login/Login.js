@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import Header from "components/nav/Header";
-import { Link } from "react-router-dom";
-//import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import axios from "axios";
+import swal from "sweetalert";
+import logo2 from "assets/img/logo2.png";
+import Card from "@mui/material/Card";
+import space from "assets/img/space_example.jpg";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [inputId, setInputId] = useState("");
   const [inputPw, setInputPw] = useState("");
 
@@ -16,78 +23,96 @@ export default function Login() {
     setInputPw(e.target.value);
   };
 
-  const onClickLogin = () => {
+  async function onClickLogin(event) {
+    if (inputId !== "") {
+      if (inputPw !== "") {
+        const data = {
+          user_id: inputId,
+          password: inputPw,
+        };
+        await axios
+          .post("http://localhost:8000/user/signin", data)
+          .then(res => {
+            console.log(res);
+            if (res.data.result === "success") {
+              event.preventDefault();
+              sessionStorage.setItem("ID", inputId);
+              sessionStorage.setItem("no", res.data.user_no);
+              sessionStorage.setItem("Nick", res.data.nickname);
+              navigate("/");
+            } else {
+              swal("Error!", "아이디 또는 비밀번호 오류입니다.", "error");
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        swal("Error!", "비밀번호를 입력해주세요!!", "error");
+      }
+    } else {
+      swal("Error!", "아이디를 입력해주세요!!", "error");
+    }
+
     console.log("ID", inputId);
     console.log("PW", inputPw);
-
-    // 유효성 검사 필요
-    // 로그인 axios 부분
-    /* 
-    axios.post("/login", null, {
-      params: {
-        id: inputId,
-        password: inputPw,
-      },
-    })
-    .then(res => {
-      console.log(res)
-      //로그인 정보 세션에 저장
-      sessionStorage.setItem('user_id', inputId)
-      //페이지 이동 필요
-    })
-    .catch()
-    */
-  };
+  }
 
   return (
     <StyledWrapper>
       <Header />
       <div id="main">
-        <h2>Login</h2>
-        <div id="loginForm">
-          <div id="logoBox"></div>
+        <Card variant="outlined" sx={{ width: 1300, mt: 10 }}>
+          <h2>Login</h2>
+          <img src={logo2} alt="logo"></img>
+          <div id="loginForm">
+            <div id="loginBox">
+              <div id="inputH">
+                <div>
+                  <TextField
+                    label="아이디"
+                    variant="outlined"
+                    size="small"
+                    value={inputId}
+                    onChange={handleInputId}
+                    id="input_area"
+                  />
+                </div>
+              </div>
 
-          <div id="loginBox">
-            <div id="inputBox">
-              <div id="label_text">
-                <label> ID : </label>
+              <div id="inputBox">
+                <div>
+                  <TextField
+                    autoComplete="current-password"
+                    label="비밀번호"
+                    type="password"
+                    variant="outlined"
+                    value={inputPw}
+                    onChange={handleInputPw}
+                    size="small"
+                    id="input_area"
+                  />
+                </div>
               </div>
-              <div>
-                <input
-                  type="text"
-                  name="input_id"
-                  value={inputId}
-                  onChange={handleInputId}
-                ></input>
-              </div>
-            </div>
 
-            <div id="inputBox">
-              <div id="label_text">
-                <label> PW : </label>
+              <div id="btBox">
+                <Button
+                  id="btn_login"
+                  color="secondary"
+                  variant="contained"
+                  onClick={onClickLogin}
+                >
+                  Login
+                </Button>
               </div>
-              <div>
-                <input
-                  type="password"
-                  name="input_pw"
-                  value={inputPw}
-                  onChange={handleInputPw}
-                ></input>
-              </div>
+              <Link to="/join">
+                <div id="textJoin">
+                  <h5 id="h_join">회원가입</h5>
+                </div>
+              </Link>
             </div>
-
-            <div id="btBox">
-              <button type="button" id="btn_login" onClick={onClickLogin}>
-                Login
-              </button>
-            </div>
-            <Link to="/join">
-              <div id="textJoin">
-                <h3>회원가입</h3>
-              </div>
-            </Link>
           </div>
-        </div>
+        </Card>
       </div>
     </StyledWrapper>
   );
@@ -95,26 +120,46 @@ export default function Login() {
 
 const StyledWrapper = styled.div`
   #main {
+    height: 900px;
     text-align: center;
+    background: url("${space}");
+    background-size: 100% 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
   }
 
-  #logoBox {
-    width: 600px;
-    height: 700px;
-    background: black;
-    float: left;
+  .css-rb59ar-MuiPaper-root-MuiCard-root {
+    margin: 90px auto;
+    border: 5px solid;
+  }
+
+  #main img {
+    margin-top: -330px;
+  }
+
+  #main h2 {
+    margin-top: 50px;
   }
 
   #loginBox {
+    margin-right: -100px;
+    margin-bottom: 100px;
     width: 600px;
     display: inline-block;
-    background: gray;
-    margin-top: 160px;
+  }
+
+  #input_area {
+    width: 250px;
+  }
+
+  #inputH {
+    margin-top: 70px;
   }
 
   #inputBox {
-    width: 200px;
-    margin: 40px auto;
+    width: 300px;
+    margin: 50px auto;
   }
 
   #btBox {
@@ -122,20 +167,21 @@ const StyledWrapper = styled.div`
   }
 
   #btn_login {
-    width: 170px;
-  }
-
-  #label_text {
-    text-align: left;
+    margin-top: 20px;
+    width: 280px;
   }
 
   #loginForm {
-    border: 1px solid;
     display: inline-block;
+    margin-top: 50px;
   }
 
   #textJoin {
-    margin-right: 30px;
-    text-align: right;
+    width: 100px;
+    margin: auto;
+  }
+
+  #h_join {
+    color: purple;
   }
 `;
