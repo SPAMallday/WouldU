@@ -74,22 +74,25 @@ def signin(request):
     row = serializers.serialize("json", User.objects.filter(user_id=user_id), fields = {"nickname", "password"})
     print(row)
     size= len(json.loads(row))
-    print(size)
     if(size == 0):
         login ="fail"
         nick =None
+        user_no=None
     else : 
+        u_no = json.loads(row)[0]['pk']
         password_n = json.loads(row)[0]['fields']['password']
         nickname_n = json.loads(row)[0]['fields']['nickname']
-        print("비밀번호 " , password_n)
         if(password != password_n):
             login = "fail"
             nick = None
+            user_no=None
         else:
             login = "success"
             nick =nickname_n
+            user_no=u_no
     context= {'result' : login ,
-              'nickname' : nick }
+              'nickname' : nick,
+              'user_no' : user_no }
     return JsonResponse(context)
 
     
