@@ -17,8 +17,7 @@ from apps.wouldU.models import Review
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def MyFavAlcoholAPI(request):
-    req_data = request.data
-    user_no = req_data['user_no']
+    user_no = request.META.get('HTTP_USER_NO')
     # user_no = 1
 
     cursor = connection.cursor()
@@ -76,8 +75,7 @@ def MyFavAlcoholAPI(request):
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def MyAlcoholStatisticsAPI(request):
-    req_data = request.data
-    user_no = req_data['user_no']
+    user_no = request.META.get('HTTP_USER_NO')
     # user_no = 1
 
     cursor = connection.cursor()
@@ -116,8 +114,7 @@ def MyAlcoholStatisticsAPI(request):
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def RegionalStatisticsAPI(request):
-    req_data = request.data
-    user_no = req_data['user_no']
+    user_no = request.META.get('HTTP_USER_NO')
     # user_no = 1
 
     cursor = connection.cursor()
@@ -156,8 +153,7 @@ def RegionalStatisticsAPI(request):
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def MyFavListAPI(request):
-    req_data = request.data
-    user_no = req_data['user_no']
+    user_no = request.META.get('HTTP_USER_NO')
     # user_no = 1
 
     cursor = connection.cursor()
@@ -190,8 +186,7 @@ def MyFavListAPI(request):
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def MyReviewListAPI(request):
-    req_data = request.data
-    user_no = req_data['user_no']
+    user_no = request.META.get('HTTP_USER_NO')
     # user_no = 1
 
     cursor = connection.cursor()
@@ -226,8 +221,7 @@ def MyReviewListAPI(request):
 @api_view(['DELETE'])
 @permission_classes([AllowAny])
 def DeleteReviewAPI(request, no):
-    req_data = request.data
-    user_no = req_data['user_no']
+    user_no = request.META.get('HTTP_USER_NO')
     # user_no = 1
     
     try:
