@@ -32,15 +32,21 @@ export default function App() {
               <Route path="once" element={<SearchOnce />}></Route> */}
               <Route path="before" element={<ReviewBefore />}></Route>
               <Route path="rating" element={<ReviewSul />}></Route>
-              <Route
-                path="detail/:detail_id"
-                element={<DetailPage />}
-              />
+              <Route path="detail/:detail_id" element={<DetailPage />} />
               <Route path="recommend/">
-                <Route index element={<RecommendPage /> } />
-                <Route path="based_on_evaluation" element={<BasedOnEvaluationPage />} />
-                <Route path="search_for_recommend" element={<SearchForRecommendPage />} />
-                <Route path="based_on_filtering" element={<BasedOnFilteringPage />} />
+                <Route index element={<RecommendPage />} />
+                <Route
+                  path="based_on_evaluation"
+                  element={<BasedOnEvaluationPage />}
+                />
+                <Route
+                  path="search_for_recommend"
+                  element={<SearchForRecommendPage />}
+                />
+                <Route
+                  path="based_on_filtering"
+                  element={<BasedOnFilteringPage />}
+                />
               </Route>
             </Route>
           </Routes>
