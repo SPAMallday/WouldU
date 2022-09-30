@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import MainPage from "views/main/MainPage";
 // import SearchPage from "views/search/SearchPage";
 // import DetailPage from "views/detail/DetailPage";
-// import Login from "views/login/Login";
+import Login from "views/login/Login";
 // import Join from "views/login/joinID";
 // import Join2 from "views/login/joinQ";
-import MyPage from "views/mypage/MyPage";
+// import MyPage from "views/mypage/MyPage";
 // import SearchOnce from "views/search/SearchoncePage";
 // import ReviewBefore from "views/rating/ReviewBefore";
 // import ReviewSul from "views/rating/ReviewSul";
@@ -24,10 +24,10 @@ export default function App() {
             <Route path="/">
               // <Route index element={<MainPage />} />
               // <Route path="search" element={<SearchPage />} />
-              // <Route path="login" element={<Login />}></Route>
+              <Route path="login" element={<Login />}></Route>
               // <Route path="join" element={<Join />}></Route>
               // <Route path="survey" element={<Join2 />}></Route>
-              <Route path="mypage" element={<MyPage />}></Route>
+              // <Route path="mypage" element={<MyPage />}></Route>
               {/* BasedOnFilteringPage와 동일하므로 주석처리
               <Route path="once" element={<SearchOnce />}></Route> */}
               // <Route path="before" element={<ReviewBefore />}></Route>
