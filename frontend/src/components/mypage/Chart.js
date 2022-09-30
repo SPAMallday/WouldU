@@ -40,7 +40,7 @@ export default function Chart(prop) {
           </Button>
         </div>
         <div id="averageBox">
-          <h3 id="title">내가 고른 술들의 평균값</h3>
+          <h3 id="title">{prop.userName}님이 먹은 술의 평균값</h3>
           <Barchart rateData={prop.rateData} />
         </div>
       </div>
