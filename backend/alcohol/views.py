@@ -80,23 +80,29 @@ def alcoIsLike(request):
     data = json.loads(request.body)
     alco_no = Alcohol.objects.get(alcohol_no = data['alco_no'])
     user_no = User.objects.get(user_no = data['user_no'])
-    print(alco_no)
-    print(user_no)
+    
+    alcohol = Alcohol.objects.filter(alcohol_no = alco_no.alcohol_no)
+    # 해당 술의 좋아요 갯수 
+    alco_like_count=json.loads(serializers.serialize("json", alcohol , fields={'like_count'}))[0]['fields']['like_count']
+    # alco_like = Alcohol.objects.get(alcohol_no = data['alco_no'])
+    # user_no = User.objects.get(user_no = data['user_no'])
     isLike= Alcohol_like.objects.filter(alcohol_no = alco_no , user_no = user_no)
     is_row = isLike.exists()
     # 아직 좋아요 한번도 안눌렀던 술 , 유저 ( 추가 )
     if(is_row == False): 
-        # alco_like = Alcohol_like()
-        # alco_like.alcohol_no = alco_no
-        # alco_like.user_no = user_no 
-        # alco_like.save()
-        Alcohol_like.objects.create(alcohol_no = alco_no, user_no = user_no, is_like=True)
+        Alcohol_like.objects.create(alcohol_no = alco_no , user_no = user_no, is_like=True)
+        alco_like_cnt = alco_like_count+1
+        alcohol.update(like_count = alco_like_cnt)
 
     else :
         is_like = json.loads(serializers.serialize("json", isLike, fields = {"is_like"}))[0]['fields']['is_like']
         if(is_like==True):
+            alco_like_cnt = alco_like_count-1
+            alcohol.update(like_count = alco_like_cnt)
             is_like = False
         else:
+            alco_like_cnt = alco_like_count+1
+            alcohol.update(like_count = alco_like_cnt)
             is_like= True
 
         isLike.update(is_like= is_like)
