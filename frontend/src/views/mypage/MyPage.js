@@ -162,7 +162,10 @@ export default function MyPage() {
                 </div>
               </div>
               <LikeList likeList={likeList} />
-              <ReviewList reviewList={reviewList} />
+              <ReviewList
+                reviewList={reviewList}
+                setReviewList={setReviewList}
+              />
             </Card>
           </div>
         </div>
