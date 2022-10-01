@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'user',
     'alcohol',
-    'search'
     'apps.wouldU',
+    'apps.search',
     'apps.mypage',
     'django.contrib.admin',
     'django.contrib.auth',
