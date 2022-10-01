@@ -9,25 +9,35 @@ export default function Menu() {
   return (
     <StyledWrapper>
       <div id="menubuttons">
-        <Link to="/search" state={{ fromIndexQuery: "" }}>
-          <div id="search">검색</div>
-        </Link>
-        <Link to="/recommend">
-          <div id="recommend">추천</div>
-        </Link>
+        <div id="search">
+          <Link to="/search">
+            검색
+          </Link>
+        </div>
+        <div id="recommend">
+          <Link to="/recommend">
+            추천
+          </Link>
+        </div>
         {logged ? (
           <>
-            <Link to="/">
-              <div id="mypage">마이페이지</div>
-            </Link>
-            <Link to="/">
-              <div id="logout">로그아웃</div>
-            </Link>
+            <div id="mypage">
+              <Link to="/">
+                마이페이지
+              </Link>
+            </div>
+            <div id="logout">
+              <Link to="/">
+                로그아웃
+              </Link>
+            </div>
           </>
         ) : (
-          <Link to="/login">
-            <div id="login">로그인</div>
-          </Link>
+          <div id="login">
+            <Link to="/login">
+              로그인
+            </Link>
+          </div>
         )}
       </div>
     </StyledWrapper>
@@ -35,6 +45,9 @@ export default function Menu() {
 }
 
 const StyledWrapper = styled.div`
+  font-family: "GD";
+  font-size: 24px;
+  background-color: #f7ecde;
   display: flex;
   align-items: center;
   text-align: center;
@@ -43,7 +56,14 @@ const StyledWrapper = styled.div`
   #menubuttons {
     display: flex;
   }
-  a > div {
+  #menubuttons div {
     margin: 10px;
+    border-radius: 10px;
+  }
+  #menubuttons div:hover {
+    box-shadow: 200px 0 0 0 rgba(0, 0, 0, 0.2) inset;
+  }
+  #menubuttons div a {
+    padding: 5px 20px;
   }
 `;
