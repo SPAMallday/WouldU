@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import earth from "assets/img/earth.png";
-import planet1 from "assets/img/planet1.png";
+import planet3 from "assets/img/planet1.png";
 import planet2 from "assets/img/planet2.png";
-import planet3 from "assets/img/planet3.png";
+import planet1 from "assets/img/planet3.png";
+import planet4 from "assets/img/planet4.png";
 import space from "assets/img/space_example.jpg";
 
 export default function MyCollection(prop) {
   const [rank, setRank] = useState();
   useEffect(() => {
-    console.log(prop);
-    console.log(prop.spaceData);
-
     if (prop.spaceData && prop.spaceData.length > 0) {
       setRank(prop.spaceData);
-      console.log(rank);
     }
   }, [prop, rank]);
 
@@ -58,6 +55,14 @@ export default function MyCollection(prop) {
                   <img src={planet3} alt="행성" id="P_planet3" />
                   <h5>{rank[3].space}</h5>
                 </Planet3>
+              ) : null}
+
+              {rank[4] ? (
+                <Planet4 count={rank[4].count}>
+                  <div id="textCount">{rank[4].count} 개</div>
+                  <img src={planet4} alt="행성" id="P_planet4" />
+                  <h5>{rank[4].space}</h5>
+                </Planet4>
               ) : null}
             </div>
           </div>
@@ -122,6 +127,23 @@ const Planet2 = styled.div`
 `;
 const Planet3 = styled.div`
   #P_planet3 {
+    width: ${props =>
+      props.count > 3 ? (props.count > 6 ? "300px" : "200px") : "100px"};
+  }
+
+  display: inline-block;
+  color: white;
+  h5 {
+    text-align: center;
+    margin-top: 10px;
+  }
+  :hover {
+    transform: scale(1.2);
+  }
+`;
+
+const Planet4 = styled.div`
+  #P_planet4 {
     width: ${props =>
       props.count > 3 ? (props.count > 6 ? "300px" : "200px") : "100px"};
   }

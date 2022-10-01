@@ -129,8 +129,8 @@ const StyledWrapper = styled.div`
   }
 
   .css-rb59ar-MuiPaper-root-MuiCard-root {
-    margin: 90px auto;
-    border: 5px solid;
+    margin: 0 auto;
+    margin-top: unset;
   }
 
   #main img {
