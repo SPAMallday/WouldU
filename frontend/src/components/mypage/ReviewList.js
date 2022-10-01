@@ -1,13 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
-import ex from "assets/img/장수.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import Rating from "@mui/material/Rating";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -16,6 +10,8 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import swal from "sweetalert";
 import space from "assets/img/space_example.jpg";
+import { mydelete } from "../../api/myPageAPI";
+import { useNavigate } from "react-router-dom";
 
 // Import Swiper styles
 import "swiper/css";
@@ -27,23 +23,12 @@ import "swiper/css/navigation";
  * @returns
  */
 export default function ReviewList(prop) {
-  //dialog용 변수
-  const [open, setOpen] = React.useState(false);
-
-  //dialog 닫기
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOk = () => {
-    setOpen(false);
-    //리뷰 삭제 요청 보내기
-  };
+  const navigate = useNavigate();
 
   //리뷰 클릭시 dialog띄우기
   const onClickItem = item => {
     swal({
-      title: "Warning!",
+      title: "리뷰 삭제!",
       text: "정말로 삭제하시겠습니까?",
       icon: "warning",
       dangerMode: true,
@@ -62,7 +47,16 @@ export default function ReviewList(prop) {
     }).then(value => {
       switch (value) {
         case "OK":
-          swal("Success!", "삭제되었습니다.", "success");
+          mydelete(item.review_no)
+            .then(res => {
+              swal("Success!", "삭제되었습니다.", "success");
+              console.log(res.data);
+              navigate("/mypage");
+            })
+            .catch(err => {
+              console.log(err);
+            });
+
           break;
         case "NO":
           console.log("NO");
@@ -97,17 +91,17 @@ export default function ReviewList(prop) {
                   height="230"
                   alt="술"
                   id="imgSool"
-                  image={ex}
+                  image={prop.reviewList[i].alcohol_image}
                 />
                 <CardContent>
                   <Typography component="div" sx={{ fontSize: 20 }}>
-                    {prop.reviewList[i].name}
+                    {prop.reviewList[i].alcohol_name}
                   </Typography>
                   <Typography component="div" sx={{ fontSize: 20 }}>
                     <h5 id="tx_star">평점 : </h5>
                     <Rating
                       name="read-only"
-                      value={prop.reviewList[i].rating}
+                      value={prop.reviewList[i].score}
                       readOnly
                     />
                   </Typography>
@@ -145,24 +139,6 @@ export default function ReviewList(prop) {
           {like()}
         </Swiper>
       </div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            리뷰를 삭제하시겠습니까?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>아니요</Button>
-          <Button onClick={handleOk} autoFocus>
-            예
-          </Button>
-        </DialogActions>
-      </Dialog>
     </StyledWrapper>
   );
 }
@@ -172,6 +148,7 @@ const StyledWrapper = styled.div`
     margin-top: 60px;
     margin-bottom: 40px;
     width: 1300px;
+    height: 500px;
     background: url("${space}");
     background-size: 100% 100%;
     color: white;
