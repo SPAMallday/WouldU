@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'user',
     'alcohol',
     'apps.wouldU',
+    'apps.search',
     'apps.mypage',
     'recommend',
     'django.contrib.admin',
