@@ -31,19 +31,24 @@ def alcoDetails(request, alco_no, user_no):
 
     datas = cursor.fetchone()
 
-    #현재 로그인 유저가 좋아요 눌렀는지 
-    isLike= Alcohol_like.objects.filter(alcohol_no = alco_no , user_no = user_no)
-    is_row = isLike.exists()
-    if(is_row == False): 
+    #로그인 안한 유저
+    if(user_no == 0):
         like=0
-    else :
-        # 좋아요 취소한 사람이면 
-        is_like = json.loads(serializers.serialize("json", isLike, fields = {"is_like"}))[0]['fields']['is_like']
-        print(is_like)
-        if(is_like==True):
-            like=1
-        else : 
+    
+    else : 
+        #현재 로그인 유저가 좋아요 눌렀는지 
+        isLike= Alcohol_like.objects.filter(alcohol_no = alco_no , user_no = user_no)
+        is_row = isLike.exists()
+        if(is_row == False): 
             like=0
+        else :
+            # 좋아요 취소한 사람이면 
+            is_like = json.loads(serializers.serialize("json", isLike, fields = {"is_like"}))[0]['fields']['is_like']
+            print(is_like)
+            if(is_like==True):
+                like=1
+            else : 
+                like=0
     
 
     alco_no = datas[0]
