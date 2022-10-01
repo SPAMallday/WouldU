@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'alcohol',
     'apps.wouldU',
     'apps.mypage',
+    'recommend',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

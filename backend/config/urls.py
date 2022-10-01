@@ -21,5 +21,6 @@ urlpatterns = [
     path('user/', include('user.urls')),
     path('alcohol/', include('alcohol.urls')),
     path('mypage/', include('apps.mypage.urls')),
+    path('recommend/', include('recommend.urls')),
     path('admin/', admin.site.urls),
 ]
