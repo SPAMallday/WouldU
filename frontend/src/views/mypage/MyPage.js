@@ -70,7 +70,7 @@ export default function MyPage() {
       });
     });
     mylike().then(res => {
-      console.log(res);
+      console.log("조아", res);
       setLikeList([]);
       res.forEach(data => {
         setLikeList(likeList => [
