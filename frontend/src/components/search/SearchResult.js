@@ -8,7 +8,7 @@ import Pagination from "./Pagination";
 export default function SearchResult(props) {
   const { searchQuery, filterKinds } = props;
   // eslint-disable-next-line
-  const [limit, setLimit] = React.useState(3);
+  const [limit, setLimit] = React.useState(15);
   const [page, setPage] = React.useState(1);
   const offset = (page - 1) * limit;
 
@@ -39,20 +39,31 @@ export default function SearchResult(props) {
   ));
 
   return (
-    <StyledWrapper>
-      <div id="result">
-        {listItems}
-      </div>
-      <Pagination
-        total={filterNameAndKinds.length}
-        limit={limit}
-        page={page}
-        setPage={setPage} />
-    </StyledWrapper>
+    <>
+      <StyledWrapper>
+        <div id="result">{listItems}</div>
+      </StyledWrapper>
+        <Pagination
+          total={filterNameAndKinds.length}
+          limit={limit}
+          page={page}
+          setPage={setPage}
+        />
+    </>
   );
 }
 
 const StyledWrapper = styled.div`
-  width: 800px;
+  width: 1800px;
   height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  #result {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 20px;
+  }
 `;
