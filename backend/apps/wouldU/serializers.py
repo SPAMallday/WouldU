@@ -1,4 +1,7 @@
-from .models import Ranking
+from dataclasses import field
+
+from alcohol.serializer import AlcoholSerializer
+from .models import Ranking,Review
 from rest_framework import serializers
 
 class RankSerializer(serializers.ModelSerializer):
@@ -15,3 +18,8 @@ class RankSerializer(serializers.ModelSerializer):
     #     instance.content = validated_data.get('content', instance.content)
     #     instance.save()
     #     return instance
+ 
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model =Review
+        fields='__all__'

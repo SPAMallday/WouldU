@@ -9,11 +9,11 @@ export default function Element(props) {
       <div id="information">
         <div>{props.name}</div>
         <div>{props.brewery}</div>
-        <div>{props.ingredients}</div>
+        {/* <div>{props.ingredients}</div> */}
         <div>
           {props.size}ml / {props.alcohol}도
         </div>
-        <div id="information-desc">{props.desc}</div>
+        {/* <div id="information-desc">{props.desc}</div> */}
       </div>
     </StyledWrapper>
   );
@@ -23,18 +23,19 @@ const StyledWrapper = styled.div`
   display: flex;
   border: solid;
   margin: 10px 0px;
+  align-items: center;
 
   #picture {
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     border: solid;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   #picture img {
-    width: 190px;
-    height: 190px;
+    width: 90px;
+    height: 90px;
     margin: auto;
     object-fit: contain;
   }

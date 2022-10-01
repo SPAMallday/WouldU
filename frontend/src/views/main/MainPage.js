@@ -1,6 +1,6 @@
 import Header from "components/nav/Header"
 import Carousel from "components/main/Carousel";
-import SearchWindow from "components/main/SearchWindow";
+// import SearchWindow from "components/main/SearchWindow";
 import styled from "styled-components";
 import PopularWordCard from "components/main/PopularWordCard";
 import RecentReviewCard from "components/main/RecentReviewCard";
@@ -10,7 +10,6 @@ export default function MainPage() {
     <StyledWrapper>
       <Header />
       <Carousel />
-      <SearchWindow />
       <div id="popularwordslist">
         <PopularWordCard />
         <RecentReviewCard />
