@@ -31,7 +31,7 @@ export default function Login() {
           password: inputPw,
         };
         await axios
-          .post("http://j7a402.p.ssafy.io:8080/user/signin", data)
+          .post("http://j7a402.p.ssafy.io/api/user/signin", data)
           .then(res => {
             console.log(res);
             if (res.data.result === "success") {
