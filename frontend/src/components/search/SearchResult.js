@@ -5,46 +5,46 @@ import Element from "./Element";
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
 
-export default function SearchResult(props) {
-  const { searchQuery, filterKinds } = props;
+export default function SearchResult ({value}) {
+  // const { searchQuery, filterKinds } = props;
   // eslint-disable-next-line
   const [limit, setLimit] = React.useState(15);
   const [page, setPage] = React.useState(1);
   const offset = (page - 1) * limit;
 
-  const filterName = testinput.filter(q => {
-    return q.name.replace(" ","").toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase().replace(" ",""))
-  });
+  // const filterName = testinput.filter(q => {
+  //   return q.name.replace(" ","").toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase().replace(" ",""))
+  // });
 
-  const filterNameAndKinds = (filterKinds.length === 0) ?
-    filterName :
-    filterName.filter(k => {
-        return filterKinds.some(i => i.slice(0, 2) === k.type.slice(0, 2))
-      });
+  // const filterNameAndKinds = (filterKinds.length === 0) ?
+  //   filterName :
+  //   filterName.filter(k => {
+  //       return filterKinds.some(i => i.slice(0, 2) === k.type.slice(0, 2))
+  //     });
   
-  const listItems = filterNameAndKinds.slice(offset, offset + limit).map(e => (
-    <Link to={"/detail/" + e.id} key={`detail + ${e.id}`}>
-      <Element
-        id={e.id}
-        img_link={e.img_link}
-        name={e.name}
-        brewery={e.brewery}
-        ingredients={e.ingredients}
-        size={e.size}
-        alcohol={e.alcohol}
-        desc={e.desc}
-        key={`${e.id}`}
-      />
-    </Link>
-  ));
-
   return (
     <>
       <StyledWrapper>
-        <div id="result">{listItems}</div>
+        <div id="result">
+          {value && value.slice(0, limit).map((result) => (
+            <Link to={`/detail/${result.alcohol_no}`} key={`detail + ${result.alcohol_no}`}>
+              <Element
+                id={result.alcohol_no}
+                img_link={result.alcohol_image}
+                name={result.alcohol_name}
+                brewery={result.brewery}
+                // ingredients={result.}
+                size={result.size}
+                alcohol={result.abv}
+                // desc={result.}
+                key={`${result.alcohol_no}`}
+              />
+            </Link>
+          ))}
+        </div>
       </StyledWrapper>
         <Pagination
-          total={filterNameAndKinds.length}
+          total={20}
           limit={limit}
           page={page}
           setPage={setPage}
