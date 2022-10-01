@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
+import { search } from "../../api/searchAPI";
 
 export default function SearchBar(props) {
-  const { setSearchQuery } = props;
+  const { params, setParams, setSearchData } = props;
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Enter Key로 검색
+  const handleOnKeyPress = e => {
+    if (e.key === 'Enter') {
+      handleSubmitButton(); 
+    }
+  };
+
+  const handleSubmitButton = () => {
+    console.log(searchQuery)
+
+    // search(params).then(res => {
+    //   setSearchData(res);
+    //   console.log(res);
+    // });
+    
+    setParams(prevState => ({...prevState, 
+      name: searchQuery
+    }))
+  };
 
   return (
     <Paper
@@ -29,6 +51,8 @@ export default function SearchBar(props) {
         placeholder="전통주 검색"
         inputProps={{ "aria-label": "input" }}
         onChange={e => setSearchQuery(e.target.value)}
+        // onChange={e =>  setSearchQuery((prev) =>  (...prev, e.target.value ) )}
+        onKeyPress={handleOnKeyPress}
       />
       <Divider component="span" sx={{ height: 28 }} orientation="vertical" />
       <IconButton
@@ -36,6 +60,7 @@ export default function SearchBar(props) {
         type="submit"
         sx={{ p: "10px" }}
         aria-label="search"
+        onClick={() => handleSubmitButton()}
       >
         <SearchIcon />
       </IconButton>
