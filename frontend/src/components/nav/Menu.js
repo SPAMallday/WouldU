@@ -9,7 +9,7 @@ export default function Menu() {
   return (
     <StyledWrapper>
       <div id="menubuttons">
-        <Link to="/search">
+        <Link to="/search" state={{ fromIndexQuery: "" }}>
           <div id="search">검색</div>
         </Link>
         <Link to="/recommend">
