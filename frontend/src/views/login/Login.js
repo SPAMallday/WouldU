@@ -31,7 +31,7 @@ export default function Login() {
           password: inputPw,
         };
         await axios
-          .post("/api/user/signin", data)
+          .post("http://localhost:8000/user/signin", data)
           .then(res => {
             console.log(res);
             if (res.data.result === "success") {
