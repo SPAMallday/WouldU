@@ -1,24 +1,27 @@
-import React, { useState } from "react";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import React, { useState, useEffect } from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import styled from "@emotion/styled";
-import testinput from "components/search/testinput";
 import StarComment from "components/rating/StarComment";
 import SelectType from "components/search/SelectType";
+import swal from "sweetalert";
+import Slide from "@mui/material/Slide";
+import { alcoholreview } from "../../api/recommendAPI";
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="down" ref={ref} {...props} />;
+});
 
 /**
  * @todo 제출하기 버튼으로 제출할 수 있게 해야함
  */
 export default function SendReviewDialog(props) {
-  const { openReview, setOpenReview, targetId } = props;
-
-  const reviewTargetInTestinput = testinput[targetId - 1];
+  const { openReview, setOpenReview } = props;
 
   //평가
   const [value, setValue] = useState(3);
@@ -47,6 +50,35 @@ export default function SendReviewDialog(props) {
     setOpenReview(false);
   };
 
+  const handleOk = () => {
+    const data = {
+      user_no: sessionStorage.getItem("no"),
+      alcohol_no: props.alcohol.alco_no,
+      score: value,
+      comment: comment,
+      sweet: sweet,
+      sour: sour,
+      scent: smell,
+      body: body,
+    };
+    console.log(sweet, sour, body, smell, value, comment);
+    alcoholreview(data).then(res => {
+      if (res === "success") {
+        swal({
+          title: "Thank you!",
+          text: "리뷰 작성이 완료되었습니다.",
+          icon: "success",
+          button: {
+            text: "확인",
+          },
+        });
+        setOpenReview(false);
+      } else {
+        swal("Error!", "리뷰 작성 실패!!", "error");
+      }
+    });
+  };
+
   const onChangeValue = (event, newValue) => {
     setValue(newValue);
   };
@@ -58,40 +90,39 @@ export default function SendReviewDialog(props) {
   return (
     <>
       <Dialog
-        fullWidth="true"
         maxWidth="md"
+        TransitionComponent={Transition}
+        keepMounted
         open={openReview}
         onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
       >
         <DialogTitle>리뷰 작성하기</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {reviewTargetInTestinput.name} 을(를) 마셔본 우주 유저의 경험은 소중합니다. 작성해주세요~
+            {props.alcohol.alco_name} 을(를) 마셔본 우주 유저의 경험은
+            소중합니다. 작성해주세요~
           </DialogContentText>
           <Box
             noValidate
             component="form"
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              m: 'auto',
-              width: 'fit-content',
+              display: "flex",
+              flexDirection: "column",
+              m: "auto",
+              width: "fit-content",
             }}
           >
             <StyledWrapper>
               <div id="main">
                 <div id="ratingForm">
                   <div id="imgBox">
-                    <img
-                      src={reviewTargetInTestinput.img_link}
-                      alt="술"
-                      id="img_sul"
-                    />
+                    <img src={props.alcohol.alco_img} alt="술" id="img_sul" />
                   </div>
                   <div id="detailBox">
-                    <h5 id="text_sul">이름 : {reviewTargetInTestinput.name}</h5>
-                    <h5 id="text_sul">주종 : {reviewTargetInTestinput.type}</h5>
-                    <h5 id="text_sul">양조장 : {reviewTargetInTestinput.brewery}</h5>
+                    <h5 id="text_sul">이름 : {props.alcohol.alco_name}</h5>
+                    <h5 id="text_sul">주종 : {props.alcohol.alco_type}</h5>
+                    <h5 id="text_sul">도수 : {props.alcohol.abv}도</h5>
                   </div>
                 </div>
                 <div>
@@ -115,7 +146,7 @@ export default function SendReviewDialog(props) {
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>제출하기</Button>
+          <Button onClick={handleOk}>제출하기</Button>
           <Button onClick={handleClose}>닫기</Button>
         </DialogActions>
       </Dialog>
@@ -145,7 +176,6 @@ const StyledWrapper = styled.div`
   #imgBox {
     width: 200px;
     height: 200px;
-    background: yellow;
     float: left;
   }
   #imgBox img {

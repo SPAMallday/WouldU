@@ -19,7 +19,7 @@ export default function MyCollection(prop) {
     if (rank && rank.length > 0) {
       return (
         <StyledWrapper>
-          <div id="main">
+          <div id="main2">
             <h3 id="title">{prop.userName}님이 먹은 술 </h3>
             <div id="space">
               {rank[0].count !== 0 ? (
@@ -156,17 +156,17 @@ const Planet4 = styled.div`
   }
   :hover {
     transform: scale(1.2);
+    filter: grayscale(0);
   }
 `;
 
 const StyledWrapper = styled.div`
-  #main {
+  #main2 {
     margin-top: 60px;
     margin-bottom: 40px;
-    background: url("${space}");
-    background-size: 100% 100%;
     width: 1300px;
     height: 510px;
+    background-image: url("${space}");
   }
   #title {
     text-align: left;
