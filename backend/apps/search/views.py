@@ -24,8 +24,9 @@ def searchAlcoholAPI(request):
     # request param
     name = request.GET.get('name', '') 
     sort = int(request.GET.get('sort', 1)) 
-    page = int(request.GET.get('page', 0))
-    alcol_type = request.GET.get('alcol_type', [])
+    # page = int(request.GET.get('page', 0))
+    row_index = int(request.GET.get('row_index', 0))
+    alcol_type = request.GET.get('alcol_type', '')
 
     # sort 
     # 1 : alcohol no
@@ -34,37 +35,50 @@ def searchAlcoholAPI(request):
     sorting = ['', 'a.alcohol_no', 'a.alcohol_name', 'a.like_count DESC']
 
     # page당 15개의 item
-    page = (page-1) * 15
+    # page = (page-1) * 15
 
     # 깔끔하게 처리하고 싶은데.... 나중에 찾아보겠음
     alcohol_type = ''
     if len(alcol_type) != 0:
-      alcohol_type += 'AND a.alcohol_type in ('
-      for idx, val in enumerate(alcol_type):
-        alcohol_type += "'" + val + "'" + ('' if idx == len(alcol_type) -1 else ', ')
+      alcohol_type += 'AND a.alcohol_code in ('
+      list = alcol_type.split(',')
+      for idx, val in enumerate(list):
+        alcohol_type += "'" + val + "'" + ('' if idx == len(list) -1 else ', ')
       alcohol_type += ')'
     
-
+    print(alcohol_type)
     cursor = connection.cursor()
-    cursor.execute(f"""SELECT a.alcohol_no
-                           , a.alcohol_name
-                           , CONCAT('https://a402o1a4.s3.ap-northeast-2.amazonaws.com/', a.alcohol_no, '.png') alcohol_image
-                           , a.brewery
-                           , a.size
-                           , a.abv
-                        FROM alcohol a
-                       WHERE 1=1
-                         {alcohol_type}
-                         AND a.alcohol_name like '%%{name}%%'
-                       ORDER BY {sorting[sort]} 
-                       LIMIT {page}, 15""")
+    # total row count
+    # cursor.execute(f"""SELECT count(*)
+    #                      FROM alcohol a
+    #                     WHERE 1=1
+    #                       {alcohol_type}
+    #                       AND a.alcohol_name like '%%{name}%%'
+    #                     ORDER BY {sorting[sort]} 
+    #                     LIMIT {page}, 15""")
+    # row_num = cursor.fetchone()
+
+    cursor.execute(f"""SELECT row_number() OVER (ORDER BY {sorting[sort]}) as row_index
+                            , a.alcohol_no
+                            , a.alcohol_name
+                            , CONCAT('https://a402o1a4.s3.ap-northeast-2.amazonaws.com/', a.alcohol_no, '.png') as alcohol_image
+                            , a.brewery
+                            , replace(a.size, "|", ", ") size
+                            , a.abv
+                         FROM alcohol a
+                        WHERE 1=1
+                          {alcohol_type}
+                          AND a.alcohol_name like '%%{name}%%'
+                        ORDER BY {sorting[sort]} 
+                        LIMIT {row_index}, 16""")
+                        # LIMIT {page}, 16""")
                   # , (alcohol_type, name, sorting[sort], page))  
-    print(name, alcohol_type, sorting[sort], page)
+    print(name, alcol_type, sorting[sort], row_index)
     
     results = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) \
                 for row in cursor.fetchall()]
 
     if results != None and len(results) > 0:
         result = results[0]
-    print(results)
+    # print(results)
     return Response(results)
