@@ -9,6 +9,8 @@ import IconButton from "@mui/material/IconButton";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import StarIcon from "@mui/icons-material/Star";
 import Card from "@mui/material/Card";
+import spaces from "assets/img/space_example.jpg";
+
 import {
   category,
   average,
@@ -177,8 +179,11 @@ export default function MyPage() {
 const StyledWrapper = styled.div`
   #main {
     text-align: center;
-    background-color: #efeff7;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url("${spaces}");
+    background-size: 100% 100%;
   }
+
   .css-bhp9pd-MuiPaper-root-MuiCard-root {
     background-color: #efeff7;
     box-shadow: none;

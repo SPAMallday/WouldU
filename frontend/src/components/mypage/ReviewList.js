@@ -160,9 +160,7 @@ const StyledWrapper = styled.div`
     margin-bottom: 40px;
     width: 1300px;
     height: 500px;
-    background: url("${space}");
-    background-size: 100% 100%;
-    color: white;
+    background: #bb9b9b;
   }
   #title {
     text-align: left;
