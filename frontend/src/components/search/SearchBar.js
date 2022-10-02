@@ -16,16 +16,17 @@ export default function SearchBar(props) {
         m: "20px",
         display: "flex",
         alignItems: "center",
-        width: 700,
+        width: 800,
         height: 50,
-        boxShadow: 0,
+        boxShadow: 2,
         border: 1,
-        borderColor: "grey.400",
+        borderColor: "grey.600",
+        backgroundColor: "#FCF8E8",
       }}
     >
       <InputBase
         component="span"
-        sx={{ flex: 1, fontSize: 20, ml: 2 }}
+        sx={{ flex: 1, fontSize: 20, ml: 2, fontFamily: "GD" }}
         placeholder="전통주 검색"
         inputProps={{ "aria-label": "input" }}
         onChange={e => setSearchQuery(e.target.value)}

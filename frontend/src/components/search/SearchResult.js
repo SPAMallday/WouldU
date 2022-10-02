@@ -54,16 +54,21 @@ export default function SearchResult(props) {
 }
 
 const StyledWrapper = styled.div`
-  width: 1800px;
+  width: 100%;
   height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
 
+  a {
+    text-decoration: none;
+    color: black;
+  }
   #result {
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 20px;
+    
   }
 `;
