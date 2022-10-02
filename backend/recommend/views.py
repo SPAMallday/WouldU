@@ -52,7 +52,6 @@ def get_recom_user(request, user_no):
     # review_data = ratings.pivot_table('rating', index='alcohol_no', columns='user_no')
     # review_data.fillna(0, inplace=True)
 
-
     # 1 과거 주류에서 user_no에 해당하는 유저가 이미 마신 술을 다 가져옴 - pandas로 과거 주류데이터 가져온거 걸러서 써도 될 듯
     cursor = connection.cursor()
     cursor.execute(f'''SELECT alcohol_no
@@ -120,6 +119,7 @@ def get_recom_once(request):
     sour = data["sour"]
     scent = data["scent"]
     body = data["body"]
+    # 도수레벨 배열로 받음
     t_abv_level = data["abv_level"]
 
     target = [sweet, sour, scent, body]
@@ -147,25 +147,44 @@ def get_recom_once(request):
     # 유클리디안 거리를 기준으로 가장 유사한 술 10개를 선정
     top10_alcohols = euclide_df.sort_values(by="similarity", ascending=False)[:10]
 
-    in_res = top10_alcohols.loc[top10_alcohols["abv_level"] == t_abv_level]
-    out_res = top10_alcohols.loc[top10_alcohols["abv_level"] != t_abv_level]
+    in_res = top10_alcohols.loc[top10_alcohols["abv_level"].isin(t_abv_level)]
+    out_res = top10_alcohols.loc[~top10_alcohols["abv_level"].isin(t_abv_level)]
 
     # 가장 유사한 술 추천
-    result = {"in_alcohol_list" : [], "out_alcohol_list" : []}
+    result = {"in_alcohol_list": [], "out_alcohol_list": []}
     # 해당 도수 범위에 술이 있는 경우
     if len(in_res) > 0:
         temp_list = in_res["alcohol_no"].values.tolist()
         length = len(temp_list)
-        if  length> 3:
+        if length > 3:
             result["in_alcohol_list"] = temp_list[:3]
         else:
             # 도수에 맞는 술 넣고
             result["in_alcohol_list"] = temp_list
             # 모자란 수만큼 도수에 맞지 않는 술도 가져오기
-            result["out_alcohol_list"] = out_res["alcohol_no"].values.tolist()[:3-length]
+            result["out_alcohol_list"] = out_res["alcohol_no"].values.tolist()[:3 - length]
     # 해당 도수 범위에 술이 없는 경우
     else:
         result["out_alcohol_list"] = out_res["alcohol_no"].values.tolist()[:3]
+
+    # 범위에 있는 술 정보 가져오기
+    for key, value in result.items():
+        if len(value) > 0:
+            cursor.execute(f"""SELECT   alcohol_no
+                                        , alcohol_name
+                                        , CONCAT('https://a402o1a4.s3.ap-northeast-2.amazonaws.com/', alcohol_no, '.png') as alcohol_image
+                                        , brewery
+                                        , replace(size, "|", ", ") as size
+                                        , abv
+                                        , replace(material, "|", ", ") as material
+                                        , detail
+                                     FROM alcohol
+                                    WHERE 1=1
+                                    AND alcohol_no IN ({",".join(str(s) for s in value)})
+                                    """)
+
+            result[key] = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) \
+                   for row in cursor.fetchall()]
 
     return JsonResponse(result)
 
@@ -273,4 +292,3 @@ def write_record(request):
         result["result"] = "fail"
 
         return JsonResponse(result, status=500)
-
