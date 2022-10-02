@@ -22,27 +22,27 @@ export default function SelectType(prop) {
     return `${value}`;
   }
 
-  function repeatRadio(start, end) {
-    var elements = [];
+  // function repeatRadio(start, end) {
+  //   var elements = [];
 
-    for (var i = start; i <= end; i++) {
-      let color = "primary";
-      if (end % 2 === 0 && (end / 2 === i || end / 2 + 1 === i)) {
-        color = "default";
-      } else if (end % 2 !== 0 && end / 2 + 1 === i) {
-        color = "default";
-      }
+  //   for (var i = start; i <= end; i++) {
+  //     let color = "primary";
+  //     if (end % 2 === 0 && (end / 2 === i || end / 2 + 1 === i)) {
+  //       color = "default";
+  //     } else if (end % 2 !== 0 && end / 2 + 1 === i) {
+  //       color = "default";
+  //     }
 
-      elements.push(
-        <FormControlLabel
-          value={i}
-          control={<Radio className="Mui-checked" color={color} />}
-          labelPlacement="bottom"
-        />,
-      );
-    }
-    return elements;
-  }
+  //     elements.push(
+  //       <FormControlLabel
+  //         value={i}
+  //         control={<Radio className="Mui-checked" color={color} />}
+  //         labelPlacement="bottom"
+  //       />,
+  //     );
+  //   }
+  //   return elements;
+  // }
 
   return (
     <StyledWrapper>

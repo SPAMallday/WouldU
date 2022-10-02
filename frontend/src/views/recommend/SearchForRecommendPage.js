@@ -8,8 +8,8 @@ import * as React from "react";
 export default function SearchForRecommendPage() {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [handleClick, setHandleClick] = React.useState(false);
-  const [reviewTarget, setReviewTarget] = React.useState("");
-  
+  const [reviewTarget, setReviewTarget] = React.useState({});
+
   return (
     <>
       <Header />
