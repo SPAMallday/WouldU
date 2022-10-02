@@ -19,7 +19,8 @@ def RankingAPI(request):
     # print(serializer)
     # return Response(serializer.data)
     cursor = connection.cursor()
-    cursor.execute('''SELECT b.alcohol_name 
+    cursor.execute('''SELECT b.alcohol_no
+                           , b.alcohol_name 
                            , a.ranking
                        FROM ranking a
                            , alcohol b
@@ -72,7 +73,8 @@ def RecentReviewAPI(request):
     #                                 ''')
     # data = serializers.serialize('json', result, fields=('review_no', 'rank', 'reg_date'))
     cursor = connection.cursor()
-    cursor.execute('''SELECT a.alcohol_name
+    cursor.execute('''SELECT b.alcohol_no
+                           , a.alcohol_name
                            , @ROWNUM := @ROWNUM + 1 ranking
                            , a.reg_date
                         FROM (SELECT distinct b.alcohol_name as alcohol_name

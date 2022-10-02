@@ -1,8 +1,6 @@
-import http
 import json
 from user.models import User
 from .models import Alcohol, Alcohol_recommend, Alcohol_score1,Alcohol_score2, Alcohol_score3,Alcohol_score4
-from apps.wouldU.models import Review
 from apps.wouldU.serializers import ReviewSerializer
 from django.db import connection
 from rest_framework.decorators import api_view, permission_classes
@@ -11,6 +9,7 @@ from apps.mypage.models import Alcohol_like
 from django.http.response import JsonResponse
 from rest_framework.response import Response
 from django.core import serializers
+from .functions.recommend_CB import alcohol_rec
 
 
 # Create your views here.
@@ -163,3 +162,62 @@ def kind_score_cal(Alco, alco_no,score):
         total_score = isNow['fields']['total_score']
         count = isNow['fields']['count']
         isScore.update(total_score = total_score+score, count = count+1)
+
+
+# 유사 주류 추천
+# Content-based Filtering
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def similarAlcoholAPI(request, alcohol_no):
+    print(type(alcohol_no))
+    # 유사주류 추천하는 것
+    # 실제로는 주류가 추가 되는 곳에 들어가야하는데..
+    # 현재 관리자 페이지가 없기 때문에
+    # alcohol_rec();
+    
+    cursor = connection.cursor()
+    cursor.execute(f"""SELECT a.*
+                         FROM similar_alcohol a
+                        WHERE 1=1
+                          AND a.alcohol_no = {alcohol_no}
+                    """)
+    similar_list = cursor.fetchone()[1]
+    similar_list = similar_list.split(',')
+
+    results = []
+    print(type(similar_list[0]))
+    for alcohol in similar_list:
+        cursor.execute(f"""SELECT a.alcohol_no
+                                , a.alcohol_name
+                                , CONCAT('https://a402o1a4.s3.ap-northeast-2.amazonaws.com/', a.alcohol_no, '.png') as alcohol_image
+                            FROM alcohol a
+                            WHERE 1=1
+                             AND a.alcohol_no = {alcohol}
+                        """)
+    
+        results += [dict((cursor.description[i][0], value) for i, value in enumerate(row)) \
+                for row in cursor.fetchall()]
+        
+    return Response(results)
+
+    
+
+#상세페이지 리뷰 목록
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def alcoReviewAPI(request, alcohol_no):
+    cursor = connection.cursor()
+    cursor.execute(f"""SELECT a.alcohol_no
+                            , a.comment
+                            , a.score
+                         FROM review a
+                        WHERE 1=1
+                          AND a.alcohol_no = {alcohol_no}
+                        ORDER BY a.reg_date DESC
+                        LIMIT 5""")
+    
+    results = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) \
+                for row in cursor.fetchall()]
+
+    # print(results)
+    return Response(results)
