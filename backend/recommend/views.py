@@ -260,8 +260,9 @@ def write_record(request):
                                    WHERE user_no = {user_no}
                                    ''')
         similar_data = cursor.fetchone()
+
         # 문자열에서 배열로 변환
-        similar_data = ast.literal_eval(similar_data)
+        similar_data = ast.literal_eval(similar_data[0])
 
         try:
             similar_data.remove(alcohol_no)
@@ -273,7 +274,7 @@ def write_record(request):
         similar_data = str(similar_data)
 
         cursor.execute(f'''UPDATE recommend_mf
-                           SET similar = {similar_data}
+                           SET similar = '{similar_data}'
                            WHERE user_no = {user_no}
                            ''')
 
@@ -285,9 +286,9 @@ def write_record(request):
         result["result"] = "success"
 
         return JsonResponse(result, status=201)
-    except:
+    except Exception as e:
         connection.rollback()
-
+        print(e)
         print("평점 값 입력에 실패하였음")
         result["result"] = "fail"
 
