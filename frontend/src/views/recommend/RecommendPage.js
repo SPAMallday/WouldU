@@ -1,28 +1,27 @@
-import Header from "components/nav/Header";
 import styled from "styled-components";
 import * as React from "react";
 import RecommendIndex from "components/recommend/RecommendIndex";
 import recommendbackground from "assets/img/recommendbackground.jpg";
 import { Link } from "react-router-dom";
 import earth from "assets/img/earth.png";
+import mousepointer from "assets/img/mousepointer.png";
 
 export default function RecommendPage() {
   return (
-    <div>
-      <StyledWrapper>
-        <div id="earth">
-          <Link to="/">
-            <img src={earth} alt="지구" />
-            <div id="back">돌아가기</div>
-          </Link>
-        </div>
-        <RecommendIndex />
-      </StyledWrapper>
-    </div>
+    <StyledWrapper>
+      <div id="earth">
+        <Link to="/">
+          <img src={earth} alt="지구" />
+          <div id="back">돌아가기</div>
+        </Link>
+      </div>
+      <RecommendIndex />
+    </StyledWrapper>
   );
 }
 
 const StyledWrapper = styled.div`
+  cursor: url(${mousepointer}) 50 50, auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -49,6 +48,7 @@ const StyledWrapper = styled.div`
     width: 100px;
   }
   a {
+    cursor: url(${mousepointer}) 50 50, auto;
     text-decoration: none;
     color: black;
     display: flex;

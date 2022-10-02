@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import planet4 from "assets/img/planet4.png";
 import planet1 from "assets/img/planet1.png";
 import planet2 from "assets/img/planet2.png";
-
+import mousepointer from "assets/img/mousepointer.png";
 
 /**
  * 리뷰를 한번도 하지 않은 유저에게는 '평가'만 활성화하여 보여지고, 안내 문구도 같이 출력해야 함
@@ -86,6 +86,7 @@ const StyledWrapper = styled.div`
     transform: translateY(-18px);
   }
   a {
+    cursor: url(${mousepointer}) 50 50, auto;
     text-decoration: none;
     color: black;
     display: flex;
