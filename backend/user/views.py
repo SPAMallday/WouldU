@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 
-from .models import User, Survey
+from .models import User, Survey, User_kind_code
 
 from django.db import connection
 
@@ -24,27 +24,59 @@ from user.serializer import UserSerializer
 @permission_classes([AllowAny])
 def signup(request):
     user = UserSerializer(data=request.data)
-    print(user)
     reply_list= request.data['reply_list']
-    # reply_list=''.join(str(x) for x in request.data['reply_list']) #json 리스트를 문자열로 
-    print(reply_list)
+
     if user.is_valid():
-        # Survey.objects.create(user_no = 16, reply_list= reply_list)
+
+        user_k = cal_reply(reply_list).kind_code
         user.save()
+    
         user_id = user['user_id'].value
+        User.objects.filter(user_id = user_id).update(user_kind = user_k)
+
         id = User.objects.get(user_id = user_id) # user_no
         Survey.objects.create(user_no = id, reply_list = reply_list)
-        # # return Response(status=status.HTTP_200_OK)
-        # nuser= user.save(commit=False)
-        # user_id = user['user_id'].value
-        # id = User.objects.get(user_id = user_id) # user_no
-        # Survey.objects.create(user_no = id, reply_list = reply_list)
-        # nuser.user_kind = 'A'
-        # nuser.save()
-        # return Response(status=status.HTTP_200_OK)
         return JsonResponse({'result' : "success"})
     return JsonResponse({'result' : "fail"})
     #return Response(user.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def cal_reply(reply_list):
+    ey=0
+    en=0
+    oy=0
+    on=0
+    for index, val in enumerate(reply_list):
+        print(index, val)
+        # 짝수
+        if((index+1)%2==0):
+           if(val == 'Y'): 
+                ey += 1
+           else: 
+                en +=1
+        # 홀수
+        else:
+           if(val == 'Y'): 
+                oy += 1
+           else: 
+                on +=1
+
+    
+    if(oy>on):
+        if(ey>en):
+            user_k = User_kind_code.objects.get(kind_code = 'K1')
+            # us.update(user_kind= user_k)
+        else: 
+            print("here")
+            user_k = User_kind_code.objects.get(kind_code = 'K2')
+            # us.update(user_kind =user_k)
+    else:
+        if(ey>en):
+            user_k = User_kind_code.objects.get(kind_code = 'K3')
+            # us.update(user_kind=user_k)
+        else:
+            user_k = User_kind_code.objects.get(kind_code = 'K4')
+            # us.update(user_kind=user_k)
+    return user_k
 
 
 # 아이디 중복검사 
