@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+import enum
+import http
+>>>>>>> 7f45649de5ff53c0512220ec1a4ec1fa3a37d90e
 import json
 from user.models import User
 from .models import Alcohol, Alcohol_recommend, Alcohol_score1,Alcohol_score2, Alcohol_score3,Alcohol_score4
@@ -164,6 +169,7 @@ def kind_score_cal(Alco, alco_no,score):
         isScore.update(total_score = total_score+score, count = count+1)
 
 
+<<<<<<< HEAD
 # 유사 주류 추천
 # Content-based Filtering
 @api_view(['GET'])
@@ -221,3 +227,35 @@ def alcoReviewAPI(request, alcohol_no):
 
     # print(results)
     return Response(results)
+=======
+# 각 유형별로 평점 순 랭킹 보내주기 
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def RankByUserKind(request, user_no):
+    user_kind = User.objects.get(user_no = user_no).user_kind.kind_code
+    cursor = connection.cursor()
+    sql1 = "SELECT s.alcohol_no, a.alcohol_name, (s.total_score DIV s.count) as avg_score FROM alcohol a JOIN "
+    if(user_kind =='K1'):
+        sql2="alcohol_score1 "
+    elif(user_kind =='K2'):
+        sql2="alcohol_score2 "
+    elif(user_kind == 'K3'):
+        sql2="alcohol_score3 "
+    elif(user_kind == 'K4'):
+        sql2="alcohol_score4 "
+    sql3 = "s ON s.id = a.alcohol_no ORDER BY -avg_score LIMIT 0, 10"
+
+    sql = sql1+sql2+sql3
+    cursor.execute(sql)
+
+    results= [dict((cursor.description[i][0], value) for i,value in enumerate(row)) \
+            for row in cursor.fetchall()]
+
+    if results != None and len(results) > 0:
+        result = results[0]
+    
+    return Response(results)
+
+
+
+>>>>>>> 7f45649de5ff53c0512220ec1a4ec1fa3a37d90e
