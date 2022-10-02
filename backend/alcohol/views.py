@@ -1,7 +1,8 @@
+import enum
 import http
 import json
 from user.models import User
-from .models import Alcohol
+from .models import Alcohol, Alcohol_recommend, Alcohol_score1,Alcohol_score2, Alcohol_score3,Alcohol_score4
 from apps.wouldU.models import Review
 from apps.wouldU.serializers import ReviewSerializer
 from django.db import connection
@@ -22,7 +23,7 @@ from django.core import serializers
 def alcoDetails(request, alco_no, user_no):
     cursor= connection.cursor()
     # result = Alcohol_recommend.objects.prefetch_related('alcohol_no').all().filter(alcohol_no = alco_no)
-    result = cursor.execute('''SELECT a.*, ar.sweet, ar.sour, ar.scent, ar.body, ar.score, ac.alcohol_type
+    result = cursor.execute('''SELECT a.*, ar.sweet, ar.sour, ar.scent, ar.body, ar.score, ar.count, ac.alcohol_type
                                          FROM alcohol AS a inner join alcohol_recommend AS ar
                                          ON a.alcohol_no = ar.alcohol_no
                                          LEFT JOIN alcohol_code AS ac
@@ -52,6 +53,10 @@ def alcoDetails(request, alco_no, user_no):
     
 
     alco_no = datas[0]
+    if (datas[18] == 0):
+        score = 0
+    else :
+        score = datas[17]/datas[18]
     details ={
         'user_like' : like,
         'alco_no' :  alco_no,
@@ -69,8 +74,8 @@ def alcoDetails(request, alco_no, user_no):
         'sour' : datas[14],
         'scent' : datas[15],
         'body' : datas[16],
-        'score' : datas[17],
-        'alco_type' : datas[18],
+        'score' : score,
+        'alco_type' : datas[19],
         'alco_img' : 'https://a402o1a4.s3.ap-northeast-2.amazonaws.com/'+str(alco_no)+'.png'
     }
    
@@ -120,11 +125,74 @@ def alcoIsLike(request):
 @permission_classes([AllowAny])
 def alcoPostReview(request):
     review = ReviewSerializer(data= request.data)
-    user_no = request.data['user_no']
-    user_kind = json.loads(serializers.serialize("json", User.objects.filter(user_no = user_no), fields={'user_kind'}))[0]['fields']['user_kind']
-    print(user_kind)
+    alco_no = Alcohol.objects.get(alcohol_no = request.data['alcohol_no'])
+    user_no = User.objects.get(user_no=request.data['user_no'])
+    score = request.data['score']
+    alco = Alcohol_recommend.objects.filter(alcohol_no = alco_no)
+    alcohol=json.loads(serializers.serialize("json", alco, fields={'score','count'}))[0] # 현재 술 
+    alcohol_score = alcohol['fields']['score']
+    alcohol_count= alcohol['fields']['count']
+    
+    #사용자 유형 
+    user_kind = json.loads(serializers.serialize("json", User.objects.filter(user_no = user_no.user_no), fields={'user_kind'}))[0]['fields']['user_kind']
 
+    print(user_kind)
     if(review.is_valid()):
         review.save()
+        alco.update(score=alcohol_score+score, count = alcohol_count+1)
+
+    # 평점 (각 유형별로 테이블에 저장)
+    if(user_kind =='K1'):
+        kind_score_cal(Alcohol_score1, alco_no, score)
+    elif(user_kind == 'K2'):
+        kind_score_cal(Alcohol_score2, alco_no, score)
+    elif(user_kind == 'K3'):
+        kind_score_cal(Alcohol_score3, alco_no, score)
+    elif(user_kind =='K4'):
+        kind_score_cal(Alcohol_score4, alco_no, score)
+
 
     return Response("success")      
+
+def kind_score_cal(Alco, alco_no,score):
+    isScore = Alco.objects.filter(alcohol_no = alco_no)
+    isrow = isScore.exists()
+    if(isrow==False):
+        Alco.objects.create(alcohol_no = alco_no, total_score = score, count = 1)
+    else: 
+        isNow = json.loads(serializers.serialize("json", isScore, fields={'total_score', 'count'}))[0]
+        total_score = isNow['fields']['total_score']
+        count = isNow['fields']['count']
+        isScore.update(total_score = total_score+score, count = count+1)
+
+
+# 각 유형별로 평점 순 랭킹 보내주기 
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def RankByUserKind(request, user_no):
+    user_kind = User.objects.get(user_no = user_no).user_kind.kind_code
+    cursor = connection.cursor()
+    sql1 = "SELECT s.alcohol_no, a.alcohol_name, (s.total_score DIV s.count) as avg_score FROM alcohol a JOIN "
+    if(user_kind =='K1'):
+        sql2="alcohol_score1 "
+    elif(user_kind =='K2'):
+        sql2="alcohol_score2 "
+    elif(user_kind == 'K3'):
+        sql2="alcohol_score3 "
+    elif(user_kind == 'K4'):
+        sql2="alcohol_score4 "
+    sql3 = "s ON s.id = a.alcohol_no ORDER BY -avg_score LIMIT 0, 10"
+
+    sql = sql1+sql2+sql3
+    cursor.execute(sql)
+
+    results= [dict((cursor.description[i][0], value) for i,value in enumerate(row)) \
+            for row in cursor.fetchall()]
+
+    if results != None and len(results) > 0:
+        result = results[0]
+    
+    return Response(results)
+
+
+
