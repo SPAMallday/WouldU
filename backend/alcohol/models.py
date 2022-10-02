@@ -45,7 +45,10 @@ class Alcohol_recommend(models.Model):
     scent = models.IntegerField() #향
     body = models.IntegerField() #바디감
     abv_level= models.IntegerField() #도수 ( 1~7 )
-    score = models.IntegerField(default=0) # 리뷰 기준의 평균평점
+    score1 = models.IntegerField(default=0) # 리뷰 기준의 평점 1그룹
+    score2 = models.IntegerField(default=0) # 2그룹
+    score3 = models.IntegerField(default=0) # 3그룹
+    score4 = models.IntegerField(default=0) # 4그룹
     class Meta :
         db_table = 'alcohol_recommend'
 
