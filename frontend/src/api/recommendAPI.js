@@ -55,7 +55,17 @@ export const alcoholLike = async data => {
 // 유사주류
 export const similaralcohol = async no => {
   try {
-    const res = await apiClient.get(`/detail/similar-alcohol/${no}`);
+    const res = await apiClient.get(`/alcohol/similar-alcohol/${no}`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//상세페이지 유저 평가
+export const reviewalcohol = async no => {
+  try {
+    const res = await apiClient.get(`alcohol/review/${no}`);
     return res.data;
   } catch (err) {
     console.log(err);
@@ -66,16 +76,6 @@ export const similaralcohol = async no => {
 export const onceRecom = async data => {
   try {
     const res = await apiClient.post(`/recommend/once`, data);
-    return res.data;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-//상세페이지 유저 평가
-export const reviewalcohol = async no => {
-  try {
-    const res = await apiClient.get(`/detail/user-comment/${no}`);
     return res.data;
   } catch (err) {
     console.log(err);

@@ -5,25 +5,11 @@ import { Navigation } from "swiper";
 /**
  * @todo 틀만 만들어 놓은 것임
  */
-export default function Similar(props) {
-  const showSimilarList = () => {
-    const similarList = [];
-    for (let i = 0; i < 6; i++) {
-      similarList.push(
-        <SwiperSlide>
-          <div key={i} i="item">
-            <img id="img-sool" src={props.alcohol.alco_img} alt="예시" />
-            <h5 id="name-sool">{props.alcohol.alco_name}</h5>
-          </div>
-        </SwiperSlide>,
-      );
-    }
-    return similarList;
-  };
+export default function Similar({alcohol, similar}) {
 
   return (
     <StyledWrapper>
-      <h3>"{props.alcohol.alco_name}"와 유사한 전통주</h3>
+      <h3>"{alcohol.alco_name}"와 유사한 전통주</h3>
       <div id="similarlist">
         <Swiper
           modules={[Navigation]}
@@ -31,7 +17,16 @@ export default function Similar(props) {
           slidesPerView={5}
           navigation
         >
-          {showSimilarList()}
+          {
+            similar && similar.slice(0, 6).map((item, index) => (
+              <SwiperSlide>
+                <div key={index} id="similar">
+                  <img id="img-sool" src={item.alcohol_image} alt="예시" />
+                  <h5 id="name-sool">{item.alcohol_name}</h5>
+                </div>
+              </SwiperSlide>
+            ))
+          }
         </Swiper>
       </div>
     </StyledWrapper>

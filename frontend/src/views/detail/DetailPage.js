@@ -28,22 +28,22 @@ export default function DetailPage() {
 
     similaralcohol(params.detail_id).then(res => {
       console.log(res);
-      setSimilar();
+      setSimilar(res);
     });
 
     reviewalcohol(params.detail_id).then(res => {
       console.log(res);
-      //setReview();
+      setReview(res);
     });
 
-    setReview([
-      {
-        score: 5,
-        comment: "hi",
-      },
-      { score: 4, comment: "hihihih" },
-      { score: 1, comment: "난 별로" },
-    ]);
+    // setReview([
+    //   {
+    //     score: 5,
+    //     comment: "hi",
+    //   },
+    //   { score: 4, comment: "hihihih" },
+    //   { score: 1, comment: "난 별로" },
+    // ]);
   }, []);
 
   return (
