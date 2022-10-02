@@ -1,8 +1,8 @@
 import React from 'react';
-// import carousel_element1 from "assets/img/carousel_element1.jpg";
-// import carousel_element2 from "assets/img/carousel_element2.jpg";
-// import carousel_element3 from "assets/img/carousel_element3.jpg";
-// import carousel_element4 from "assets/img/carousel_element4.jpg";
+import carousel_element1 from "assets/img/carousel_element1.jpg";
+import carousel_element2 from "assets/img/carousel_element2.jpg";
+import carousel_element3 from "assets/img/carousel_element3.jpg";
+import carousel_element4 from "assets/img/carousel_element4.jpg";
 import carousel_element5 from "assets/img/carousel_element5.jpg";
 import styled from "styled-components";
 
@@ -18,20 +18,28 @@ export default function PhotoCarousel() {
         indicators={false}
         pause={false}
       >
-        <Carousel.Item id="carousel-item">
+        {/* <Carousel.Item id="carousel-item">
           <img
             id="carousel-img"
             className="d-block w-100"
             src={carousel_element5}
             alt="First slide"
           />
+        </Carousel.Item> */}
+        <Carousel.Item>
+          <img
+            id="carousel-img"
+            className="d-block w-100"
+            src={carousel_element1}
+            alt="Second slide"
+          />
         </Carousel.Item>
-        {/* <Carousel.Item>
+        <Carousel.Item>
           <img
             id="carousel-img"
             className="d-block w-100"
             src={carousel_element2}
-            alt="Second slide"
+            alt="Third slide"
           />
         </Carousel.Item>
         <Carousel.Item>
@@ -42,14 +50,6 @@ export default function PhotoCarousel() {
             alt="Third slide"
           />
         </Carousel.Item>
-        <Carousel.Item>
-          <img
-            id="carousel-img"
-            className="d-block w-100"
-            src={carousel_element4}
-            alt="Third slide"
-          />
-        </Carousel.Item> */}
       </Carousel>
     </StyledWrapper>
   );
@@ -60,11 +60,11 @@ const StyledWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 30vw;
-    margin: 0px 0px 10px;
+    height: 40vw;
+    margin: 0px 0px 20px;
   }
   .carousel-inner {
-    height: 30vw;
+    height: 40vw;
   }
   .carousel-item {
     display: flex;
@@ -73,7 +73,9 @@ const StyledWrapper = styled.div`
   }
   .carousel-inner img {
     max-width: 90vw;
-    height: 30vw;
+    height: 40vw;
     object-fit: fill;
+    border: 8px dashed #deb6ab;
+    border-radius: 20px;
   }
 `;

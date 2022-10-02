@@ -3,13 +3,18 @@ import styled from "styled-components";
 import * as React from "react";
 import RecommendIndex from "components/recommend/RecommendIndex";
 import space_example from "assets/img/space_example.jpg";
+import { Link } from "react-router-dom";
 
 export default function RecommendPage() {
   
   return (
     <>
-      <Header />
       <StyledWrapper>
+        <button>
+          <Link to="/">
+            뒤로 가기
+          </Link>
+        </button>
         <RecommendIndex />
       </StyledWrapper>
     </>
