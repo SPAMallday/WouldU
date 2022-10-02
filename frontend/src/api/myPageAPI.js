@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { json } from "react-router-dom";
 import { apiClient } from ".";
 

@@ -5,13 +5,18 @@ import Similar from "components/detail/Similar";
 import Review from "components/detail/Review";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { alcoholDetail, similaralcohol } from "../../api/recommendAPI";
+import {
+  alcoholDetail,
+  similaralcohol,
+  reviewalcohol,
+} from "../../api/recommendAPI";
 
 export default function DetailPage() {
   let params = useParams();
   const [alcohol, setAlcohol] = useState({});
   const [userno, setUserno] = useState("");
   const [similar, setSimilar] = useState([]);
+  const [review, setReview] = useState([]);
 
   useEffect(() => {
     setUserno(sessionStorage.getItem("no"));
@@ -25,6 +30,20 @@ export default function DetailPage() {
       console.log(res);
       setSimilar();
     });
+
+    reviewalcohol(params.detail_id).then(res => {
+      console.log(res);
+      //setReview();
+    });
+
+    setReview([
+      {
+        score: 5,
+        comment: "hi",
+      },
+      { score: 4, comment: "hihihih" },
+      { score: 1, comment: "난 별로" },
+    ]);
   }, []);
 
   return (
@@ -37,6 +56,7 @@ export default function DetailPage() {
           userno={userno}
         />
         <Similar alcohol={alcohol} similar={similar} />
+        <Review review={review} />
       </StyledWrapper>
     </>
   );
