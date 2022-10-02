@@ -120,6 +120,10 @@ def alcoIsLike(request):
 @permission_classes([AllowAny])
 def alcoPostReview(request):
     review = ReviewSerializer(data= request.data)
+    user_no = request.data['user_no']
+    user_kind = json.loads(serializers.serialize("json", User.objects.filter(user_no = user_no), fields={'user_kind'}))[0]['fields']['user_kind']
+    print(user_kind)
+
     if(review.is_valid()):
         review.save()
 

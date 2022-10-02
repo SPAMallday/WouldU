@@ -49,6 +49,7 @@ class Alcohol_recommend(models.Model):
     score2 = models.IntegerField(default=0) # 2그룹
     score3 = models.IntegerField(default=0) # 3그룹
     score4 = models.IntegerField(default=0) # 4그룹
+    score = models.IntegerField(default=0)
     class Meta :
         db_table = 'alcohol_recommend'
 
