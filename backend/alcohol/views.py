@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-import enum
-import http
->>>>>>> 7f45649de5ff53c0512220ec1a4ec1fa3a37d90e
 import json
 from user.models import User
 from .models import Alcohol, Alcohol_recommend, Alcohol_score1,Alcohol_score2, Alcohol_score3,Alcohol_score4
@@ -169,7 +164,6 @@ def kind_score_cal(Alco, alco_no,score):
         isScore.update(total_score = total_score+score, count = count+1)
 
 
-<<<<<<< HEAD
 # 유사 주류 추천
 # Content-based Filtering
 @api_view(['GET'])
@@ -227,7 +221,7 @@ def alcoReviewAPI(request, alcohol_no):
 
     # print(results)
     return Response(results)
-=======
+
 # 각 유형별로 평점 순 랭킹 보내주기 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -256,6 +250,3 @@ def RankByUserKind(request, user_no):
     
     return Response(results)
 
-
-
->>>>>>> 7f45649de5ff53c0512220ec1a4ec1fa3a37d90e
