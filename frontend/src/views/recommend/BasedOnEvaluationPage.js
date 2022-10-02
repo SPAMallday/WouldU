@@ -1,25 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import Header from "components/nav/Header";
-import testinput from "components/search/testinput";
-import { Link } from "react-router-dom";
 import rocketicon from "assets/img/rocketicon.png"
 import mousepointer from "assets/img/mousepointer.png";
 import traditionalframe from "assets/img/traditionalframe.png";
 import planet4 from "assets/img/planet4.png"
+import Element from "components/search/Element";
+import { Link } from "react-router-dom";
+import { userRecom, alcoholDetail } from "../../api/recommendAPI";
 
 /**
  * @todo 백엔드에서 추천 결과5개 보내주기로 했어서 그거 띄우는 틀 만들었음.
  */
 export default function BasedOnEvaluationPage() {
-  const testIdList = [1, 3, 5, 6, 7];
-  const filterTestList = testinput.filter(num => {
-    return testIdList.includes(Number(num.id))
-  })
-  console.log(filterTestList)
+  const [ac_id, setAcid] = useState([]);
+  const [alcohol, setAlcohol] = useState([]);
 
-  const testListItems = filterTestList.map(e => (
-    <Link to={"/detail/" + e.id} key={`detail + ${e.id}`}>
+  useEffect(() => {
+    //알콜 리스트 받아오고
+    userRecom().then(res => {
+      setAcid(res.recommend);
+      setAlcohol([]);
+      for (var i = 0; i < res.recommend.length; i++) {
+        alcoholDetail(res.recommend[i]).then(res => {
+          setAlcohol(alcohol => [...alcohol, res]);
+        });
+      }
+    });
+
+    //알콜 상세 받아오기
+  }, []);
+  const ListItems = alcohol.map(e => (
+    <Link to={"/detail/" + e.alco_no} key={`detail + ${e.alco_no}`}>
       <div id="result-frame">
         <div id="tooltip">
           <img src={e.img_link} alt="img" />
@@ -36,7 +48,6 @@ export default function BasedOnEvaluationPage() {
       </div>
     </Link>
   ));
-  console.log(testListItems[0])
   return (
     <>
       <Header />
@@ -53,7 +64,7 @@ export default function BasedOnEvaluationPage() {
                 클릭하시면 해당 전통주의 상세페이지로 이동합니다.
               </div>
             </div>
-            <div id="result">{testListItems}</div>
+            <div id="result">{ListItems}</div>
           </div>
           <div id="goevaluation">
             <Link to="/recommend/search_for_recommend">

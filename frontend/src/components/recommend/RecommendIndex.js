@@ -1,24 +1,45 @@
 import styled from "styled-components";
-import * as React from "react";
-import { Link } from "react-router-dom";
 import planet4 from "assets/img/planet4.png";
-import planet1 from "assets/img/planet1.png";
+import planet3 from "assets/img/planet3.png";
 import planet2 from "assets/img/planet2.png";
 import mousepointer from "assets/img/mousepointer.png";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 /**
  * 리뷰를 한번도 하지 않은 유저에게는 '평가'만 활성화하여 보여지고, 안내 문구도 같이 출력해야 함
  */
 export default function RecommendIndex() {
+  const navigate = useNavigate();
+  const [user_no, setno] = useState();
+  useEffect(() => {
+    setno(window.sessionStorage.getItem("no"));
+  }, []);
+
+  const sfr = () => {
+    if (user_no === null) {
+      swal("앗!", "로그인이 필요한 서비스입니다.", "info");
+    } else {
+      navigate("/recommend/search-for-recommend");
+    }
+  };
+  const boe = () => {
+    if (user_no === null) {
+      swal("앗!", "로그인이 필요한 서비스입니다.", "info");
+    } else {
+      navigate("/recommend/based-on-evaluation");
+    }
+  };
   return (
     <StyledWrapper>
-      <div id="mars">
+      <div id="mars" onClick={boe}>
         <Link to="/recommend/based_on_evaluation">
             <img src={planet2} alt="화성" />
             <div id="text">추천 받으러 가는 행성</div>
         </Link>
       </div>
-      <div id="jupiter">
+      <div id="jupiter" onClick={sfr}>
         <Link to="/recommend/search_for_recommend">
           <img src={planet4} alt="목성" />
           <div id="text">전통주 평가하는 행성</div>
@@ -26,7 +47,7 @@ export default function RecommendIndex() {
       </div>
       <div id="saturn">
         <Link to="/recommend/based_on_filtering">
-          <img src={planet1} alt="토성" />
+          <img src={planet3} alt="토성" />
           <div id="text">간단히 추천해주는 행성</div>
         </Link>
       </div>

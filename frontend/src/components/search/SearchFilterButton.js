@@ -1,28 +1,50 @@
 import styled from "styled-components";
-import * as React from "react";
+import React, { useEffect, useState } from "react";
+import { search } from "../../api/searchAPI";
 
 export default function SearchFilterButton(props) {
-  const { buttonName, filterKinds, setFilterKinds } = props;
-  const [selected, setSelected] = React.useState(false);
-  
-  const handleClick = (n) => {
+  const { buttonValue, buttonName, params, setParams, setSearchData } = props;
+  const [selected, setSelected] = useState(false);
+  const [filterKinds, setFilterKinds] = useState([]);
+  const [temp, setTemp] = useState('aa');
+  // {
+  //   'name': '',
+  //   'sort': 1,
+  //   'row_index': 0,
+  //   'alcol-type':[],
+  // }
+
+
+  const handleClick = (e) => {
+    e.preventDefault();
+
     if (selected === false) {
-      n.preventDefault();
       setSelected(true);
-      setFilterKinds([...filterKinds, buttonName]);
+
+      const at = params.alcol_type + buttonValue + ','
+      setParams(prevState => ({...prevState, 
+        alcol_type: at
+      }))
     }
     else {
-      n.preventDefault();
       setSelected(false);
-      filterKinds.splice(filterKinds.indexOf( buttonName ), 1);
-      setFilterKinds([...filterKinds]);
+
+      const at = params.alcol_type.replace(buttonValue + ',', '')
+      setParams(prevState => ({...prevState, 
+        alcol_type: at
+      }))
     }
   };
   
+
   return (
     <StyledWrapper>
       <div>
-        <button id={selected === true ? "clicked" : "non-clicked"} type="button" onClick={handleClick}>
+        <button
+          id={selected === true ? "clicked" : "non-clicked"}
+          type="button"
+          onClick={handleClick}
+        >
           {buttonName}
         </button>
       </div>

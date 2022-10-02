@@ -37,15 +37,15 @@ export default function App() {
               <Route path="recommend/">
                 <Route index element={<RecommendPage />} />
                 <Route
-                  path="based_on_evaluation"
+                  path="based-on-evaluation"
                   element={<BasedOnEvaluationPage />}
                 />
                 <Route
-                  path="search_for_recommend"
+                  path="search-for-recommend"
                   element={<SearchForRecommendPage />}
                 />
                 <Route
-                  path="based_on_filtering"
+                  path="based-on-filtering"
                   element={<BasedOnFilteringPage />}
                 />
               </Route>

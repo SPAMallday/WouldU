@@ -9,9 +9,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import swal from "sweetalert";
-import space from "assets/img/space_example.jpg";
-import { mydelete } from "../../api/myPageAPI";
-import { useNavigate } from "react-router-dom";
+import { mydelete, myreview } from "../../api/myPageAPI";
 
 // Import Swiper styles
 import "swiper/css";
@@ -23,13 +21,11 @@ import "swiper/css/navigation";
  * @returns
  */
 export default function ReviewList(prop) {
-  const navigate = useNavigate();
-
   //리뷰 클릭시 dialog띄우기
   const onClickItem = item => {
     swal({
-      title: "리뷰 삭제!",
-      text: "정말로 삭제하시겠습니까?",
+      title: "평가 삭제!",
+      text: item.alcohol_name + " 평가를 삭제하시겠습니까?",
       icon: "warning",
       dangerMode: true,
       buttons: {
@@ -49,9 +45,23 @@ export default function ReviewList(prop) {
         case "OK":
           mydelete(item.review_no)
             .then(res => {
-              swal("Success!", "삭제되었습니다.", "success");
-              console.log(res.data);
-              navigate("/mypage");
+              swal("Success!", "삭제 완료!", "success");
+              myreview().then(res => {
+                prop.setReviewList([]);
+                res.forEach(data => {
+                  prop.setReviewList(reviewList => [
+                    ...reviewList,
+                    {
+                      alcohol_image: data.alcohol_image,
+                      alcohol_name: data.alcohol_name,
+                      alcohol_no: data.alcohol_no,
+                      comment: data.comment,
+                      score: data.score,
+                      review_no: data.review_no,
+                    },
+                  ]);
+                });
+              });
             })
             .catch(err => {
               console.log(err);
@@ -59,14 +69,11 @@ export default function ReviewList(prop) {
 
           break;
         case "NO":
-          console.log("NO");
           break;
         default:
           console.log("error");
       }
     });
-
-    console.log(item);
   };
 
   // 술 리스트 반복으로 보여주기
@@ -123,7 +130,7 @@ export default function ReviewList(prop) {
   return (
     <StyledWrapper>
       <div id="main">
-        <h3 id="title">리뷰 목록</h3>
+        <h3 id="title">내가 평가한 목록</h3>
         <div id="space">
           <div id="itemlist"></div>
         </div>
@@ -133,8 +140,6 @@ export default function ReviewList(prop) {
           spaceBetween={50}
           slidesPerView={3}
           navigation
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={swiper => console.log(swiper)}
         >
           {like()}
         </Swiper>
@@ -149,9 +154,7 @@ const StyledWrapper = styled.div`
     margin-bottom: 40px;
     width: 1300px;
     height: 500px;
-    background: url("${space}");
-    background-size: 100% 100%;
-    color: white;
+    background: #bb9b9b;
   }
   #title {
     text-align: left;
