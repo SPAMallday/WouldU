@@ -55,3 +55,13 @@ export const similaralcohol = async no => {
     console.log(err);
   }
 };
+
+// 일회용 추천
+export const onceRecom = async data => {
+  try {
+    const res = await apiClient.post(`/recommend/once`, data);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
