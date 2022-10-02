@@ -68,9 +68,11 @@ export default function MyPage() {
           { space: data.region_name, count: data.count },
         ]);
       });
+      spaceData.sort(function (a, b) {
+        return b.count - a.count;
+      });
     });
     mylike().then(res => {
-      console.log("조아", res);
       setLikeList([]);
       res.forEach(data => {
         setLikeList(likeList => [
