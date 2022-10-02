@@ -65,3 +65,29 @@ export const onceRecom = async data => {
     console.log(err);
   }
 };
+
+// 술 평가 점수 받아오기
+export const getRecord = async data => {
+  try {
+    const res = await apiClient.get(`/recommend/record`, {
+      params: { user_no: user_no, alcohol_no: data },
+    });
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// 술 평가 기록하기
+export const makeRecord = async data => {
+  try {
+    const res = await apiClient.post(`/recommend/record/update`, {
+      user_no: user_no,
+      ...data,
+    });
+    return res;
+  } catch (err) {
+    console.log(err);
+    return err.response;
+  }
+};

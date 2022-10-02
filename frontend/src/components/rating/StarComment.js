@@ -27,27 +27,29 @@ export default function StarComment(prop) {
           />
         </Box>
       </div>
-      <div id="hanmadi">
-        <Box
-          component="form"
-          sx={{
-            "& > :not(style)": { m: 1, width: "300px" },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField
-            required
-            id="outlined-multiline-static"
-            label="한줄평"
-            multiline
-            value={prop.comment}
-            rows={2}
-            onChange={prop.onChangeComment}
-            variant="outlined"
-          />
-        </Box>
-      </div>
+      {prop.type === undefined ? (
+        <div id="hanmadi">
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { m: 1, width: "300px" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              required
+              id="outlined-multiline-static"
+              label="한줄평"
+              multiline
+              value={prop.comment}
+              rows={2}
+              onChange={prop.onChangeComment}
+              variant="outlined"
+            />
+          </Box>
+        </div>
+      ) : null}
     </StyledWrapper>
   );
 }
