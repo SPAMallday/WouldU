@@ -37,9 +37,11 @@ export default function Menu() {
             </Link>
           </>
         ) : (
-          <Link to="/login">
-            <div id="login">로그인</div>
-          </Link>
+          <div id="login">
+            <Link to="/login">
+              로그인
+            </Link>
+          </div>
         )}
       </div>
     </StyledWrapper>
@@ -47,6 +49,9 @@ export default function Menu() {
 }
 
 const StyledWrapper = styled.div`
+  font-family: "GD";
+  font-size: 24px;
+  background-color: #f7ecde;
   display: flex;
   align-items: center;
   text-align: center;
@@ -55,7 +60,14 @@ const StyledWrapper = styled.div`
   #menubuttons {
     display: flex;
   }
-  a > div {
+  #menubuttons div {
     margin: 10px;
+    border-radius: 10px;
+  }
+  #menubuttons div:hover {
+    box-shadow: 200px 0 0 0 rgba(0, 0, 0, 0.2) inset;
+  }
+  #menubuttons div a {
+    padding: 5px 20px;
   }
 `;

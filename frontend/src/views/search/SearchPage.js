@@ -33,19 +33,31 @@ export default function SearchPage() {
     <>
       <Header />
       <StyledWrapper>
-        <SearchBar params={params} setParams={setParams} setSearchData={setSearchData} />
-        <SearchFilter params={params} setParams={setParams} setSearchData={setSearchData} />
-        {/* <SearchFilter filterKinds={ filterKinds } setFilterKinds={setFilterKinds} /> */}
-        {/* <SearchResult searchQuery={searchQuery} filterKinds={filterKinds} /> */}
-        <SearchResult value={searchData} />
+        <div id="background">
+          <div id="searchtools">
+            <SearchBar params={params} setParams={setParams} setSearchData={setSearchData} />
+            <SearchFilter params={params} setParams={setParams} setSearchData={setSearchData} />
+            {/* <SearchFilter filterKinds={ filterKinds } setFilterKinds={setFilterKinds} /> */}
+            {/* <SearchResult searchQuery={searchQuery} filterKinds={filterKinds} /> */}
+            <SearchResult value={searchData} />
+          </div>
+        </div>
       </StyledWrapper>
     </>
   );
 }
 
 const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  background-color: #f7ecde;
+  height: 88vh;
+  
+  #background {
+    height: 100%;
+  }
+  #searchtools {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+  }
 `;

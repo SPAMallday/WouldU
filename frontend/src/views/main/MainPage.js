@@ -1,5 +1,5 @@
 import Header from "components/nav/Header"
-import Carousel from "components/main/Carousel";
+import PhotoCarousel from "components/main/PhotoCarousel";
 // import SearchWindow from "components/main/SearchWindow";
 import styled from "styled-components";
 import PopularWordCard from "components/main/PopularWordCard";
@@ -9,7 +9,7 @@ export default function MainPage() {
   return(
     <StyledWrapper>
       <Header />
-      <Carousel />
+      <PhotoCarousel />
       <div id="popularwordslist">
         <PopularWordCard />
         <RecentReviewCard />
@@ -19,6 +19,8 @@ export default function MainPage() {
 };
 
 const StyledWrapper = styled.div`
+  background-color: #f7ecde;
+
   #popularwordslist {
     display: flex;
     justify-content: space-evenly;
