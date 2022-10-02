@@ -35,10 +35,12 @@ const StyledWrapper = styled.div`
 
   #earth {
     position: relative;
-    top: 52vh;
+    top: 55vh;
     left: -43vw;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
+    width: 200px;
+    height: 200px;
   }
   #earth:hover {
     -webkit-transform: translateY(-18px);
@@ -46,6 +48,10 @@ const StyledWrapper = styled.div`
   }
   #earth img {
     width: 100px;
+  }
+  #earth img:hover {
+    width: 150px;
+    height: 150px;
   }
   a {
     cursor: url(${mousepointer}) 50 50, auto;
