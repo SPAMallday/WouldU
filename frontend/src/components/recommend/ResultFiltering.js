@@ -1,4 +1,4 @@
-import Element from "components/recommend/Element";
+import Element from "components/search/Element";
 import { Link } from "react-router-dom";
 import { onceRecom } from "api/recommendAPI";
 import { useState } from "react";
