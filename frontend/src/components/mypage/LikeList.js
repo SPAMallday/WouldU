@@ -7,7 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-
+import { Link, useNavigate } from "react-router-dom";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -19,8 +19,10 @@ import "swiper/css/navigation";
  * @returns
  */
 export default function LikeList(prop) {
+  const navigate = useNavigate();
   const onClickItem = item => {
     console.log(item);
+    navigate("/detail/ " + item.alcohol_no);
   };
 
   const like = () => {
@@ -67,8 +69,6 @@ export default function LikeList(prop) {
           spaceBetween={-50}
           slidesPerView={5}
           navigation
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={swiper => console.log(swiper)}
         >
           {like()}
         </Swiper>

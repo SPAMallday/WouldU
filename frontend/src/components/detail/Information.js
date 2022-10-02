@@ -59,7 +59,6 @@ export default function Information(props) {
     };
 
     if (props.userno !== null) {
-      console.log(props.alcohol.user_like, like);
       alcoholLike(data).then(res => {
         if (res === "success") {
           if (like === 1) {

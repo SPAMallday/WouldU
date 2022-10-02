@@ -9,7 +9,6 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import swal from "sweetalert";
-import space from "assets/img/space_example.jpg";
 import { mydelete, myreview } from "../../api/myPageAPI";
 
 // Import Swiper styles
@@ -25,8 +24,8 @@ export default function ReviewList(prop) {
   //리뷰 클릭시 dialog띄우기
   const onClickItem = item => {
     swal({
-      title: "리뷰 삭제!",
-      text: "정말로 삭제하시겠습니까?",
+      title: "평가 삭제!",
+      text: item.alcohol_name + " 평가를 삭제하시겠습니까?",
       icon: "warning",
       dangerMode: true,
       buttons: {
@@ -70,14 +69,11 @@ export default function ReviewList(prop) {
 
           break;
         case "NO":
-          console.log("NO");
           break;
         default:
           console.log("error");
       }
     });
-
-    console.log(item);
   };
 
   // 술 리스트 반복으로 보여주기
@@ -134,7 +130,7 @@ export default function ReviewList(prop) {
   return (
     <StyledWrapper>
       <div id="main">
-        <h3 id="title">리뷰 목록</h3>
+        <h3 id="title">내가 평가한 목록</h3>
         <div id="space">
           <div id="itemlist"></div>
         </div>
@@ -144,8 +140,6 @@ export default function ReviewList(prop) {
           spaceBetween={50}
           slidesPerView={3}
           navigation
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={swiper => console.log(swiper)}
         >
           {like()}
         </Swiper>

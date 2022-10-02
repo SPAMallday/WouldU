@@ -55,7 +55,6 @@ export const myreview = async () => {
 export const mydelete = async no => {
   try {
     const res = await apiClient.delete(`/mypage/review/${no}`);
-    console.log(res);
     return res.data;
   } catch (err) {
     console.log(err);
