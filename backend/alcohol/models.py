@@ -47,6 +47,7 @@ class Alcohol_recommend(models.Model):
     body = models.IntegerField() #바디감
     abv_level= models.IntegerField() #도수 ( 1~7 )
     score = models.IntegerField(default=0)
+    count = models.IntegerField(default=0) 
     class Meta :
         db_table = 'alcohol_recommend'
 
