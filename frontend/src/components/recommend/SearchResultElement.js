@@ -10,7 +10,7 @@ export default function SearchResultElement({ result }) {
         <div id="alcoholtitle">{result.alcohol_name}</div>
         <div>{result.brewery}</div>
         <div>
-          {result.size}ml / {result.alcohol}도
+          {result.size}ml / {result.abv}도
         </div>
       </div>
     </StyledWrapper>
@@ -62,4 +62,3 @@ const StyledWrapper = styled.div`
     font-size: 20px;
   }
 `;
-  
