@@ -22,6 +22,7 @@ export default function BasedOnEvaluationPage() {
       setAcid(res.recommend);
       setAlcohol([]);
       for (var i = 0; i < res.recommend.length; i++) {
+        console.log(res);
         alcoholDetail(res.recommend[i]).then(res => {
           setAlcohol(alcohol => [...alcohol, res]);
         });
@@ -48,7 +49,7 @@ export default function BasedOnEvaluationPage() {
       </div>
     </Link>
   ));
-  
+
   return (
     <>
       <Header />

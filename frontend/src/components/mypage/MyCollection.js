@@ -130,6 +130,14 @@ export default function MyCollection(prop) {
         </StyledWrapper>
       );
     }
+  } else {
+    return (
+      <StyledWrapper>
+        <div id="main2">
+          <h3 id="title">{prop.userName}님이 먹은 술 </h3>
+        </div>
+      </StyledWrapper>
+    );
   }
 }
 
@@ -179,6 +187,18 @@ const StyledWrapper = styled.div`
     height: 530px;
     background-image: url("${space}");
     background-size: 100% 100%;
+
+    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: "GD";
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-sizing: border-box;
+    border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
   }
   #title {
     text-align: left;
