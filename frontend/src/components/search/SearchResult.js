@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import testinput from "./testinput";
 import Element from "./Element";
 import { Link } from "react-router-dom";
@@ -12,15 +12,10 @@ export default function SearchResult ({value}) {
   const [page, setPage] = React.useState(1);
   const offset = (page - 1) * limit;
 
-  // const filterName = testinput.filter(q => {
-  //   return q.name.replace(" ","").toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase().replace(" ",""))
-  // });
-
-  // const filterNameAndKinds = (filterKinds.length === 0) ?
-  //   filterName :
-  //   filterName.filter(k => {
-  //       return filterKinds.some(i => i.slice(0, 2) === k.type.slice(0, 2))
-  //     });
+  useEffect(() => {
+    console.log( value )
+  }
+  );
   
   return (
     <>

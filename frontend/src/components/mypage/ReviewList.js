@@ -81,12 +81,8 @@ export default function ReviewList(prop) {
     const result = [];
     for (let i = 0; i < prop.reviewList.length; i++) {
       result.push(
-        <SwiperSlide>
-          <div
-            id="bigItem"
-            key={i}
-            onClick={() => onClickItem(prop.reviewList[i])}
-          >
+        <SwiperSlide key={i}>
+          <div id="bigItem" onClick={() => onClickItem(prop.reviewList[i])}>
             <Card
               sx={{
                 maxWidth: 300,
