@@ -67,7 +67,7 @@ const StyledWrapper = styled.div`
     cursor: url(${mousepointer}) 50 50, auto;
     position: fixed;
     top: 78vh;
-    left: 90vw;
+    right: 0vw;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     width: 200px;

@@ -107,7 +107,7 @@ export default function Login() {
 }
 
 const StyledWrapper = styled.div`
-  background-color: #f7ecde;
+  background-color: #fcfcfc;
   height: 100vh;
   #main {
     height: 78vh;
@@ -130,7 +130,7 @@ const StyledWrapper = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: #ffe3e1;
+    background-color: #f7ecde;
   }
 
   #main img {

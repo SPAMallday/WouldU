@@ -7,7 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -51,7 +51,7 @@ export default function LikeList(prop) {
                   <Typography
                     component="div"
                     id="soolname"
-                    sx={{ fontSize: 20 }}
+                    sx={{ fontSize: 20, fontFamily: "GD" }}
                   >
                     {prop.likeList[i].alcohol_name}
                   </Typography>
@@ -99,19 +99,18 @@ const StyledWrapper = styled.div`
     border-top-left-radius: 255px 15px;
     border-top-right-radius: 15px 225px;
 
-    background-color: #ffe3e1;
+    background-color: #f7ecde;
   }
 
   #soolcard {
-    border: 2px solid #f09494;
+    border: 2px solid #e8c9a0;
     border-radius: 5px;
     margin: 5px 0;
 
     :hover {
       box-shadow: rgba(0, 0, 0, 0.9) 0px 3px 8px;
       transform: scale(1.1);
-
-      background-color: #ffd1e8;
+      background-color: #f2e0c9;
     }
   }
   #title {

@@ -62,7 +62,7 @@ const StyledWrapper = styled.div`
     border-top-right-radius: 15px 225px;
     display: flex;
 
-    background-color: #ffe3e1;
+    background-color: #f7ecde;
   }
   #categoryBox {
     display: inline-block;
@@ -78,6 +78,7 @@ const StyledWrapper = styled.div`
     margin-top: 20px;
   }
   #btn_recom {
+    font-family: "GD";
     margin-top: 20px;
     margin-left: -30px;
   }

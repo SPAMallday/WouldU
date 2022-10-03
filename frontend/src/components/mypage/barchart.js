@@ -14,6 +14,7 @@ const Barchart = prop => {
 
   return (
     // chart height이 100%이기 때문이 chart를 덮는 마크업 요소에 height 설정
+
     <div style={{ width: "800px", height: "500px", margin: "0 auto" }}>
       <ResponsiveBar
         maxValue={5}
@@ -32,7 +33,7 @@ const Barchart = prop => {
         /**
          * chart margin
          */
-        margin={{ top: 40, right: 180, bottom: 80, left: 60 }}
+        margin={{ top: 40, right: 180, bottom: 80, left: 0 }}
         /**
          * chart padding (bar간 간격)
          */
@@ -55,6 +56,7 @@ const Barchart = prop => {
             text: {
               fontSize: 20,
               fill: "#000000",
+              fontFamily: "GD",
             },
           },
           /**
@@ -64,6 +66,7 @@ const Barchart = prop => {
             text: {
               fontSize: 0,
               fill: "#000000",
+              fontFamily: "GD",
             },
           },
           axis: {
@@ -74,6 +77,7 @@ const Barchart = prop => {
               text: {
                 fontSize: 10,
                 fill: "#000000",
+                fontFamily: "GD",
               },
             },
             /**
@@ -83,6 +87,7 @@ const Barchart = prop => {
               text: {
                 fontSize: 16,
                 fill: "#000000",
+                fontFamily: "GD",
               },
             },
           },

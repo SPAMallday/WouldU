@@ -98,7 +98,10 @@ export default function ReviewList(prop) {
                   image={prop.reviewList[i].alcohol_image}
                 />
                 <CardContent>
-                  <Typography component="div" sx={{ fontSize: 20 }}>
+                  <Typography
+                    component="div"
+                    sx={{ fontSize: 20, fontFamily: "GD" }}
+                  >
                     {prop.reviewList[i].alcohol_name}
                   </Typography>
                   <Typography component="div" sx={{ fontSize: 20 }}>
@@ -163,10 +166,10 @@ const StyledWrapper = styled.div`
     border-top-left-radius: 255px 15px;
     border-top-right-radius: 15px 225px;
 
-    background-color: #dfe8cc;
+    background-color: #f7ecde;
   }
   #soolcard {
-    border: 2px solid #ccd6a6;
+    border: 2px solid #e8c9a0;
     border-radius: 5px;
     padding: 5px 5px;
     margin: 5px 0;
@@ -177,7 +180,7 @@ const StyledWrapper = styled.div`
     :hover {
       box-shadow: rgba(0, 0, 0, 0.9) 0px 3px 8px;
       transform: scale(1.1);
-      background-color: #c4e2b6;
+      background-color: #f2e0c9;
     }
   }
   #title {
@@ -195,6 +198,7 @@ const StyledWrapper = styled.div`
     margin-bottom: 10px;
     margin-left: 10px;
     margin-right: 10px;
+    font-family: "GD";
   }
   #tx_star {
     text-align: left;
@@ -202,6 +206,7 @@ const StyledWrapper = styled.div`
     margin-bottom: -25px;
     margin-left: 10px;
     margin-right: 10px;
+    font-family: "GD";
   }
 
   .css-o69gx8-MuiCardMedia-root {
