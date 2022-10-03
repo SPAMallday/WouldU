@@ -63,15 +63,20 @@ export default function SearchResult(props) {
                 });
               }}
             >
-              <SearchResultElement
-                id={result.alcohol_no}
-                img_link={result.alcohol_image}
-                name={result.alcohol_name}
-                brewery={result.brewery}
-                size={result.size}
-                alcohol={result.abv}
-                key={`${result.alcohol_no}`}
-              />
+            {/* <SearchResultElement
+              id={result.alcohol_no}
+              img_link={result.alcohol_image}
+              name={result.alcohol_name}
+              brewery={result.brewery}
+              size={result.size}
+              alcohol={result.abv}
+              key={`${result.alcohol_no}`}
+            /> */}
+            <SearchResultElement
+              id={result.alcohol_no}
+              result={ result }
+              key={`${result.alcohol_no}`}
+            />
             </div>
           ))}
         </div>
