@@ -4,14 +4,11 @@ import Header from "components/nav/Header";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import axios from "axios";
 import swal from "sweetalert";
 import logo2 from "assets/img/logo2.png";
 import Card from "@mui/material/Card";
 import space from "assets/img/space_example.jpg";
-import {
-  login
-} from "../../api/userAPI";
+import { login } from "../../api/userAPI";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -34,24 +31,21 @@ export default function Login() {
           password: inputPw,
         };
         login(data).then(res => {
-            if (res.result === "success") {
-              sessionStorage.setItem("ID", inputId);
-              sessionStorage.setItem("no", res.user_no);
-              sessionStorage.setItem("Nick", res.nickname);
-              navigate("/");
-            } else {
-              swal("Error!", "아이디 또는 비밀번호 오류입니다.", "error");
-            }
-          })
+          if (res.result === "success") {
+            sessionStorage.setItem("ID", inputId);
+            sessionStorage.setItem("no", res.user_no);
+            sessionStorage.setItem("Nick", res.nickname);
+            navigate("/");
+          } else {
+            swal("Error!", "아이디 또는 비밀번호 오류입니다.", "error");
+          }
+        });
       } else {
         swal("Error!", "비밀번호를 입력해주세요!!", "error");
       }
     } else {
       swal("Error!", "아이디를 입력해주세요!!", "error");
     }
-
-    console.log("ID", inputId);
-    console.log("PW", inputPw);
   }
 
   return (
@@ -86,7 +80,7 @@ export default function Login() {
                     value={inputPw}
                     onChange={handleInputPw}
                     size="small"
-                    id="input_area"
+                    id="input_area2"
                   />
                 </div>
               </div>
@@ -116,7 +110,7 @@ export default function Login() {
 
 const StyledWrapper = styled.div`
   #main {
-    height: 900px;
+    height: 1020px;
     text-align: center;
     background: url("${space}");
     background-size: 100% 100%;
@@ -146,6 +140,10 @@ const StyledWrapper = styled.div`
   }
 
   #input_area {
+    width: 250px;
+  }
+
+  #input_area2 {
     width: 250px;
   }
 
