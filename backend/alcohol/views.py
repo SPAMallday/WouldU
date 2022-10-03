@@ -228,7 +228,7 @@ def alcoReviewAPI(request, alcohol_no):
 def RankByUserKind(request, user_no):
     user_kind = User.objects.get(user_no = user_no).user_kind.kind_code
     cursor = connection.cursor()
-    sql1 = "SELECT a.alcohol_no, a.alcohol_name, (s.total_score DIV s.count) as avg_score FROM alcohol a JOIN "
+    sql1 = "SELECT a.alcohol_no, a.alcohol_name, (s.total_score DIV s.count) as avg_score, CONCAT('https://a402o1a4.s3.ap-northeast-2.amazonaws.com/', a.alcohol_no, '.png') as alcohol_image FROM alcohol a JOIN "
     if(user_kind =='K1'):
         sql2="alcohol_score1 "
     elif(user_kind =='K2'):
