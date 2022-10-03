@@ -44,7 +44,7 @@ export default function PopularWordCard() {
 
   useEffect(() => {
     likeRanking().then(res => {
-      console.log(res);
+      //console.log(res);
 
       let resList = res;
       let temp = [];

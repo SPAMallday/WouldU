@@ -69,17 +69,19 @@ export default function SameType() {
                         <Typography component="div" sx={{ fontSize: 20 }}>
                           <h4>{item.alcohol_name}</h4>
                         </Typography>
-                        <Typography component="div" sx={{ fontSize: 20 }}>
-                          <h4>
-                            평점 :
-                            <Rating
-                              name="read-only"
-                              value={item.avg_score}
-                              readOnly
-                              id="stars"
-                              size="large"
-                            />
-                          </h4>
+                        <Typography
+                          component="div"
+                          sx={{ fontSize: 20 }}
+                          id="ratestars"
+                        >
+                          <h4>평점 :</h4>
+                          <Rating
+                            name="read-only"
+                            value={item.avg_score}
+                            readOnly
+                            id="stars"
+                            size="large"
+                          />
                         </Typography>
                       </CardContent>
                     </CardActionArea>
@@ -96,19 +98,33 @@ export default function SameType() {
 
 const StyledWrapper = styled.div`
   #main {
-    width: 1300px;
-    height: 500px;
+    width: 1400px;
+    height: 520px;
+    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: "GD";
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-sizing: border-box;
+    border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
+
     background-color: #ffe3e1;
+    margin-bottom: 50px;
   }
   #title {
-    text-align: left;
-    padding-top: 20px;
-    margin-left: 30px;
+    text-align: center;
+    padding-top: 30px;
   }
-
+  .swiper {
+    height: 100%;
+  }
   .swiper-wrapper {
     margin-left: 50px;
-    margin-top: 50px;
+    margin-top: 30px;
   }
 
   #imgSool {
@@ -118,8 +134,25 @@ const StyledWrapper = styled.div`
   }
 
   #soolcard {
+    border: 2px solid #f09494;
+    border-radius: 5px;
+    padding: 5px 5px;
+    margin: 5px 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #ffd1d1;
     :hover {
+      box-shadow: rgba(0, 0, 0, 0.9) 0px 3px 8px;
       transform: scale(1.1);
+      background-color: #ffd1e8;
     }
+  }
+  #ratestars {
+    display: flex;
+    justify-content: center;
+  }
+  #stars {
+    margin-top: -3px;
   }
 `;

@@ -36,7 +36,7 @@ export default function RecentReviewCard() {
 
   useEffect(() => {
     recentReview().then(res => {
-      console.log(res);
+      //console.log(res);
 
       let resList = res;
       let temp = [];

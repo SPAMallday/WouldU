@@ -65,6 +65,7 @@ const StyledWrapper = styled.div`
     height: 250px;
   }
   #mars {
+    text-align: center;
     position: relative;
     top: -10vh;
     left: 3vw;
@@ -78,6 +79,7 @@ const StyledWrapper = styled.div`
     transform: translateY(-18px);
   }
   #jupiter {
+    text-align: center;
     position: relative;
     top: -10vh;
     width: 350px;
@@ -90,6 +92,7 @@ const StyledWrapper = styled.div`
     transform: translateY(-18px);
   }
   #saturn {
+    text-align: center;
     position: relative;
     width: 350px;
     height: 350px;
