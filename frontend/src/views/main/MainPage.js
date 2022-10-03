@@ -5,7 +5,6 @@ import styled from "styled-components";
 import PopularWordCard from "components/main/PopularWordCard";
 import RecentReviewCard from "components/main/RecentReviewCard";
 import SametypeUserCard from "components/main/SametypeUserCard";
-
 export default function MainPage() {
   return (
     <StyledWrapper>
@@ -15,6 +14,7 @@ export default function MainPage() {
         <PopularWordCard />
         <RecentReviewCard />
       </div>
+
       <div id="sametype">
         <SametypeUserCard />
       </div>

@@ -8,13 +8,15 @@ import React, { useEffect, useState } from "react";
 export default function Menu() {
   //const logged = window.sessionStorage.getItem("ID");
   const [logg, setlogg] = useState();
+
   useEffect(() => {
     setlogg(window.sessionStorage.getItem("ID"));
   }, []);
   const logout = () => {
     sessionStorage.clear();
-    swal("logout!", "로그아웃 완료", "success");
     setlogg();
+    window.location.replace("/");
+    swal("logout!", "로그아웃 완료", "success");
   };
   return (
     <StyledWrapper>
@@ -38,9 +40,7 @@ export default function Menu() {
           </>
         ) : (
           <div id="login">
-            <Link to="/login">
-              로그인
-            </Link>
+            <Link to="/login">로그인</Link>
           </div>
         )}
       </div>
