@@ -34,19 +34,15 @@ export default function RecommendIndex() {
   return (
     <StyledWrapper>
       <div id="mars" onClick={boe}>
-        <Link to="/recommend/based_on_evaluation">
-            <img src={planet2} alt="화성" />
-            <div id="text">추천 받으러 가는 행성</div>
-        </Link>
+        <img src={planet2} alt="화성" />
+        <div id="text">추천 받으러 가는 행성</div>
       </div>
       <div id="jupiter" onClick={sfr}>
-        <Link to="/recommend/search_for_recommend">
-          <img src={planet4} alt="목성" />
-          <div id="text">전통주 평가하는 행성</div>
-        </Link>
+        <img src={planet4} alt="목성" />
+        <div id="text">전통주 평가하는 행성</div>
       </div>
       <div id="saturn">
-        <Link to="/recommend/based_on_filtering">
+        <Link to="/recommend/based-on-filtering">
           <img src={planet3} alt="토성" />
           <div id="text">간단히 추천해주는 행성</div>
         </Link>
