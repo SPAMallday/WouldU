@@ -66,12 +66,16 @@ const StyledWrapper = styled.div`
   }
   #mars {
     position: relative;
-    top: -10vh;
+    top: -15vh;
     left: 3vw;
     width: 350px;
     height: 350px;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   #mars:hover {
     -webkit-transform: translateY(-18px);
@@ -79,11 +83,15 @@ const StyledWrapper = styled.div`
   }
   #jupiter {
     position: relative;
-    top: -10vh;
+    top: -15vh;
     width: 350px;
     height: 350px;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   #jupiter:hover {
     -webkit-transform: translateY(-18px);
@@ -93,10 +101,14 @@ const StyledWrapper = styled.div`
     position: relative;
     width: 350px;
     height: 350px;
-    top: -10vh;
+    top: -15vh;
     left: -3vw;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   #saturn:hover {
     -webkit-transform: translateY(-18px);

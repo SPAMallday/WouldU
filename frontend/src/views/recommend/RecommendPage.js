@@ -35,12 +35,16 @@ const StyledWrapper = styled.div`
 
   #earth {
     position: relative;
-    top: 55vh;
-    left: -43vw;
+    top: 56vh;
+    left: -45vw;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     width: 200px;
     height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   #earth:hover {
     -webkit-transform: translateY(-18px);

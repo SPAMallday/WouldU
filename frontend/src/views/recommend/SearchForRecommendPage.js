@@ -83,15 +83,24 @@ const StyledWrapper = styled.div`
   #rocketframe {
     cursor: url(${mousepointer}) 50 50, auto;
     position: relative;
-    top: 23vh;
-    left: 4vw;
+    top: 29vh;
+    left: -0.4vw;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     width: 200px;
     height: 200px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+  #rocketframe > a {
+    cursor: url(${mousepointer}) 50 50, auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
   }
   #rocketframe:hover {
     cursor: url(${mousepointer}) 50 50, auto;
