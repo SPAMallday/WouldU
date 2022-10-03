@@ -48,25 +48,25 @@ export default function SelectType(prop) {
     <StyledWrapper>
       <div>
         {/* <FormControl>
-          <FormLabel>단맛</FormLabel>
-          <RadioGroup row className="radioGroup">
-            <FormControlLabel
-              value={0}
-              control={<Radio className="Mui-checked" color="success" />}
-              label="전혀 달지 않아요"
-              labelPlacement="bottom"
-            />
-            {repeatRadio(1, 4)}
-            <FormControlLabel
-              value="5"
-              control={<Radio className="Mui-checked" color="success" />}
-              label="아주 달아요"
-              labelPlacement="bottom"
-            />
-          </RadioGroup>
-        </FormControl> */}
+        <FormLabel>단맛</FormLabel>
+        <RadioGroup row className="radioGroup">
+          <FormControlLabel
+            value={0}
+            control={<Radio className="Mui-checked" color="success" />}
+            label="전혀 달지 않아요"
+            labelPlacement="bottom"
+          />
+          {repeatRadio(1, 4)}
+          <FormControlLabel
+            value="5"
+            control={<Radio className="Mui-checked" color="success" />}
+            label="아주 달아요"
+            labelPlacement="bottom"
+          />
+        </RadioGroup>
+      </FormControl> */}
 
-        <h5 id="textSub">단맛</h5>
+        <div id="textSub">&lt;단맛&gt;</div>
         <Box sx={{ width: 400 }} id="slider">
           <Slider
             defaultValue={3}
@@ -76,11 +76,11 @@ export default function SelectType(prop) {
             marks={[
               {
                 value: 0,
-                label: "전혀 달지 않아요",
+                label: "쓴맛이 좋아요!",
               },
               {
                 value: 5,
-                label: "아주 달아요",
+                label: "단맛이 좋아요!",
               },
             ]}
             min={0}
@@ -90,7 +90,7 @@ export default function SelectType(prop) {
         </Box>
       </div>
       <div>
-        <h5 id="textSub">신맛</h5>
+        <div id="textSub">&lt;신맛&gt;</div>
         <Box sx={{ width: 400 }} id="slider">
           <Slider
             defaultValue={3}
@@ -100,11 +100,11 @@ export default function SelectType(prop) {
             marks={[
               {
                 value: 0,
-                label: "전혀 시지 않아요",
+                label: "신맛은 싫어요!",
               },
               {
                 value: 5,
-                label: "아주 셔요",
+                label: "셔야 맛이죠!",
               },
             ]}
             min={0}
@@ -114,7 +114,7 @@ export default function SelectType(prop) {
         </Box>
       </div>
       <div>
-        <h5 id="textSub">바디감</h5>
+        <div id="textSub">&lt;바디감&gt;</div>
         <Box sx={{ width: 400 }} id="slider">
           <Slider
             defaultValue={3}
@@ -124,11 +124,11 @@ export default function SelectType(prop) {
             marks={[
               {
                 value: 1,
-                label: "아주 가벼워요",
+                label: "아주 가볍게!",
               },
               {
                 value: 5,
-                label: "아주 무거워요",
+                label: "아주 무겁게!",
               },
             ]}
             min={1}
@@ -138,7 +138,7 @@ export default function SelectType(prop) {
         </Box>
       </div>
       <div>
-        <h5 id="textSub">향</h5>
+        <div id="textSub">&lt;향&gt;</div>
         <Box sx={{ width: 400 }} id="slider">
           <Slider
             defaultValue={3}
@@ -148,16 +148,17 @@ export default function SelectType(prop) {
             marks={[
               {
                 value: 1,
-                label: "약해요",
+                label: "약한 향!",
               },
               {
                 value: 5,
-                label: "강해요",
+                label: "강한 향!",
               },
             ]}
             min={1}
             max={5}
             color="secondary"
+            sx={{ fontFamily:"GD" }}
           />
         </Box>
       </div>
@@ -177,13 +178,16 @@ const StyledWrapper = styled.div`
   }
   #textSub {
     text-align: left;
-    width: 400px;
-    margin: auto;
-    margin-top: 30px;
-    margin-bottom: 20px;
+    width: 100px;
+    margin-left: 50px;
+    margin-top: 25px;
+    margin-bottom: 5px;
+    font-family: "Jua";
+    font-size: 24px;
   }
   #slider {
     margin: auto;
+    font-family: "GD" !important;
   }
   // .radioGroup {
   //   width: 100%;
@@ -196,4 +200,18 @@ const StyledWrapper = styled.div`
   //   white-space: nowrap;
   //   text-overflow: ellipsis;
   // }
+
+  .MuiSlider-markLabel {
+    font-family: "GD";
+    font-size: 16px;
+  }
+  .MuiSlider-rail {
+    color: #319da0;
+  }
+  .MuiSlider-track {
+    color: #256d85;
+  }
+  .MuiSlider-thumb {
+    color: #1f4690;
+  }
 `;
