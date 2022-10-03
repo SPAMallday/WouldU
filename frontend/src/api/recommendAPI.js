@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { json } from "react-router-dom";
 import { apiClient } from ".";
 
@@ -25,7 +24,9 @@ export const alcoholDetail = async al_no => {
   }
 
   try {
-    const res = await apiClient.get(`/alcohol/detail/${al_no}/${user_no}`);
+    const res = await apiClient.get(
+      `/alcohol/detail?alco_no=${al_no}&user_no=${user_no}`,
+    );
     return res.data;
   } catch (err) {
     console.log(err);
@@ -90,7 +91,7 @@ export const getRecord = async data => {
   }
   try {
     const res = await apiClient.get(`/recommend/record`, {
-      params: { user_no: user_no, alcohol_no: data },
+      // params: { user_no: user_no, alcohol_no: data },
     });
     return res.data;
   } catch (err) {
@@ -106,7 +107,7 @@ export const makeRecord = async data => {
   }
   try {
     const res = await apiClient.post(`/recommend/record/update`, {
-      user_no: user_no,
+      // user_no: user_no,
       ...data,
     });
     return res;

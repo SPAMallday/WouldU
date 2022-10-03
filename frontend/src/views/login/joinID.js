@@ -10,6 +10,9 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
+import {
+  idCheck
+} from "../../api/userAPI";
 
 export default function JoinID() {
   const [inputId, setInputId] = useState("");
@@ -47,11 +50,12 @@ export default function JoinID() {
 
   //아이디 중복확인
   const onIdCheck = () => {
+    idCheck(inputId).then(res => {
+      setIdOk(true);
+    });
     if (inputId !== "") {
-      axios
-        .get(`http://localhost:8000/user/checkid/${inputId}`)
-        .then(res => {
-          console.log(res);
+      idCheck(inputId).then(res => {
+        setIdOk(true);
           if (res.data.result === "success") {
             setIdOk(true);
             swal({
@@ -66,9 +70,6 @@ export default function JoinID() {
             swal("OMG!", "중복된 아이디입니다.", "error");
           }
         })
-        .catch(err => {
-          console.log(err);
-        });
     } else {
       swal("Error!", "아이디를 입력해주세요!!", "error");
     }
