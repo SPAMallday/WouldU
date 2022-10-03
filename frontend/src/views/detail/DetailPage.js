@@ -44,7 +44,7 @@ export default function DetailPage() {
     //   { score: 4, comment: "hihihih" },
     //   { score: 1, comment: "난 별로" },
     // ]);
-  }, []);
+  }, [params.detail_id]);
 
   return (
     <>

@@ -88,69 +88,66 @@ export default function SendReviewDialog(props) {
   };
 
   return (
-    <>
-      <Dialog
-        maxWidth="md"
-        TransitionComponent={Transition}
-        keepMounted
-        open={openReview}
-        onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle>리뷰 작성하기</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            {props.alcohol.alco_name} 을(를) 마셔본 우주 유저의 경험은
-            소중합니다. 작성해주세요~
-          </DialogContentText>
-          <Box
-            noValidate
-            component="form"
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              m: "auto",
-              width: "fit-content",
-            }}
-          >
-            <StyledWrapper>
-              <div id="main">
-                <div id="ratingForm">
-                  <div id="imgBox">
-                    <img src={props.alcohol.alco_img} alt="술" id="img_sul" />
-                  </div>
-                  <div id="detailBox">
-                    <h5 id="text_sul">이름 : {props.alcohol.alco_name}</h5>
-                    <h5 id="text_sul">주종 : {props.alcohol.alco_type}</h5>
-                    <h5 id="text_sul">도수 : {props.alcohol.abv}도</h5>
-                  </div>
+    <Dialog
+      maxWidth="md"
+      TransitionComponent={Transition}
+      keepMounted
+      open={openReview}
+      onClose={handleClose}
+      aria-describedby="alert-dialog-slide-description"
+    >
+      <DialogTitle>리뷰 작성하기</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          {props.alcohol.alco_name} 을(를) 마셔본 우주 유저의 경험은 소중합니다.
+          작성해주세요~
+        </DialogContentText>
+        <Box
+          noValidate
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            m: "auto",
+            width: "fit-content",
+          }}
+        >
+          <StyledWrapper>
+            <div id="main">
+              <div id="ratingForm">
+                <div id="imgBox">
+                  <img src={props.alcohol.alco_img} alt="술" id="img_sul" />
                 </div>
-                <div>
-                  <SelectType
-                    handleChange={handleChange}
-                    handleChange1={handleChange1}
-                    handleChange2={handleChange2}
-                    handleChange3={handleChange3}
-                  />
-                </div>
-                <div>
-                  <StarComment
-                    value={value}
-                    onChangeValue={onChangeValue}
-                    comment={comment}
-                    onChangeComment={onChangeComment}
-                  />
+                <div id="detailBox">
+                  <h5 id="text_sul">이름 : {props.alcohol.alco_name}</h5>
+                  <h5 id="text_sul">주종 : {props.alcohol.alco_type}</h5>
+                  <h5 id="text_sul">도수 : {props.alcohol.abv}도</h5>
                 </div>
               </div>
-            </StyledWrapper>
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleOk}>제출하기</Button>
-          <Button onClick={handleClose}>닫기</Button>
-        </DialogActions>
-      </Dialog>
-    </>
+              <div>
+                <SelectType
+                  handleChange={handleChange}
+                  handleChange1={handleChange1}
+                  handleChange2={handleChange2}
+                  handleChange3={handleChange3}
+                />
+              </div>
+              <div>
+                <StarComment
+                  value={value}
+                  onChangeValue={onChangeValue}
+                  comment={comment}
+                  onChangeComment={onChangeComment}
+                />
+              </div>
+            </div>
+          </StyledWrapper>
+        </Box>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleOk}>제출하기</Button>
+        <Button onClick={handleClose}>닫기</Button>
+      </DialogActions>
+    </Dialog>
   );
 }
 

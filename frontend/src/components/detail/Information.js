@@ -10,8 +10,33 @@ import React, { useState, useEffect } from "react";
 
 export default function Information(props) {
   const [like, setLike] = useState("");
+  const [tasteData, setTasteData] = useState();
   useEffect(() => {
     setLike(props.alcohol.user_like);
+    if (props.alcohol.score >= 0) {
+      setTasteData([
+        {
+          taste: "평점",
+          전통주: Number(props.alcohol.score),
+        },
+        {
+          taste: "단맛",
+          전통주: Number(props.alcohol.sweet),
+        },
+        {
+          taste: "바디감",
+          전통주: Number(props.alcohol.body),
+        },
+        {
+          taste: "신맛",
+          전통주: Number(props.alcohol.sour),
+        },
+        {
+          taste: "향",
+          전통주: Number(props.alcohol.scent),
+        },
+      ]);
+    }
   }, [props]);
 
   const [openReview, setOpenReview] = useState(false);
@@ -30,28 +55,7 @@ export default function Information(props) {
   /**
    * @todo 유저 평점 집어넣어야 함
    */
-  const tasteData = [
-    {
-      taste: "평점",
-      전통주: Number(props.alcohol.score),
-    },
-    {
-      taste: "단맛",
-      전통주: Number(props.alcohol.sweet),
-    },
-    {
-      taste: "바디감",
-      전통주: Number(props.alcohol.body),
-    },
-    {
-      taste: "신맛",
-      전통주: Number(props.alcohol.sour),
-    },
-    {
-      taste: "향",
-      전통주: Number(props.alcohol.scent),
-    },
-  ];
+
   const changelike = () => {
     const data = {
       alco_no: props.alcohol.alco_no,
