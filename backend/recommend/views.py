@@ -145,7 +145,7 @@ def get_recom_once(request):
     # dataframe으로 변환
     euclide_df = pd.DataFrame(data=euclide_res, columns=["alcohol_no", "similarity", "abv_level"])
     # 유클리디안 거리를 기준으로 가장 유사한 술 10개를 선정
-    top10_alcohols = euclide_df.sort_values(by="similarity", ascending=False)[:10]
+    top10_alcohols = euclide_df.sort_values(by="similarity", ascending=True)[:10]
 
     in_res = top10_alcohols.loc[top10_alcohols["abv_level"].isin(t_abv_level)]
     out_res = top10_alcohols.loc[~top10_alcohols["abv_level"].isin(t_abv_level)]
@@ -156,16 +156,16 @@ def get_recom_once(request):
     if len(in_res) > 0:
         temp_list = in_res["alcohol_no"].values.tolist()
         length = len(temp_list)
-        if length > 3:
-            result["in_alcohol_list"] = temp_list[:3]
+        if length > 5:
+            result["in_alcohol_list"] = temp_list[:5]
         else:
             # 도수에 맞는 술 넣고
             result["in_alcohol_list"] = temp_list
             # 모자란 수만큼 도수에 맞지 않는 술도 가져오기
-            result["out_alcohol_list"] = out_res["alcohol_no"].values.tolist()[:3 - length]
+            result["out_alcohol_list"] = out_res["alcohol_no"].values.tolist()[:5 - length]
     # 해당 도수 범위에 술이 없는 경우
     else:
-        result["out_alcohol_list"] = out_res["alcohol_no"].values.tolist()[:3]
+        result["out_alcohol_list"] = out_res["alcohol_no"].values.tolist()[:5]
 
     # 범위에 있는 술 정보 가져오기
     for key, value in result.items():
