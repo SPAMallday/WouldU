@@ -5,28 +5,26 @@ import { Navigation } from "swiper";
 /**
  * @todo 틀만 만들어 놓은 것임
  */
-export default function Similar({alcohol, similar}) {
-
+export default function Similar({ alcohol, similar }) {
   return (
     <StyledWrapper>
       <h3>"{alcohol.alco_name}"와 유사한 전통주</h3>
       <div id="similarlist">
         <Swiper
           modules={[Navigation]}
-          spaceBetween={-50}
+          spaceBetween={50}
           slidesPerView={5}
           navigation
         >
-          {
-            similar && similar.slice(0, 6).map((item, index) => (
+          {similar &&
+            similar.slice(0, 6).map((item, index) => (
               <SwiperSlide>
                 <div key={index} id="similar">
                   <img id="img-sool" src={item.alcohol_image} alt="예시" />
                   <h5 id="name-sool">{item.alcohol_name}</h5>
                 </div>
               </SwiperSlide>
-            ))
-          }
+            ))}
         </Swiper>
       </div>
     </StyledWrapper>
@@ -43,6 +41,7 @@ const StyledWrapper = styled.div`
     padding-top: 20px;
     margin-left: 30px;
   }
+
   #item {
     display: inline-block;
     border: 1px solid;
@@ -50,8 +49,13 @@ const StyledWrapper = styled.div`
   }
   #img-sool {
     height: 250px;
+    width: 100%;
+    object-fit: scale-down;
   }
   #name-sool {
     margin: 10px;
+  }
+  #similarlist h5 {
+    text-align: center;
   }
 `;

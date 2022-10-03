@@ -33,17 +33,19 @@ export default function RecentReviewCard() {
   let todayMonth = now.getMonth() + 1;
   let todayDate = now.getDate();
 
-  const checkToday = (date) => {
-    if (todayYear === Number(date.slice(0, 4))
-      && todayMonth === Number(date.slice(5, 7))
-      && todayDate === Number(date.slice(8, 10))) {
+  const checkToday = date => {
+    if (
+      todayYear === Number(date.slice(0, 4)) &&
+      todayMonth === Number(date.slice(5, 7)) &&
+      todayDate === Number(date.slice(8, 10))
+    ) {
       return (
         <div>
           <img src={newtag} alt="신규" />
         </div>
-      )
+      );
     }
-  }
+  };
 
   if (reviewList && reviewList.length === 10) {
     return (
