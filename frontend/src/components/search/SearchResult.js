@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 // import Pagination from "./Pagination";
 import Pagination from "react-js-pagination";
 
-export default function SearchResult ({value, params, setParams}) {
+export default function SearchResult ({searchData, params, setParams}) {
   // const { searchQuery, filterKinds } = props;
   // eslint-disable-next-line
   const [limit, setLimit] = useState(15);
@@ -20,17 +20,18 @@ export default function SearchResult ({value, params, setParams}) {
   };
 
   useEffect(() => {
-    if (value.length > 0) {
-      console.log(value[0].total_count)
-      setTotalPage(value[0].total_count)
+    console.log(searchData.length)
+    if (searchData.length > 0) {
+      console.log(searchData[0].total_count)
+      setTotalPage(searchData[0].total_count)
     }
-  }, [value]);
+  }, [searchData]);
   
   return (
     <>
       <StyledWrapper>
         <div id="result">
-          {value && value.map((result) => (
+          {searchData && searchData.map((result) => (
             <Link to={`/detail/${result.alcohol_no}`} key={`detail + ${result.alcohol_no}`}>
               <Element
                 id={result.alcohol_no}
