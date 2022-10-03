@@ -206,10 +206,10 @@ def get_record(request):
     cursor.close()
     connection.close()
 
-    result = {"score": q_result[0]}
+    result = {"score": 0}
 
-    if result["score"] is None:
-        result["score"] = 0
+    if q_result is not None:
+        result["score"] = q_result[0]
 
     return JsonResponse(result)
 
@@ -247,7 +247,7 @@ def write_record(request):
                            ''')
             has_record = cursor.fetchone()
 
-            if has_record[0] is None:
+            if has_record is None:
                 cursor.execute(f'''INSERT INTO user_alcohol (user_no, alcohol_no, score)
                                VALUES ({user_no}, {alcohol_no}, {score})
                                 ''')
