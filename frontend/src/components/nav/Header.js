@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import logo from "assets/img/logo_example.png";
+import logo2 from "assets/img/logo2.png";
 import Menu from "components/nav/Menu";
 
 export default function Header() {
@@ -9,10 +9,7 @@ export default function Header() {
       <div id="container">
         <Link to="/">
           <div id="logo">
-            <img id="logo-image" src={ logo } alt="logo" />
-            <div id="logo-letter">
-              우주
-            </div>
+            <img id="logo-image" src={ logo2 } alt="logo" />
           </div>
         </Link>
         <Menu />
@@ -22,14 +19,19 @@ export default function Header() {
 };
 
 const StyledWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #F7ECDE;
+
   #container {
-    width: 100%;
-    height: 80px;
+    width: 90%;
+    height: 100px;
     position: sticky;
-    background-color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: 5px 0px;
   }
   a {
     text-decoration: none;
@@ -42,10 +44,6 @@ const StyledWrapper = styled.div`
     justify-content: center;
   }
   #logo-image {
-    width: 50px;
-    height: 50px;
-  }
-  #logo-letter {
-    font-size: 32px;    
-  }
+    width: 150px;
+    height: 100px;
 `;

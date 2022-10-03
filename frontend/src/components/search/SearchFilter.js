@@ -1,39 +1,50 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
+import { search } from "../../api/searchAPI";
 import styled from "styled-components";
 import SearchFilterButton from "./SearchFilterButton";
 
 export default function SearchFilter(props) {
-  const { filterKinds, setFilterKinds } = props;
+  const { params, setParams, setSearchData } = props;
 
   return (
     <StyledWrapper>
-      <div>
+      <div id="filter-frame">
         <h3 id="filter-title">종류</h3>
         <div id="filter-elements">
           <SearchFilterButton
+            buttonValue="A5"
             buttonName="탁주"
-            filterKinds={filterKinds}
-            setFilterKinds={setFilterKinds}
+            params={params}
+            setParams={setParams}
+            setSearchData={setSearchData}
           />
           <SearchFilterButton
+            buttonValue="A3"
             buttonName="약주·청주"
-            filterKinds={filterKinds}
-            setFilterKinds={setFilterKinds}
+            params={params}
+            setParams={setParams}
+            setSearchData={setSearchData}
           />
           <SearchFilterButton
+            buttonValue="A1"
             buttonName="과실주"
-            filterKinds={filterKinds}
-            setFilterKinds={setFilterKinds}
+            params={params}
+            setParams={setParams}
+            setSearchData={setSearchData}
           />
           <SearchFilterButton
+            buttonValue="A2"
             buttonName="증류주"
-            filterKinds={filterKinds}
-            setFilterKinds={setFilterKinds}
+            params={params}
+            setParams={setParams}
+            setSearchData={setSearchData}
           />
           <SearchFilterButton
-            buttonName="리쿠르/기타주류"
-            filterKinds={filterKinds}
-            setFilterKinds={setFilterKinds}
+            buttonValue="A4"
+            buttonName="리큐르/기타주류"
+            params={params}
+            setParams={setParams}
+            setSearchData={setSearchData}
           />
         </div>
       </div>
@@ -44,8 +55,20 @@ export default function SearchFilter(props) {
 const StyledWrapper = styled.div`
   width: 800px;
   height: auto;
-  border: solid;
+  border: 3px dashed #85c88a;
+  border-radius: 10px;
   margin: 0px 0px 20px;
+  padding: 15px;
+
+  #filter-frame {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  #filter-title {
+    font-family: "GD";
+    margin: 0px 10px 0px 0px;
+  }
 
   #filter-elements {
     display: flex;

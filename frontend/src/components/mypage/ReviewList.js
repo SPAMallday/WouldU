@@ -1,13 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
-import ex from "assets/img/장수.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import Rating from "@mui/material/Rating";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -15,7 +9,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import swal from "sweetalert";
-import space from "assets/img/space_example.jpg";
+import { mydelete, myreview } from "../../api/myPageAPI";
 
 // Import Swiper styles
 import "swiper/css";
@@ -27,24 +21,11 @@ import "swiper/css/navigation";
  * @returns
  */
 export default function ReviewList(prop) {
-  //dialog용 변수
-  const [open, setOpen] = React.useState(false);
-
-  //dialog 닫기
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOk = () => {
-    setOpen(false);
-    //리뷰 삭제 요청 보내기
-  };
-
   //리뷰 클릭시 dialog띄우기
   const onClickItem = item => {
     swal({
-      title: "Warning!",
-      text: "정말로 삭제하시겠습니까?",
+      title: "평가 삭제!",
+      text: item.alcohol_name + " 평가를 삭제하시겠습니까?",
       icon: "warning",
       dangerMode: true,
       buttons: {
@@ -62,17 +43,37 @@ export default function ReviewList(prop) {
     }).then(value => {
       switch (value) {
         case "OK":
-          swal("Success!", "삭제되었습니다.", "success");
+          mydelete(item.review_no)
+            .then(res => {
+              swal("Success!", "삭제 완료!", "success");
+              myreview().then(res => {
+                prop.setReviewList([]);
+                res.forEach(data => {
+                  prop.setReviewList(reviewList => [
+                    ...reviewList,
+                    {
+                      alcohol_image: data.alcohol_image,
+                      alcohol_name: data.alcohol_name,
+                      alcohol_no: data.alcohol_no,
+                      comment: data.comment,
+                      score: data.score,
+                      review_no: data.review_no,
+                    },
+                  ]);
+                });
+              });
+            })
+            .catch(err => {
+              console.log(err);
+            });
+
           break;
         case "NO":
-          console.log("NO");
           break;
         default:
           console.log("error");
       }
     });
-
-    console.log(item);
   };
 
   // 술 리스트 반복으로 보여주기
@@ -97,17 +98,17 @@ export default function ReviewList(prop) {
                   height="230"
                   alt="술"
                   id="imgSool"
-                  image={ex}
+                  image={prop.reviewList[i].alcohol_image}
                 />
                 <CardContent>
                   <Typography component="div" sx={{ fontSize: 20 }}>
-                    {prop.reviewList[i].name}
+                    {prop.reviewList[i].alcohol_name}
                   </Typography>
                   <Typography component="div" sx={{ fontSize: 20 }}>
                     <h5 id="tx_star">평점 : </h5>
                     <Rating
                       name="read-only"
-                      value={prop.reviewList[i].rating}
+                      value={prop.reviewList[i].score}
                       readOnly
                     />
                   </Typography>
@@ -129,7 +130,7 @@ export default function ReviewList(prop) {
   return (
     <StyledWrapper>
       <div id="main">
-        <h3 id="title">리뷰 목록</h3>
+        <h3 id="title">내가 평가한 목록</h3>
         <div id="space">
           <div id="itemlist"></div>
         </div>
@@ -139,30 +140,10 @@ export default function ReviewList(prop) {
           spaceBetween={50}
           slidesPerView={3}
           navigation
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={swiper => console.log(swiper)}
         >
           {like()}
         </Swiper>
       </div>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            리뷰를 삭제하시겠습니까?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>아니요</Button>
-          <Button onClick={handleOk} autoFocus>
-            예
-          </Button>
-        </DialogActions>
-      </Dialog>
     </StyledWrapper>
   );
 }
@@ -172,9 +153,8 @@ const StyledWrapper = styled.div`
     margin-top: 60px;
     margin-bottom: 40px;
     width: 1300px;
-    background: url("${space}");
-    background-size: 100% 100%;
-    color: white;
+    height: 500px;
+    background: #bb9b9b;
   }
   #title {
     text-align: left;

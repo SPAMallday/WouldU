@@ -7,9 +7,11 @@ export default function SearchResultElement(props) {
         <img src={props.img_link} alt="example" />
       </div>
       <div id="information">
-        <h5>{props.name}</h5>
+        <h5>{props.alcohol_name}</h5>
         <div>{props.brewery}</div>
-        <div>{props.size}ml / {props.alcohol}도</div>
+        <div>
+          {props.size}ml / {props.alcohol}도
+        </div>
       </div>
     </StyledWrapper>
   );

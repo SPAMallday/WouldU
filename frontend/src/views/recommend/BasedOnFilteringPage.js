@@ -23,10 +23,10 @@ export default function BasedonFilteringPage() {
   const [goToResult, setGoToResult] = useState(false);
 
   const onClick = () => {
-    setGoToResult(true)    
+    setGoToResult(true);
   };
 
-  const alchol = [
+  const alcohol = [
     {
       value: 0,
       label: "0",
@@ -44,12 +44,8 @@ export default function BasedonFilteringPage() {
       label: "30",
     },
     {
-      value: 40,
-      label: "40",
-    },
-    {
-      value: 50,
-      label: "50",
+      value: 41,
+      label: "40도 이상",
     },
   ];
 
@@ -79,48 +75,54 @@ export default function BasedonFilteringPage() {
     <StyledWrapper>
       <Header />
       {!goToResult ? (
-      <div id="main">
-        <h2>일회성 검색</h2>
-        <div id="searchForm">
-          <SelectType
-            handleChange={handleChange}
-            handleChange1={handleChange1}
-            handleChange2={handleChange2}
-            handleChange3={handleChange3}
-          />
-          <div>
-            <h5 id="textSub">도수</h5>
-            <Box sx={{ width: 400 }} id="slider">
-              <Slider
-                getAriaLabel={() => "Temperature range"}
-                value={value}
-                getAriaValueText={valuetext}
-                onChange={handleChange4}
-                valueLabelDisplay="auto"
-                marks={alchol}
-                min={0}
-                max={50}
+        <div id="main">
+          <h2>원하시는 술의 느낌을 골라주세요!</h2>
+          <div id="searchForm">
+            <SelectType
+              handleChange={handleChange}
+              handleChange1={handleChange1}
+              handleChange2={handleChange2}
+              handleChange3={handleChange3}
+            />
+            <div>
+              <h5 id="textSub">도수</h5>
+              <Box sx={{ width: 400 }} id="slider">
+                <Slider
+                  getAriaLabel={() => "Temperature range"}
+                  value={value}
+                  getAriaValueText={valuetext}
+                  onChange={handleChange4}
+                  valueLabelDisplay="auto"
+                  marks={alcohol}
+                  min={0}
+                  max={41}
+                  color="secondary"
+                />
+              </Box>
+            </div>
+            <div id="btBox">
+              <Button
+                type="button"
+                id="btn_search"
+                variant="contained"
+                onClick={onClick}
                 color="secondary"
-              />
-            </Box>
-          </div>
-          <div id="btBox">
-            <Button
-              type="button"
-              id="btn_search"
-              variant="contained"
-              onClick={onClick}
-              color="secondary"
-            >
-              검색
-            </Button>
+              >
+                검색
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
-      ):
-      (
+      ) : (
         <div>
-          <ResultFiltering setGoToResult={setGoToResult} sweet={sweet} sour={sour} body={body} smell={smell} value={value} />
+          <ResultFiltering
+            setGoToResult={setGoToResult}
+            sweet={sweet}
+            sour={sour}
+            body={body}
+            smell={smell}
+            value={value}
+          />
         </div>
       )}
     </StyledWrapper>

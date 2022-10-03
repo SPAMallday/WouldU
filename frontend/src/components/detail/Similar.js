@@ -1,44 +1,32 @@
 import styled from "styled-components";
-import testinput from "components/search/testinput";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 
 /**
  * @todo 틀만 만들어 놓은 것임
-*/
-export default function Similar(props) {
-  const { detailId } = props;
-
-  const detailInformation = testinput[detailId - 1];
-
-  const showSimilarList = () =>{
-    const similarList = [];
-    for(let i=0; i < 6; i++){
-      similarList.push(
-        <SwiperSlide>
-          <div key={i} i="item">
-            <img id="img-sool"src={detailInformation.img_link} alt="예시" />
-            <h5 id="name-sool">{detailInformation.name}</h5>
-          </div>
-        </SwiperSlide>
-      );
-    }
-    return similarList;
-  }
+ */
+export default function Similar({alcohol, similar}) {
 
   return (
     <StyledWrapper>
-      <h3>
-        "{detailInformation.name}"와 유사한 전통주
-      </h3>
+      <h3>"{alcohol.alco_name}"와 유사한 전통주</h3>
       <div id="similarlist">
         <Swiper
-            modules={[Navigation]}
-            spaceBetween={-50}
-            slidesPerView={5}
-            navigation
-          >
-          {showSimilarList()}
+          modules={[Navigation]}
+          spaceBetween={-50}
+          slidesPerView={5}
+          navigation
+        >
+          {
+            similar && similar.slice(0, 6).map((item, index) => (
+              <SwiperSlide>
+                <div key={index} id="similar">
+                  <img id="img-sool" src={item.alcohol_image} alt="예시" />
+                  <h5 id="name-sool">{item.alcohol_name}</h5>
+                </div>
+              </SwiperSlide>
+            ))
+          }
         </Swiper>
       </div>
     </StyledWrapper>

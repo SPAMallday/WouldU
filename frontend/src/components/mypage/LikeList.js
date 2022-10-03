@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "@emotion/styled";
-import ex from "assets/img/장수.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import Card from "@mui/material/Card";
@@ -8,7 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-
+import { Link, useNavigate } from "react-router-dom";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -20,8 +19,10 @@ import "swiper/css/navigation";
  * @returns
  */
 export default function LikeList(prop) {
+  const navigate = useNavigate();
   const onClickItem = item => {
     console.log(item);
+    navigate("/detail/ " + item.alcohol_no);
   };
 
   const like = () => {
@@ -34,21 +35,20 @@ export default function LikeList(prop) {
 
             <Card
               sx={{
-                width: 160,
-                height: 290,
+                width: 170,
+                height: 310,
               }}
             >
               <CardActionArea>
                 <CardMedia
                   component="img"
-                  height="230"
-                  src={ex}
-                  alt="술"
+                  src={prop.likeList[i].alcohol_image}
+                  alt={prop.likeList[i].alcohol_name}
                   id="imgSool"
                 />
                 <CardContent>
                   <Typography component="div" sx={{ fontSize: 20 }}>
-                    {prop.likeList[i].name}
+                    {prop.likeList[i].alcohol_name}
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -64,14 +64,11 @@ export default function LikeList(prop) {
     <StyledWrapper>
       <div id="main">
         <h3 id="title">좋아요 목록</h3>
-
         <Swiper
           modules={[Navigation]}
           spaceBetween={-50}
           slidesPerView={5}
           navigation
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={swiper => console.log(swiper)}
         >
           {like()}
         </Swiper>
@@ -84,7 +81,7 @@ const StyledWrapper = styled.div`
   #main {
     margin-top: 50px;
     width: 1300px;
-    height: 400px;
+    height: 430px;
     background: #bb9b9b;
   }
   #title {
@@ -100,5 +97,11 @@ const StyledWrapper = styled.div`
   .css-o69gx8-MuiCardMedia-root {
     width: unset;
     margin: auto;
+  }
+
+  #imgSool {
+    width: 100%;
+    height: 230px;
+    object-fit: scale-down;
   }
 `;

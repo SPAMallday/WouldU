@@ -3,24 +3,19 @@ import styled from "@emotion/styled";
 import Piechart from "./piechart";
 import Barchart from "./barchart";
 import Button from "@mui/material/Button";
-
+import { useNavigate } from "react-router-dom";
 /**
  * 버튼연결하기
  * @param {주종차트, 술 평균값} prop
  * @returns
  */
 export default function Chart(prop) {
-  const [favorite, setfavorite] = useState("");
-  const [average, setaverage] = useState("");
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    setfavorite();
-    setaverage();
-  }, []);
+  useEffect(() => {}, []);
 
   const onClickRecom = () => {
-    console.log("fa", favorite);
-    console.log("av", average);
+    navigate("/recommend");
   };
 
   return (
