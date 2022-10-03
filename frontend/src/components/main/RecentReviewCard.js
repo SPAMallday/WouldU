@@ -15,17 +15,18 @@ export default function RecentReviewCard() {
   function convList(list) {
     const convert = list.map((item, index) => {
       return (
-        <Grid key={index} className="gridItem">
-          <Typography
-            display="inline-flex"
-            onClick={() => {
-              onClick(item.alcohol_no);
-            }}
-          >
+        <Grid
+          key={index}
+          className="gridItem"
+          onClick={() => {
+            onClick(item.alcohol_no);
+          }}
+        >
+          <Typography display="inline-flex">
             &nbsp;{item.ranking}.&nbsp;
             {item.alcohol_name}
           </Typography>
-          {checkToday(item.reg_date)}
+          {/* {checkToday(item.reg_date)} */}
         </Grid>
       );
     });
@@ -35,7 +36,7 @@ export default function RecentReviewCard() {
 
   useEffect(() => {
     recentReview().then(res => {
-      console.log(res);
+      //console.log(res);
 
       let resList = res;
       let temp = [];
@@ -82,7 +83,7 @@ export default function RecentReviewCard() {
           container
           direction="row"
           justifyContent="center"
-          alignItems="center"
+          alignItems="flex-start"
           columnSpacing={2}
         >
           <Grid
@@ -156,6 +157,12 @@ const StyledWrapper = styled.div`
     align-items: center;
     background-color: #dae2b6;
     justify-content: space-between;
+
+    :hover {
+      transform: scale(1.1);
+      box-shadow: rgba(0, 0, 0, 0.65) 0px 3px 8px;
+      background-color: #c4e2b6;
+    }
   }
 
   .gridItem p {

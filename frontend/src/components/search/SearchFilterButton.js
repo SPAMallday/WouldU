@@ -23,7 +23,8 @@ export default function SearchFilterButton(props) {
 
       const at = params.alcol_type + buttonValue + ','
       setParams(prevState => ({...prevState, 
-        alcol_type: at
+        alcol_type: at,
+        page: 1
       }))
     }
     else {
@@ -31,7 +32,8 @@ export default function SearchFilterButton(props) {
 
       const at = params.alcol_type.replace(buttonValue + ',', '')
       setParams(prevState => ({...prevState, 
-        alcol_type: at
+        alcol_type: at,
+        page: 1
       }))
     }
   };

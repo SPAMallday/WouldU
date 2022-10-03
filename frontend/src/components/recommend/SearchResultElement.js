@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
-export default function SearchResultElement(props) {
+export default function SearchResultElement({ result }) {
   return (
     <StyledWrapper>
       <div id="picture">
-        <img src={props.img_link} alt="example" />
+        <img src={result.alcohol_image} alt="example" />
       </div>
       <div id="information">
-        <div id="alcoholtitle">{props.alcohol_name}</div>
-        <div>{props.brewery}</div>
+        <div id="alcoholtitle">{result.alcohol_name}</div>
+        <div>{result.brewery}</div>
         <div>
-          {props.size}ml / {props.alcohol}도
+          {result.size}ml / {result.abv}도
         </div>
       </div>
     </StyledWrapper>
@@ -62,4 +62,3 @@ const StyledWrapper = styled.div`
     font-size: 20px;
   }
 `;
-  

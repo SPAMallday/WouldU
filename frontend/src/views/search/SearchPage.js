@@ -10,12 +10,11 @@ import {
 
 export default function SearchPage() {
   // const [searchQuery, setSearchQuery] = useState("");
-  const [filterKinds, setFilterKinds] = useState([]);
   const [searchData, setSearchData] = useState([]);
   const [params, setParams] = useState({
     'name': '',
     'sort': 1,
-    'row_index': 0,
+    'page': 1,
     'alcol_type':'',
   });
 
@@ -25,6 +24,7 @@ export default function SearchPage() {
     console.log(params)
     search(params).then(res => {
       setSearchData(res);
+    
       console.log(res);
     });
   }, [params]);
@@ -39,7 +39,7 @@ export default function SearchPage() {
             <SearchFilter params={params} setParams={setParams} setSearchData={setSearchData} />
             {/* <SearchFilter filterKinds={ filterKinds } setFilterKinds={setFilterKinds} /> */}
             {/* <SearchResult searchQuery={searchQuery} filterKinds={filterKinds} /> */}
-            <SearchResult value={searchData} />
+            <SearchResult searchData={searchData} params={params} setParams={setParams} />
           </div>
         </div>
       </StyledWrapper>

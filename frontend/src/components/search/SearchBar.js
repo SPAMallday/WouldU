@@ -19,14 +19,10 @@ export default function SearchBar(props) {
 
   const handleSubmitButton = () => {
     console.log(searchQuery)
-
-    // search(params).then(res => {
-    //   setSearchData(res);
-    //   console.log(res);
-    // });
     
     setParams(prevState => ({...prevState, 
-      name: searchQuery
+      name: searchQuery,
+      page: 1
     }))
   };
 

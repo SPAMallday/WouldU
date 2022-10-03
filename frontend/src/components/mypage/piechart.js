@@ -23,7 +23,7 @@ const Piechart = prop => {
         /**
          * chart margin
          */
-        margin={{ top: 40, right: 40, bottom: 40, left: 30 }}
+        margin={{ top: 40, right: 40, bottom: 40, left: 10 }}
         /**
          * chart 중간 빈공간 반지름
          */
@@ -73,6 +73,7 @@ const Piechart = prop => {
             text: {
               fontSize: 20,
               fill: "#000000",
+              fontFamily: "GD",
             },
           },
           /**
@@ -82,6 +83,7 @@ const Piechart = prop => {
             text: {
               fontSize: 18,
               fill: "#000000",
+              fontFamily: "GD",
             },
           },
         }}

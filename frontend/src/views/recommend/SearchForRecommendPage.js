@@ -6,12 +6,29 @@ import ReviewForRecommend from "components/recommend/ReviewForRecommend";
 import rocketicon from "assets/img/rocketicon.png";
 import mousepointer from "assets/img/mousepointer.png";
 import { Link } from "react-router-dom";
-import * as React from "react";
+import React, { useState, useEffect } from "react";
+import { search } from "../../api/searchAPI";
 
 export default function SearchForRecommendPage() {
-  const [searchQuery, setSearchQuery] = React.useState("");
-  const [handleClick, setHandleClick] = React.useState(false);
-  const [reviewTarget, setReviewTarget] = React.useState({});
+  const [searchQuery, setSearchQuery] = useState("");
+  const [handleClick, setHandleClick] = useState(false);
+  const [reviewTarget, setReviewTarget] = useState({});
+  const [searchData, setSearchData] = useState([]);
+  const [params, setParams] = useState({
+    name: "",
+    sort: 1,
+    page: 1,
+    alcol_type: "",
+  });
+
+  useEffect(() => {
+    console.log(params);
+    search(params).then(res => {
+      setSearchData(res);
+
+      console.log(res);
+    });
+  }, [params]);
 
   return (
     <>
@@ -30,9 +47,15 @@ export default function SearchForRecommendPage() {
                     도움이 됩니다.
                   </div>
                 </div>
-                <SearchBar setSearchQuery={setSearchQuery} />
+                <SearchBar
+                  params={params}
+                  setParams={setParams}
+                  setSearchData={setSearchData}
+                />
                 <SearchResult
-                  searchQuery={searchQuery}
+                  searchData={searchData}
+                  params={params}
+                  setParams={setParams}
                   setHandleClick={setHandleClick}
                   setReviewTarget={setReviewTarget}
                 />
@@ -58,7 +81,7 @@ export default function SearchForRecommendPage() {
 
 const StyledWrapper = styled.div`
   background-color: #f7ecde;
-  height: 88vh;
+  height: 105vh;
   font-family: "GD";
 
   #background {
@@ -81,9 +104,8 @@ const StyledWrapper = styled.div`
     font-size: 20px;
   }
   #rocketframe {
+    margin-top: -145px;
     cursor: url(${mousepointer}) 50 50, auto;
-    position: fixed;
-    top: 78vh;
     left: 0vw;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;

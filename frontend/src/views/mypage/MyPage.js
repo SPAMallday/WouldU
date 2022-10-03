@@ -9,7 +9,6 @@ import IconButton from "@mui/material/IconButton";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import StarIcon from "@mui/icons-material/Star";
 import Card from "@mui/material/Card";
-import spaces from "assets/img/space_example.jpg";
 
 import {
   category,
@@ -125,10 +124,10 @@ export default function MyPage() {
                     id="btnSummary"
                     size="large"
                   >
-                    <BarChartIcon sx={{ fontSize: 40, color: "purple" }} />
+                    <BarChartIcon sx={{ fontSize: 40, color: "#fa7070" }} />
                   </IconButton>
                   <IconButton onClick={onClickList}>
-                    <StarIcon sx={{ fontSize: 40, color: "purple" }} />
+                    <StarIcon sx={{ fontSize: 40, color: "#ffa500" }} />
                   </IconButton>
                 </div>
               </div>
@@ -158,10 +157,10 @@ export default function MyPage() {
                     id="btnSummary"
                     size="large"
                   >
-                    <BarChartIcon sx={{ fontSize: 40, color: "purple" }} />
+                    <BarChartIcon sx={{ fontSize: 40, color: "#ffa500" }} />
                   </IconButton>
                   <IconButton onClick={onClickList}>
-                    <StarIcon sx={{ fontSize: 40, color: "purple" }} />
+                    <StarIcon sx={{ fontSize: 40, color: "#fa7070" }} />
                   </IconButton>
                 </div>
               </div>
@@ -179,15 +178,14 @@ export default function MyPage() {
 }
 
 const StyledWrapper = styled.div`
+  background-color: #fcfcfc;
+  font-family: "GD";
   #main {
     text-align: center;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-      url("${spaces}");
-    background-size: 100% 100%;
   }
 
   .css-bhp9pd-MuiPaper-root-MuiCard-root {
-    background-color: #efeff7;
+    background-color: #fcfcfc;
     box-shadow: none;
   }
   #mainPage {

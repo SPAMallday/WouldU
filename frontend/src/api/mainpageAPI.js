@@ -13,7 +13,7 @@ export const userRank = async () => {
     const res = await apiClient.get(`/alcohol/rank-type/${user_no}`);
     return res.data;
   } catch (err) {
-    console.log(err);
+    //console.log(err);
   }
 };
 
