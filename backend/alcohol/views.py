@@ -18,7 +18,9 @@ from .functions.recommend_CB import alcohol_rec
 # 술 상세정보 불러오기 
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def alcoDetails(request, alco_no, user_no):
+def alcoDetails(request):
+    alco_no = request.GET['alco_no']
+    user_no = request.GET['user_no']
     cursor= connection.cursor()
     # result = Alcohol_recommend.objects.prefetch_related('alcohol_no').all().filter(alcohol_no = alco_no)
     result = cursor.execute('''SELECT a.*, ar.sweet, ar.sour, ar.scent, ar.body, ar.score, ar.count, ac.alcohol_type
@@ -228,7 +230,7 @@ def alcoReviewAPI(request, alcohol_no):
 def RankByUserKind(request, user_no):
     user_kind = User.objects.get(user_no = user_no).user_kind.kind_code
     cursor = connection.cursor()
-    sql1 = "SELECT a.alcohol_no, a.alcohol_name, (s.total_score DIV s.count) as avg_score FROM alcohol a JOIN "
+    sql1 = "SELECT a.alcohol_no, a.alcohol_name, (s.total_score DIV s.count) as avg_score, CONCAT('https://a402o1a4.s3.ap-northeast-2.amazonaws.com/', a.alcohol_no, '.png') as alcohol_image FROM alcohol a JOIN "
     if(user_kind =='K1'):
         sql2="alcohol_score1 "
     elif(user_kind =='K2'):
