@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import * as React from "react";
 import SearchResultElement from "components/recommend/SearchResultElement";
+import Pagination from "react-js-pagination";
+import React, { useState, useEffect } from "react";
 
 // 검색결과 배열 테스트용
 const test = [
@@ -23,46 +24,68 @@ const test = [
 ];
 
 export default function SearchResult(props) {
-  const { searchQuery, setHandleClick, setReviewTarget } = props;
+  const { searchData, params, setParams, setHandleClick, setReviewTarget } = props;
 
-  const filterName = test.filter(q => {
-    return q.alcohol_name
-      .replace(" ", "")
-      .toLocaleLowerCase()
-      .includes(searchQuery.toLocaleLowerCase().replace(" ", ""));
-  });
 
-  const listItems = filterName.map(e => (
-    <div
-      key={`detail + ${e.alcohol_no}`}
-      onClick={() => {
-        setHandleClick(true);
-        setReviewTarget({
-          alcohol_no: e.alcohol_no,
-          alcohol_image: e.alcohol_image,
-          alcohol_name: e.alcohol_name,
-          brewery: e.brewery,
-          size: e.size,
-          abv: e.alcohol,
-        });
-      }}
-    >
-      <SearchResultElement
-        id={e.alcohol_no}
-        img_link={e.alcohol_image}
-        name={e.alcohol_name}
-        brewery={e.brewery}
-        size={e.size}
-        alcohol={e.alcohol}
-        key={`${e.alcohol_no}`}
-      />
-    </div>
-  ));
+  const [limit, setLimit] = useState(15);
+  const [totalPage, setTotalPage] = useState(1);
+
+  const handlePageChange = (page) => {
+    // setPage(page);
+    setParams(prevState => ({...prevState, 
+      page: page
+    }))
+  };
+
+  useEffect(() => {
+    if (searchData.length > 0) {
+      console.log(searchData[0].total_count)
+      setTotalPage(searchData[0].total_count)
+    }
+  }, [searchData]);
 
   return (
-    <StyledWrapper>
-      <div id="result">{listItems}</div>
-    </StyledWrapper>
+    <>
+      <StyledWrapper>
+        <div id="result">
+            {searchData && searchData.map((result) => (
+            <div
+              key={`detail + ${result.alcohol_no}`}
+              onClick={() => {
+                setHandleClick(true);
+                setReviewTarget({
+                  alcohol_no: result.alcohol_no,
+                  alcohol_image: result.alcohol_image,
+                  alcohol_name: result.alcohol_name,
+                  brewery: result.brewery,
+                  size: result.size,
+                  abv: result.abv,
+                });
+              }}
+            >
+              <SearchResultElement
+                id={result.alcohol_no}
+                img_link={result.alcohol_image}
+                name={result.alcohol_name}
+                brewery={result.brewery}
+                size={result.size}
+                alcohol={result.abv}
+                key={`${result.alcohol_no}`}
+              />
+            </div>
+          ))}
+        </div>
+      </StyledWrapper>
+      <Pagination
+        activePage={params.page} // 현재 페이지
+        itemsCountPerPage={limit} // 한 페이지랑 보여줄 아이템 갯수
+        totalItemsCount={totalPage} // 총 아이템 갯수
+        pageRangeDisplayed={5} // paginator의 페이지 범위
+        prevPageText={"‹"} // "이전"을 나타낼 텍스트
+        nextPageText={"›"} // "다음"을 나타낼 텍스트
+        onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
+      />
+    </>
   );
 }
 
