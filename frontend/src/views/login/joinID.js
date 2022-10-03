@@ -9,10 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
-import axios from "axios";
-import {
-  idCheck
-} from "../../api/userAPI";
+import { idCheck } from "../../api/userAPI";
 
 export default function JoinID() {
   const [inputId, setInputId] = useState("");
@@ -26,15 +23,36 @@ export default function JoinID() {
   const [inputGender, setInputGender] = useState("");
   const [idOk, setIdOk] = useState(false);
   //const [passCheck, setPassCheck] = useState("숫자, 영문 포함한 8자 이상");
-  const [passOk, setPassOk] = useState("불일치");
+  const [passOk, setPassOk] = useState("중복확인 필수");
+  const [disable, setDisable] = useState(false);
 
   useEffect(() => {
-    if (inputPw === inputPWD) {
+    if (inputPw === inputPWD && inputPw !== "") {
       setPassOk("일치");
     } else {
       setPassOk("불일치");
     }
-  }, [inputPw, inputPWD]);
+
+    if (
+      inputId !== "" &&
+      inputPw !== "" &&
+      inputPWD !== "" &&
+      inputGender !== "" &&
+      inputYear !== "" &&
+      inputMonth !== "" &&
+      inputDay !== ""
+    ) {
+      setDisable(true);
+    }
+  }, [
+    inputPw,
+    inputPWD,
+    inputId,
+    inputGender,
+    inputYear,
+    inputMonth,
+    inputDay,
+  ]);
   // 나중에 비밀번호 규칙추가하기
   // 비밀번호 확인용
   /** 
@@ -50,26 +68,22 @@ export default function JoinID() {
 
   //아이디 중복확인
   const onIdCheck = () => {
-    idCheck(inputId).then(res => {
-      setIdOk(true);
-    });
     if (inputId !== "") {
       idCheck(inputId).then(res => {
-        setIdOk(true);
-          if (res.data.result === "success") {
-            setIdOk(true);
-            swal({
-              title: "Good ID!",
-              text: "사용가능한 아이디입니다.",
-              icon: "success",
-              button: {
-                text: "확인",
-              },
-            });
-          } else {
-            swal("OMG!", "중복된 아이디입니다.", "error");
-          }
-        })
+        if (res.data.result === "success") {
+          setIdOk(true);
+          swal({
+            title: "Good ID!",
+            text: "사용가능한 아이디입니다.",
+            icon: "success",
+            button: {
+              text: "확인",
+            },
+          });
+        } else {
+          swal("OMG!", "중복된 아이디입니다.", "error");
+        }
+      });
     } else {
       swal("Error!", "아이디를 입력해주세요!!", "error");
     }
@@ -103,7 +117,13 @@ export default function JoinID() {
 
   const handleInputDay = e => {
     setInputDay(e.target.value);
-    setBirth(inputYear + "-" + inputMonth + "-" + e.target.value);
+    if (parseInt(e.target.value) > 0 && parseInt(e.target.value) < 10) {
+      setBirth(
+        inputYear + "-" + inputMonth + "-" + 0 + parseInt(e.target.value),
+      );
+    } else {
+      setBirth(inputYear + "-" + inputMonth + "-" + e.target.value);
+    }
   };
 
   const handleInputGender = e => {
@@ -111,14 +131,27 @@ export default function JoinID() {
   };
 
   const onClickNext = event => {
-    console.log("ID", inputId);
-    console.log("PW", inputPw);
-    console.log("PWD", inputPWD);
-    console.log(birth);
-
     //아이디 중복체크 완료해야 진행가능
     if (idOk === true) {
-      console.log(true);
+      if (passOk === "일치") {
+        if (
+          inputYear >= 1900 &&
+          inputYear < 2003 &&
+          inputMonth !== "" &&
+          inputDay >= 1 &&
+          inputDay <= 31
+        ) {
+        } else if (inputYear > 2002) {
+          swal("Error!", "미성년자는 사용할수 없습니다.!", "error");
+          event.preventDefault();
+        } else {
+          swal("Error!", "잘못된 날짜형식입니다!", "error");
+          event.preventDefault();
+        }
+      } else {
+        swal("Error!", "비밀번호가 일치하지 않습니다!", "error");
+        event.preventDefault();
+      }
     } else {
       swal("Error!", "아이디 중복확인 필수!", "error");
       console.log(false);
@@ -130,148 +163,161 @@ export default function JoinID() {
   return (
     <StyledWrapper>
       <Header />
-      <div id="main">
-        <div id="joinForm">
-          <h2>회원 정보</h2>
-          <div id="joinBox">
-            <div id="tf_id">
-              <TextField
-                label="아이디"
-                variant="outlined"
-                size="small"
-                value={inputId}
-                onChange={handleInputId}
-                id="input_area"
-              />
-              <Button onClick={onIdCheck} id="btn_check">
-                중복확인
-              </Button>
-            </div>
-
-            <div id="tf_item">
-              <TextField
-                autoComplete="current-password"
-                label="비밀번호"
-                type="password"
-                variant="outlined"
-                value={inputPw}
-                onChange={handleInputPw}
-                size="small"
-                id="input_area"
-              />
-            </div>
-
-            <div>
-              <div id="tf_pass">
+      <div id="bigdiv">
+        <div id="main">
+          <div id="joinForm">
+            <h2>회원 정보</h2>
+            <div id="joinBox">
+              <div id="tf_id">
                 <TextField
-                  label="비밀번호 재확인"
+                  label="아이디"
+                  variant="outlined"
+                  size="small"
+                  value={inputId}
+                  onChange={handleInputId}
+                  id="input_area1"
+                />
+                <Button onClick={onIdCheck} id="btn_check">
+                  중복확인
+                </Button>
+              </div>
+
+              <div id="tf_item">
+                <TextField
+                  autoComplete="current-password"
+                  label="비밀번호"
                   type="password"
                   variant="outlined"
-                  value={inputPWD}
-                  onChange={handleInputPWD}
+                  value={inputPw}
+                  onChange={handleInputPw}
                   size="small"
-                  id="input_area"
+                  id="input_area2"
                 />
               </div>
-              <h5 id="tx_ok">{passOk}</h5>
-            </div>
 
-            <div id="tf_item">
-              <div id="div_nick">
-                <label> 닉네임 </label>
-              </div>
-              <TextField
-                label="닉네임"
-                variant="outlined"
-                value={inputNick}
-                onChange={handleInputNick}
-                size="small"
-                id="input_area"
-              />
-            </div>
-
-            <div>
-              <div id="tf_bitem">
-                <label> 생년월일 </label>
-              </div>
               <div>
+                <div id="tf_pass">
+                  <TextField
+                    label="비밀번호 재확인"
+                    type="password"
+                    variant="outlined"
+                    value={inputPWD}
+                    onChange={handleInputPWD}
+                    size="small"
+                    id="input_area3"
+                  />
+                </div>
+                <h5 id="tx_ok">{passOk}</h5>
+              </div>
+
+              <div>
+                <div id="div_nick">
+                  <label> 닉네임 </label>
+                </div>
                 <TextField
-                  label="연도"
+                  label="닉네임"
                   variant="outlined"
-                  value={inputYear}
-                  onChange={handleInputYear}
+                  value={inputNick}
+                  onChange={handleInputNick}
                   size="small"
-                  id="input_birth"
+                  id="input_area4"
                 />
-                <FormControl sx={{ ml: 1, mr: 1, minWidth: 80 }} size="small">
-                  <InputLabel id="demo-select-small">월</InputLabel>
+              </div>
+
+              <div>
+                <div id="tf_bitem">
+                  <label> 생년월일 </label>
+                </div>
+                <div>
+                  <TextField
+                    label="연도"
+                    variant="outlined"
+                    value={inputYear}
+                    onChange={handleInputYear}
+                    size="small"
+                    id="input_birth1"
+                  />
+                  <FormControl sx={{ ml: 1, mr: 1, minWidth: 80 }} size="small">
+                    <InputLabel id="demo-select-small">월</InputLabel>
+                    <Select
+                      labelId="demo-select-small"
+                      id="demo-select-small"
+                      value={inputMonth}
+                      label="월"
+                      onChange={handleInputMonth}
+                    >
+                      <MenuItem value="01">1월</MenuItem>
+                      <MenuItem value="02">2월</MenuItem>
+                      <MenuItem value="03">3월</MenuItem>
+                      <MenuItem value="04">4월</MenuItem>
+                      <MenuItem value="05">5월</MenuItem>
+                      <MenuItem value="06">6월</MenuItem>
+                      <MenuItem value="07">7월</MenuItem>
+                      <MenuItem value="08">8월</MenuItem>
+                      <MenuItem value="09">9월</MenuItem>
+                      <MenuItem value="10">10월</MenuItem>
+                      <MenuItem value="11">11월</MenuItem>
+                      <MenuItem value="12">12월</MenuItem>
+                    </Select>
+                  </FormControl>
+                  <TextField
+                    label="일"
+                    variant="outlined"
+                    value={inputDay}
+                    onChange={handleInputDay}
+                    size="small"
+                    id="input_birth2"
+                  />
+                </div>
+              </div>
+
+              <div id="tf_gender">
+                <div id="div_gender">
+                  <label> 성별 </label>
+                </div>
+                <FormControl sx={{ m: 1, minWidth: 80 }} size="small">
+                  <InputLabel id="demo-select-small">성별</InputLabel>
                   <Select
                     labelId="demo-select-small"
                     id="demo-select-small"
-                    value={inputMonth}
-                    label="월"
-                    onChange={handleInputMonth}
+                    value={inputGender}
+                    label="성별"
+                    onChange={handleInputGender}
                   >
-                    <MenuItem value="01">1월</MenuItem>
-                    <MenuItem value="02">2월</MenuItem>
-                    <MenuItem value="03">3월</MenuItem>
-                    <MenuItem value="04">4월</MenuItem>
-                    <MenuItem value="05">5월</MenuItem>
-                    <MenuItem value="06">6월</MenuItem>
-                    <MenuItem value="07">7월</MenuItem>
-                    <MenuItem value="08">8월</MenuItem>
-                    <MenuItem value="09">9월</MenuItem>
-                    <MenuItem value="10">10월</MenuItem>
-                    <MenuItem value="11">11월</MenuItem>
-                    <MenuItem value="12">12월</MenuItem>
+                    <MenuItem value="1">남성</MenuItem>
+                    <MenuItem value="2">여성</MenuItem>
                   </Select>
                 </FormControl>
-                <TextField
-                  label="일"
-                  variant="outlined"
-                  value={inputDay}
-                  onChange={handleInputDay}
-                  size="small"
-                  id="input_birth"
-                />
               </div>
-            </div>
 
-            <div id="tf_gender">
-              <div id="div_gender">
-                <label> 성별 </label>
+              <div id="btBox">
+                {disable ? (
+                  <Link
+                    to="/survey"
+                    state={{
+                      user_id: inputId,
+                      password: inputPw,
+                      nickname: inputNick,
+                      gender: inputGender,
+                      birth: birth,
+                    }}
+                    onClick={onClickNext}
+                  >
+                    <Button variant="contained" id="btn_next">
+                      다음
+                    </Button>
+                  </Link>
+                ) : (
+                  <Button
+                    variant="contained"
+                    id="btn_next"
+                    color="secondary"
+                    disabled
+                  >
+                    다음
+                  </Button>
+                )}
               </div>
-              <FormControl sx={{ m: 1, minWidth: 80 }} size="small">
-                <InputLabel id="demo-select-small">성별</InputLabel>
-                <Select
-                  labelId="demo-select-small"
-                  id="demo-select-small"
-                  value={inputGender}
-                  label="성별"
-                  onChange={handleInputGender}
-                >
-                  <MenuItem value="1">남성</MenuItem>
-                  <MenuItem value="2">여성</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
-
-            <div id="btBox">
-              <Link
-                to="/survey"
-                state={{
-                  user_id: inputId,
-                  password: inputPw,
-                  nickname: inputNick,
-                  gender: inputGender,
-                  birth: birth,
-                }}
-                onClick={onClickNext}
-              >
-                <Button variant="contained" id="btn_next" color="secondary">
-                  다음
-                </Button>
-              </Link>
             </div>
           </div>
         </div>
@@ -281,8 +327,39 @@ export default function JoinID() {
 }
 
 const StyledWrapper = styled.div`
+  background-color: #f7ecde;
+  height: 1130px;
+
+  #bigdiv {
+    display: flex;
+    justify-content: center;
+  }
   #main {
     text-align: center;
+    width: 30vw;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: "GD";
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-sizing: border-box;
+    border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
+
+    flex-direction: column;
+    background-color: #dfe8cc;
+
+    justify-content: center;
+    align-items: center;
+  }
+
+  #main h2 {
+    margin-top: 60px;
   }
 
   #joinBox {
@@ -333,14 +410,6 @@ const StyledWrapper = styled.div`
     margin-left: 20px;
   }
 
-  #input_area {
-    width: 300px;
-  }
-
-  #input_birth {
-    width: 90px;
-  }
-
   #joinForm {
     display: inline-block;
     align-items: center;
@@ -354,10 +423,32 @@ const StyledWrapper = styled.div`
 
   #btn_next {
     width: 170px;
+    background-color: white;
+    color: black;
   }
 
   #btn_check {
     margin-left: 20px;
-    color: purple;
+    color: red;
+  }
+
+  #input_area1 {
+    width: 300px;
+  }
+  #input_area2 {
+    width: 300px;
+  }
+  #input_area3 {
+    width: 300px;
+  }
+  #input_area4 {
+    width: 300px;
+  }
+
+  #input_birth1 {
+    width: 90px;
+  }
+  #input_birth2 {
+    width: 90px;
   }
 `;

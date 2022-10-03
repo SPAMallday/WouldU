@@ -8,11 +8,8 @@ import FormLabel from "@mui/material/FormLabel";
 import Button from "@mui/material/Button";
 import Header from "components/nav/Header";
 import { Link, useLocation } from "react-router-dom";
-import axios from "axios";
 import swal from "sweetalert";
-import {
-  join
-} from "../../api/userAPI";
+import { join } from "../../api/userAPI";
 
 export default function JoinQ() {
   // 전체 응답 저장용
@@ -106,347 +103,350 @@ export default function JoinQ() {
       reply_list: reply,
     };
 
-    console.log(data);
-
     // 회원가입 axios 부분
 
-    join(data).then(res => {
-      if (res.result === "success") {
-        swal({
-          title: "Welcome!",
-          text: "회원가입이 완료되었습니다!",
-          icon: "success",
-          button: {
-            text: "확인",
-          },
-        });
-      } else {
-        swal("Fail!", "회원가입에 실패하였습니다", "error");
-      }
-    })
-    .catch(err => {
-      console.log(err);
-      event.preventDefault();
-    });
+    join(data)
+      .then(res => {
+        if (res.result === "success") {
+          swal({
+            title: "Welcome!",
+            text: "회원가입이 완료되었습니다!",
+            icon: "success",
+            button: {
+              text: "확인",
+            },
+          });
+        } else {
+          swal("Fail!", "회원가입에 실패하였습니다", "error");
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        event.preventDefault();
+      });
   };
 
   return (
     <StyledWrapper>
       <Header />
-      <div id="main">
-        <h2>음주유형검사</h2>
-        <div id="surveyForm">
-          <div id="surveyBox">
-            {/*---1번 질문---*/}
-            <FormControl id="surveyItem">
-              <FormLabel
-                id="demo-row-radio-buttons-group-label"
-                color="secondary"
-              >
-                <h5>Q1. 나는 조용하게 먹는것이 좋다.</h5>
-              </FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-                id="radioGroup"
-                value={Q1}
-                onChange={handleQ1}
-              >
-                <FormControlLabel
-                  value="Y"
-                  control={<Radio color="secondary" />}
-                  label="예"
-                />
-                <FormControlLabel
-                  value="N"
-                  control={<Radio color="secondary" />}
-                  label="아니요"
-                  id="radioNo"
-                />
-              </RadioGroup>
-            </FormControl>
-            {/*---2번 질문---*/}
-            <FormControl id="surveyItem">
-              <FormLabel
-                id="demo-row-radio-buttons-group-label"
-                color="secondary"
-              >
-                <h5>Q2. 나는 나만의 향수가 3개 이상 있다.</h5>
-              </FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-                id="radioGroup"
-                value={Q2}
-                onChange={handleQ2}
-              >
-                <FormControlLabel
-                  value="Y"
-                  control={<Radio color="secondary" />}
-                  label="예"
-                />
-                <FormControlLabel
-                  value="N"
-                  control={<Radio color="secondary" />}
-                  label="아니요"
-                  id="radioNo"
-                />
-              </RadioGroup>
-            </FormControl>
-            {/*---3번 질문---*/}
-            <FormControl id="surveyItem">
-              <FormLabel
-                id="demo-row-radio-buttons-group-label"
-                color="secondary"
-              >
-                <h5>Q3. 나는 낯을 많이 가린다.</h5>
-              </FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-                id="radioGroup"
-                value={Q3}
-                onChange={handleQ3}
-              >
-                <FormControlLabel
-                  value="Y"
-                  control={<Radio color="secondary" />}
-                  label="예"
-                />
-                <FormControlLabel
-                  value="N"
-                  control={<Radio color="secondary" />}
-                  label="아니요"
-                  id="radioNo"
-                />
-              </RadioGroup>
-            </FormControl>
-            {/*---4번 질문---*/}
-            <FormControl id="surveyItem">
-              <FormLabel
-                id="demo-row-radio-buttons-group-label"
-                color="secondary"
-              >
-                <h5>Q4. 나는 디퓨저를 사용중이다.</h5>
-              </FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-                id="radioGroup"
-                value={Q4}
-                onChange={handleQ4}
-              >
-                <FormControlLabel
-                  value="Y"
-                  control={<Radio color="secondary" />}
-                  label="예"
-                />
-                <FormControlLabel
-                  value="N"
-                  control={<Radio color="secondary" />}
-                  label="아니요"
-                  id="radioNo"
-                />
-              </RadioGroup>
-            </FormControl>
-            {/*---5번 질문---*/}
-            <FormControl id="surveyItem">
-              <FormLabel
-                id="demo-row-radio-buttons-group-label"
-                color="secondary"
-              >
-                <h5>Q5. 나는 친구들과 약속후에 다음날은 쉰다.</h5>
-              </FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-                id="radioGroup"
-                value={Q5}
-                onChange={handleQ5}
-              >
-                <FormControlLabel
-                  value="Y"
-                  control={<Radio color="secondary" />}
-                  label="예"
-                />
-                <FormControlLabel
-                  value="N"
-                  control={<Radio color="secondary" />}
-                  label="아니요"
-                  id="radioNo"
-                />
-              </RadioGroup>
-            </FormControl>
-            {/*---6번 질문---*/}
-            <FormControl id="surveyItem">
-              <FormLabel
-                id="demo-row-radio-buttons-group-label"
-                color="secondary"
-              >
-                <h5>Q6. 나는 맛집을 5군데 이상 알고있다.</h5>
-              </FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-                id="radioGroup"
-                value={Q6}
-                onChange={handleQ6}
-              >
-                <FormControlLabel
-                  value="Y"
-                  control={<Radio color="secondary" />}
-                  label="예"
-                />
-                <FormControlLabel
-                  value="N"
-                  control={<Radio color="secondary" />}
-                  label="아니요"
-                  id="radioNo"
-                />
-              </RadioGroup>
-            </FormControl>
-            {/*---7번 질문---*/}
-            <FormControl id="surveyItem">
-              <FormLabel
-                id="demo-row-radio-buttons-group-label"
-                color="secondary"
-              >
-                <h5>Q7. 나는 사람들과 대화하는 게 어렵다.</h5>
-              </FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-                id="radioGroup"
-                value={Q7}
-                onChange={handleQ7}
-              >
-                <FormControlLabel
-                  value="Y"
-                  control={<Radio color="secondary" />}
-                  label="예"
-                />
-                <FormControlLabel
-                  value="N"
-                  control={<Radio color="secondary" />}
-                  label="아니요"
-                  id="radioNo"
-                />
-              </RadioGroup>
-            </FormControl>
-            {/*---8번 질문---*/}
-            <FormControl id="surveyItem">
-              <FormLabel
-                id="demo-row-radio-buttons-group-label"
-                color="secondary"
-              >
-                <h5>Q8. 나는 누군가를 처음 만났을 때 향기가 났으면 좋겠다.</h5>
-              </FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-                id="radioGroup"
-                value={Q8}
-                onChange={handleQ8}
-              >
-                <FormControlLabel
-                  value="Y"
-                  control={<Radio color="secondary" />}
-                  label="예"
-                />
-                <FormControlLabel
-                  value="N"
-                  control={<Radio color="secondary" />}
-                  label="아니요"
-                  id="radioNo"
-                />
-              </RadioGroup>
-            </FormControl>
-            {/*---9번 질문---*/}
-            <FormControl id="surveyItem">
-              <FormLabel
-                id="demo-row-radio-buttons-group-label"
-                color="secondary"
-              >
-                <h5>Q9. 나는 대화를 먼저 시작하는 편이 아니다.</h5>
-              </FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-                id="radioGroup"
-                value={Q9}
-                onChange={handleQ9}
-              >
-                <FormControlLabel
-                  value="Y"
-                  control={<Radio color="secondary" />}
-                  label="예"
-                />
-                <FormControlLabel
-                  value="N"
-                  control={<Radio color="secondary" />}
-                  label="아니요"
-                  id="radioNo"
-                />
-              </RadioGroup>
-            </FormControl>
-            {/*---10번 질문---*/}
-            <FormControl id="surveyItem">
-              <FormLabel
-                id="demo-row-radio-buttons-group-label"
-                color="secondary"
-              >
-                <h5>Q10. 나는 새로운 음식을 즐기는 편이다.</h5>
-              </FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-                id="radioGroup"
-                value={Q10}
-                onChange={handleQ10}
-              >
-                <FormControlLabel
-                  value="Y"
-                  control={<Radio color="secondary" />}
-                  label="예"
-                />
-                <FormControlLabel
-                  value="N"
-                  control={<Radio color="secondary" />}
-                  label="아니요"
-                  id="radioNo"
-                />
-              </RadioGroup>
-            </FormControl>
-            {disable ? (
-              <Link to="/" onClick={onClickJoin}>
+      <div id="bigdiv">
+        <div id="main">
+          <h2>음주유형검사</h2>
+          <div id="surveyForm">
+            <div id="surveyBox">
+              {/*---1번 질문---*/}
+              <FormControl id="surveyItem">
+                <FormLabel
+                  id="demo-row-radio-buttons-group-label"
+                  color="secondary"
+                >
+                  <h5>Q1. 나는 조용하게 먹는것이 좋다.</h5>
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                  id="radioGroup"
+                  value={Q1}
+                  onChange={handleQ1}
+                >
+                  <FormControlLabel
+                    value="Y"
+                    control={<Radio color="secondary" />}
+                    label="예"
+                  />
+                  <FormControlLabel
+                    value="N"
+                    control={<Radio color="secondary" />}
+                    label="아니요"
+                    id="radioNo"
+                  />
+                </RadioGroup>
+              </FormControl>
+              {/*---2번 질문---*/}
+              <FormControl id="surveyItem">
+                <FormLabel
+                  id="demo-row-radio-buttons-group-label"
+                  color="secondary"
+                >
+                  <h5>Q2. 나는 나만의 향수가 3개 이상 있다.</h5>
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                  id="radioGroup"
+                  value={Q2}
+                  onChange={handleQ2}
+                >
+                  <FormControlLabel
+                    value="Y"
+                    control={<Radio color="secondary" />}
+                    label="예"
+                  />
+                  <FormControlLabel
+                    value="N"
+                    control={<Radio color="secondary" />}
+                    label="아니요"
+                    id="radioNo"
+                  />
+                </RadioGroup>
+              </FormControl>
+              {/*---3번 질문---*/}
+              <FormControl id="surveyItem">
+                <FormLabel
+                  id="demo-row-radio-buttons-group-label"
+                  color="secondary"
+                >
+                  <h5>Q3. 나는 낯을 많이 가린다.</h5>
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                  id="radioGroup"
+                  value={Q3}
+                  onChange={handleQ3}
+                >
+                  <FormControlLabel
+                    value="Y"
+                    control={<Radio color="secondary" />}
+                    label="예"
+                  />
+                  <FormControlLabel
+                    value="N"
+                    control={<Radio color="secondary" />}
+                    label="아니요"
+                    id="radioNo"
+                  />
+                </RadioGroup>
+              </FormControl>
+              {/*---4번 질문---*/}
+              <FormControl id="surveyItem">
+                <FormLabel
+                  id="demo-row-radio-buttons-group-label"
+                  color="secondary"
+                >
+                  <h5>Q4. 나는 디퓨저를 사용중이다.</h5>
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                  id="radioGroup"
+                  value={Q4}
+                  onChange={handleQ4}
+                >
+                  <FormControlLabel
+                    value="Y"
+                    control={<Radio color="secondary" />}
+                    label="예"
+                  />
+                  <FormControlLabel
+                    value="N"
+                    control={<Radio color="secondary" />}
+                    label="아니요"
+                    id="radioNo"
+                  />
+                </RadioGroup>
+              </FormControl>
+              {/*---5번 질문---*/}
+              <FormControl id="surveyItem">
+                <FormLabel
+                  id="demo-row-radio-buttons-group-label"
+                  color="secondary"
+                >
+                  <h5>Q5. 나는 친구들과 약속후에 다음날은 쉰다.</h5>
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                  id="radioGroup"
+                  value={Q5}
+                  onChange={handleQ5}
+                >
+                  <FormControlLabel
+                    value="Y"
+                    control={<Radio color="secondary" />}
+                    label="예"
+                  />
+                  <FormControlLabel
+                    value="N"
+                    control={<Radio color="secondary" />}
+                    label="아니요"
+                    id="radioNo"
+                  />
+                </RadioGroup>
+              </FormControl>
+              {/*---6번 질문---*/}
+              <FormControl id="surveyItem">
+                <FormLabel
+                  id="demo-row-radio-buttons-group-label"
+                  color="secondary"
+                >
+                  <h5>Q6. 나는 맛집을 5군데 이상 알고있다.</h5>
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                  id="radioGroup"
+                  value={Q6}
+                  onChange={handleQ6}
+                >
+                  <FormControlLabel
+                    value="Y"
+                    control={<Radio color="secondary" />}
+                    label="예"
+                  />
+                  <FormControlLabel
+                    value="N"
+                    control={<Radio color="secondary" />}
+                    label="아니요"
+                    id="radioNo"
+                  />
+                </RadioGroup>
+              </FormControl>
+              {/*---7번 질문---*/}
+              <FormControl id="surveyItem">
+                <FormLabel
+                  id="demo-row-radio-buttons-group-label"
+                  color="secondary"
+                >
+                  <h5>Q7. 나는 사람들과 대화하는 게 어렵다.</h5>
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                  id="radioGroup"
+                  value={Q7}
+                  onChange={handleQ7}
+                >
+                  <FormControlLabel
+                    value="Y"
+                    control={<Radio color="secondary" />}
+                    label="예"
+                  />
+                  <FormControlLabel
+                    value="N"
+                    control={<Radio color="secondary" />}
+                    label="아니요"
+                    id="radioNo"
+                  />
+                </RadioGroup>
+              </FormControl>
+              {/*---8번 질문---*/}
+              <FormControl id="surveyItem">
+                <FormLabel
+                  id="demo-row-radio-buttons-group-label"
+                  color="secondary"
+                >
+                  <h5>
+                    Q8. 나는 누군가를 처음 만났을 때 향기가 났으면 좋겠다.
+                  </h5>
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                  id="radioGroup"
+                  value={Q8}
+                  onChange={handleQ8}
+                >
+                  <FormControlLabel
+                    value="Y"
+                    control={<Radio color="secondary" />}
+                    label="예"
+                  />
+                  <FormControlLabel
+                    value="N"
+                    control={<Radio color="secondary" />}
+                    label="아니요"
+                    id="radioNo"
+                  />
+                </RadioGroup>
+              </FormControl>
+              {/*---9번 질문---*/}
+              <FormControl id="surveyItem">
+                <FormLabel
+                  id="demo-row-radio-buttons-group-label"
+                  color="secondary"
+                >
+                  <h5>Q9. 나는 대화를 먼저 시작하는 편이 아니다.</h5>
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                  id="radioGroup"
+                  value={Q9}
+                  onChange={handleQ9}
+                >
+                  <FormControlLabel
+                    value="Y"
+                    control={<Radio color="secondary" />}
+                    label="예"
+                  />
+                  <FormControlLabel
+                    value="N"
+                    control={<Radio color="secondary" />}
+                    label="아니요"
+                    id="radioNo"
+                  />
+                </RadioGroup>
+              </FormControl>
+              {/*---10번 질문---*/}
+              <FormControl id="surveyItem">
+                <FormLabel
+                  id="demo-row-radio-buttons-group-label"
+                  color="secondary"
+                >
+                  <h5>Q10. 나는 새로운 음식을 즐기는 편이다.</h5>
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                  id="radioGroup"
+                  value={Q10}
+                  onChange={handleQ10}
+                >
+                  <FormControlLabel
+                    value="Y"
+                    control={<Radio color="secondary" />}
+                    label="예"
+                  />
+                  <FormControlLabel
+                    value="N"
+                    control={<Radio color="secondary" />}
+                    label="아니요"
+                    id="radioNo"
+                  />
+                </RadioGroup>
+              </FormControl>
+              {disable ? (
+                <Link to="/" onClick={onClickJoin}>
+                  <div id="btBox">
+                    <Button variant="contained" id="btn_join">
+                      회원가입
+                    </Button>
+                  </div>
+                </Link>
+              ) : (
                 <div id="btBox">
-                  <Button variant="contained" id="btn_join" color="secondary">
+                  <Button
+                    variant="contained"
+                    id="btn_join"
+                    color="secondary"
+                    disabled
+                  >
                     회원가입
                   </Button>
                 </div>
-              </Link>
-            ) : (
-              <div id="btBox">
-                <Button
-                  variant="contained"
-                  id="btn_join"
-                  color="secondary"
-                  disabled
-                >
-                  회원가입
-                </Button>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -455,8 +455,33 @@ export default function JoinQ() {
 }
 
 const StyledWrapper = styled.div`
+  background-color: #f7ecde;
+  #bigdiv {
+    display: flex;
+    justify-content: center;
+  }
   #main {
     text-align: center;
+    width: 30vw;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: "GD";
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-sizing: border-box;
+    border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
+
+    flex-direction: column;
+    background-color: #dfe8cc;
+
+    justify-content: center;
+    align-items: center;
   }
 
   #surveyBox {
@@ -488,6 +513,8 @@ const StyledWrapper = styled.div`
 
   #btn_join {
     width: 170px;
+    background-color: white;
+    color: black;
   }
 
   #surveyForm {

@@ -27,11 +27,11 @@ export default function SameType() {
     navigate("/detail/" + item.alcohol_no);
   };
 
-  // useEffect(() => {
-  //   userRank().then(res => {
-  //     setSametype(res);
-  //   });
-  // }, []);
+  useEffect(() => {
+    userRank().then(res => {
+      setSametype(res);
+    });
+  }, [sametype]);
 
   if (sametype && sametype.length > 0) {
     return (
