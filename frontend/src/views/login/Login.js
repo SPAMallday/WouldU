@@ -9,6 +9,9 @@ import swal from "sweetalert";
 import logo2 from "assets/img/logo2.png";
 import Card from "@mui/material/Card";
 import space from "assets/img/space_example.jpg";
+import {
+  login
+} from "../../api/userAPI";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -30,22 +33,16 @@ export default function Login() {
           user_id: inputId,
           password: inputPw,
         };
-        await axios
-          .post("http://localhost:8000/user/signin", data)
-          .then(res => {
-            console.log(res);
-            if (res.data.result === "success") {
+        login(data).then(res => {
+            if (res.result === "success") {
               sessionStorage.setItem("ID", inputId);
-              sessionStorage.setItem("no", res.data.user_no);
-              sessionStorage.setItem("Nick", res.data.nickname);
+              sessionStorage.setItem("no", res.user_no);
+              sessionStorage.setItem("Nick", res.nickname);
               navigate("/");
             } else {
               swal("Error!", "아이디 또는 비밀번호 오류입니다.", "error");
             }
           })
-          .catch(err => {
-            console.log(err);
-          });
       } else {
         swal("Error!", "비밀번호를 입력해주세요!!", "error");
       }
