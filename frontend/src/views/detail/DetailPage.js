@@ -50,13 +50,15 @@ export default function DetailPage() {
     <>
       <Header />
       <StyledWrapper>
-        <Information
-          detailId={params.detail_id}
-          alcohol={alcohol}
-          userno={userno}
-        />
-        <Similar alcohol={alcohol} similar={similar} />
-        <Review review={review} />
+        <div id="backgroundframe">
+          <Information
+            detailId={params.detail_id}
+            alcohol={alcohol}
+            userno={userno}
+          />
+          <Similar alcohol={alcohol} similar={similar} />
+          <Review review={review} />
+        </div>
       </StyledWrapper>
     </>
   );
@@ -67,4 +69,10 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  #backgroundframe {
+    background-color: #f7ecde;
+    width: 100%;
+    height: 100%;
+  }
 `;
