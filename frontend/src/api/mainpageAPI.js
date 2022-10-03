@@ -6,7 +6,7 @@ import { apiClient } from ".";
 export const userRank = async () => {
   let user_no = sessionStorage.getItem("no");
   if (user_no === null) {
-    user_no = "1";
+    user_no = "0";
   }
 
   try {
