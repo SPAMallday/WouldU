@@ -84,6 +84,10 @@ export const onceRecom = async data => {
 
 // 술 평가 점수 받아오기
 export const getRecord = async data => {
+  let user_no = sessionStorage.getItem("no");
+  if (user_no === null) {
+    user_no = "0";
+  }
   try {
     const res = await apiClient.get(`/recommend/record`, {
       params: { user_no: user_no, alcohol_no: data },
@@ -96,6 +100,10 @@ export const getRecord = async data => {
 
 // 술 평가 기록하기
 export const makeRecord = async data => {
+  let user_no = sessionStorage.getItem("no");
+  if (user_no === null) {
+    user_no = "0";
+  }
   try {
     const res = await apiClient.post(`/recommend/record/update`, {
       user_no: user_no,

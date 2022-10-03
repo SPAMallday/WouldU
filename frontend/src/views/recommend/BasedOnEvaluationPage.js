@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import Header from "components/nav/Header";
-import rocketicon from "assets/img/rocketicon.png"
+import rocketicon from "assets/img/rocketicon.png";
 import mousepointer from "assets/img/mousepointer.png";
 import traditionalframe from "assets/img/traditionalframe.png";
-import planet4 from "assets/img/planet4.png"
+import planet4 from "assets/img/planet4.png";
 import Element from "components/search/Element";
 import { Link } from "react-router-dom";
 import { userRecom, alcoholDetail } from "../../api/recommendAPI";
@@ -34,13 +34,13 @@ export default function BasedOnEvaluationPage() {
     <Link to={"/detail/" + e.alco_no} key={`detail + ${e.alco_no}`}>
       <div id="result-frame">
         <div id="tooltip">
-          <img src={e.img_link} alt="img" />
+          <img src={e.alco_img} alt="img" />
           <span id="tooltiptext">
             <div id="information">
-              <div id="alcoholtitle">{e.name}</div>
+              <div id="alcoholtitle">{e.alco_name}</div>
               <div>{e.brewery}</div>
               <div>
-                {e.size}ml / {e.alcohol}도
+                {e.size}ml / {e.abv}도
               </div>
             </div>
           </span>
@@ -67,7 +67,7 @@ export default function BasedOnEvaluationPage() {
             <div id="result">{ListItems}</div>
           </div>
           <div id="goevaluation">
-            <Link to="/recommend/search_for_recommend">
+            <Link to="/recommend/search-for-recommend">
               <img src={planet4} alt="목성" />
               <div id="goevaluation-text">평가하러 가기</div>
             </Link>
