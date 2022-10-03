@@ -29,8 +29,8 @@ export default function LikeList(prop) {
     const result = [];
     for (let i = 0; i < prop.likeList.length; i++) {
       result.push(
-        <SwiperSlide>
-          <div key={i} id="item" onClick={() => onClickItem(prop.likeList[i])}>
+        <SwiperSlide key={i}>
+          <div id="item" onClick={() => onClickItem(prop.likeList[i])}>
             {/** 술 이미지 교체 해야함. */}
 
             <Card
