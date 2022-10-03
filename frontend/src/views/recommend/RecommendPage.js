@@ -5,7 +5,7 @@ import recommendbackground from "assets/img/recommendbackground.jpg";
 import { Link } from "react-router-dom";
 import earth from "assets/img/earth.png";
 import mousepointer from "assets/img/mousepointer.png";
-
+import rocketicon from "assets/img/rocketicon.png";
 export default function RecommendPage() {
   return (
     <StyledWrapper>
@@ -14,6 +14,12 @@ export default function RecommendPage() {
         <Link to="/">
           <img src={earth} alt="지구" />
           <div id="back">돌아가기</div>
+        </Link>
+      </div>
+      <div id="rocketframe">
+        <Link to="/login">
+          <img src={rocketicon} alt="로켓" />
+          <div id="back">로그인</div>
         </Link>
       </div>
     </StyledWrapper>
@@ -57,6 +63,42 @@ const StyledWrapper = styled.div`
     width: 150px;
     height: 150px;
   }
+  #rocketframe {
+    cursor: url(${mousepointer}) 50 50, auto;
+    position: fixed;
+    top: 78vh;
+    right: 0vw;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #rocketframe > a {
+    cursor: url(${mousepointer}) 50 50, auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+  #rocketframe:hover {
+    cursor: url(${mousepointer}) 50 50, auto;
+    -webkit-transform: translateY(-18px);
+    transform: translateY(-18px);
+  }
+  #rocketframe img {
+    cursor: url(${mousepointer}) 50 50, auto;
+    width: 100px;
+  }
+  #rocketframe img:hover {
+    cursor: url(${mousepointer}) 50 50, auto;
+    width: 150px;
+    height: 150px;
+  }
+
   a {
     cursor: url(${mousepointer}) 50 50, auto;
     text-decoration: none;

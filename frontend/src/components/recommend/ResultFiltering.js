@@ -170,6 +170,7 @@ const StyledWrapper = styled.div`
     cursor: url(${mousepointer}) 50 50, auto;
     -webkit-transform: translateY(-18px);
     transform: translateY(-18px);
+    transform: scale(1.1);
   }
   #rocketframe img {
     cursor: url(${mousepointer}) 50 50, auto;
@@ -177,8 +178,7 @@ const StyledWrapper = styled.div`
   }
   #rocketframe img:hover {
     cursor: url(${mousepointer}) 50 50, auto;
-    width: 150px;
-    height: 150px;
+    transform: scale(1.1);
   }
   #backtodialog {
     cursor: url(${mousepointer}) 50 50, auto;

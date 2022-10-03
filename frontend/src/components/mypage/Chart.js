@@ -45,27 +45,41 @@ export default function Chart(prop) {
 
 const StyledWrapper = styled.div`
   #main {
-    margin-top: 50px;
     width: 1300px;
     height: 550px;
-    background: #bb9b9b;
+    margin-top: 50px;
+
+    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: "GD";
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-sizing: border-box;
+    border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
+    display: flex;
+
+    background-color: #f7ecde;
   }
   #categoryBox {
     display: inline-block;
     width: 650px;
     height: 550px;
-    background-color: #bb9b9b;
   }
   #averageBox {
     width: 650px;
     height: 550px;
     float: right;
-    background: #bb9b9b;
   }
   #title {
     margin-top: 20px;
   }
   #btn_recom {
+    font-family: "GD";
     margin-top: 20px;
+    margin-left: -30px;
   }
 `;
