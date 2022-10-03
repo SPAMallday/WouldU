@@ -14,7 +14,7 @@ export default function RadarChart(props) {
 
   if (tasteData && tasteData.length > 0) {
     return (
-      <div style={{ width: "650px", height: "400px", margin: "0 auto" }}>
+      <div style={{ width: "600px", height: "400px", margin: "0 auto" }}>
         <ResponsiveRadar
           data={tasteData}
           keys={["전통주"]}

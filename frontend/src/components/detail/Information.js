@@ -7,6 +7,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import IconButton from "@mui/material/IconButton";
 import swal from "sweetalert";
 import React, { useState, useEffect } from "react";
+import heartdetailpage from "assets/img/heartdetailpage.png"
 
 export default function Information(props) {
   const [like, setLike] = useState("");
@@ -47,10 +48,16 @@ export default function Information(props) {
         ? []
         : [props.alcohol.tag.split(",")]
       : [];
-
-  const detailInformationTagslist = detailInformationTags.map(e => (
-    <div key={e}>#{e}</div>
-  ));
+  console.log(detailInformationTags)
+  const detailInformationTagslist = ( detailInformationTags[0] && detailInformationTags[0].length > 1 ? (
+    detailInformationTags[0].map(e => (
+      <div key={e}>#{e}</div>
+    ))
+  ) :
+    (
+      detailInformationTags.map(e => (
+        <div key={e}>#{e}</div>
+      ))));
 
   /**
    * @todo 유저 평점 집어넣어야 함
@@ -96,38 +103,50 @@ export default function Information(props) {
           {like === 1 ? (
             <div id="divlike">
               <IconButton onClick={changelike} id="likeb">
-                <FavoriteIcon sx={{ fontSize: 40, color: "purple" }} />
+                <FavoriteIcon sx={{ fontSize: 40 }} />
               </IconButton>
             </div>
           ) : (
             <div id="divlike">
               <IconButton onClick={changelike} id="likeb">
-                <FavoriteBorderIcon sx={{ fontSize: 40, color: "purple" }} />
+                <FavoriteBorderIcon sx={{ fontSize: 40 }} />
               </IconButton>
             </div>
           )}
-          <h3>{props.alcohol.alco_name}</h3>
+          <div id="alcoholname">{props.alcohol.alco_name}</div>
           <div>양조장 : {props.alcohol.brewery}</div>
           <div>종류 : {props.alcohol.alco_type}</div>
           <div>재료 : {props.alcohol.material}</div>
           <div>용량 : {props.alcohol.size}ml</div>
           <div>도수 : {props.alcohol.abv}도</div>
-          <div>수상내역 : {props.alcohol.award}</div>
-          <a
-            href={`https://search.shopping.naver.com/search/all?query=${props.alcohol.alco_name}`}
-          >
-            <button>구매하러 가기</button>
-          </a>
-          <div>
-            <button onClick={handleReview}>리뷰하기</button>
-            <SendReviewDialog
-              openReview={openReview}
-              setOpenReview={setOpenReview}
-              alcohol={props.alcohol}
-            />
-          </div>
+          {props.alcohol.award === "" ? (
+            <div>수상내역 : -</div>
+            ) : (
+              <div>수상내역 : {props.alcohol.award}</div>
+              )}
           <div id="information-desc">설명 : {props.alcohol.detail}</div>
-          <div id="information-tags">태그 : {detailInformationTagslist}</div>
+          <div id="information-tags">{detailInformationTagslist}</div>
+          <div id="buttongroup-frame">
+            <div id="buttongroup">
+              <div>
+                <button id="goreview" onClick={handleReview}>
+                  리뷰 남기기
+                </button>
+                <SendReviewDialog
+                  openReview={openReview}
+                  setOpenReview={setOpenReview}
+                  alcohol={props.alcohol}
+                />
+              </div>
+              <button id="goshop">
+                <a
+                  href={`https://search.shopping.naver.com/search/all?query=${props.alcohol.alco_name}`}
+                >
+                  구매하러 가기
+                </a>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <div id="information-chart">
@@ -138,25 +157,36 @@ export default function Information(props) {
 }
 
 const StyledWrapper = styled.div`
+  font-family: "GD";
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   #picture-information {
     display: flex;
-    border: solid;
+    border: 3px ridge #f5f0bb;
     margin: 10px 0px;
+    width: 80vw;
+    min-width: 1200px;
+    border-radius: 10px;
   }
-
   #picture {
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     border: 1px solid;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: white;
+    border-radius: 7px;
   }
   #picture img {
-    width: 190px;
-    height: 190px;
+    width: 290px;
+    height: 290px;
     margin: auto;
     object-fit: contain;
+    border-radius: 10px;
   }
 
   #divlike {
@@ -167,26 +197,73 @@ const StyledWrapper = styled.div`
     margin-bottom: -30px;
   }
 
+  #alcoholname {
+    font-size: 32px;
+    padding: 10px 0px 10px;
+  }
+
   #information {
     display: flex;
     flex-direction: column;
-    margin: 10px;
+    margin: 0px 10px 10px;
+    font-size: 20px;
   }
   #information div {
-    margin: 0px 5px;
+    margin: 0px 10px 3px;
   }
-  #information-desc {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    line-height: 1.2em;
+
+  #buttongroup-frame {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
   }
+  #buttongroup {
+    display: flex;
+    width: 300px;
+  }
+  #goshop {
+    padding: 0px 15px;
+    border-radius: 10px;
+    background-color: #b5fe83;
+    border: 2px solid #babd42;
+    height: 40px;
+  }
+  #goshop a {
+    text-decoration: none;
+    color: black;
+  }
+  #goreview {
+    height: 40px;
+    padding: 0px 15px;
+    border-radius: 10px;
+    background-color: #ffee63;
+    border: 2px solid #efd345;
+  }
+  // #information-desc {
+  //   overflow: hidden;
+  //   text-overflow: ellipsis;
+  //   display: -webkit-box;
+  //   -webkit-line-clamp: 3;
+  //   -webkit-box-orient: vertical;
+  //   line-height: 1.2em;
+  // }
   #information-tags {
+    margin-top: 10px;
     display: flex;
   }
+  #information-tags div {
+    margin-top: 10px;
+  }
   #information-chart {
-    border: solid olive;
+    border: 3px ridge #f5f0bb;
+    margin: 10px 0px;
+    width: 80vw;
+    min-width: 1200px;
+    border-radius: 10px;
+  }
+
+  // 좋아요 버튼
+  .MuiSvgIcon-root {
+    color: #d2001a;
   }
 `;
