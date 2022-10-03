@@ -15,11 +15,13 @@ import RecommendPage from "views/recommend/RecommendPage";
 import BasedOnEvaluationPage from "views/recommend/BasedOnEvaluationPage";
 import BasedOnFilteringPage from "views/recommend/BasedOnFilteringPage";
 import SearchForRecommendPage from "views/recommend/SearchForRecommendPage";
+import ScrollToTop from "components/scroll/ScrollToTop";
 
 export default function App() {
   return (
     <>
       <Router>
+        <ScrollToTop />
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/">

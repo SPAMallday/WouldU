@@ -48,6 +48,7 @@ export default function BasedOnEvaluationPage() {
       </div>
     </Link>
   ));
+  
   return (
     <>
       <Header />
@@ -111,9 +112,9 @@ const StyledWrapper = styled.div`
   }
   #rocketframe {
     cursor: url(${mousepointer}) 50 50, auto;
-    position: relative;
-    top: -8vh;
-    left: 1.4vw;
+    position: fixed;
+    top: 78vh;
+    left: 0vw;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     width: 200px;
@@ -152,9 +153,9 @@ const StyledWrapper = styled.div`
 
   #goevaluation {
     cursor: url(${mousepointer}) 50 50, auto;
-    position: relative;
-    top: 13vh;
-    left: 87.3vw;
+    position: fixed;
+    top: 78vh;
+    left: 88.5vw;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     width: 200px;
