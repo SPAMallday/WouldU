@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 console.log("BASE : " + BASE_URL);
@@ -10,12 +10,12 @@ export const apiClient = axios.create({
 apiClient.interceptors.request.use(
   function (config) {
     const user_no = sessionStorage.getItem("no");
-    if (user_no)
-      config.headers['user-no'] = user_no;
-    return config
+    if (user_no) config.headers["user-no"] = user_no;
+    return config;
   },
   function (error) {
     // Do something with request error
     return Promise.reject(error);
-  }
+  },
 );
+
