@@ -53,7 +53,6 @@ export default function Login() {
       <Header />
       <div id="main">
         <Card variant="outlined" sx={{ width: 1300, mt: 10 }}>
-          <h2>Login</h2>
           <img src={logo2} alt="logo"></img>
           <div id="loginForm">
             <div id="loginBox">
@@ -88,7 +87,6 @@ export default function Login() {
               <div id="btBox">
                 <Button
                   id="btn_login"
-                  color="secondary"
                   variant="contained"
                   onClick={onClickLogin}
                 >
@@ -109,23 +107,34 @@ export default function Login() {
 }
 
 const StyledWrapper = styled.div`
+  background-color: #f7ecde;
+  height: 100vh;
   #main {
-    height: 1020px;
-    text-align: center;
-    background: url("${space}");
-    background-size: 100% 100%;
+    height: 78vh;
     display: flex;
+    text-align: center;
     flex-direction: column-reverse;
     justify-content: center;
   }
 
   .css-rb59ar-MuiPaper-root-MuiCard-root {
     margin: 0 auto;
-    margin-top: unset;
+    width: 1200px;
+    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+    font-family: "GD";
+    border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffe3e1;
   }
 
   #main img {
-    margin-top: -330px;
+    width: 500px;
   }
 
   #main h2 {
@@ -163,6 +172,7 @@ const StyledWrapper = styled.div`
   #btn_login {
     margin-top: 20px;
     width: 280px;
+    background-color: #fa7070;
   }
 
   #loginForm {
@@ -176,6 +186,9 @@ const StyledWrapper = styled.div`
   }
 
   #h_join {
-    color: purple;
+    color: #fa7070;
+  }
+  a {
+    text-decoration: none;
   }
 `;

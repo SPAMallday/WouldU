@@ -22,17 +22,17 @@ export default function DetailPage() {
     setUserno(sessionStorage.getItem("no"));
 
     alcoholDetail(params.detail_id).then(res => {
-      console.log(res);
+      //console.log(res);
       setAlcohol(res);
     });
 
     similaralcohol(params.detail_id).then(res => {
-      console.log(res);
+      //console.log(res);
       setSimilar(res);
     });
 
     reviewalcohol(params.detail_id).then(res => {
-      console.log(res);
+      //console.log(res);
       setReview(res);
     });
 

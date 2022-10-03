@@ -87,6 +87,7 @@ export default function ReviewList(prop) {
               sx={{
                 maxWidth: 300,
               }}
+              id="soolcard"
             >
               <CardActionArea>
                 <CardMedia
@@ -149,8 +150,35 @@ const StyledWrapper = styled.div`
     margin-top: 60px;
     margin-bottom: 40px;
     width: 1300px;
-    height: 500px;
-    background: #bb9b9b;
+    height: 530px;
+    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: "GD";
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-sizing: border-box;
+    border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
+
+    background-color: #dfe8cc;
+  }
+  #soolcard {
+    border: 2px solid #ccd6a6;
+    border-radius: 5px;
+    padding: 5px 5px;
+    margin: 5px 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    :hover {
+      box-shadow: rgba(0, 0, 0, 0.9) 0px 3px 8px;
+      transform: scale(1.1);
+      background-color: #c4e2b6;
+    }
   }
   #title {
     text-align: left;
@@ -158,7 +186,7 @@ const StyledWrapper = styled.div`
     margin-left: 30px;
   }
   #bigItem {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     margin-top: 20px;
   }
   #tx_rating {

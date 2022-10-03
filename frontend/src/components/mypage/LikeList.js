@@ -38,6 +38,7 @@ export default function LikeList(prop) {
                 width: 170,
                 height: 310,
               }}
+              id="soolcard"
             >
               <CardActionArea>
                 <CardMedia
@@ -47,7 +48,11 @@ export default function LikeList(prop) {
                   id="imgSool"
                 />
                 <CardContent>
-                  <Typography component="div" sx={{ fontSize: 20 }}>
+                  <Typography
+                    component="div"
+                    id="soolname"
+                    sx={{ fontSize: 20 }}
+                  >
                     {prop.likeList[i].alcohol_name}
                   </Typography>
                 </CardContent>
@@ -66,7 +71,7 @@ export default function LikeList(prop) {
         <h3 id="title">좋아요 목록</h3>
         <Swiper
           modules={[Navigation]}
-          spaceBetween={-50}
+          spaceBetween={0}
           slidesPerView={5}
           navigation
         >
@@ -81,8 +86,33 @@ const StyledWrapper = styled.div`
   #main {
     margin-top: 50px;
     width: 1300px;
-    height: 430px;
-    background: #bb9b9b;
+    height: 450px;
+    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: "GD";
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-sizing: border-box;
+    border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
+
+    background-color: #ffe3e1;
+  }
+
+  #soolcard {
+    border: 2px solid #f09494;
+    border-radius: 5px;
+    margin: 5px 0;
+
+    :hover {
+      box-shadow: rgba(0, 0, 0, 0.9) 0px 3px 8px;
+      transform: scale(1.1);
+
+      background-color: #ffd1e8;
+    }
   }
   #title {
     text-align: left;
@@ -92,6 +122,7 @@ const StyledWrapper = styled.div`
   }
   #item {
     display: inline-block;
+    margin-top: 10px;
   }
 
   .css-o69gx8-MuiCardMedia-root {
@@ -103,5 +134,9 @@ const StyledWrapper = styled.div`
     width: 100%;
     height: 230px;
     object-fit: scale-down;
+  }
+
+  .swiper-wrapper {
+    height: 400px;
   }
 `;

@@ -32,7 +32,7 @@ const Barchart = prop => {
         /**
          * chart margin
          */
-        margin={{ top: 40, right: 190, bottom: 120, left: 50 }}
+        margin={{ top: 40, right: 180, bottom: 80, left: 60 }}
         /**
          * chart padding (bar간 간격)
          */

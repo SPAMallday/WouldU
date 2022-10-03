@@ -125,10 +125,10 @@ export default function MyPage() {
                     id="btnSummary"
                     size="large"
                   >
-                    <BarChartIcon sx={{ fontSize: 40, color: "purple" }} />
+                    <BarChartIcon sx={{ fontSize: 40, color: "#fa7070" }} />
                   </IconButton>
                   <IconButton onClick={onClickList}>
-                    <StarIcon sx={{ fontSize: 40, color: "purple" }} />
+                    <StarIcon sx={{ fontSize: 40, color: "#ffa500" }} />
                   </IconButton>
                 </div>
               </div>
@@ -158,10 +158,10 @@ export default function MyPage() {
                     id="btnSummary"
                     size="large"
                   >
-                    <BarChartIcon sx={{ fontSize: 40, color: "purple" }} />
+                    <BarChartIcon sx={{ fontSize: 40, color: "#ffa500" }} />
                   </IconButton>
                   <IconButton onClick={onClickList}>
-                    <StarIcon sx={{ fontSize: 40, color: "purple" }} />
+                    <StarIcon sx={{ fontSize: 40, color: "#fa7070" }} />
                   </IconButton>
                 </div>
               </div>
@@ -181,13 +181,11 @@ export default function MyPage() {
 const StyledWrapper = styled.div`
   #main {
     text-align: center;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-      url("${spaces}");
-    background-size: 100% 100%;
+    background-color: #f7ecde;
   }
 
   .css-bhp9pd-MuiPaper-root-MuiCard-root {
-    background-color: #efeff7;
+    background-color: #f7ecde;
     box-shadow: none;
   }
   #mainPage {
