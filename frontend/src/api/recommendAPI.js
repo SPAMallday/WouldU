@@ -86,7 +86,7 @@ export const onceRecom = async data => {
 export const getRecord = async data => {
   try {
     const res = await apiClient.get(`/recommend/record`, {
-      params: { user_no: user_no, alcohol_no: data },
+      // params: { user_no: user_no, alcohol_no: data },
     });
     return res.data;
   } catch (err) {
@@ -98,7 +98,7 @@ export const getRecord = async data => {
 export const makeRecord = async data => {
   try {
     const res = await apiClient.post(`/recommend/record/update`, {
-      user_no: user_no,
+      // user_no: user_no,
       ...data,
     });
     return res;

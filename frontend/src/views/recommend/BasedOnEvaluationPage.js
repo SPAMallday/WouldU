@@ -112,12 +112,15 @@ const StyledWrapper = styled.div`
   #rocketframe {
     cursor: url(${mousepointer}) 50 50, auto;
     position: relative;
-    top: -6vh;
+    top: -8vh;
     left: 1.4vw;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     width: 200px;
     height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   #rocketframe:hover {
     cursor: url(${mousepointer}) 50 50, auto;
@@ -150,12 +153,15 @@ const StyledWrapper = styled.div`
   #goevaluation {
     cursor: url(${mousepointer}) 50 50, auto;
     position: relative;
-    top: 15vh;
-    left: 87.5vw;
+    top: 13vh;
+    left: 87.3vw;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     width: 200px;
     height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   #goevaluation:hover {
     cursor: url(${mousepointer}) 50 50, auto;
