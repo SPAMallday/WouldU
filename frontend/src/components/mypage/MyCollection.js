@@ -130,6 +130,14 @@ export default function MyCollection(prop) {
         </StyledWrapper>
       );
     }
+  } else {
+    return (
+      <StyledWrapper>
+        <div id="main2">
+          <h3 id="title">{prop.userName}님이 먹은 술 </h3>
+        </div>
+      </StyledWrapper>
+    );
   }
 }
 
