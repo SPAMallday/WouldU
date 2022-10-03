@@ -69,7 +69,7 @@ def alcoDetails(request):
         'like_count' : datas[7],
         'food' : datas[8].replace("|", ","),
         'tag' : datas[9].replace("|", ","),
-        'size' : datas[11].replace("|", ","),
+        'size' : datas[10].replace("|", ","),
         'sweet' : datas[13],
         'sour' : datas[14],
         'scent' : datas[15],
