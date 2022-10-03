@@ -228,7 +228,7 @@ def alcoReviewAPI(request, alcohol_no):
 def RankByUserKind(request, user_no):
     user_kind = User.objects.get(user_no = user_no).user_kind.kind_code
     cursor = connection.cursor()
-    sql1 = "SELECT s.alcohol_no, a.alcohol_name, (s.total_score DIV s.count) as avg_score FROM alcohol a JOIN "
+    sql1 = "SELECT a.alcohol_no, a.alcohol_name, (s.total_score DIV s.count) as avg_score FROM alcohol a JOIN "
     if(user_kind =='K1'):
         sql2="alcohol_score1 "
     elif(user_kind =='K2'):
@@ -237,7 +237,7 @@ def RankByUserKind(request, user_no):
         sql2="alcohol_score3 "
     elif(user_kind == 'K4'):
         sql2="alcohol_score4 "
-    sql3 = "s ON s.id = a.alcohol_no ORDER BY -avg_score LIMIT 0, 10"
+    sql3 = "s ON s.alcohol_no = a.alcohol_no ORDER BY -avg_score LIMIT 0, 10"
 
     sql = sql1+sql2+sql3
     cursor.execute(sql)
