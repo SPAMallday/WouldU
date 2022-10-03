@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { json } from "react-router-dom";
 import { apiClient } from ".";
 
@@ -25,7 +24,9 @@ export const alcoholDetail = async al_no => {
   }
 
   try {
-    const res = await apiClient.get(`/alcohol/detail/${al_no}/${user_no}`);
+    const res = await apiClient.get(
+      `/alcohol/detail?alco_no=${al_no}&user_no=${user_no}`,
+    );
     return res.data;
   } catch (err) {
     console.log(err);
