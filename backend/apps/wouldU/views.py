@@ -73,11 +73,11 @@ def RecentReviewAPI(request):
     #                                 ''')
     # data = serializers.serialize('json', result, fields=('review_no', 'rank', 'reg_date'))
     cursor = connection.cursor()
-    cursor.execute('''SELECT b.alcohol_no
+    cursor.execute('''SELECT a.alcohol_no
                            , a.alcohol_name
                            , @ROWNUM := @ROWNUM + 1 ranking
                            , a.reg_date
-                        FROM (SELECT distinct b.alcohol_name as alcohol_name
+                        FROM (SELECT distinct b.alcohol_no, b.alcohol_name as alcohol_name
                                    , a.reg_date
                                 FROM review a
                                    , alcohol b
