@@ -66,7 +66,7 @@ export const similaralcohol = async no => {
 //상세페이지 유저 평가
 export const reviewalcohol = async no => {
   try {
-    const res = await apiClient.get(`/alcohol/review/${no}`);
+    const res = await apiClient.get(`alcohol/review/${no}`);
     return res.data;
   } catch (err) {
     console.log(err);
@@ -91,7 +91,7 @@ export const getRecord = async data => {
   }
   try {
     const res = await apiClient.get(`/recommend/record`, {
-      params: { user_no: user_no, alcohol_no: data },
+      // params: { user_no: user_no, alcohol_no: data },
     });
     return res.data;
   } catch (err) {
@@ -107,7 +107,7 @@ export const makeRecord = async data => {
   }
   try {
     const res = await apiClient.post(`/recommend/record/update`, {
-      user_no: user_no,
+      // user_no: user_no,
       ...data,
     });
     return res;
