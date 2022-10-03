@@ -24,8 +24,8 @@ def searchAlcoholAPI(request):
     # request param
     name = request.GET.get('name', '') 
     sort = int(request.GET.get('sort', 1)) 
-    # page = int(request.GET.get('page', 0))
-    row_index = int(request.GET.get('row_index', 0))
+    page = int(request.GET.get('page', 0))
+    # row_index = int(request.GET.get('row_index', 0))
     alcol_type = request.GET.get('alcol_type', '')
 
     # sort 
@@ -35,8 +35,8 @@ def searchAlcoholAPI(request):
     sorting = ['', 'a.alcohol_no', 'a.alcohol_name', 'a.like_count DESC']
 
     # page당 15개의 item
-    # page = (page-1) * 15
-
+    start_index = (page-1) * 15
+    
     # 깔끔하게 처리하고 싶은데.... 나중에 찾아보겠음
     alcohol_type = ''
     if len(alcol_type) != 0:
@@ -49,14 +49,14 @@ def searchAlcoholAPI(request):
     print(alcohol_type)
     cursor = connection.cursor()
     # total row count
-    # cursor.execute(f"""SELECT count(*)
-    #                      FROM alcohol a
-    #                     WHERE 1=1
-    #                       {alcohol_type}
-    #                       AND a.alcohol_name like '%%{name}%%'
-    #                     ORDER BY {sorting[sort]} 
-    #                     LIMIT {page}, 15""")
-    # row_num = cursor.fetchone()
+    cursor.execute(f"""SELECT count(*)
+                         FROM alcohol a
+                        WHERE 1=1
+                          {alcohol_type}
+                          AND a.alcohol_name like '%%{name}%%'
+                          """)
+    row_num = cursor.fetchone()
+    print(row_num[0])
 
     cursor.execute(f"""SELECT row_number() OVER (ORDER BY {sorting[sort]}) as row_index
                             , a.alcohol_no
@@ -65,20 +65,19 @@ def searchAlcoholAPI(request):
                             , a.brewery
                             , replace(a.size, "|", ", ") size
                             , a.abv
+                            , {row_num[0]} as total_count
                          FROM alcohol a
                         WHERE 1=1
                           {alcohol_type}
                           AND a.alcohol_name like '%%{name}%%'
                         ORDER BY {sorting[sort]} 
-                        LIMIT {row_index}, 16""")
+                        LIMIT {start_index}, 15""")
                         # LIMIT {page}, 16""")
                   # , (alcohol_type, name, sorting[sort], page))  
-    print(name, alcol_type, sorting[sort], row_index)
+    # print(name, alcol_type, sorting[sort], start_index)
     
     results = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) \
                 for row in cursor.fetchall()]
 
-    if results != None and len(results) > 0:
-        result = results[0]
     # print(results)
     return Response(results)
