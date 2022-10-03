@@ -138,7 +138,7 @@ export default function JoinQ() {
               <FormControl id="surveyItem">
                 <FormLabel
                   id="demo-row-radio-buttons-group-label"
-                  color="secondary"
+                  color="warning"
                 >
                   <h5>Q1. 나는 조용하게 먹는것이 좋다.</h5>
                 </FormLabel>
@@ -152,12 +152,12 @@ export default function JoinQ() {
                 >
                   <FormControlLabel
                     value="Y"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="예"
                   />
                   <FormControlLabel
                     value="N"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="아니요"
                     id="radioNo"
                   />
@@ -167,7 +167,7 @@ export default function JoinQ() {
               <FormControl id="surveyItem">
                 <FormLabel
                   id="demo-row-radio-buttons-group-label"
-                  color="secondary"
+                  color="warning"
                 >
                   <h5>Q2. 나는 나만의 향수가 3개 이상 있다.</h5>
                 </FormLabel>
@@ -181,12 +181,12 @@ export default function JoinQ() {
                 >
                   <FormControlLabel
                     value="Y"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="예"
                   />
                   <FormControlLabel
                     value="N"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="아니요"
                     id="radioNo"
                   />
@@ -196,7 +196,7 @@ export default function JoinQ() {
               <FormControl id="surveyItem">
                 <FormLabel
                   id="demo-row-radio-buttons-group-label"
-                  color="secondary"
+                  color="warning"
                 >
                   <h5>Q3. 나는 낯을 많이 가린다.</h5>
                 </FormLabel>
@@ -210,12 +210,12 @@ export default function JoinQ() {
                 >
                   <FormControlLabel
                     value="Y"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="예"
                   />
                   <FormControlLabel
                     value="N"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="아니요"
                     id="radioNo"
                   />
@@ -225,7 +225,7 @@ export default function JoinQ() {
               <FormControl id="surveyItem">
                 <FormLabel
                   id="demo-row-radio-buttons-group-label"
-                  color="secondary"
+                  color="warning"
                 >
                   <h5>Q4. 나는 디퓨저를 사용중이다.</h5>
                 </FormLabel>
@@ -239,12 +239,12 @@ export default function JoinQ() {
                 >
                   <FormControlLabel
                     value="Y"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="예"
                   />
                   <FormControlLabel
                     value="N"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="아니요"
                     id="radioNo"
                   />
@@ -254,7 +254,7 @@ export default function JoinQ() {
               <FormControl id="surveyItem">
                 <FormLabel
                   id="demo-row-radio-buttons-group-label"
-                  color="secondary"
+                  color="warning"
                 >
                   <h5>Q5. 나는 친구들과 약속후에 다음날은 쉰다.</h5>
                 </FormLabel>
@@ -268,12 +268,12 @@ export default function JoinQ() {
                 >
                   <FormControlLabel
                     value="Y"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="예"
                   />
                   <FormControlLabel
                     value="N"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="아니요"
                     id="radioNo"
                   />
@@ -283,7 +283,7 @@ export default function JoinQ() {
               <FormControl id="surveyItem">
                 <FormLabel
                   id="demo-row-radio-buttons-group-label"
-                  color="secondary"
+                  color="warning"
                 >
                   <h5>Q6. 나는 맛집을 5군데 이상 알고있다.</h5>
                 </FormLabel>
@@ -297,12 +297,12 @@ export default function JoinQ() {
                 >
                   <FormControlLabel
                     value="Y"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="예"
                   />
                   <FormControlLabel
                     value="N"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="아니요"
                     id="radioNo"
                   />
@@ -312,7 +312,7 @@ export default function JoinQ() {
               <FormControl id="surveyItem">
                 <FormLabel
                   id="demo-row-radio-buttons-group-label"
-                  color="secondary"
+                  color="warning"
                 >
                   <h5>Q7. 나는 사람들과 대화하는 게 어렵다.</h5>
                 </FormLabel>
@@ -326,12 +326,12 @@ export default function JoinQ() {
                 >
                   <FormControlLabel
                     value="Y"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="예"
                   />
                   <FormControlLabel
                     value="N"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="아니요"
                     id="radioNo"
                   />
@@ -341,7 +341,7 @@ export default function JoinQ() {
               <FormControl id="surveyItem">
                 <FormLabel
                   id="demo-row-radio-buttons-group-label"
-                  color="secondary"
+                  color="warning"
                 >
                   <h5>
                     Q8. 나는 누군가를 처음 만났을 때 향기가 났으면 좋겠다.
@@ -357,12 +357,12 @@ export default function JoinQ() {
                 >
                   <FormControlLabel
                     value="Y"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="예"
                   />
                   <FormControlLabel
                     value="N"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="아니요"
                     id="radioNo"
                   />
@@ -372,7 +372,7 @@ export default function JoinQ() {
               <FormControl id="surveyItem">
                 <FormLabel
                   id="demo-row-radio-buttons-group-label"
-                  color="secondary"
+                  color="warning"
                 >
                   <h5>Q9. 나는 대화를 먼저 시작하는 편이 아니다.</h5>
                 </FormLabel>
@@ -386,12 +386,12 @@ export default function JoinQ() {
                 >
                   <FormControlLabel
                     value="Y"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="예"
                   />
                   <FormControlLabel
                     value="N"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="아니요"
                     id="radioNo"
                   />
@@ -401,7 +401,7 @@ export default function JoinQ() {
               <FormControl id="surveyItem">
                 <FormLabel
                   id="demo-row-radio-buttons-group-label"
-                  color="secondary"
+                  color="warning"
                 >
                   <h5>Q10. 나는 새로운 음식을 즐기는 편이다.</h5>
                 </FormLabel>
@@ -415,12 +415,12 @@ export default function JoinQ() {
                 >
                   <FormControlLabel
                     value="Y"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="예"
                   />
                   <FormControlLabel
                     value="N"
-                    control={<Radio color="secondary" />}
+                    control={<Radio color="warning" />}
                     label="아니요"
                     id="radioNo"
                   />
@@ -436,12 +436,7 @@ export default function JoinQ() {
                 </Link>
               ) : (
                 <div id="btBox">
-                  <Button
-                    variant="contained"
-                    id="btn_join"
-                    color="secondary"
-                    disabled
-                  >
+                  <Button variant="contained" id="btn_join1" disabled>
                     회원가입
                   </Button>
                 </div>
@@ -462,7 +457,7 @@ const StyledWrapper = styled.div`
   }
   #main {
     text-align: center;
-    width: 30vw;
+    width: 40vw;
     margin: 10px;
     padding: 10px;
     border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
@@ -513,8 +508,10 @@ const StyledWrapper = styled.div`
 
   #btn_join {
     width: 170px;
-    background-color: white;
-    color: black;
+    background-color: #b15606;
+  }
+  #btn_join1 {
+    width: 170px;
   }
 
   #surveyForm {

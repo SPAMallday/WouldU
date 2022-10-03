@@ -308,12 +308,7 @@ export default function JoinID() {
                     </Button>
                   </Link>
                 ) : (
-                  <Button
-                    variant="contained"
-                    id="btn_next"
-                    color="secondary"
-                    disabled
-                  >
+                  <Button variant="contained" id="btn_next1" disabled>
                     다음
                   </Button>
                 )}
@@ -336,7 +331,7 @@ const StyledWrapper = styled.div`
   }
   #main {
     text-align: center;
-    width: 30vw;
+    width: 40vw;
     margin: 10px;
     padding: 10px;
     border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
@@ -423,8 +418,10 @@ const StyledWrapper = styled.div`
 
   #btn_next {
     width: 170px;
-    background-color: white;
-    color: black;
+    background-color: #b15606;
+  }
+  #btn_next1 {
+    width: 170px;
   }
 
   #btn_check {
