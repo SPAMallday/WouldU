@@ -25,7 +25,7 @@ export default function RecentReviewCard() {
             &nbsp;{item.ranking}.&nbsp;
             {item.alcohol_name}
           </Typography>
-          {checkToday(item.reg_date)}
+          {/* {checkToday(item.reg_date)} */}
         </Grid>
       );
     });
@@ -82,7 +82,7 @@ export default function RecentReviewCard() {
           container
           direction="row"
           justifyContent="center"
-          alignItems="center"
+          alignItems="flex-start"
           columnSpacing={2}
         >
           <Grid

@@ -73,7 +73,7 @@ export default function PopularWordCard() {
           container
           direction="row"
           justifyContent="center"
-          alignItems="center"
+          alignItems="flex-start"
           columnSpacing={2}
         >
           <Grid
