@@ -16,3 +16,23 @@ export const userRank = async () => {
     console.log(err);
   }
 };
+
+// 최근 리뷰작성된 목록 불러오기
+export const recentReview = async () => {
+  try {
+    const res = await apiClient.get(`/review-ranking`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// 최근 리뷰작성된 목록 불러오기
+export const likeRanking = async () => {
+  try {
+    const res = await apiClient.get(`/like-ranking`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};

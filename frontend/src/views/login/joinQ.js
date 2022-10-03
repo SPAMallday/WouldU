@@ -10,6 +10,9 @@ import Header from "components/nav/Header";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
+import {
+  join
+} from "../../api/userAPI";
 
 export default function JoinQ() {
   // 전체 응답 저장용
@@ -107,27 +110,24 @@ export default function JoinQ() {
 
     // 회원가입 axios 부분
 
-    axios
-      .post("http://localhost:8000/user/signup", data)
-      .then(res => {
-        console.log(res);
-        if (res.data.result === "success") {
-          swal({
-            title: "Welcome!",
-            text: "회원가입이 완료되었습니다!",
-            icon: "success",
-            button: {
-              text: "확인",
-            },
-          });
-        } else {
-          swal("Fail!", "회원가입에 실패하였습니다", "error");
-        }
-      })
-      .catch(err => {
-        console.log(err);
-        event.preventDefault();
-      });
+    join(data).then(res => {
+      if (res.result === "success") {
+        swal({
+          title: "Welcome!",
+          text: "회원가입이 완료되었습니다!",
+          icon: "success",
+          button: {
+            text: "확인",
+          },
+        });
+      } else {
+        swal("Fail!", "회원가입에 실패하였습니다", "error");
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      event.preventDefault();
+    });
   };
 
   return (
