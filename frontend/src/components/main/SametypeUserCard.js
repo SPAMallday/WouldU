@@ -23,15 +23,17 @@ export default function SameType() {
   const [sametype, setSametype] = useState();
   const navigate = useNavigate();
   const onClickItem = item => {
-    console.log(item);
+    //console.log(item);
     navigate("/detail/" + item.alcohol_no);
   };
 
   useEffect(() => {
-    userRank().then(res => {
-      setSametype(res);
-    });
-  }, [sametype]);
+    if (sessionStorage.getItem("no") !== null) {
+      userRank().then(res => {
+        setSametype(res);
+      });
+    }
+  }, []);
 
   if (sametype && sametype.length > 0) {
     return (
@@ -53,6 +55,7 @@ export default function SameType() {
                       maxWidth: 300,
                     }}
                     onClick={() => onClickItem(item)}
+                    id="soolcard"
                   >
                     <CardActionArea>
                       <CardMedia
@@ -112,5 +115,11 @@ const StyledWrapper = styled.div`
     width: 100%;
     height: 230px;
     object-fit: scale-down;
+  }
+
+  #soolcard {
+    :hover {
+      transform: scale(1.1);
+    }
   }
 `;

@@ -26,16 +26,15 @@ export default function PopularWordCard() {
   function convList(list) {
     const convert = list.map((item, index) => {
       return (
-        <Grid key={index} className="gridItem">
+        <Grid
+          key={index}
+          className="gridItem"
+          onClick={() => {
+            onClick(item.alcohol_no);
+          }}
+        >
           <img src={imgList[index]} alt={index + 1} />
-          <Typography
-            display="inline-flex"
-            onClick={() => {
-              onClick(item.alcohol_no);
-            }}
-          >
-            {item.alcohol_name}
-          </Typography>
+          <Typography display="inline-flex">{item.alcohol_name}</Typography>
         </Grid>
       );
     });
@@ -142,6 +141,12 @@ const StyledWrapper = styled.div`
     display: flex;
     align-items: center;
     background-color: #ffd1d1;
+
+    :hover {
+      transform: scale(1.1);
+      box-shadow: rgba(0, 0, 0, 0.9) 0px 3px 8px;
+      background-color: #ffd1e8;
+    }
   }
 
   .gridItem p {
