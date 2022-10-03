@@ -1,7 +1,7 @@
 from email.policy import default
 from django.db import models
 
-from user.models import User
+from user.models import User, User_kind_code
 from alcohol.models import Alcohol
 
 
