@@ -11,20 +11,19 @@ import seven from "assets/img/number/seven.png"
 import eight from "assets/img/number/eight.png"
 import nine from "assets/img/number/nine.png"
 import ten from "assets/img/number/ten.png"
+import {
+  likeRanking
+} from "../../api/mainpageAPI";
 
 export default function PopularWordCard() {
   const [popularList, setPopularList] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/like-ranking`)
-      .then(res => {
+    
+    likeRanking().then(res => {
         console.log(res);
-        setPopularList(res.data);
+        setPopularList(res);
       })
-      .catch(err => {
-        console.log(err);
-      });
   }, []);
   
   if (popularList && popularList.length === 10) {

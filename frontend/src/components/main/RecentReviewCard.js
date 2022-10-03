@@ -12,20 +12,17 @@ import eight from "assets/img/number/eight.png";
 import nine from "assets/img/number/nine.png";
 import ten from "assets/img/number/ten.png";
 import newtag from "assets/img/newtag.png";
+import {
+  recentReview
+} from "../../api/mainpageAPI";
 
 export default function RecentReviewCard() {
   const [reviewList, setReviewList] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/review-ranking`)
-      .then(res => {
-        console.log(res);
-        setReviewList(res.data);
+    recentReview().then(res => {
+        setReviewList(res);
       })
-      .catch(err => {
-        console.log(err);
-      });
   }, []);
 
   let now = new Date();
