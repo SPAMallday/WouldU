@@ -12,20 +12,17 @@ import eight from "assets/img/number/eight.png";
 import nine from "assets/img/number/nine.png";
 import ten from "assets/img/number/ten.png";
 import newtag from "assets/img/newtag.png";
+import {
+  recentReview
+} from "../../api/mainpageAPI";
 
 export default function RecentReviewCard() {
   const [reviewList, setReviewList] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/review-ranking`)
-      .then(res => {
-        console.log(res);
-        setReviewList(res.data);
+    recentReview().then(res => {
+        setReviewList(res);
       })
-      .catch(err => {
-        console.log(err);
-      });
   }, []);
 
   let now = new Date();
@@ -33,17 +30,19 @@ export default function RecentReviewCard() {
   let todayMonth = now.getMonth() + 1;
   let todayDate = now.getDate();
 
-  const checkToday = (date) => {
-    if (todayYear === Number(date.slice(0, 4))
-      && todayMonth === Number(date.slice(5, 7))
-      && todayDate === Number(date.slice(8, 10))) {
+  const checkToday = date => {
+    if (
+      todayYear === Number(date.slice(0, 4)) &&
+      todayMonth === Number(date.slice(5, 7)) &&
+      todayDate === Number(date.slice(8, 10))
+    ) {
       return (
         <div>
           <img src={newtag} alt="신규" />
         </div>
-      )
+      );
     }
-  }
+  };
 
   if (reviewList && reviewList.length === 10) {
     return (

@@ -49,15 +49,16 @@ export default function SearchPage() {
 
 const StyledWrapper = styled.div`
   background-color: #f7ecde;
-  height: 88vh;
-  
+  height: 100vh;
+
   #background {
+    background-color: #f7ecde;
     height: 100%;
   }
   #searchtools {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;    
+    align-items: center;
   }
 `;

@@ -22,7 +22,7 @@ export default function LikeList(prop) {
   const navigate = useNavigate();
   const onClickItem = item => {
     console.log(item);
-    navigate("/detail/ " + item.alcohol_no);
+    navigate("/detail/" + item.alcohol_no);
   };
 
   const like = () => {

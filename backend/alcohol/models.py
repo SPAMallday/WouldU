@@ -1,4 +1,5 @@
 from doctest import master
+from email.policy import default
 from django.db import models
 
 # Create your models here.
@@ -45,8 +46,36 @@ class Alcohol_recommend(models.Model):
     scent = models.IntegerField() #향
     body = models.IntegerField() #바디감
     abv_level= models.IntegerField() #도수 ( 1~7 )
-    score = models.IntegerField(default=0) # 리뷰 기준의 평균평점
+    score = models.IntegerField(default=0)
+    count = models.IntegerField(default=0) 
     class Meta :
         db_table = 'alcohol_recommend'
 
+class Alcohol_score1(models.Model):
+    alcohol_no = models.OneToOneField(Alcohol, on_delete=models.CASCADE, db_column='alcohol_no')
+    total_score= models.IntegerField(default=0)
+    count = models.IntegerField(default=0)
+    class Meta :
+        db_table = 'alcohol_score1'
+
+class Alcohol_score2(models.Model):
+    alcohol_no = models.OneToOneField(Alcohol, on_delete=models.CASCADE, db_column='alcohol_no')
+    total_score= models.IntegerField(default=0)
+    count = models.IntegerField(default=0)
+    class Meta :
+        db_table = 'alcohol_score2'
+
+class Alcohol_score3(models.Model):
+    alcohol_no = models.OneToOneField(Alcohol, on_delete=models.CASCADE, db_column='alcohol_no')
+    total_score= models.IntegerField(default=0)
+    count = models.IntegerField(default=0)
+    class Meta :
+        db_table = 'alcohol_score3'
+
+class Alcohol_score4(models.Model):
+    alcohol_no = models.OneToOneField(Alcohol, on_delete=models.CASCADE, db_column='alcohol_no')
+    total_score= models.IntegerField(default=0)
+    count = models.IntegerField(default=0)
+    class Meta :
+        db_table = 'alcohol_score4'
     
