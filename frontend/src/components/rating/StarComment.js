@@ -13,7 +13,7 @@ export default function StarComment(prop) {
   return (
     <StyledWrapper>
       <div id="starBox">
-        <h5>평점</h5>
+        <div id="rating-title">평점</div>
         <Box
           sx={{
             "& > legend": { mt: 2 },
@@ -63,5 +63,8 @@ const StyledWrapper = styled.div`
   }
   #hanmadi {
     margin-top: 20px;
+  }
+  #rating-title {
+    font-size: 26px;
   }
 `;
