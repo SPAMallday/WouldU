@@ -6,6 +6,11 @@ import Slider from "@mui/material/Slider";
 import Button from "@mui/material/Button";
 import SelectType from "components/search/SelectType";
 import ResultFiltering from "components/recommend/ResultFiltering";
+import recommendbackground from "assets/img/recommendbackground.jpg";
+import filteringpageicon from "assets/img/filteringpageicon.png";
+import rocketicon from "assets/img/rocketicon.png";
+import { Link } from "react-router-dom";
+import mousepointer from "assets/img/mousepointer.png";
 
 //import axios from "axios";
 
@@ -73,48 +78,63 @@ export default function BasedonFilteringPage() {
 
   return (
     <StyledWrapper>
-      <Header />
       {!goToResult ? (
-        <div id="main">
-          <h2>원하시는 술의 느낌을 골라주세요!</h2>
-          <div id="searchForm">
-            <SelectType
-              handleChange={handleChange}
-              handleChange1={handleChange1}
-              handleChange2={handleChange2}
-              handleChange3={handleChange3}
-            />
-            <div>
-              <h5 id="textSub">도수</h5>
-              <Box sx={{ width: 400 }} id="slider">
-                <Slider
-                  getAriaLabel={() => "Temperature range"}
-                  value={value}
-                  getAriaValueText={valuetext}
-                  onChange={handleChange4}
-                  valueLabelDisplay="auto"
-                  marks={alcohol}
-                  min={0}
-                  max={41}
+        <div id="backgroundimage">
+          <div id="main">
+            <div id="introduce-frame">
+              <div id="introduce-text">
+                "원하시는 전통주의
+                <br />
+                느낌을 말해주세요!"
+              </div>
+              <div id="introduce-empty" />
+            </div>
+            <div id="searchForm">
+              <SelectType
+                handleChange={handleChange}
+                handleChange1={handleChange1}
+                handleChange2={handleChange2}
+                handleChange3={handleChange3}
+              />
+              <div>
+                <h5 id="textSub">&lt;도수&gt;</h5>
+                <Box sx={{ width: 400 }} id="slider">
+                  <Slider
+                    getAriaLabel={() => "Temperature range"}
+                    value={value}
+                    getAriaValueText={valuetext}
+                    onChange={handleChange4}
+                    valueLabelDisplay="auto"
+                    marks={alcohol}
+                    min={0}
+                    max={41}
+                    color="secondary"
+                  />
+                </Box>
+              </div>
+              <div id="btBox">
+                <Button
+                  type="button"
+                  id="btn_search"
+                  variant="contained"
+                  onClick={onClick}
                   color="secondary"
-                />
-              </Box>
+                >
+                  검색
+                </Button>
+              </div>
             </div>
-            <div id="btBox">
-              <Button
-                type="button"
-                id="btn_search"
-                variant="contained"
-                onClick={onClick}
-                color="secondary"
-              >
-                검색
-              </Button>
-            </div>
+          </div>
+          <div id="rocketframe">
+            <Link to="/recommend">
+              <img src={rocketicon} alt="로켓" />
+              <div id="back">돌아가기</div>
+            </Link>
           </div>
         </div>
       ) : (
         <div>
+          <Header />
           <ResultFiltering
             setGoToResult={setGoToResult}
             sweet={sweet}
@@ -130,26 +150,142 @@ export default function BasedonFilteringPage() {
 }
 
 const StyledWrapper = styled.div`
+  font-family: "GD";
+  #backgroundimage {
+    cursor: url(${mousepointer}) 50 50, auto;
+    background-image: url(${recommendbackground});
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+  }
   #main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #introduce-frame {
+    background-image: url(${filteringpageicon});
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 650px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0px;
+  }
+  #introduce-text {
+    font-family: "Jua";
+    font-size: 36px;
     text-align: center;
+  }
+  #introduce-empty {
+    width: 280px;
   }
   #searchForm {
     margin: auto;
     width: 600px;
-    height: 800px;
-    border: 1px solid;
+    height: auto;
+    border: 5px dashed #ffae6d;
+    background-color: #f3e0b5;
+    border-radius: 10px;
   }
   #textSub {
     text-align: left;
-    width: 400px;
-    margin: auto;
-    margin-top: 30px;
-    margin-bottom: 20px;
+    width: 100px;
+    margin-left: 50px;
+    margin-top: 25px;
+    margin-bottom: 5px;
+    font-family: "Jua";
+    font-size: 24px;
   }
   #slider {
     margin: auto;
   }
   #btn_search {
     margin-top: 60px;
+  }
+  #btBox {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 10px;
+  }
+  #btBox button {
+    margin-top: 20px;
+  }
+
+  .MuiSlider-markLabel {
+    font-family: "GD";
+    font-size: 16px;
+  }
+  .MuiSlider-rail {
+    color: #319da0;
+  }
+  .MuiSlider-track {
+    color: #256d85;
+  }
+  .MuiSlider-thumb {
+    color: #1f4690;
+  }
+  .css-8je8zh-MuiTouchRipple-root {
+  }
+  .MuiButtonBase-root {
+    background-color: #ffa500;
+    font-family: "Jua";
+    font-size: 24px;
+    margin-top: 20px;
+  }
+
+  #rocketframe {
+    cursor: url(${mousepointer}) 50 50, auto;
+    position: fixed;
+    top: 78vh;
+    left: 0vw;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #rocketframe > a {
+    cursor: url(${mousepointer}) 50 50, auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+  #rocketframe:hover {
+    cursor: url(${mousepointer}) 50 50, auto;
+    -webkit-transform: translateY(-18px);
+    transform: translateY(-18px);
+  }
+  #rocketframe img {
+    cursor: url(${mousepointer}) 50 50, auto;
+    width: 100px;
+  }
+  #rocketframe img:hover {
+    cursor: url(${mousepointer}) 50 50, auto;
+    width: 150px;
+    height: 150px;
+  }
+  #back {
+    cursor: url(${mousepointer}) 50 50, auto;
+    font-family: "GD";
+    font-size: 18px;
+    color: black;
+    background-color: #aac4ff;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 3px solid #b1b2ff;
+    display: inline-block;
+    width: 90px;
+    text-align: center;
   }
 `;

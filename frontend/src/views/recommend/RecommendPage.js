@@ -9,13 +9,13 @@ import mousepointer from "assets/img/mousepointer.png";
 export default function RecommendPage() {
   return (
     <StyledWrapper>
+      <RecommendIndex />
       <div id="earth">
         <Link to="/">
           <img src={earth} alt="지구" />
           <div id="back">돌아가기</div>
         </Link>
       </div>
-      <RecommendIndex />
     </StyledWrapper>
   );
 }
@@ -34,9 +34,9 @@ const StyledWrapper = styled.div`
   height: 100vh;
 
   #earth {
-    position: relative;
-    top: 56vh;
-    left: -45vw;
+    position: fixed;
+    top: 78vh;
+    left: 0vw;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     width: 200px;

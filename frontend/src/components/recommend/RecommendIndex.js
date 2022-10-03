@@ -65,9 +65,9 @@ const StyledWrapper = styled.div`
     height: 250px;
   }
   #mars {
-    position: relative;
-    top: -15vh;
-    left: 3vw;
+    position: fixed;
+    top: 25vh;
+    left: 15vw;
     width: 350px;
     height: 350px;
     -webkit-transition: all 0.5s ease;
@@ -82,8 +82,9 @@ const StyledWrapper = styled.div`
     transform: translateY(-18px);
   }
   #jupiter {
-    position: relative;
-    top: -15vh;
+    position: fixed;
+    top: 25vh;
+    left: 39.8vw;
     width: 350px;
     height: 350px;
     -webkit-transition: all 0.5s ease;
@@ -98,11 +99,11 @@ const StyledWrapper = styled.div`
     transform: translateY(-18px);
   }
   #saturn {
-    position: relative;
+    position: fixed;
     width: 350px;
     height: 350px;
-    top: -15vh;
-    left: -3vw;
+    top: 25vh;
+    left: 64.6vw;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     display: flex;

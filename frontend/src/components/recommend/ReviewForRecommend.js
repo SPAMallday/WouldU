@@ -5,6 +5,7 @@ import StarComment from "components/rating/StarComment";
 import { useEffect } from "react";
 import { getRecord, makeRecord } from "api/recommendAPI";
 import swal from "sweetalert";
+import closeicon from "assets/img/closeicon.png";
 
 export default function ReviewForRecommend(props) {
   const { setHandleClick, reviewTarget } = props;
@@ -50,22 +51,14 @@ export default function ReviewForRecommend(props) {
   return (
     <StyledWrapper>
       <div id="main">
-        <Button
-          type="button"
-          id="btn_delete"
-          variant="contained"
-          color="success"
-          onClick={goBack}
-        >
-          뒤로 가기
-        </Button>
-        <h2>술평가</h2>
+        <img id="closeicon" src={closeicon} alt="창 닫기" onClick={goBack} />
+        <div id="main-title-text">&lt; 전통주 평가 &gt;</div>
         <div id="ratingForm">
           <div id="imgBox">
             <img src={reviewTarget.alcohol_image} alt="술" id="img_sul" />
           </div>
           <div id="detailBox">
-            <h5 id="text_sul">이름 : {reviewTarget.alcohol_name}</h5>
+            <h5 id="text_title">이름 : {reviewTarget.alcohol_name}</h5>
             <h5 id="text_sul">주종 : {reviewTarget.type}</h5>
             <h5 id="text_sul">양조장 : {reviewTarget.brewery}</h5>
           </div>
@@ -85,7 +78,7 @@ export default function ReviewForRecommend(props) {
             onClick={onClick}
             color="secondary"
           >
-            등록
+            평가 보내기
           </Button>
         </div>
       </div>
@@ -96,13 +89,45 @@ export default function ReviewForRecommend(props) {
 const StyledWrapper = styled.div`
   #main {
     text-align: center;
+    margin: 10px;
+    padding: 20px 30px;
+    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: "GD";
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-sizing: border-box;
+    border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffe3e1;
+
+    justify-content: center;
+    align-items: center;
+  }
+  #main-title-text {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  #closeicon {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    top: 10px;
+    left: 270px;
   }
   #ratingForm {
-    display: inline-block;
-    margin: auto;
-    border: 1px solid;
+    display: flex;
+    margin: 10px 0px 20px;
+    border: 2px solid #ff7f3f;
+    border-radius: 7px;
+    background-color: #f4bfbf;
   }
-
   #btn_search {
     width: 150px;
     margin-top: 40px;
@@ -115,8 +140,12 @@ const StyledWrapper = styled.div`
   #imgBox {
     width: 200px;
     height: 200px;
-    background: yellow;
-    float: left;
+    border: 0.2px solid #d0b8a8;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
   }
   #imgBox img {
     width: 190px;
@@ -127,11 +156,27 @@ const StyledWrapper = styled.div`
   #detailBox {
     width: 400px;
     height: 200px;
-    display: inline-block;
-    background: pink;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f4bfbf;
+    border-radius: 7px;
+  }
+  #text_title {
+    text-align: left;
+    margin: 10px 20px;
+    font-size: 24px;
   }
   #text_sul {
     text-align: left;
-    margin: 20px;
+    margin: 10px 20px;
+    font-size: 20px;
+  }
+
+  .MuiButtonBase-root {
+    background-color: #fa7070;
+    font-family: "Jua";
+    font-size: 24px;
+    color: #fbf2cf;
   }
 `;

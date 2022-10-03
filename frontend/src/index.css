@@ -35,3 +35,8 @@ code {
   font-family: "GD";
   src: url("assets/fonts/GowunDodum-Regular.ttf");
 }
+
+@font-face {
+  font-family: "Jua";
+  src: url("assets/fonts/Jua-Regular.ttf");
+}
