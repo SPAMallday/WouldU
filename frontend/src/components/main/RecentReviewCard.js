@@ -37,7 +37,7 @@ export default function RecentReviewCard() {
     recentReview().then(res => {
       console.log(res);
 
-      let resList = res.data;
+      let resList = res;
       let temp = [];
 
       resList = convList(resList);

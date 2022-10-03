@@ -47,7 +47,7 @@ export default function PopularWordCard() {
     likeRanking().then(res => {
       console.log(res);
 
-      let resList = res.data;
+      let resList = res;
       let temp = [];
 
       resList = convList(resList);
