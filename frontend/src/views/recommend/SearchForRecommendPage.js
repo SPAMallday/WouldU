@@ -7,9 +7,7 @@ import rocketicon from "assets/img/rocketicon.png";
 import mousepointer from "assets/img/mousepointer.png";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import {
-  search
-} from "../../api/searchAPI";
+import { search } from "../../api/searchAPI";
 
 export default function SearchForRecommendPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -17,17 +15,17 @@ export default function SearchForRecommendPage() {
   const [reviewTarget, setReviewTarget] = useState({});
   const [searchData, setSearchData] = useState([]);
   const [params, setParams] = useState({
-    'name': '',
-    'sort': 1,
-    'page': 1,
-    'alcol_type':'',
+    name: "",
+    sort: 1,
+    page: 1,
+    alcol_type: "",
   });
 
   useEffect(() => {
-    console.log(params)
+    console.log(params);
     search(params).then(res => {
       setSearchData(res);
-    
+
       console.log(res);
     });
   }, [params]);
@@ -49,7 +47,11 @@ export default function SearchForRecommendPage() {
                     도움이 됩니다.
                   </div>
                 </div>
-                <SearchBar params={params} setParams={setParams} setSearchData={setSearchData} />
+                <SearchBar
+                  params={params}
+                  setParams={setParams}
+                  setSearchData={setSearchData}
+                />
                 <SearchResult
                   searchData={searchData}
                   params={params}
@@ -79,7 +81,7 @@ export default function SearchForRecommendPage() {
 
 const StyledWrapper = styled.div`
   background-color: #f7ecde;
-  height: 88vh;
+  height: 105vh;
   font-family: "GD";
 
   #background {
@@ -102,9 +104,8 @@ const StyledWrapper = styled.div`
     font-size: 20px;
   }
   #rocketframe {
+    margin-top: -145px;
     cursor: url(${mousepointer}) 50 50, auto;
-    position: fixed;
-    top: 78vh;
     left: 0vw;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
