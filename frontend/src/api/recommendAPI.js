@@ -66,7 +66,7 @@ export const similaralcohol = async no => {
 //상세페이지 유저 평가
 export const reviewalcohol = async no => {
   try {
-    const res = await apiClient.get(`alcohol/review/${no}`);
+    const res = await apiClient.get(`/alcohol/review/${no}`);
     return res.data;
   } catch (err) {
     console.log(err);
