@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 
 from django.db import connection
+import ast
 
 from apps.wouldU.models import Review
 
@@ -22,51 +23,49 @@ def MyFavAlcoholAPI(request):
 
     cursor = connection.cursor()
     # 먹은 술 기준
-    cursor.execute('''SELECT c.alcohol_type
-                           , count(c.alcohol_type) count
-                        FROM (SELECT a.alcohol_no
-                                FROM review a
-                               WHERE 1=1
-                                 AND a.user_no = %s
-                               UNION
-                               SELECT a.alcohol_no
-                                FROM user_alcohol a
-                               WHERE 1=1
-                                 AND a.user_no = %s
-                              ) a
-                           , alcohol b
-                           , alcohol_code c
-                       WHERE 1=1
-                         AND a.alcohol_no = b.alcohol_no 
-                         AND b.alcohol_code = c.alcohol_code 
-                       GROUP BY c.alcohol_type
-                       ORDER BY c.alcohol_type '''
-                  , [user_no, user_no])
+    cursor.execute(f'''SELECT 'USER' as TYPE
+                            , c.alcohol_type
+                            , count(c.alcohol_type) count
+                         FROM user_alcohol a
+                            , alcohol b
+                            , alcohol_code c
+                        WHERE 1=1
+                          AND a.user_no = {user_no}
+                          AND a.alcohol_no = b.alcohol_no 
+                          AND b.alcohol_code = c.alcohol_code 
+                        GROUP BY c.alcohol_type
+                        ORDER BY c.alcohol_type 
+                  ''')
                   
-    # 좋아요 누른 기준
-    # cursor.execute('''SELECT c.alcohol_type
-    #                        , count(c.alcohol_type) count
-    #                     FROM alcohol_like a
-    #                        , alcohol b
-    #                        , alcohol_code c
-    #                    WHERE 1=1
-    #                      AND a.user_no = %s
-    #                      AND a.is_like = 1
-    #                      AND a.alcohol_no = b.alcohol_no 
-    #                      AND b.alcohol_code = c.alcohol_code 
-    #                    GROUP BY c.alcohol_type
-    #                    ORDER BY c.alcohol_type '''
-    #               , [user_no])  
-
-#     try:
-#         cursor.execute(query)
-#     except:
-#         return { 'resultCode':500, 'resultMsg': 'query execution fail : member info' }
     results = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) \
                 for row in cursor.fetchall()]
 
-    if results != None and len(results) > 0:
-        result = results[0]
+    print(results)
+
+    # A1	과실주
+    # A2	증류수
+    # A3	약주,청주
+    # A4	리큐르/기타주류
+    # A5	탁주
+    cursor.execute(f'''SELECT a.user_kind
+                            , b.alcohol_type_figure
+                         FROM user a
+                            , user_group_figure b
+                        WHERE 1=1
+                          AND a.user_no = {user_no}
+                          AND a.user_kind = b.user_kind_code
+                    ''')
+    kind_result = cursor.fetchone()
+    user_kind = kind_result[0]
+    kind_result = ast.literal_eval(kind_result[1])
+
+    # 나중에 수정,, 너무 하드코딩이다
+    results.append({'TYPE': 'KIND_' + user_kind, 'alcohol_type' : '과실주', 'count': kind_result[0]})
+    results.append({'TYPE': 'KIND_' + user_kind, 'alcohol_type' : '증류수', 'count': kind_result[1]})
+    results.append({'TYPE': 'KIND_' + user_kind, 'alcohol_type' : '약주,청주', 'count': kind_result[2]})
+    results.append({'TYPE': 'KIND_' + user_kind, 'alcohol_type' : '리큐르/기타주류', 'count': kind_result[3]})
+    results.append({'TYPE': 'KIND_' + user_kind, 'alcohol_type' : '탁주', 'count': kind_result[4]})
+
     # print(results)
     return Response(results)
 
@@ -79,33 +78,36 @@ def MyAlcoholStatisticsAPI(request):
     # user_no = 1
 
     cursor = connection.cursor()
-    cursor.execute('''SELECT avg(b.sweet) as 단맛
-                           , avg(b.sour) as 신맛
-                           , avg(b.body) as 바디감
-                           , avg(b.scent) as 향
-                        FROM (SELECT a.alcohol_no
-                                FROM review a
-                               WHERE 1=1
-                                 AND a.user_no = %s
-                               UNION
-                               SELECT a.alcohol_no
-                                FROM user_alcohol a
-                               WHERE 1=1
-                                 AND a.user_no = %s
-                              ) a
-                           , alcohol_recommend b
-                       WHERE 1=1
-                         AND a.alcohol_no = b.alcohol_no  '''
-                  , [user_no, user_no])
-#     try:
-#         cursor.execute(query)
-#     except:
-#         return { 'resultCode':500, 'resultMsg': 'query execution fail : member info' }
+    cursor.execute(f'''SELECT 'USER' as TYPE
+                            , avg(b.sweet) as 단맛
+                            , avg(b.sour) as 신맛
+                            , avg(b.body) as 바디감
+                            , avg(b.scent) as 향
+                         FROM user_alcohol a
+                            , alcohol_recommend b
+                        WHERE 1=1
+                          AND a.user_no = {user_no}
+                          AND a.alcohol_no = b.alcohol_no  
+                    ''')
+
     results = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) \
                 for row in cursor.fetchall()]
 
-    if results != None and len(results) > 0:
-        result = results[0]
+    # sweet, sour, body, scent, count 
+    cursor.execute(f'''SELECT a.user_kind
+                            , b.alcohol_taste_figure
+                         FROM user a
+                            , user_group_figure b
+                        WHERE 1=1
+                          AND a.user_no = {user_no}
+                          AND a.user_kind = b.user_kind_code
+                    ''')
+    kind_result = cursor.fetchone()
+    user_kind = kind_result[0]
+    kind_result = ast.literal_eval(kind_result[1])
+    results.append({'TYPE': 'KIND_' + user_kind, '단맛': kind_result[0]/kind_result[4], '신맛': kind_result[1]/kind_result[4],\
+                     '바디감': kind_result[2]/kind_result[4], '향': kind_result[3]/kind_result[4]})
+
     # print(results)
     return Response(results)
     

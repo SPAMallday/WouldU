@@ -1,3 +1,6 @@
+import decimal
+
+import numpy as np
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -111,7 +114,7 @@ def get_recom_once(request):
         for i in range(len(a)):
             distance += (a[i] - b[i]) ** 2
         return distance ** 0.5
-
+    ts = time.time()
     cursor = connection.cursor()
     data = json.loads(request.body)
 
@@ -131,15 +134,45 @@ def get_recom_once(request):
 
     alcohol_df = pd.DataFrame(data=query_res, columns=["alcohol_no", "sweet", "sour", "body", "scent", "abv_level"])
 
+    # join으로 모든 술리스트와 합친 리뷰를 가져와서 사용
+    # cursor.execute(f'''SELECT b.alcohol_no, CAST(a.sweet as float4), cast(a.sour as float4) , cast(a.body as float4), cast(a.scent as float4)
+    #                     FROM alcohol as b
+    #                     LEFT OUTER JOIN (SELECT alcohol_no, avg(sweet) as sweet, avg(sour) as sour, avg(body) as body, avg(scent) as scent
+    #                                     FROM review
+    #                                     GROUP BY alcohol_no) as a
+    #                     ON a.alcohol_no = b.alcohol_no;
+    #                               ''')
+    # 리뷰만 계산한 데이터를 사용
+    cursor.execute(f'''SELECT alcohol_no, cast(avg(sweet) as float4) as sweet, cast(avg(sour) as float4) as sour,
+                                cast(avg(body) as float4) as body, cast(avg(scent) as float4) as scent
+                        FROM review
+                        GROUP BY alcohol_no;
+                                      ''')
+
+    review_query_res = cursor.fetchall()
+
+    review_df = pd.DataFrame(data=review_query_res, columns=["alcohol_no", "sweet", "sour", "body", "scent"])
+    # review_df.fillna(0)
+
     # 필요한 벡터를 분리
     alcohol_no_list = alcohol_df["alcohol_no"].values.tolist()
-    vector_list = alcohol_df[["sweet", "sour", "body", "scent"]].values.tolist()
+    vector_list = alcohol_df[["sweet", "sour", "body", "scent"]].values
     abv_level_list = alcohol_df["abv_level"].values.tolist()
 
     # 유클리디안 거리 계산
     euclide_res = []
     for i in range(len(alcohol_df)):
-        calc = euclidean_distance(target, vector_list[i])
+        # alcohol_no가 맞는 술을 찾아서 점수를 반영
+        conv_vector = None
+        try:
+            # 리뷰 좌표
+            review_cord_arr = review_df.loc[alcohol_no_list[i], ["sweet", "sour", "body", "scent"]].values
+            # 반영 점수로 환산
+            conv_vector = [x + y for x, y in zip (np.multiply(vector_list[i], 0.4), np.multiply(review_cord_arr, 0.6))]
+        except:
+            conv_vector = vector_list[i]
+
+        calc = euclidean_distance(target, conv_vector)
         euclide_res.append([alcohol_no_list[i], calc, abv_level_list[i]])
 
     # dataframe으로 변환
@@ -185,7 +218,8 @@ def get_recom_once(request):
 
             result[key] = [dict((cursor.description[i][0], value) for i, value in enumerate(row)) \
                    for row in cursor.fetchall()]
-
+    es = time.time()
+    print(f"ONCE CHECK TIME : {es - ts:.5f} sec")
     return JsonResponse(result)
 
 

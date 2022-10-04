@@ -33,10 +33,12 @@ def signup(request):
     
         user_id = user['user_id'].value
         User.objects.filter(user_id = user_id).update(user_kind = user_k)
+        kind_n = User_kind_code.objects.get(kind_code = user_k)
+        kind = kind_n.kind_name
 
         id = User.objects.get(user_id = user_id) # user_no
         Survey.objects.create(user_no = id, reply_list = reply_list)
-        return JsonResponse({'result' : "success"})
+        return JsonResponse({'result' : "success", 'user_kind': kind})
     return JsonResponse({'result' : "fail"})
     #return Response(user.errors, status=status.HTTP_400_BAD_REQUEST)
 
