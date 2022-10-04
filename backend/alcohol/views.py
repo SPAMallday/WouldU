@@ -10,6 +10,7 @@ from django.http.response import JsonResponse
 from rest_framework.response import Response
 from django.core import serializers
 from .functions.recommend_CB import alcohol_rec
+from .serializer import UserAlcoholSerializer
 
 
 # Create your views here.
@@ -51,7 +52,7 @@ def alcoDetails(request):
             else : 
                 like=0
     
-
+    
     alco_no = datas[0]
     if (datas[18] == 0):
         score = 0
