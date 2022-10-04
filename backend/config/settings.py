@@ -34,12 +34,12 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'corsheaders', #CORS 관련 추가
     'rest_framework',
-    'user',
-    'alcohol',
+    'apps.user',
+    'apps.alcohol',
     'apps.wouldU',
     'apps.search',
     'apps.mypage',
-    'recommend',
+    'apps.recommend',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

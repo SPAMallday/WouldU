@@ -1,6 +1,6 @@
 from django.db import models
-from user.models import User, User_kind_code
-from alcohol.models import Alcohol
+from apps.user.models import User, User_kind_code
+from apps.alcohol.models import Alcohol
 # Create your models here.
 
 class Alcohol_like(models.Model):
