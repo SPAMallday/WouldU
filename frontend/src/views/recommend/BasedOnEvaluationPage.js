@@ -6,39 +6,56 @@ import traditionalframe from "assets/img/traditionalframe.png";
 import planet4 from "assets/img/planet4.png";
 import Element from "components/search/Element";
 import { Link } from "react-router-dom";
-import { userRecom, alcoholDetail } from "../../api/recommendAPI";
+import { userRecom } from "../../api/recommendAPI";
+import { userRank } from "../../api/mainpageAPI";
 import Nav from "components/nav/Nav";
+import swal from "sweetalert";
 
 /**
  * @todo 백엔드에서 추천 결과5개 보내주기로 했어서 그거 띄우는 틀 만들었음.
  */
 export default function BasedOnEvaluationPage() {
-  const [ac_id, setAcid] = useState([]);
   const [alcohol, setAlcohol] = useState([]);
+  const [reviewOk, setReviewOk] = useState(true);
 
   useEffect(() => {
     //알콜 리스트 받아오고
-    userRecom().then(res => {
-      setAcid(res.recommend);
-      setAlcohol([]);
-      for (var i = 0; i < res.recommend.length; i++) {
-        console.log(res);
-        alcoholDetail(res.recommend[i]).then(res => {
-          setAlcohol(alcohol => [...alcohol, res]);
+    userRecom()
+      .then(res => {
+        //console.log(res);
+        setAlcohol([]);
+        res.forEach(data => {
+          setAlcohol(alcohol => [...alcohol, data]);
         });
-      }
-    });
+      })
+      .catch(res => {
+        setReviewOk(false);
+        swal(
+          "평가 부족!",
+          "추천의 정확도를 높이기 위해 평가해주세요!",
+          "error",
+        );
+        userRank().then(res => {
+          console.log(res);
+          setAlcohol([]);
+
+          res.forEach((data, i) => {
+            if (i > 4) return false;
+            setAlcohol(alcohol => [...alcohol, data]);
+          });
+        });
+      });
 
     //알콜 상세 받아오기
   }, []);
   const ListItems = alcohol.map(e => (
-    <Link to={"/detail/" + e.alco_no} key={`detail + ${e.alco_no}`}>
+    <Link to={"/detail/" + e.alcohol_no} key={`detail + ${e.alcohol_no}`}>
       <div id="result-frame">
         <div id="tooltip">
-          <img src={e.alco_img} alt="img" />
+          <img src={e.alcohol_image} alt="img" />
           <span id="tooltiptext">
             <div id="information">
-              <div id="alcoholtitle">{e.alco_name}</div>
+              <div id="alcoholtitle">{e.alcohol_name}</div>
               <div>{e.brewery}</div>
               <div>
                 {e.size}ml / {e.abv}도
@@ -65,6 +82,13 @@ export default function BasedOnEvaluationPage() {
                 사진에 손을 올리시면 전통주의 간단한 설명을 알 수 있으며,
                 클릭하시면 해당 전통주의 상세페이지로 이동합니다.
               </div>
+              {reviewOk === false ? (
+                <div id="introducetext">
+                  현재 평가가 부족하여 사용자와 같은 음주유형의 유저들이
+                  좋아하는 술을 추천하였습니다. 정확도를 높이기 위해서는 평가가
+                  필요합니다.
+                </div>
+              ) : null}
             </div>
             <div id="result">{ListItems}</div>
           </div>
