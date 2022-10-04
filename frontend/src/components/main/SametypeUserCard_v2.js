@@ -66,12 +66,15 @@ export default function SameType() {
                         image={item.alcohol_image}
                       />
                       <CardContent>
-                        <Typography component="div" sx={{ fontSize: 20 }}>
+                        <Typography
+                          component="div"
+                          sx={{ fontSize: 20, fontFamily: "GD" }}
+                        >
                           <h4>{item.alcohol_name}</h4>
                         </Typography>
                         <Typography
                           component="div"
-                          sx={{ fontSize: 20 }}
+                          sx={{ fontSize: 20, fontFamily: "GD", mt: 2 }}
                           id="ratestars"
                         >
                           <h4>평점 :</h4>
@@ -103,7 +106,6 @@ const StyledWrapper = styled.div`
     border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
     border-style: solid;
     border-width: 2px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     font-family: "GD";
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     box-sizing: border-box;
@@ -113,15 +115,13 @@ const StyledWrapper = styled.div`
     border-top-right-radius: 15px 225px;
 
     background-color: #ffe3e1;
-    margin-bottom: 50px;
+    margin-bottom: 70px;
   }
   #title {
     text-align: center;
     padding-top: 30px;
   }
-  .swiper {
-    height: 100%;
-  }
+
   .swiper-wrapper {
     margin-left: 50px;
     margin-top: 30px;

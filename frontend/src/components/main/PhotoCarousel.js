@@ -1,14 +1,12 @@
-import React from 'react';
-import carousel_element1 from "assets/img/carousel_element1.jpg";
-import carousel_element2 from "assets/img/carousel_element2.jpg";
-import carousel_element3 from "assets/img/carousel_element3.jpg";
-import carousel_element4 from "assets/img/carousel_element4.jpg";
-import carousel_element5 from "assets/img/carousel_element5.jpg";
+import React from "react";
+import carousel_element1 from "assets/img/text_carousel_element4.png";
+import carousel_element2 from "assets/img/text_carousel_element5.png";
+import carousel_element3 from "assets/img/text_carousel_element6.png";
 import styled from "styled-components";
 
 import Carousel from "react-bootstrap/Carousel";
 
-export default function PhotoCarousel() {
+export default function PhotoCarousel_V2() {
   return (
     <StyledWrapper>
       <Carousel
@@ -17,6 +15,7 @@ export default function PhotoCarousel() {
         controls={false}
         indicators={false}
         pause={false}
+        interval={4000}
       >
         {/* <Carousel.Item id="carousel-item">
           <img
@@ -60,22 +59,18 @@ const StyledWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 40vw;
+    height: 700px;
     margin: 0px 0px 20px;
   }
   .carousel-inner {
-    height: 40vw;
+    height: 700px;
   }
   .carousel-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
   .carousel-inner img {
-    max-width: 90vw;
-    height: 40vw;
-    object-fit: fill;
-    border: 8px dashed #deb6ab;
-    border-radius: 20px;
+    height: 700px;
+    object-fit: cover;
+  }
+  div.active {
   }
 `;

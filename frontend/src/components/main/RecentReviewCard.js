@@ -77,14 +77,14 @@ export default function RecentReviewCard() {
 
   return (
     <StyledWrapper>
-      <h2>최근 리뷰가 작성된 전통주</h2>
+      <h2>📝 최근 리뷰가 작성된 전통주</h2>
       {reviewList[0]?.length > 0 ? (
         <Grid
           container
           direction="row"
           justifyContent="center"
           alignItems="flex-start"
-          columnSpacing={2}
+          columnGap={2}
         >
           <Grid
             xs
@@ -126,15 +126,13 @@ export default function RecentReviewCard() {
 
 const StyledWrapper = styled.div`
   width: 40vw;
-  height: 40vh;
+  height: 380px;
   margin: 10px;
   padding: 10px;
-  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
   border-style: solid;
   border-width: 2px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   font-family: "GD";
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   box-sizing: border-box;
   border-bottom-left-radius: 15px 255px;
   border-bottom-right-radius: 225px 15px;
@@ -142,26 +140,25 @@ const StyledWrapper = styled.div`
   border-top-right-radius: 15px 225px;
   display: flex;
   flex-direction: column;
-  background-color: #dfe8cc;
 
   justify-content: center;
   align-items: center;
 
   .gridItem {
-    border: 2px solid #ccd6a6;
+    border: 2px solid #ffffff;
     border-radius: 5px;
     padding: 5px 5px;
     margin: 5px 0;
     width: 100%;
     display: flex;
     align-items: center;
-    background-color: #dae2b6;
     justify-content: space-between;
 
     :hover {
+      color: white;
       transform: scale(1.1);
       box-shadow: rgba(0, 0, 0, 0.65) 0px 3px 8px;
-      background-color: #c4e2b6;
+      background-color: #3d3d3d;
     }
   }
 

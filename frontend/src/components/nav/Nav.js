@@ -3,19 +3,25 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import swal from "sweetalert";
 
-import loginImg from "assets/img/navbar/login.png";
-import logoutImg from "assets/img/navbar/logout.png";
-import mypageImg from "assets/img/navbar/mypage.png";
-import recommendImg from "assets/img/navbar/recommend.png";
-import searchImg from "assets/img/navbar/search.png";
+import logo2 from "assets/img/logo2.png";
 
-export default function MainNav() {
+export default function Nav(props) {
   //const logged = window.sessionStorage.getItem("ID");
   const [logg, setlogg] = useState();
 
   useEffect(() => {
     setlogg(window.sessionStorage.getItem("ID"));
+    // position 동적으로 변경
+    if (props?.type === "main") {
+      document.getElementById("container").style.position = "fixed";
+      document.getElementById("container").style.justifyContent = "flex-end";
+    } else {
+      document.getElementById("container").style.position = "relative";
+      document.getElementById("container").style.justifyContent =
+        "space-between";
+    }
   }, []);
+
   const logout = () => {
     sessionStorage.clear();
     setlogg();
@@ -23,25 +29,54 @@ export default function MainNav() {
     swal("logout!", "로그아웃 완료", "success");
   };
 
+  // 버튼 세팅
+  function mapping(param) {
+    console.log("test", require(`assets/img/navbar/login_${param}.png`));
+    const res = {
+      login: require(`assets/img/navbar/login_${param}.png`),
+      logout: require(`assets/img/navbar/logout_${param}.png`),
+      search: require(`assets/img/navbar/search_${param}.png`),
+      recommend: require(`assets/img/navbar/recommend_${param}.png`),
+      mypage: require(`assets/img/navbar/mypage_${param}.png`),
+    };
+    return res;
+  }
+
+  let btns = {};
+  if (props?.type === "main") {
+    btns = mapping("w");
+    console.log("맵핑", mapping("w"));
+    console.log(btns);
+  } else {
+    btns = mapping("b");
+  }
+
   return (
     <StyledWrapper>
       <div id="container">
+        {props?.type === "main" ? null : (
+          <Link to="/">
+            <div id="logo">
+              <img id="logo-image" src={logo2} alt="logo" />
+            </div>
+          </Link>
+        )}
         <div id="menubuttons">
           <Link to="/search" state={{ fromIndexQuery: "" }}>
-            <img className="navBtn" src={searchImg} alt="searchImg" />
+            <img className="navBtn" src={btns.search} alt="searchImg" />
           </Link>
           <Link to="/recommend">
-            <img className="navBtn" src={recommendImg} alt="recommendImg" />
+            <img className="navBtn" src={btns.recommend} alt="recommendImg" />
           </Link>
           {logg ? (
             <>
               <Link to="/mypage">
-                <img className="navBtn" src={mypageImg} alt="mypageImg" />
+                <img className="navBtn" src={btns.mypage} alt="mypageImg" />
               </Link>
               <Link to="/">
                 <img
                   className="navBtn"
-                  src={logoutImg}
+                  src={btns.logout}
                   alt="logoutImg"
                   onClick={logout}
                 />
@@ -49,7 +84,7 @@ export default function MainNav() {
             </>
           ) : (
             <Link to="/login">
-              <img className="navBtn" src={loginImg} alt="loginImg" />
+              <img className="navBtn" src={btns.login} alt="loginImg" />
             </Link>
           )}
         </div>
@@ -77,19 +112,21 @@ const StyledWrapper = styled.div`
     position: fixed;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
     margin: 5px 0px;
   }
+
   a {
     text-decoration: none;
     color: black;
   }
+
   #logo {
     display: flex;
     text-align: center;
     align-items: center;
     justify-content: center;
   }
+
   #logo-image {
     width: 150px;
     height: 100px;

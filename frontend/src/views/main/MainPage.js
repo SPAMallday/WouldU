@@ -1,40 +1,20 @@
-import Header from "components/nav/Header";
-import PhotoCarousel from "components/main/PhotoCarousel";
-// import SearchWindow from "components/main/SearchWindow";
 import styled from "styled-components";
-import PopularWordCard from "components/main/PopularWordCard";
-import RecentReviewCard from "components/main/RecentReviewCard";
-import SametypeUserCard from "components/main/SametypeUserCard";
 
 // 디자인 v2
-import MainNav from "components/nav/MainNav";
-import PhotoCarousel_V2 from "components/main/PhotoCarousel_v2";
-import PopularWordCard_V2 from "components/main/PopularWordCard_v2";
-import RecentReviewCard_V2 from "components/main/RecentReviewCard_v2";
-import SametypeUserCard_V2 from "components/main/SametypeUserCard_v2";
+import Nav from "components/nav/Nav";
+import PhotoCarousel from "components/main/PhotoCarousel";
+import PopularWordCard from "components/main/PopularWordCard";
+import RecentReviewCard from "components/main/RecentReviewCard";
+import SametypeUserCard_V2 from "components/main/SametypeUserCard";
 
 export default function MainPage() {
-  // return (
-  //   <StyledWrapper>
-  //     <Header />
-  //     <PhotoCarousel />
-  //     <div id="popularwordslist">
-  //       <PopularWordCard />
-  //       <RecentReviewCard />
-  //     </div>
-
-  //     <div id="sametype">
-  //       <SametypeUserCard />
-  //     </div>
-  //   </StyledWrapper>
-  // );
   return (
     <StyledWrapper>
-      <MainNav />
-      <PhotoCarousel_V2 />
+      <Nav type="main" />
+      <PhotoCarousel />
       <div id="popularwordslist">
-        <PopularWordCard_V2 />
-        <RecentReviewCard_V2 />
+        <PopularWordCard />
+        <RecentReviewCard />
       </div>
 
       <div id="sametype">

@@ -3,26 +3,6 @@ import SearchResultElement from "components/recommend/SearchResultElement";
 import Pagination from "react-js-pagination";
 import React, { useState, useEffect } from "react";
 
-// 검색결과 배열 테스트용
-const test = [
-  {
-    alcohol_no: 1,
-    alcohol_name: "1000억 유산균 막걸리",
-    abv: 5,
-    material: "쌀, 누룩",
-    detail: "유산균이 어쩌고",
-    brewery: "국순당",
-    award: "2010년 어쩌고",
-    like_count: 1,
-    food: "전, 회무침",
-    tag: "저도수",
-    region_code: "R1",
-    size: 750,
-    alcohol_code: "A5",
-    alcohol_image: "https://a402o1a4.s3.ap-northeast-2.amazonaws.com/1.png",
-  },
-];
-
 export default function SearchResult(props) {
   const { searchData, params, setParams, setHandleClick, setReviewTarget } =
     props;
