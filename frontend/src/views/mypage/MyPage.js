@@ -9,71 +9,40 @@ import IconButton from "@mui/material/IconButton";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import StarIcon from "@mui/icons-material/Star";
 import Card from "@mui/material/Card";
-import axios from "axios";
-import { category, average } from '../../api/myPageAPI';
+
+import {
+  category,
+  average,
+  space,
+  mylike,
+  myreview,
+} from "../../api/myPageAPI";
 
 export default function MyPage() {
-  const SERVER = "http://localhost:8000";
-
   const [userName, setUserName] = useState("");
+  const [mpToggle, setToggle] = useState("true");
+
   //차트용 데이터들
   const [cateData, setCateData] = useState([]);
   const [rateData, setRateData] = useState([]);
-
   const [spaceData, setSpaceData] = useState([]);
 
-
-  // 먹은 술 주종 카테고리 차트
-  // const category = async (url, no) => {
-  //   try {
-  //     const res = await axios.get(`${SERVER}` + url, {
-  //       headers: { "user-no": no },
-  //     });
-
-  //     //console.log(res.data);
-  //     res.data.forEach(data => {
-  //       setCateData(cateData => [
-  //         ...cateData,
-  //         { id: data.alcohol_type, value: data.count },
-  //       ]);
-  //     });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // 먹은 술 평균값 차트
-  // const average = async (url, no) => {
-  //   try {
-  //     const res = await axios.get(`${SERVER}` + url, {
-  //       headers: { "user-no": no },
-  //     });
-
-  //     console.log(res.data[0]);
-
-  //     setRateData([
-  //       { subject: "단맛", rating: res.data[0].단맛.toFixed(2) },
-  //       { subject: "신맛", rating: res.data[0].신맛.toFixed(2) },
-  //       { subject: "바디감", rating: res.data[0].바디감.toFixed(2) },
-  //       { subject: "향", rating: res.data[0].향.toFixed(2) },
-  //     ]);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  //랭킹용 데이터들
+  const [likeList, setLikeList] = useState([]);
+  const [reviewList, setReviewList] = useState([]);
 
   useEffect(() => {
     setUserName(sessionStorage.getItem("Nick"));
 
     /** 페이지 이동했을때 값들 전부 가져와야한다.*/
 
-    const user_no = sessionStorage.getItem("no");
+    //const user_no = sessionStorage.getItem("no");
 
     // category("/mypage/my-fav-alcohol", user_no);
     // average("/mypage/my-alcohol", user_no);
 
-
-    category().then((res) => {
+    category().then(res => {
+      setCateData([]);
       res.forEach(data => {
         setCateData(cateData => [
           ...cateData,
@@ -81,7 +50,7 @@ export default function MyPage() {
         ]);
       });
     });
-    average().then((res) => {
+    average().then(res => {
       setRateData([
         { subject: "단맛", rating: res[0].단맛.toFixed(2) },
         { subject: "신맛", rating: res[0].신맛.toFixed(2) },
@@ -90,69 +59,50 @@ export default function MyPage() {
       ]);
       // setRateData(res);
     });
-
-
-    //주종차트데이터
-
-    //데이터 받아왔을때 정렬하자
-    setSpaceData([
-      { space: "경기도", count: 8 },
-      { space: "경상도", count: 6 },
-      { space: "서울", count: 4 },
-      { space: "충청도", count: 2 },
-    ]);
-    setLikeList([
-      { name: "장수", img: "" },
-      { name: "무병장수", img: "" },
-      { name: "장수왕", img: "" },
-      { name: "장수왕", img: "" },
-      { name: "장수왕", img: "" },
-      { name: "장수왕", img: "" },
-      { name: "장수왕", img: "" },
-    ]);
-    setReviewList([
-      {
-        name: "장수",
-        img: "",
-        rating: 4,
-        comment: "술이 달고 맛있다. 재구매 의사 있음",
-      },
-      {
-        name: "무병장수",
-        img: "",
-        rating: 2,
-        comment: "생각한것 만큼 맛있지 않았다. 직접 사서 먹진 않을 듯",
-      },
-      {
-        name: "장수왕",
-        img: "",
-        rating: 5,
-        comment: "내입맛이 딱 맞았다. 좋다.",
-      },
-      {
-        name: "장수 생막걸리",
-        img: "",
-        rating: 4,
-        comment: "술이 달고 맛있다. 재구매 의사 있음",
-      },
-      {
-        name: "장수 생막걸리",
-        img: "",
-        rating: 1,
-        comment: "술이 달고 맛있다. 재구매 의사 있음",
-      },
-    ]);
+    space().then(res => {
+      setSpaceData([]);
+      res.forEach(data => {
+        setSpaceData(spaceData => [
+          ...spaceData,
+          { space: data.region_name, count: data.count },
+        ]);
+      });
+      spaceData.sort(function (a, b) {
+        return b.count - a.count;
+      });
+    });
+    mylike().then(res => {
+      setLikeList([]);
+      res.forEach(data => {
+        setLikeList(likeList => [
+          ...likeList,
+          {
+            alcohol_image: data.alcohol_image,
+            alcohol_name: data.alcohol_name,
+            alcohol_no: data.alcohol_no,
+          },
+        ]);
+      });
+    });
+    myreview().then(res => {
+      setReviewList([]);
+      res.forEach(data => {
+        setReviewList(reviewList => [
+          ...reviewList,
+          {
+            alcohol_image: data.alcohol_image,
+            alcohol_name: data.alcohol_name,
+            alcohol_no: data.alcohol_no,
+            comment: data.comment,
+            score: data.score,
+            review_no: data.review_no,
+          },
+        ]);
+      });
+    });
   }, []);
 
-  const [mpToggle, setToggle] = useState("true");
-
-  //랭킹용 데이터들
-  const [likeList, setLikeList] = useState([]);
-  const [reviewList, setReviewList] = useState([]);
-
   const onClickSummary = () => {
-    console.log(cateData);
-    console.log(spaceData);
     setToggle(true);
   };
   const onClickList = () => {
@@ -174,10 +124,10 @@ export default function MyPage() {
                     id="btnSummary"
                     size="large"
                   >
-                    <BarChartIcon sx={{ fontSize: 40, color: "purple" }} />
+                    <BarChartIcon sx={{ fontSize: 40, color: "#fa7070" }} />
                   </IconButton>
                   <IconButton onClick={onClickList}>
-                    <StarIcon sx={{ fontSize: 40, color: "purple" }} />
+                    <StarIcon sx={{ fontSize: 40, color: "#ffa500" }} />
                   </IconButton>
                 </div>
               </div>
@@ -207,15 +157,18 @@ export default function MyPage() {
                     id="btnSummary"
                     size="large"
                   >
-                    <BarChartIcon sx={{ fontSize: 40, color: "purple" }} />
+                    <BarChartIcon sx={{ fontSize: 40, color: "#ffa500" }} />
                   </IconButton>
                   <IconButton onClick={onClickList}>
-                    <StarIcon sx={{ fontSize: 40, color: "purple" }} />
+                    <StarIcon sx={{ fontSize: 40, color: "#fa7070" }} />
                   </IconButton>
                 </div>
               </div>
               <LikeList likeList={likeList} />
-              <ReviewList reviewList={reviewList} />
+              <ReviewList
+                reviewList={reviewList}
+                setReviewList={setReviewList}
+              />
             </Card>
           </div>
         </div>
@@ -225,12 +178,14 @@ export default function MyPage() {
 }
 
 const StyledWrapper = styled.div`
+  background-color: #fcfcfc;
+  font-family: "GD";
   #main {
     text-align: center;
-    background-color: #efeff7;
   }
+
   .css-bhp9pd-MuiPaper-root-MuiCard-root {
-    background-color: #efeff7;
+    background-color: #fcfcfc;
     box-shadow: none;
   }
   #mainPage {
