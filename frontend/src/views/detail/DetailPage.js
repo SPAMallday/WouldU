@@ -55,6 +55,8 @@ export default function DetailPage() {
             detailId={params.detail_id}
             alcohol={alcohol}
             userno={userno}
+            setReview={setReview}
+            setAlcohol={setAlcohol}
           />
           <Similar alcohol={alcohol} similar={similar} />
           <Review review={review} />

@@ -11,7 +11,11 @@ import StarComment from "components/rating/StarComment";
 import SelectType from "components/search/SelectType";
 import swal from "sweetalert";
 import Slide from "@mui/material/Slide";
-import { alcoholreview } from "../../api/recommendAPI";
+import {
+  alcoholreview,
+  reviewalcohol,
+  alcoholDetail,
+} from "../../api/recommendAPI";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -73,6 +77,12 @@ export default function SendReviewDialog(props) {
           },
         });
         setOpenReview(false);
+        reviewalcohol(props.alcohol.alco_no).then(res => {
+          props.setReview(res);
+        });
+        alcoholDetail(props.alcohol.alco_no).then(res => {
+          props.setAlcohol(res);
+        });
       } else {
         swal("Error!", "리뷰 작성 실패!!", "error");
       }
