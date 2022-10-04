@@ -28,8 +28,8 @@ export default function MyCollection(prop) {
     if (rank && rank.length > 0) {
       return (
         <StyledWrapper>
+          <h3 id="title">{prop.userName}님이 먹은 술 </h3>
           <div id="main2">
-            <h3 id="title">{prop.userName}님이 먹은 술 </h3>
             <Swiper
               modules={[Navigation]}
               spaceBetween={50}
@@ -39,18 +39,11 @@ export default function MyCollection(prop) {
             >
               <div id="space">
                 <SwiperSlide>
-                  {rank[0].count !== 0 ? (
-                    <Earth count={rank[0].count}>
-                      <div id="textCount">{rank[0].count} 개</div>
-                      <img src={earth} alt="지구" id="P_earth" />
-                      <h5>{rank[0].space}</h5>
-                    </Earth>
-                  ) : (
-                    <Earth count={7}>
-                      <img src={earth} alt="지구" id="P_earth" />
-                      <h5>지구</h5>
-                    </Earth>
-                  )}
+                  <Earth count={rank[0].count}>
+                    <div id="textCount">{rank[0].count} 개</div>
+                    <img src={earth} alt="지구" id="P_earth" />
+                    <h5>{rank[0].space}</h5>
+                  </Earth>
                 </SwiperSlide>
                 {rank[1] ? (
                   <SwiperSlide>
@@ -133,8 +126,30 @@ export default function MyCollection(prop) {
   } else {
     return (
       <StyledWrapper>
+        <h3 id="title">{prop.userName}님이 먹은 술 </h3>
         <div id="main2">
-          <h3 id="title">{prop.userName}님이 먹은 술 </h3>
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={50}
+            slidesPerView={2}
+            navigation
+            height={500}
+          >
+            <div id="space">
+              <SwiperSlide>
+                <Earth count={7}>
+                  <img src={earth} alt="지구" id="P_earth" />
+                  <h5>지구</h5>
+                </Earth>
+              </SwiperSlide>
+              <SwiperSlide>
+                <Planet count={5}>
+                  <img src={planet1} alt="행성" id="P_planet" />
+                  <h5>달</h5>
+                </Planet>
+              </SwiperSlide>
+            </div>
+          </Swiper>
         </div>
       </StyledWrapper>
     );
@@ -199,13 +214,17 @@ const StyledWrapper = styled.div`
     border-bottom-right-radius: 225px 15px;
     border-top-left-radius: 255px 15px;
     border-top-right-radius: 15px 225px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
   #title {
     text-align: left;
-    padding-top: 20px;
     margin-left: 30px;
+    margin-top: 110px;
+    margin-bottom: -130px;
     color: white;
-    margin-bottom: 30px;
   }
 
   #space {
@@ -217,9 +236,10 @@ const StyledWrapper = styled.div`
 
   .swiper-wrapper {
     align-items: center;
+    width: 1300px;
   }
   .swiper-wrapper {
-    margin-top: 30px;
+    margin-top: 60px;
     margin-bottom: 30px;
   }
 `;

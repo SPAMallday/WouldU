@@ -35,7 +35,8 @@ export default function Login() {
             sessionStorage.setItem("ID", inputId);
             sessionStorage.setItem("no", res.user_no);
             sessionStorage.setItem("Nick", res.nickname);
-            navigate("/");
+            navigate(-1);
+            swal("Welcome!", "로그인 성공", "success");
           } else {
             swal("Error!", "아이디 또는 비밀번호 오류입니다.", "error");
           }
@@ -59,12 +60,12 @@ export default function Login() {
               <div id="inputH">
                 <div>
                   <TextField
-                    label="아이디"
                     variant="outlined"
                     size="small"
                     value={inputId}
                     onChange={handleInputId}
                     id="input_area"
+                    placeholder="아이디"
                   />
                 </div>
               </div>
@@ -73,13 +74,13 @@ export default function Login() {
                 <div>
                   <TextField
                     autoComplete="current-password"
-                    label="비밀번호"
                     type="password"
                     variant="outlined"
                     value={inputPw}
                     onChange={handleInputPw}
                     size="small"
                     id="input_area2"
+                    placeholder="비밀번호"
                   />
                 </div>
               </div>
@@ -90,14 +91,16 @@ export default function Login() {
                   variant="contained"
                   onClick={onClickLogin}
                 >
-                  Login
+                  로그인
                 </Button>
               </div>
-              <Link to="/join">
-                <div id="textJoin">
-                  <h5 id="h_join">회원가입</h5>
-                </div>
-              </Link>
+              <div id="textJoin">
+                <Link to="/join">
+                  <div id="h_join">
+                    회원가입
+                  </div>
+                </Link>
+              </div>
             </div>
           </div>
         </Card>
@@ -140,12 +143,23 @@ const StyledWrapper = styled.div`
   #main h2 {
     margin-top: 50px;
   }
+  #loginForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 50px 50px;
+  }
 
   #loginBox {
-    margin-right: -100px;
-    margin-bottom: 100px;
-    width: 600px;
+    width: 450px;
     display: inline-block;
+    border: solid #EEE3CB;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F2F2F2;
   }
 
   #input_area {
@@ -166,13 +180,22 @@ const StyledWrapper = styled.div`
   }
 
   #btBox {
-    margin: 70px;
+    margin: 10px 70px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #btBox button {
+    margin-top: 0px;
+    font-family: "GD";
+    font-size: 16px;
   }
 
   #btn_login {
     margin-top: 20px;
     width: 280px;
-    background-color: #fa7070;
+    background-color: #ff7867;
   }
 
   #loginForm {
@@ -181,14 +204,42 @@ const StyledWrapper = styled.div`
   }
 
   #textJoin {
-    width: 100px;
-    margin: auto;
+    width: 280px;
+    height: 36.5px;
+    margin: 0px 70px 70px;
+    background-color: #00c471;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.75;
+    letter-spacing: 0.02857em;
+    text-transform: uppercase;
+    min-width: 64px;
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-size: 16px;
+    height: 40px;
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+}
+  }
+  #textJoin a{
+    width: 100%;
   }
 
   #h_join {
-    color: #fa7070;
+    color: white;
   }
   a {
     text-decoration: none;
+    color: white;
   }
 `;
+
+// p: 6px 16px 248*28

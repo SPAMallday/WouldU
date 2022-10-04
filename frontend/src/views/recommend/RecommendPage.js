@@ -16,12 +16,14 @@ export default function RecommendPage() {
           <div id="back">돌아가기</div>
         </Link>
       </div>
-      <div id="rocketframe">
-        <Link to="/login">
-          <img src={rocketicon} alt="로켓" />
-          <div id="back">로그인</div>
-        </Link>
-      </div>
+      {sessionStorage.getItem("no") ? null : (
+        <div id="rocketframe">
+          <Link to="/login">
+            <img src={rocketicon} alt="로켓" />
+            <div id="back">로그인</div>
+          </Link>
+        </div>
+      )}
     </StyledWrapper>
   );
 }
