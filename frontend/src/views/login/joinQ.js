@@ -7,11 +7,12 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Button from "@mui/material/Button";
 import Header from "components/nav/Header";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { join } from "../../api/userAPI";
 
 export default function JoinQ() {
+  const navigate = useNavigate();
   // 전체 응답 저장용
   const [reply, setReply] = useState([]);
   //문항마다 저장
@@ -107,22 +108,71 @@ export default function JoinQ() {
 
     join(data)
       .then(res => {
+        console.log(res);
         if (res.result === "success") {
-          swal({
-            title: "Welcome!",
-            text: "회원가입이 완료되었습니다!",
-            icon: "success",
-            button: {
-              text: "확인",
-            },
-          });
+          if (res.user_kind === "1유형") {
+            swal({
+              title: "1유형입니다",
+              text: "혼자서 먹는걸 선호하는 타입 :)\n 향과 맛을 중요시하시는 분이군요?",
+              icon: "success",
+              buttons: {
+                confirm: {
+                  text: "확인",
+                },
+              },
+            }).then(() => {
+              swal("Success!", "회원가입 완료!", "success");
+              navigate("/login");
+            });
+          } else if (res.user_kind === "2유형") {
+            swal({
+              title: "2유형입니다",
+              text: "여럿이서 먹는걸 선호하는 타입 :)\n 향과 맛을 중요시하시는 분이군요?",
+              icon: "success",
+              buttons: {
+                confirm: {
+                  text: "확인",
+                },
+              },
+            }).then(() => {
+              swal("Success!", "회원가입 완료!", "success");
+              navigate("/login");
+            });
+          } else if (res.user_kind === "3유형") {
+            swal({
+              title: "3유형입니다",
+              text: "혼자서 먹는걸 선호하는 타입 :)\n 자극적인걸 싫어하시는 분이군요?",
+              icon: "success",
+              buttons: {
+                confirm: {
+                  text: "확인",
+                },
+              },
+            }).then(() => {
+              swal("Success!", "회원가입 완료!", "success");
+              navigate("/login");
+            });
+          } else {
+            swal({
+              title: "4유형입니다",
+              text: "여럿이서 먹는걸 선호하는 타입 :)\n 자극적인걸 싫어하시는 분이군요?",
+              icon: "success",
+              buttons: {
+                confirm: {
+                  text: "확인",
+                },
+              },
+            }).then(() => {
+              swal("Success!", "회원가입 완료!", "success");
+              navigate("/login");
+            });
+          }
         } else {
           swal("Fail!", "회원가입에 실패하였습니다", "error");
         }
       })
       .catch(err => {
         console.log(err);
-        event.preventDefault();
       });
   };
 
@@ -445,13 +495,13 @@ export default function JoinQ() {
                 </FormControl>
               </div>
               {disable ? (
-                <Link to="/" onClick={onClickJoin}>
+                <div onClick={onClickJoin}>
                   <div id="btBox">
                     <Button variant="contained" id="btn_join">
                       회원가입
                     </Button>
                   </div>
-                </Link>
+                </div>
               ) : (
                 <div id="btBox">
                   <Button variant="contained" id="btn_join1" disabled>

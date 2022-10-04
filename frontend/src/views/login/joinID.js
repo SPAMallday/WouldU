@@ -141,7 +141,7 @@ export default function JoinID() {
           inputDay >= 1 &&
           inputDay <= 31
         ) {
-        } else if (inputYear > 2002) {
+        } else if (inputYear > 2002 && inputYear < 2023) {
           swal("Error!", "미성년자는 사용할수 없습니다.!", "error");
           event.preventDefault();
         } else {

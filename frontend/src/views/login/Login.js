@@ -35,7 +35,8 @@ export default function Login() {
             sessionStorage.setItem("ID", inputId);
             sessionStorage.setItem("no", res.user_no);
             sessionStorage.setItem("Nick", res.nickname);
-            navigate("/");
+            navigate(-1);
+            swal("Welcome!", "로그인 성공", "success");
           } else {
             swal("Error!", "아이디 또는 비밀번호 오류입니다.", "error");
           }
