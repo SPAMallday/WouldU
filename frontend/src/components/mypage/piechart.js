@@ -14,7 +14,7 @@ const Piechart = prop => {
 
   return (
     // chart height이 100%이기 때문이 chart를 덮는 마크업 요소에 height 설정
-    <div style={{ width: "650px", height: "400px", margin: "0 auto" }}>
+    <div style={{ width: "600px", height: "400px", margin: "0 auto" }}>
       <ResponsivePie
         /**
          * chart에 사용될 데이터
@@ -23,7 +23,7 @@ const Piechart = prop => {
         /**
          * chart margin
          */
-        margin={{ top: 40, right: 40, bottom: 40, left: 10 }}
+        margin={{ top: 20, right: 40, bottom: 40, left: 20 }}
         /**
          * chart 중간 빈공간 반지름
          */

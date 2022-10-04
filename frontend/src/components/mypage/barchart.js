@@ -17,6 +17,7 @@ const Barchart = prop => {
 
     <div style={{ width: "800px", height: "500px", margin: "0 auto" }}>
       <ResponsiveBar
+        groupMode="stacked"
         maxValue={5}
         /**
          * chart에 사용될 데이터
@@ -33,7 +34,7 @@ const Barchart = prop => {
         /**
          * chart margin
          */
-        margin={{ top: 40, right: 180, bottom: 80, left: 0 }}
+        margin={{ top: 40, right: 180, bottom: 80, left: 50 }}
         /**
          * chart padding (bar간 간격)
          */

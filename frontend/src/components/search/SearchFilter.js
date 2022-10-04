@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { search } from "../../api/searchAPI";
 import styled from "styled-components";
 import SearchFilterButton from "./SearchFilterButton";
+import { Divider, Typography } from "@mui/material";
 
 export default function SearchFilter(props) {
   const { params, setParams, setSearchData } = props;
@@ -9,7 +10,12 @@ export default function SearchFilter(props) {
   return (
     <StyledWrapper>
       <div id="filter-frame">
-        <h3 id="filter-title">종류</h3>
+        <Typography id="filter-title">종류</Typography>
+        <Divider
+          component="span"
+          sx={{ height: 33, borderWidth: "1px" }}
+          orientation="vertical"
+        />
         <div id="filter-elements">
           <SearchFilterButton
             buttonValue="A5"
@@ -50,15 +56,13 @@ export default function SearchFilter(props) {
       </div>
     </StyledWrapper>
   );
-};
+}
 
 const StyledWrapper = styled.div`
   width: 800px;
   height: auto;
-  border: 3px dashed #85c88a;
-  border-radius: 10px;
-  margin: 0px 0px 20px;
-  padding: 15px;
+  margin: 0px 0px 10px;
+  padding: 5px;
 
   #filter-frame {
     display: flex;
@@ -66,8 +70,9 @@ const StyledWrapper = styled.div`
     justify-content: space-evenly;
   }
   #filter-title {
+    text-align: center;
     font-family: "GD";
-    margin: 0px 10px 0px 0px;
+    font-size: 1.2rem;
   }
 
   #filter-elements {

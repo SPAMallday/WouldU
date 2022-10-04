@@ -16,12 +16,14 @@ export default function RecommendPage() {
           <div id="back">돌아가기</div>
         </Link>
       </div>
-      <div id="rocketframe">
-        <Link to="/login">
-          <img src={rocketicon} alt="로켓" />
-          <div id="back">로그인</div>
-        </Link>
-      </div>
+      {sessionStorage.getItem("no") ? null : (
+        <div id="rocketframe">
+          <Link to="/login">
+            <img src={rocketicon} alt="로켓" />
+            <div id="back">로그인</div>
+          </Link>
+        </div>
+      )}
     </StyledWrapper>
   );
 }
@@ -111,11 +113,11 @@ const StyledWrapper = styled.div`
   #back {
     font-family: "GD";
     font-size: 18px;
-    color: black;
-    background-color: #aac4ff;
+    color: white;
+    background-color: #9db7d2;
+    border: 3px solid #9db7d2;
     margin-top: 10px;
     border-radius: 10px;
-    border: 3px solid #b1b2ff;
     display: inline-block;
     width: 90px;
     text-align: center;

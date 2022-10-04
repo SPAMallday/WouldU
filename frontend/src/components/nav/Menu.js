@@ -2,6 +2,13 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import React, { useEffect, useState } from "react";
+
+import loginImg from "assets/img/navbar/login_b.png";
+import logoutImg from "assets/img/navbar/logout_b.png";
+import mypageImg from "assets/img/navbar/mypage_b.png";
+import recommendImg from "assets/img/navbar/recommend_b.png";
+import searchImg from "assets/img/navbar/search_b.png";
+
 /**
  * @todo sessionStorage에 logged로 로그인했는지 정보 저장할 것
  */
@@ -22,26 +29,29 @@ export default function Menu() {
     <StyledWrapper>
       <div id="menubuttons">
         <Link to="/search" state={{ fromIndexQuery: "" }}>
-          <div id="search">검색</div>
+          <img className="navBtn" src={searchImg} alt="searchImg" />
         </Link>
         <Link to="/recommend">
-          <div id="recommend">추천</div>
+          <img className="navBtn" src={recommendImg} alt="recommendImg" />
         </Link>
         {logg ? (
           <>
             <Link to="/mypage">
-              <div id="mypage">마이페이지</div>
+              <img className="navBtn" src={mypageImg} alt="mypageImg" />
             </Link>
             <Link to="/">
-              <div id="logout" onClick={logout}>
-                로그아웃
-              </div>
+              <img
+                className="navBtn"
+                src={logoutImg}
+                alt="logoutImg"
+                onClick={logout}
+              />
             </Link>
           </>
         ) : (
-          <div id="login">
-            <Link to="/login">로그인</Link>
-          </div>
+          <Link to="/login">
+            <img className="navBtn" src={loginImg} alt="loginImg" />
+          </Link>
         )}
       </div>
     </StyledWrapper>

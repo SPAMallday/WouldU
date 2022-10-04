@@ -141,7 +141,7 @@ export default function JoinID() {
           inputDay >= 1 &&
           inputDay <= 31
         ) {
-        } else if (inputYear > 2002) {
+        } else if (inputYear > 2002 && inputYear < 2023) {
           swal("Error!", "미성년자는 사용할수 없습니다.!", "error");
           event.preventDefault();
         } else {
@@ -170,7 +170,7 @@ export default function JoinID() {
             <div id="joinBox">
               <div id="tf_id">
                 <TextField
-                  label="아이디"
+                  placeholder="아이디"
                   variant="outlined"
                   size="small"
                   value={inputId}
@@ -185,7 +185,7 @@ export default function JoinID() {
               <div id="tf_item">
                 <TextField
                   autoComplete="current-password"
-                  label="비밀번호"
+                  placeholder="비밀번호"
                   type="password"
                   variant="outlined"
                   value={inputPw}
@@ -198,7 +198,7 @@ export default function JoinID() {
               <div>
                 <div id="tf_pass">
                   <TextField
-                    label="비밀번호 재확인"
+                    placeholder="비밀번호 확인"
                     type="password"
                     variant="outlined"
                     value={inputPWD}
@@ -215,7 +215,7 @@ export default function JoinID() {
                   <label> 닉네임 </label>
                 </div>
                 <TextField
-                  label="닉네임"
+                  placeholder="닉네임"
                   variant="outlined"
                   value={inputNick}
                   onChange={handleInputNick}
@@ -230,7 +230,7 @@ export default function JoinID() {
                 </div>
                 <div>
                   <TextField
-                    label="연도"
+                    placeholder="연도"
                     variant="outlined"
                     value={inputYear}
                     onChange={handleInputYear}
@@ -261,19 +261,18 @@ export default function JoinID() {
                     </Select>
                   </FormControl>
                   <TextField
-                    label="일"
                     variant="outlined"
                     value={inputDay}
                     onChange={handleInputDay}
                     size="small"
                     id="input_birth2"
+                    placeholder="일"
                   />
                 </div>
               </div>
 
               <div id="tf_gender">
                 <div id="div_gender">
-                  <label> 성별 </label>
                 </div>
                 <FormControl sx={{ m: 1, minWidth: 80 }} size="small">
                   <InputLabel id="demo-select-small">성별</InputLabel>
@@ -367,21 +366,21 @@ const StyledWrapper = styled.div`
     margin-left: 95px;
   }
   #tf_pass {
-    margin-top: 40px;
+    margin-top: 20px;
   }
   #tx_ok {
     text-align: right;
     margin-top: 10px;
     margin-right: 95px;
     font-size: 17px;
-    color: red;
+    color: #ff884b;
   }
 
   #tf_item {
-    margin-top: 50px;
+    margin-top: 30px;
   }
   #tf_bitem {
-    margin-top: 40px;
+    margin-top: 30px;
     margin-bottom: 10px;
     text-align: left;
     margin-left: 100px;
@@ -389,7 +388,7 @@ const StyledWrapper = styled.div`
 
   #tf_gender {
     margin: auto;
-    margin-top: 50px;
+    margin-top: 40px;
     width: 350px;
     text-align: left;
   }
@@ -412,21 +411,31 @@ const StyledWrapper = styled.div`
   }
 
   #btBox {
-    margin-top: 50px;
+    margin-top: 40px;
     margin-bottom: 30px;
+  }
+  #btBox a {
+    text-decoration: none;
   }
 
   #btn_next {
     width: 170px;
-    background-color: #b15606;
+    font-size: 24px;
+    background-color: #367e18;
   }
   #btn_next1 {
     width: 170px;
+    border: solid #dbc8ac;
+    border-radius: 10px;
+    color: white;
+    font-size: 24px;
+    background-color: #367e18;
   }
-
   #btn_check {
     margin-left: 20px;
-    color: red;
+    color: #06283d;
+    border: solid #dbc8ac;
+    background-color: #e8dfca;
   }
 
   #input_area1 {
@@ -447,5 +456,35 @@ const StyledWrapper = styled.div`
   }
   #input_birth2 {
     width: 90px;
+  }
+
+  .MuiButtonBase-root {
+    font-family: "GD";
+  }
+  .MuiInputBase-input {
+    font-family: "GD";
+  }
+
+  .MuiInputBase-root {
+    font-family: "GD";
+    color: black;
+  }
+  .MuiInputBase-root input {
+    font-family: "GD";
+  }
+  .MuiOutlinedInput-notchedOutline {
+    font-family: "GD";
+  }
+  .css-yjsfm1 {
+    font-family: "GD";
+  }
+  .MuiSelect-nativeInput {
+    font-family: "GD";
+  }
+  #demo-select-small {
+    font-family: "GD";
+  }
+  #input_birth2 {
+    font-family: "GD";
   }
 `;

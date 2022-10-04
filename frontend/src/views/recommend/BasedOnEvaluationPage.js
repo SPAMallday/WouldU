@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import Header from "components/nav/Header";
 import rocketicon from "assets/img/rocketicon.png";
 import mousepointer from "assets/img/mousepointer.png";
 import traditionalframe from "assets/img/traditionalframe.png";
@@ -8,6 +7,7 @@ import planet4 from "assets/img/planet4.png";
 import Element from "components/search/Element";
 import { Link } from "react-router-dom";
 import { userRecom, alcoholDetail } from "../../api/recommendAPI";
+import Nav from "components/nav/Nav";
 
 /**
  * @todo 백엔드에서 추천 결과5개 보내주기로 했어서 그거 띄우는 틀 만들었음.
@@ -52,7 +52,7 @@ export default function BasedOnEvaluationPage() {
 
   return (
     <>
-      <Header />
+      <Nav />
       <StyledWrapper>
         <div id="background">
           <div id="basedonevaluationpageframe">
@@ -87,7 +87,6 @@ export default function BasedOnEvaluationPage() {
 }
 
 const StyledWrapper = styled.div`
-  background-color: #f7ecde;
   height: 88vh;
   font-family: "GD";
 
@@ -142,11 +141,11 @@ const StyledWrapper = styled.div`
     cursor: url(${mousepointer}) 50 50, auto;
     font-family: "GD";
     font-size: 18px;
-    color: black;
-    background-color: #aac4ff;
+    color: white;
+    background-color: #9db7d2;
+    border: 3px solid #9db7d2;
     margin-top: 10px;
     border-radius: 10px;
-    border: 3px solid #b1b2ff;
     display: inline-block;
     width: 90px;
     text-align: center;
@@ -183,11 +182,11 @@ const StyledWrapper = styled.div`
     cursor: url(${mousepointer}) 50 50, auto;
     font-family: "GD";
     font-size: 18px;
-    color: black;
-    background-color: #aac4ff;
+    color: white;
+    background-color: #9db7d2;
+    border: 3px solid #9db7d2;
     margin-top: 10px;
     border-radius: 10px;
-    border: 3px solid #b1b2ff;
     display: inline-block;
     width: 115px;
     text-align: center;
@@ -244,7 +243,7 @@ const StyledWrapper = styled.div`
   #tooltip #tooltiptext {
     visibility: hidden;
     width: 200px;
-    background-color: #ffcaca;
+    background-color: #d8d8d8;
     color: black;
     text-align: center;
     padding: 5px 0;
@@ -267,15 +266,16 @@ const StyledWrapper = styled.div`
     position: absolute;
     bottom: 100%; /* At the top of the tooltip */
     left: 50%;
-    margin-left: -5px;
+    margin-left: -10px;
     border-width: 10px;
     border-style: solid;
-    border-color: transparent transparent #ffcaca transparent;
+    border-color: transparent transparent #d8d8d8 transparent;
   }
   #information {
     font-size: 18px;
   }
   #alcoholtitle {
     font-size: 22px;
+    word-break: keep-all;
   }
 `;
