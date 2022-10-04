@@ -117,7 +117,7 @@ export default function MyPage() {
           <div id="mainPage">
             <Card>
               <div id="mp_header">
-                <h1 id="nameText">{userName}님 통계</h1>
+                <h1 id="nameText">{userName}님의 통계</h1>
                 <div id="btnGroup">
                   <IconButton
                     onClick={onClickSummary}
