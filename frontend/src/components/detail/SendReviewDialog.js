@@ -96,11 +96,15 @@ export default function SendReviewDialog(props) {
       onClose={handleClose}
       aria-describedby="alert-dialog-slide-description"
     >
-      <DialogTitle>리뷰 작성하기</DialogTitle>
+      <CustomStyle>
+        <DialogTitle id="review-title-text">
+          &lt; 리뷰 작성하기 &gt;
+        </DialogTitle>
+      </CustomStyle>
       <DialogContent>
-        <DialogContentText>
-          {props.alcohol.alco_name} 을(를) 마셔본 우주 유저의 경험은 소중합니다.
-          작성해주세요~
+        <DialogContentText sx={{ fontFamily: "GD", fontSize: "18px" }}>
+          "{props.alcohol.alco_name}"을(를) 마셔본 우주 유저의 경험은
+          소중합니다.
         </DialogContentText>
         <Box
           noValidate
@@ -118,7 +122,7 @@ export default function SendReviewDialog(props) {
                   <img src={props.alcohol.alco_img} alt="술" id="img_sul" />
                 </div>
                 <div id="detailBox">
-                  <h5 id="text_sul">이름 : {props.alcohol.alco_name}</h5>
+                  <h5 id="text_title">이름 : {props.alcohol.alco_name}</h5>
                   <h5 id="text_sul">주종 : {props.alcohol.alco_type}</h5>
                   <h5 id="text_sul">도수 : {props.alcohol.abv}도</h5>
                 </div>
@@ -131,7 +135,7 @@ export default function SendReviewDialog(props) {
                   handleChange3={handleChange3}
                 />
               </div>
-              <div>
+              <div id="text-font">
                 <StarComment
                   value={value}
                   onChangeValue={onChangeValue}
@@ -144,8 +148,18 @@ export default function SendReviewDialog(props) {
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleOk}>제출하기</Button>
-        <Button onClick={handleClose}>닫기</Button>
+        <Button
+          onClick={handleOk}
+          sx={{ fontFamily: "GD", color: "black", fontSize: "20px" }}
+        >
+          제출하기
+        </Button>
+        <Button
+          onClick={handleClose}
+          sx={{ fontFamily: "GD", color: "black", fontSize: "20px" }}
+        >
+          닫기
+        </Button>
       </DialogActions>
     </Dialog>
   );
@@ -156,9 +170,11 @@ const StyledWrapper = styled.div`
     text-align: center;
   }
   #ratingForm {
-    display: inline-block;
-    margin: auto;
-    border: 1px solid;
+    display: flex;
+    margin: 10px 0px 20px;
+    border: 2px solid #abd9ff;
+    border-radius: 7px;
+    background-color: #d2daff;
   }
 
   #btn_search {
@@ -173,7 +189,12 @@ const StyledWrapper = styled.div`
   #imgBox {
     width: 200px;
     height: 200px;
-    float: left;
+    border: 0.2px solid #abd9ff;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
   }
   #imgBox img {
     width: 190px;
@@ -184,11 +205,33 @@ const StyledWrapper = styled.div`
   #detailBox {
     width: 400px;
     height: 200px;
-    display: inline-block;
-    background: pink;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #d2daff;
+    border-radius: 7px;
+  }
+  #text_title {
+    text-align: left;
+    margin: 10px 20px;
+    font-size: 24px;
+    font-family: "GD";
   }
   #text_sul {
     text-align: left;
-    margin: 20px;
+    margin: 10px 20px;
+    font-size: 20px;
+    font-family: "GD";
+  }
+  #text-font {
+    font-family: "GD";
+  }
+`;
+
+const CustomStyle = styled.div`
+  text-align: center;
+  .MuiTypography-root {
+    font-family: "GD";
+    font-size: 28px;
   }
 `;
