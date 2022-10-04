@@ -16,7 +16,7 @@ from django.http.response import JsonResponse
 from django.core import serializers
 
 
-from user.serializer import UserSerializer
+from apps.user.serializer import UserSerializer
 
 # Create your views here.
 # 회원가입 
