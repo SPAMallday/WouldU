@@ -32,7 +32,7 @@ export default function StarComment(prop) {
           <Box
             component="form"
             sx={{
-              "& > :not(style)": { m: 1, width: "300px" },
+              "& > :not(style)": { m: 1, width: "500px" },
             }}
             noValidate
             autoComplete="off"
