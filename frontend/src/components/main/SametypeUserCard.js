@@ -106,12 +106,11 @@ export default function SameType() {
 
 const StyledWrapper = styled.div`
   #main {
-    width: 1400px;
+    width: 90vw;
+    min-width: 1200px;
     height: 520px;
-    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
     border-style: solid;
     border-width: 2px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     font-family: "GD";
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     box-sizing: border-box;
@@ -119,8 +118,6 @@ const StyledWrapper = styled.div`
     border-bottom-right-radius: 225px 15px;
     border-top-left-radius: 255px 15px;
     border-top-right-radius: 15px 225px;
-
-    background-color: #ffe3e1;
     margin-bottom: 70px;
   }
   #title {
@@ -160,18 +157,16 @@ const StyledWrapper = styled.div`
   }
 
   #soolcard {
-    border: 2px solid #f09494;
-    border-radius: 5px;
     padding: 5px 5px;
     margin: 5px 0;
     width: 100%;
     display: flex;
     align-items: center;
-    background-color: #ffd1d1;
     :hover {
-      box-shadow: rgba(0, 0, 0, 0.9) 0px 3px 8px;
       transform: scale(1.1);
-      background-color: #ffd1e8;
+      // border: 2px solid D8D8D8;
+      border-radius: 5px;
+      background-color: #d8d8d8;
     }
   }
   #ratestars {

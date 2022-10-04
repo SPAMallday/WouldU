@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
+import { Navigation, EffectCards, Autoplay } from "swiper";
 import { useNavigate } from "react-router-dom";
+
+import "swiper/css";
+import "swiper/css/effect-cards";
 
 export default function Similar({ alcohol, similar }) {
   const navigate = useNavigate();
@@ -13,33 +16,38 @@ export default function Similar({ alcohol, similar }) {
   return (
     <StyledWrapper>
       <div id="similarframe">
-      <div id="similartitle">&lt; "{alcohol.alco_name}"와(과) 유사한 전통주 &gt;</div>
-      <div id="similarlist">
-        <Swiper
-          modules={[Navigation]}
-          spaceBetween={50}
-          slidesPerView={5}
-          navigation
-        >
-          {similar &&
-            similar.slice(0, 6).map((item, index) => (
-              <SwiperSlide key={index}>
-                <div
-                  id="similar"
-                  onClick={() => {
-                    clickSlmilar(item);
-                  }}
-                >
-                  <img
-                    id="img-sool"
-                    src={item.alcohol_image}
-                    alt={item.alcohol_name}
-                  />
-                </div>
-                  <div id="name-sool">{item.alcohol_name}</div>
-              </SwiperSlide>
-            ))}
-        </Swiper>
+        <div id="similartitle">
+          &lt; "{alcohol.alco_name}"와(과) 유사한 전통주 &gt;
+        </div>
+        <div id="similarlist">
+          <Swiper
+            effect={"cards"}
+            grabCursor={true}
+            modules={[EffectCards, Autoplay]}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+          >
+            {similar &&
+              similar.slice(0, 6).map((item, index) => (
+                <SwiperSlide key={index}>
+                  <div
+                    id="similar"
+                    onClick={() => {
+                      clickSlmilar(item);
+                    }}
+                  >
+                    <img
+                      id="img-sool"
+                      src={item.alcohol_image}
+                      alt={item.alcohol_name}
+                    />
+                    <div id="name-sool">{item.alcohol_name}</div>
+                  </div>
+                </SwiperSlide>
+              ))}
+          </Swiper>
         </div>
       </div>
     </StyledWrapper>
@@ -53,11 +61,7 @@ const StyledWrapper = styled.div`
   font-family: "GD";
 
   #similarframe {
-    border: 3px ridge #f5f0bb;
     margin: 10px 0px;
-    width: 80vw;
-    min-width: 1200px;
-    border-radius: 10px;
   }
 
   #similartitle {
@@ -67,8 +71,10 @@ const StyledWrapper = styled.div`
 
   #similar {
     cursor: pointer;
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
+    max-width: 230px;
+    max-height: 320px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -78,8 +84,8 @@ const StyledWrapper = styled.div`
     border-radius: 10px;
   }
   #img-sool {
-    width: 190px;
-    height: 190px;
+    width: 224px;
+    height: 224px;
     margin: auto;
     object-fit: contain;
     border-radius: 10px;
@@ -90,19 +96,16 @@ const StyledWrapper = styled.div`
   }
 
   .swiper {
-    width: 1300px;
+    width: 240px;
+    height: 320px;
   }
-  .swiper-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 1200px;
-  }
+
   .swiper-slide {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin: 0px 10px;
+    justify-content: center;
+    border-radius: 18px;
+    font-size: 22px;
+    font-weight: bold;
   }
 `;

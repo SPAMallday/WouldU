@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Rating from "@mui/material/Rating";
+import { Divider } from "@mui/material";
 
 export default function Review({ review }) {
   // 술 리스트 반복으로 보여주기
@@ -9,20 +10,28 @@ export default function Review({ review }) {
       <div id="reviewframe">
         <div id="reviewtitle">&lt; "우주" 회원들의 평가 &gt;</div>
         <div id="reviewlist">
-          {review.length > 0 ? null : <div id="reviewnull">현재 등록된 리뷰가 없습니다.😥</div>}
+          {review.length > 0 ? null : (
+            <div id="reviewnull">현재 등록된 리뷰가 없습니다.😥</div>
+          )}
           {review &&
-            review.map((item, index) => (
-              <div id="reviews" key={index}>
-                <div id="tx_star">
-                  <Rating
-                    name="read-only"
-                    value={item.score}
-                    readOnly
-                    id="stars"
-                    size="large"
-                  />
+            review.map((item, index, arr) => (
+              <div key={index}>
+                <div id="reviews">
+                  <div id="tx_star">
+                    <Rating
+                      name="read-only"
+                      value={item.score}
+                      readOnly
+                      id="stars"
+                      size="large"
+                      key={index}
+                    />
+                  </div>
+                  <div id="tx_comment">{item.comment}</div>
                 </div>
-                <div id="tx_comment">{item.comment}</div>
+                {arr.length - 1 !== index ? (
+                  <Divider className="reviewDivider" />
+                ) : null}
               </div>
             ))}
         </div>
@@ -31,24 +40,16 @@ export default function Review({ review }) {
   );
 }
 const StyledWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-family: "GD";
+  margin-bottom: 50px;
 
   #reviewframe {
-    border: 3px ridge #f5f0bb;
     margin: 10px 0px;
-    width: 80vw;
-    min-width: 1200px;
     border-radius: 10px;
+    background-color: #fff1f0;
+    padding: 5px;
   }
-  #main {
-    border: 1px solid;
-    height: 250px;
-    width: 1300px;
-    margin-bottom: 80px;
-  }
+
   #reviewtitle {
     font-size: 24px;
     margin: 10px;
@@ -64,20 +65,24 @@ const StyledWrapper = styled.div`
     align-items: center;
     margin-left: 10px;
     margin: 5px 4px;
-    border: 2px solid #e1ceb5;
     border-radius: 10px;
-    background-color: #ffe7cc;
     font-size: 20px;
     padding: 2px;
   }
 
   #tx_star {
-    background-color: #fff5e4;
     border-radius: 10px;
     margin-left: 5px;
   }
   #tx_comment {
     margin-left: 10px;
+  }
+
+  .reviewDivider {
+    border-width: 1px;
+    border-color: #7a7a7a;
+    width: 97%;
+    margin: 2px 1.5%;
   }
 
   .MuiRating-root {

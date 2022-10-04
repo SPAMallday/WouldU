@@ -13,7 +13,7 @@ export default function Nav(props) {
     setlogg(window.sessionStorage.getItem("ID"));
     // position 동적으로 변경
     if (props?.type === "main") {
-      document.getElementById("container").style.position = "fixed";
+      document.getElementById("container").style.position = "absolute";
       document.getElementById("container").style.justifyContent = "flex-end";
     } else {
       document.getElementById("container").style.position = "relative";
@@ -98,7 +98,6 @@ const StyledWrapper = styled.div`
   align-items: center;
   font-family: "GD";
   font-size: 24px;
-  display: flex;
   align-items: center;
   text-align: center;
   justify-content: center;
@@ -106,9 +105,10 @@ const StyledWrapper = styled.div`
   #container {
     top: 0px;
     z-index: 3;
-    width: 90%;
+    min-width: 1200px;
+    width: 80%;
     height: 100px;
-    position: fixed;
+    position: absolute;
     display: flex;
     align-items: center;
     margin: 5px 0px;

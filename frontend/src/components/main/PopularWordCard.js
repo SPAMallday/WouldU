@@ -115,7 +115,8 @@ export default function PopularWordCard() {
 }
 
 const StyledWrapper = styled.div`
-  width: 40vw;
+  width: 42vw;
+  min-width: 540px;
   height: 380px;
   margin: 10px;
   padding: 10px;
