@@ -94,7 +94,7 @@ const PgStyle = styled.div`
   .pagination {
     display: flex;
     justify-content: center;
-    margin-top: 70px;
+    margin-top: 10px;
   }
 
   ul {
@@ -107,11 +107,15 @@ const PgStyle = styled.div`
     width: 40px;
     height: 40px;
     border-radius: 10px;
-    border: 1px solid #ffa500;
+    // border: 1px solid #9db7d2;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 5px;
+
+    :hover {
+      box-shadow: 200px 0 0 0 rgba(0, 0, 0, 0.3) inset;
+    }
   }
 
   ul.pagination li:first-child {
@@ -134,11 +138,11 @@ const PgStyle = styled.div`
   }
 
   ul.pagination li.active {
-    background-color: #ffa500;
+    background-color: #9db7d2;
   }
 
   ul.pagination li a:hover {
-    color: green;
+    color: white;
   }
 
   ul.pagination li a.active {

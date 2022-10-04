@@ -18,7 +18,6 @@ export default function SearchResult({ searchData, params, setParams }) {
   };
 
   useEffect(() => {
-    console.log(searchData.length);
     if (searchData.length > 0) {
       console.log(searchData[0].total_count);
       setTotalPage(searchData[0].total_count);

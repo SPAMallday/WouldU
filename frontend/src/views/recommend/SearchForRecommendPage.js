@@ -1,4 +1,3 @@
-import Header from "components/nav/Header";
 import styled from "styled-components";
 import SearchBar from "components/search/SearchBar";
 import SearchResult from "components/recommend/SearchResult";
@@ -8,6 +7,7 @@ import mousepointer from "assets/img/mousepointer.png";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { search } from "../../api/searchAPI";
+import Nav from "components/nav/Nav";
 
 export default function SearchForRecommendPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -32,7 +32,7 @@ export default function SearchForRecommendPage() {
 
   return (
     <>
-      <Header />
+      <Nav />
       <StyledWrapper>
         <div id="background">
           <div id="searchforrecommendpageframe">
@@ -70,7 +70,7 @@ export default function SearchForRecommendPage() {
           <div id="rocketframe">
             <Link to="/recommend">
               <img src={rocketicon} alt="로켓" />
-              <div id="back">돌아가기</div>
+              <div id="back">우주로 돌아가기</div>
             </Link>
           </div>
         </div>
@@ -80,7 +80,6 @@ export default function SearchForRecommendPage() {
 }
 
 const StyledWrapper = styled.div`
-  background-color: #f7ecde;
   height: 105vh;
   font-family: "GD";
 
@@ -94,7 +93,7 @@ const StyledWrapper = styled.div`
     align-items: center;
   }
   #introducetotal {
-    margin-top: 50px;
+    margin-top: 30px;
     text-align: center;
   }
   #introduceheader {
@@ -104,9 +103,10 @@ const StyledWrapper = styled.div`
     font-size: 20px;
   }
   #rocketframe {
-    margin-top: -145px;
+    position: fixed;
     cursor: url(${mousepointer}) 50 50, auto;
     left: 0vw;
+    bottom: 5%;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     width: 200px;
@@ -142,13 +142,13 @@ const StyledWrapper = styled.div`
     cursor: url(${mousepointer}) 50 50, auto;
     font-family: "GD";
     font-size: 18px;
-    color: black;
-    background-color: #aac4ff;
+    color: white;
+    background-color: #9db7d2;
+    border: 3px solid #9db7d2;
     margin-top: 10px;
     border-radius: 10px;
-    border: 3px solid #b1b2ff;
     display: inline-block;
-    width: 90px;
+    width: 140px;
     text-align: center;
   }
 `;

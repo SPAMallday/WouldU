@@ -25,11 +25,19 @@ const StyledWrapper = styled.div`
   align-items: center;
   width: 340px;
 
+  :hover {
+    transform: scale(1.1);
+    box-shadow: rgba(0, 0, 0, 0.9) 0px 3px 8px;
+    background-color: #ecdfc8;
+  }
+
   #picture {
     width: 100px;
     height: 100px;
-    border: 0.2px solid #d0b8a8;
-    border-radius: 7px;
+    border: solid;
+    border-width: 0 2px 0 0;
+    border-color: transparent #d0b8a8 transparent transparent;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,6 +54,9 @@ const StyledWrapper = styled.div`
     flex-direction: column;
     margin: 5px;
     font-family: "GD";
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   #information div {
     margin: 0px 5px;

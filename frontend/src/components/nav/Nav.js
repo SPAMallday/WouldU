@@ -31,7 +31,6 @@ export default function Nav(props) {
 
   // 버튼 세팅
   function mapping(param) {
-    console.log("test", require(`assets/img/navbar/login_${param}.png`));
     const res = {
       login: require(`assets/img/navbar/login_${param}.png`),
       logout: require(`assets/img/navbar/logout_${param}.png`),

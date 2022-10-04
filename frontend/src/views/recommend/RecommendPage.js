@@ -111,11 +111,11 @@ const StyledWrapper = styled.div`
   #back {
     font-family: "GD";
     font-size: 18px;
-    color: black;
-    background-color: #aac4ff;
+    color: white;
+    background-color: #9db7d2;
+    border: 3px solid #9db7d2;
     margin-top: 10px;
     border-radius: 10px;
-    border: 3px solid #b1b2ff;
     display: inline-block;
     width: 90px;
     text-align: center;
