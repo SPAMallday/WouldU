@@ -66,6 +66,7 @@ const StyledWrapper = styled.div`
   }
 
   #similar {
+    cursor: pointer;
     width: 200px;
     height: 200px;
     display: flex;

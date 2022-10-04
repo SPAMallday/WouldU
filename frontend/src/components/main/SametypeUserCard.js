@@ -39,7 +39,7 @@ export default function SameType() {
     return (
       <StyledWrapper>
         <div id="main">
-          <h3 id="title">나와 비슷한 유저들이 고른 술</h3>
+          <h3 id="title">나와 비슷한 유저들이 선택한 전통주</h3>
           <Swiper
             id="swiper"
             modules={[Navigation]}
@@ -58,13 +58,18 @@ export default function SameType() {
                     id="soolcard"
                   >
                     <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="230"
-                        alt="술"
-                        id="imgSool"
-                        image={item.alcohol_image}
-                      />
+                      <div id="image-arrange">
+                        <div id="image-frame">
+                          <CardMedia
+                            component="img"
+                            width="220"
+                            height="220"
+                            alt="술"
+                            id="imgSool"
+                            image={item.alcohol_image}
+                          />
+                        </div>
+                      </div>
                       <CardContent>
                         <Typography
                           component="div"
@@ -77,7 +82,7 @@ export default function SameType() {
                           sx={{ fontSize: 20, fontFamily: "GD", mt: 2 }}
                           id="ratestars"
                         >
-                          <h4>평점 :</h4>
+                          <h4>평점 :&nbsp;</h4>
                           <Rating
                             name="read-only"
                             value={item.avg_score}
@@ -130,10 +135,28 @@ const StyledWrapper = styled.div`
     margin-top: 30px;
   }
 
+  #image-arrange {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #image-frame {
+    width: 250px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+  }
+
   #imgSool {
-    width: 100%;
-    height: 230px;
-    object-fit: scale-down;
+    width: 240px;
+    height: 240px;
+    margin: auto;
+    object-fit: contain;
+    border-radius: 10px;
   }
 
   #soolcard {
@@ -154,8 +177,16 @@ const StyledWrapper = styled.div`
   #ratestars {
     display: flex;
     justify-content: center;
+    align-items: center;
   }
   #stars {
     margin-top: -3px;
+  }
+
+  .swiper-button-prev {
+    top: 42%;
+  }
+  .swiper-button-next {
+    top: 42%;
   }
 `;
