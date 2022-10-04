@@ -6,7 +6,7 @@ export default function SearchFilterButton(props) {
   const { buttonValue, buttonName, params, setParams, setSearchData } = props;
   const [selected, setSelected] = useState(false);
   const [filterKinds, setFilterKinds] = useState([]);
-  const [temp, setTemp] = useState('aa');
+  const [temp, setTemp] = useState("aa");
   // {
   //   'name': '',
   //   'sort': 1,
@@ -14,30 +14,21 @@ export default function SearchFilterButton(props) {
   //   'alcol-type':[],
   // }
 
-
-  const handleClick = (e) => {
+  const handleClick = e => {
     e.preventDefault();
 
     if (selected === false) {
       setSelected(true);
 
-      const at = params.alcol_type + buttonValue + ','
-      setParams(prevState => ({...prevState, 
-        alcol_type: at,
-        page: 1
-      }))
-    }
-    else {
+      const at = params.alcol_type + buttonValue + ",";
+      setParams(prevState => ({ ...prevState, alcol_type: at, page: 1 }));
+    } else {
       setSelected(false);
 
-      const at = params.alcol_type.replace(buttonValue + ',', '')
-      setParams(prevState => ({...prevState, 
-        alcol_type: at,
-        page: 1
-      }))
+      const at = params.alcol_type.replace(buttonValue + ",", "");
+      setParams(prevState => ({ ...prevState, alcol_type: at, page: 1 }));
     }
   };
-  
 
   return (
     <StyledWrapper>
@@ -55,35 +46,31 @@ export default function SearchFilterButton(props) {
 }
 
 const StyledWrapper = styled.div`
-  #non-clicked {
-    border: solid #b6e388;
-    margin: 0px 10px;
-    line-height: 2.3;
-    padding: 0 15px;
-    font-size: 20px;
-    text-align: center;
-    color: #000;
+  line-height: 2;
+  font-size: 20px;
+  text-align: center;
+  font-family: "GD";
+
+  #non-clicked,
+  #clicked {
     border-radius: 10px;
-    background-color: #e1ffb1;
-    box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.6),
-      inset -1px -1px 1px rgba(0, 0, 0, 0.6);
-    font-family: "GD";
+    margin: 0px 10px;
+    padding: 0 15px;
+    color: #d8d8d8;
+  }
+
+  #non-clicked {
+    border: 2px solid #d8d8d8;
+    background-color: transparent;
   }
   #non-clicked:hover {
-    background-color: #c7f2a4;
+    border-color: white;
+    color: white;
+    background-color: #9db7d2;
   }
   #clicked {
-    border: solid #b6e388;
-    margin: 0px 10px;
-    line-height: 2.3;
-    padding: 0 15px;
-    font-size: 20px;
-    text-align: center;
-    color: #000;
-    border-radius: 10px;
-    background-color: #b6e388;
-    box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.6),
-      inset -1px -1px 1px rgba(0, 0, 0, 0.6);
-    font-family: "GD";
+    background-color: transparent;
+    border: 2px solid #5783b2;
+    color: #5783b2;
   }
 `;

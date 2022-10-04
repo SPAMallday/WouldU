@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { getRecord, makeRecord } from "api/recommendAPI";
 import swal from "sweetalert";
 import closeicon from "assets/img/closeicon.png";
+import { Box, Grid } from "@mui/material";
 
 export default function ReviewForRecommend(props) {
   const { setHandleClick, reviewTarget } = props;
@@ -52,131 +53,135 @@ export default function ReviewForRecommend(props) {
     <StyledWrapper>
       <div id="main">
         <img id="closeicon" src={closeicon} alt="창 닫기" onClick={goBack} />
-        <div id="main-title-text">&lt; 전통주 평가 &gt;</div>
-        <div id="ratingForm">
-          <div id="imgBox">
-            <img src={reviewTarget.alcohol_image} alt="술" id="img_sul" />
-          </div>
-          <div id="detailBox">
-            <h5 id="text_title">이름 : {reviewTarget.alcohol_name}</h5>
-            <h5 id="text_sul">주종 : {reviewTarget.type}</h5>
-            <h5 id="text_sul">양조장 : {reviewTarget.brewery}</h5>
-          </div>
-        </div>
-        <div>
-          <StarComment
-            value={value}
-            onChangeValue={onChangeValue}
-            type="recommend"
-          />
-        </div>
-        <div id="btBox">
-          <Button
-            type="button"
-            id="btn_search"
-            variant="contained"
-            onClick={onClick}
-            color="secondary"
-          >
-            평가 보내기
-          </Button>
-        </div>
+        <Box sx={{ display: "flex" }}>
+          <img src={reviewTarget.alcohol_image} alt="술" id="img_sul" />
+          <Box>
+            <Grid>
+              <div id="detailBox">
+                <Grid>
+                  <div id="main-title-text">&lt; 전통주 평가 &gt;</div>
+                  <h5 id="text_title">이름 : {reviewTarget.alcohol_name}</h5>
+                  {/* <h5 id="text_sul">주종 : {reviewTarget.type}</h5> */}
+                  <h5 id="text_sul">양조장 : {reviewTarget.brewery}</h5>
+                </Grid>
+                <Grid>
+                  <StarComment
+                    value={value}
+                    onChangeValue={onChangeValue}
+                    type="recommend"
+                  />
+                  <div id="btBox">
+                    <Button
+                      type="button"
+                      id="btn_search"
+                      variant="contained"
+                      onClick={onClick}
+                      color="secondary"
+                    >
+                      평가 보내기
+                    </Button>
+                  </div>
+                </Grid>
+              </div>
+            </Grid>
+          </Box>
+        </Box>
       </div>
     </StyledWrapper>
   );
 }
 
 const StyledWrapper = styled.div`
+  text-align: end;
   #main {
-    text-align: center;
-    margin: 10px;
-    padding: 20px 30px;
-    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
-    border-style: solid;
-    border-width: 2px;
+    position: absolute;
+    z-index: 3;
+    // margin: 10vh 0 15vh;
+    padding: 30px 30px 30px 0;
+    background-color: white;
+    border: 2px solid #d8d8d8;
+    border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     font-family: "GD";
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     box-sizing: border-box;
-    border-bottom-left-radius: 15px 255px;
-    border-bottom-right-radius: 225px 15px;
-    border-top-left-radius: 255px 15px;
-    border-top-right-radius: 15px 225px;
     display: flex;
     flex-direction: column;
-    background-color: #ffe3e1;
-
     justify-content: center;
     align-items: center;
+    overflow: visible;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
   #main-title-text {
     font-size: 36px;
     margin-bottom: 20px;
+    margin-right: 20px;
   }
   #closeicon {
     cursor: pointer;
     width: 50px;
     height: 50px;
-    position: relative;
-    top: 10px;
-    left: 270px;
-  }
-  #ratingForm {
-    display: flex;
-    margin: 10px 0px 20px;
-    border: 2px solid #ff7f3f;
-    border-radius: 7px;
-    background-color: #f4bfbf;
+    position: absolute;
+    right: 5px;
+    top: 2px;
+    z-index: 2;
   }
   #btn_search {
     width: 150px;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
   }
-  #btn_delete {
-    float: right;
-    margin-bottom: -50px;
-  }
-  #imgBox {
-    width: 200px;
-    height: 200px;
-    border: 0.2px solid #d0b8a8;
-    border-radius: 7px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-  }
-  #imgBox img {
-    width: 190px;
-    height: 190px;
-    margin: auto;
+
+  #img_sul {
+    width: auto;
+    height: auto;
+    min-width: 150px;
+    max-width: 300px;
+    max-height: 300px;
     object-fit: contain;
+    border-radius: 10px;
+    border: 2px solid #020715;
+    background-color: white;
+    transform: translate(-40%, 0);
   }
   #detailBox {
-    width: 400px;
-    height: 200px;
+    // width: 400px;
+    // height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #f4bfbf;
     border-radius: 7px;
   }
   #text_title {
-    text-align: left;
     margin: 10px 20px;
     font-size: 24px;
   }
   #text_sul {
-    text-align: left;
     margin: 10px 20px;
     font-size: 20px;
   }
 
   .MuiButtonBase-root {
     background-color: #fa7070;
-    font-family: "Jua";
+    font-family: "GD";
     font-size: 24px;
     color: #fbf2cf;
+  }
+
+  #starBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  #btBox {
+    display: flex;
+    justify-content: center;
+  }
+
+  #rating-title {
+    margin-right: 0.8rem;
   }
 `;

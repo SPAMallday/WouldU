@@ -13,6 +13,10 @@ import ten from "assets/img/number/ten.png";
 import { useNavigate } from "react-router-dom";
 import { Grid, Typography } from "@mui/material";
 import { likeRanking } from "../../api/mainpageAPI";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper";
+import "swiper/css";
+import "swiper/css/pagination";
 
 export default function PopularWordCard() {
   const [popularList, setPopularList] = useState([]);
@@ -66,14 +70,14 @@ export default function PopularWordCard() {
 
   return (
     <StyledWrapper>
-      <h2>실시간 좋아요 순위</h2>
+      <h2>🏆 실시간 좋아요 순위 </h2>
       {popularList[0]?.length > 0 ? (
         <Grid
           container
           direction="row"
           justifyContent="center"
           alignItems="flex-start"
-          columnSpacing={2}
+          columnGap={2}
         >
           <Grid
             xs
@@ -111,15 +115,13 @@ export default function PopularWordCard() {
 
 const StyledWrapper = styled.div`
   width: 40vw;
-  height: 40vh;
+  height: 380px;
   margin: 10px;
   padding: 10px;
-  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
   border-style: solid;
   border-width: 2px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   font-family: "GD";
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   box-sizing: border-box;
   border-bottom-left-radius: 15px 255px;
   border-bottom-right-radius: 225px 15px;
@@ -127,25 +129,25 @@ const StyledWrapper = styled.div`
   border-top-right-radius: 15px 225px;
   display: flex;
   flex-direction: column;
-  background-color: #ffe3e1;
+  background-color: #fcf8e8;
 
   justify-content: center;
   align-items: center;
 
   .gridItem {
-    border: 2px solid #f09494;
+    border: 2px solid #ecdfc8;
     border-radius: 5px;
     padding: 5px 5px;
     margin: 5px 0;
     width: 100%;
     display: flex;
     align-items: center;
-    background-color: #ffd1d1;
+    background-color: #ecdfc8;
 
     :hover {
       transform: scale(1.1);
       box-shadow: rgba(0, 0, 0, 0.9) 0px 3px 8px;
-      background-color: #ffd1e8;
+      background-color: #ecdfc8;
     }
   }
 

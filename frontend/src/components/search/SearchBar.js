@@ -12,18 +12,15 @@ export default function SearchBar(props) {
 
   // Enter Key로 검색
   const handleOnKeyPress = e => {
-    if (e.key === 'Enter') {
-      handleSubmitButton(); 
+    if (e.key === "Enter") {
+      handleSubmitButton();
     }
   };
 
   const handleSubmitButton = () => {
-    console.log(searchQuery)
-    
-    setParams(prevState => ({...prevState, 
-      name: searchQuery,
-      page: 1
-    }))
+    console.log(searchQuery);
+
+    setParams(prevState => ({ ...prevState, name: searchQuery, page: 1 }));
   };
 
   return (
@@ -39,7 +36,7 @@ export default function SearchBar(props) {
         boxShadow: 2,
         border: 1,
         borderColor: "grey.600",
-        backgroundColor: "#FCF8E8",
+        backgroundColor: "#E9EBED",
       }}
     >
       <InputBase
@@ -63,4 +60,4 @@ export default function SearchBar(props) {
       </IconButton>
     </Paper>
   );
-};
+}
