@@ -7,10 +7,11 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import IconButton from "@mui/material/IconButton";
 import swal from "sweetalert";
 import React, { useState, useEffect } from "react";
-import heartdetailpage from "assets/img/heartdetailpage.png"
+import heartdetailpage from "assets/img/heartdetailpage.png";
 
 export default function Information(props) {
   const [like, setLike] = useState("");
+  const [count, setCount] = useState("");
   const [tasteData, setTasteData] = useState();
   useEffect(() => {
     setLike(props.alcohol.user_like);
@@ -38,6 +39,7 @@ export default function Information(props) {
         },
       ]);
     }
+    setCount(props.alcohol.like_count);
   }, [props]);
 
   const [openReview, setOpenReview] = useState(false);
@@ -48,16 +50,11 @@ export default function Information(props) {
         ? []
         : [props.alcohol.tag.split(",")]
       : [];
-  console.log(detailInformationTags)
-  const detailInformationTagslist = ( detailInformationTags[0] && detailInformationTags[0].length > 1 ? (
-    detailInformationTags[0].map(e => (
-      <div key={e}>#{e}</div>
-    ))
-  ) :
-    (
-      detailInformationTags.map(e => (
-        <div key={e}>#{e}</div>
-      ))));
+  //console.log(detailInformationTags);
+  const detailInformationTagslist =
+    detailInformationTags[0] && detailInformationTags[0].length > 1
+      ? detailInformationTags[0].map(e => <div key={e}>#{e}</div>)
+      : detailInformationTags.map(e => <div key={e}>#{e}</div>);
 
   /**
    * @todo 유저 평점 집어넣어야 함
@@ -74,9 +71,11 @@ export default function Information(props) {
         if (res === "success") {
           if (like === 1) {
             setLike(0);
+            setCount(count - 1);
           } else {
             swal("Like!", "좋아요 추가 완료!", "success");
             setLike(1);
+            setCount(count + 1);
           }
         }
       });
@@ -102,12 +101,14 @@ export default function Information(props) {
         <div id="information">
           {like === 1 ? (
             <div id="divlike">
+              <div id="textCount">{count}</div>
               <IconButton onClick={changelike} id="likeb">
                 <FavoriteIcon sx={{ fontSize: 40 }} />
               </IconButton>
             </div>
           ) : (
             <div id="divlike">
+              <div id="textCount">{count}</div>
               <IconButton onClick={changelike} id="likeb">
                 <FavoriteBorderIcon sx={{ fontSize: 40 }} />
               </IconButton>
@@ -121,9 +122,9 @@ export default function Information(props) {
           <div>도수 : {props.alcohol.abv}도</div>
           {props.alcohol.award === "" ? (
             <div>수상내역 : -</div>
-            ) : (
-              <div>수상내역 : {props.alcohol.award}</div>
-              )}
+          ) : (
+            <div>수상내역 : {props.alcohol.award}</div>
+          )}
           <div id="information-desc">설명 : {props.alcohol.detail}</div>
           <div id="information-tags">{detailInformationTagslist}</div>
           <div id="buttongroup-frame">
@@ -180,6 +181,8 @@ const StyledWrapper = styled.div`
     justify-content: center;
     background-color: white;
     border-radius: 7px;
+    margin-top: 20px;
+    margin-left: 20px;
   }
   #picture img {
     width: 290px;
@@ -191,10 +194,14 @@ const StyledWrapper = styled.div`
 
   #divlike {
     text-align: right;
-    height: 10px;
+    display: inline-block;
+    height: 0px;
+    font-size: larger;
   }
-  #likeb {
-    margin-bottom: -30px;
+
+  #textCount {
+    display: inline-block;
+    font-family: "GD";
   }
 
   #alcoholname {
@@ -209,7 +216,7 @@ const StyledWrapper = styled.div`
     font-size: 20px;
   }
   #information div {
-    margin: 0px 10px 3px;
+    margin: 0px 5px 3px;
   }
 
   #buttongroup-frame {

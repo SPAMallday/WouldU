@@ -23,8 +23,11 @@ export default function MyPage() {
   const [mpToggle, setToggle] = useState("true");
 
   //차트용 데이터들
-  const [cateData, setCateData] = useState([]);
+  const [mycateData, setmyCateData] = useState([]);
+  const [othercateData, setotherCateData] = useState([]);
+
   const [rateData, setRateData] = useState([]);
+  const [otherrateData, setotherRateData] = useState([]);
   const [spaceData, setSpaceData] = useState([]);
 
   //랭킹용 데이터들
@@ -34,30 +37,57 @@ export default function MyPage() {
   useEffect(() => {
     setUserName(sessionStorage.getItem("Nick"));
 
-    /** 페이지 이동했을때 값들 전부 가져와야한다.*/
-
-    //const user_no = sessionStorage.getItem("no");
-
-    // category("/mypage/my-fav-alcohol", user_no);
-    // average("/mypage/my-alcohol", user_no);
-
+    //주종
     category().then(res => {
-      setCateData([]);
+      setmyCateData([]);
+      setotherCateData([]);
       res.forEach(data => {
-        setCateData(cateData => [
-          ...cateData,
-          { id: data.alcohol_type, value: data.count },
-        ]);
+        if (data.TYPE === "USER") {
+          setmyCateData(cateData => [
+            ...cateData,
+            { id: data.alcohol_type, value: data.count },
+          ]);
+        } else {
+          if (data.count > 0) {
+            setotherCateData(cateData => [
+              ...cateData,
+              { id: data.alcohol_type, value: data.count },
+            ]);
+          }
+        }
       });
     });
+
+    //평균값
     average().then(res => {
-      setRateData([
-        { subject: "단맛", rating: res[0].단맛.toFixed(2) },
-        { subject: "신맛", rating: res[0].신맛.toFixed(2) },
-        { subject: "바디감", rating: res[0].바디감.toFixed(2) },
-        { subject: "향", rating: res[0].향.toFixed(2) },
-      ]);
-      // setRateData(res);
+      console.log(res);
+
+      res.forEach(data => {
+        if (data.TYPE === "USER") {
+          if (data.단맛 !== null) {
+            setRateData([
+              { subject: "단맛", rating: res[0].단맛.toFixed(2) },
+              { subject: "신맛", rating: res[0].신맛.toFixed(2) },
+              { subject: "바디감", rating: res[0].바디감.toFixed(2) },
+              { subject: "향", rating: res[0].향.toFixed(2) },
+            ]);
+          } else {
+            setRateData([
+              { subject: "단맛", rating: 0 },
+              { subject: "신맛", rating: 0 },
+              { subject: "바디감", rating: 0 },
+              { subject: "향", rating: 0 },
+            ]);
+          }
+        } else {
+          setotherRateData([
+            { subject: "단맛", rating: res[1].단맛.toFixed(2) },
+            { subject: "신맛", rating: res[1].신맛.toFixed(2) },
+            { subject: "바디감", rating: res[1].바디감.toFixed(2) },
+            { subject: "향", rating: res[1].향.toFixed(2) },
+          ]);
+        }
+      });
     });
     space().then(res => {
       setSpaceData([]);
@@ -133,8 +163,10 @@ export default function MyPage() {
               </div>
               <Chart
                 userName={userName}
-                cateData={cateData}
+                cateData={mycateData}
                 rateData={rateData}
+                othercateData={othercateData}
+                otherrateData={otherrateData}
               />
               <MyCollection userName={userName} spaceData={spaceData} />
             </Card>
