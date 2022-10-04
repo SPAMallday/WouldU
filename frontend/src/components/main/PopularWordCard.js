@@ -36,6 +36,7 @@ export default function PopularWordCard() {
           onClick={() => {
             onClick(item.alcohol_no);
           }}
+          id="grid-clickable"
         >
           <img src={imgList[index]} alt={index + 1} />
           <Typography display="inline-flex">{item.alcohol_name}</Typography>
@@ -127,12 +128,16 @@ const StyledWrapper = styled.div`
   border-bottom-right-radius: 225px 15px;
   border-top-left-radius: 255px 15px;
   border-top-right-radius: 15px 225px;
-  display: flex;
-  flex-direction: column;
   background-color: #fcf8e8;
 
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  #grid-clickable {
+    cursor: pointer;
+  }
 
   .gridItem {
     border: 2px solid #ecdfc8;
