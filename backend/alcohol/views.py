@@ -5,7 +5,7 @@ from apps.wouldU.serializers import ReviewSerializer
 from django.db import connection
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
-from apps.mypage.models import Alcohol_like, User_group_figure
+from apps.mypage.models import Alcohol_like, User_alcohol, User_group_figure
 from django.http.response import JsonResponse
 from rest_framework.response import Response
 from django.core import serializers
@@ -181,6 +181,12 @@ def alcoPostReview(request):
     elif(user_kind =='K4'):
         kind_score_cal(Alcohol_score4, alco_no, score)
 
+
+    is_row= User_alcohol.objects.filter(alcohol_no = alco_no, user_no= user_no)
+    if(is_row.exists()):
+        is_row.update(score=score)
+    else :
+        User_alcohol.objects.create(score=score, alcohol_no = alco_no, user_no= user_no)
 
     return Response("success")      
 
