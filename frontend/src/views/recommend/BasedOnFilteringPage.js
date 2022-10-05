@@ -11,6 +11,7 @@ import filteringpageicon from "assets/img/filteringpageicon.png";
 import rocketicon from "assets/img/rocketicon.png";
 import { Link } from "react-router-dom";
 import mousepointer from "assets/img/mousepointer.png";
+import Nav from "components/nav/Nav";
 
 //import axios from "axios";
 
@@ -134,7 +135,7 @@ export default function BasedonFilteringPage() {
         </div>
       ) : (
         <div>
-          <Header />
+          <Nav />
           <ResultFiltering
             setGoToResult={setGoToResult}
             sweet={sweet}
@@ -243,7 +244,7 @@ const StyledWrapper = styled.div`
   #rocketframe {
     cursor: url(${mousepointer}) 50 50, auto;
     position: fixed;
-    top: 78vh;
+    top: 74vh;
     left: 0vw;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
