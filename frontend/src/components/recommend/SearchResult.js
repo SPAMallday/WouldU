@@ -77,7 +77,7 @@ export default function SearchResult(props) {
 
 const StyledWrapper = styled.div`
   width: 1800px;
-  height: 650px;
+  height: 620px;
   display: flex;
   align-items: center;
   justify-content: center;

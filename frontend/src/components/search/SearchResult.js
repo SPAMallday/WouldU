@@ -137,9 +137,9 @@ const PgStyle = styled.div`
 
 const StyledWrapper = styled.div`
   width: 100%;
-  height: 650px;
+  height: 620px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 
   a {
