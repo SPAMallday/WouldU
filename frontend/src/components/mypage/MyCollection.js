@@ -160,10 +160,10 @@ const Earth = styled.div`
         ? props.count !== 1
           ? props.count !== 2
             ? props.count !== 3
-              ? "300px"
-              : "250px"
-            : "200px"
-          : "150px"
+              ? "260px"
+              : "210px"
+            : "160px"
+          : "130px"
         : "100px"};
   }
 
@@ -189,10 +189,10 @@ const Planet = styled.div`
         ? props.count !== 1
           ? props.count !== 2
             ? props.count !== 3
-              ? "300px"
-              : "250px"
-            : "200px"
-          : "150px"
+              ? "260px"
+              : "210px"
+            : "160px"
+          : "130px"
         : "100px"};
   }
 

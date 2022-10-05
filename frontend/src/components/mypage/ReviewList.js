@@ -134,7 +134,7 @@ export default function ReviewList(prop) {
         <div id="space">
           <div id="itemlist"></div>
         </div>
-        {prop.reviewList > 0 ? (
+        {prop.reviewList.length > 0 ? (
           <Swiper
             id="swiper"
             modules={[Navigation]}

@@ -119,6 +119,8 @@ export default function DetailPage() {
                 detailId={params.detail_id}
                 alcohol={alcohol}
                 userno={userno}
+                setAlcohol={setAlcohol}
+                setReview={setReview}
               />
             </Grid>
           </Grid>

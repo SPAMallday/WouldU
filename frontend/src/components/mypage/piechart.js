@@ -23,7 +23,7 @@ const Piechart = prop => {
         /**
          * chart margin
          */
-        margin={{ top: 20, right: 40, bottom: 50, left: 20 }}
+        margin={{ top: 60, right: 40, bottom: 30, left: 20 }}
         /**
          * chart 중간 빈공간 반지름
          */

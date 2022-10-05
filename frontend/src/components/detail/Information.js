@@ -84,6 +84,8 @@ export default function Information(props) {
                   openReview={openReview}
                   setOpenReview={setOpenReview}
                   alcohol={props.alcohol}
+                  setReview={props.setReview}
+                  setAlcohol={props.setAlcohol}
                 />
               </div>
               <button id="goshop">
