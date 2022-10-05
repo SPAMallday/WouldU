@@ -1,6 +1,6 @@
 from dataclasses import field
 
-from alcohol.serializer import AlcoholSerializer
+from apps.alcohol.serializer import AlcoholSerializer
 from .models import Ranking,Review
 from rest_framework import serializers
 
