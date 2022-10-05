@@ -420,6 +420,9 @@ const StyledWrapper = styled.div`
 
   #btn_next {
     width: 170px;
+    border: solid #dbc8ac;
+    border-radius: 10px;
+    color: white;
     font-size: 24px;
     background-color: #367e18;
   }
@@ -429,7 +432,7 @@ const StyledWrapper = styled.div`
     border-radius: 10px;
     color: white;
     font-size: 24px;
-    background-color: #367e18;
+    background-color: #7F8487;
   }
   #btn_check {
     margin-left: 20px;
