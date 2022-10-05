@@ -47,10 +47,11 @@ def MyFavAlcoholAPI(request):
     # A3	약주,청주
     # A4	리큐르/기타주류
     # A5	탁주
-    cursor.execute(f'''SELECT a.user_kind
+    cursor.execute(f'''SELECT c.kind_name
                             , b.alcohol_type_figure
                          FROM user a
                             , user_group_figure b
+                            , user_kind_code c
                         WHERE 1=1
                           AND a.user_no = {user_no}
                           AND a.user_kind = b.user_kind_code
@@ -60,11 +61,11 @@ def MyFavAlcoholAPI(request):
     kind_result = ast.literal_eval(kind_result[1])
 
     # 나중에 수정,, 너무 하드코딩이다
-    results.append({'TYPE': 'KIND_' + user_kind, 'alcohol_type' : '과실주', 'count': kind_result[0]})
-    results.append({'TYPE': 'KIND_' + user_kind, 'alcohol_type' : '증류수', 'count': kind_result[1]})
-    results.append({'TYPE': 'KIND_' + user_kind, 'alcohol_type' : '약주,청주', 'count': kind_result[2]})
-    results.append({'TYPE': 'KIND_' + user_kind, 'alcohol_type' : '리큐르/기타주류', 'count': kind_result[3]})
-    results.append({'TYPE': 'KIND_' + user_kind, 'alcohol_type' : '탁주', 'count': kind_result[4]})
+    results.append({'TYPE': user_kind, 'alcohol_type' : '과실주', 'count': kind_result[0]})
+    results.append({'TYPE': user_kind, 'alcohol_type' : '증류수', 'count': kind_result[1]})
+    results.append({'TYPE': user_kind, 'alcohol_type' : '약주,청주', 'count': kind_result[2]})
+    results.append({'TYPE': user_kind, 'alcohol_type' : '리큐르/기타주류', 'count': kind_result[3]})
+    results.append({'TYPE': user_kind, 'alcohol_type' : '탁주', 'count': kind_result[4]})
 
     # print(results)
     return Response(results)
@@ -94,18 +95,20 @@ def MyAlcoholStatisticsAPI(request):
                 for row in cursor.fetchall()]
 
     # sweet, sour, body, scent, count 
-    cursor.execute(f'''SELECT a.user_kind
+    cursor.execute(f'''SELECT c.kind_name
                             , b.alcohol_taste_figure
                          FROM user a
                             , user_group_figure b
+                            , user_kind_code c
                         WHERE 1=1
                           AND a.user_no = {user_no}
                           AND a.user_kind = b.user_kind_code
+                          AND a.user_kind = c.user_kind_code
                     ''')
     kind_result = cursor.fetchone()
     user_kind = kind_result[0]
     kind_result = ast.literal_eval(kind_result[1])
-    results.append({'TYPE': 'KIND_' + user_kind, '단맛': kind_result[0]/kind_result[4], '신맛': kind_result[1]/kind_result[4],\
+    results.append({'TYPE': user_kind, '단맛': kind_result[0]/kind_result[4], '신맛': kind_result[1]/kind_result[4],\
                      '바디감': kind_result[2]/kind_result[4], '향': kind_result[3]/kind_result[4]})
 
     # print(results)

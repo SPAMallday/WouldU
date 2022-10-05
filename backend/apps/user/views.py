@@ -38,7 +38,7 @@ def signup(request):
 
         id = User.objects.get(user_id = user_id) # user_no
         Survey.objects.create(user_no = id, reply_list = reply_list)
-        return JsonResponse({'result' : "success", 'user_kind': kind})
+        return JsonResponse({'result' : "success", 'user_kind': [user_k, kind]})
     return JsonResponse({'result' : "fail"})
     #return Response(user.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -63,21 +63,34 @@ def cal_reply(reply_list):
                 on +=1
 
     
+    # if(oy>on):
+    #     if(ey>en):
+    #         user_k = User_kind_code.objects.get(kind_code = 'K1')
+    #         # us.update(user_kind= user_k)
+    #     else: 
+    #         print("here")
+    #         user_k = User_kind_code.objects.get(kind_code = 'K2')
+    #         # us.update(user_kind =user_k)
+    # else:
+    #     if(ey>en):
+    #         user_k = User_kind_code.objects.get(kind_code = 'K3')
+    #         # us.update(user_kind=user_k)
+    #     else:
+    #         # us.update(user_kind=user_k)
+    
     if(oy>on):
         if(ey>en):
-            user_k = User_kind_code.objects.get(kind_code = 'K1')
-            # us.update(user_kind= user_k)
+            kind_code = 'K1'
         else: 
-            print("here")
-            user_k = User_kind_code.objects.get(kind_code = 'K2')
-            # us.update(user_kind =user_k)
+            kind_code = 'K2'
     else:
         if(ey>en):
-            user_k = User_kind_code.objects.get(kind_code = 'K3')
-            # us.update(user_kind=user_k)
+            kind_code = 'K3'
         else:
-            user_k = User_kind_code.objects.get(kind_code = 'K4')
-            # us.update(user_kind=user_k)
+            kind_code = 'K4'
+    
+    user_k = User_kind_code.objects.get(kind_code = kind_code)
+
     return user_k
 
 
