@@ -30,7 +30,6 @@ export default function MyPage() {
   const [rateData, setRateData] = useState([]);
   const [otherrateData, setotherRateData] = useState([]);
   const [spaceData, setSpaceData] = useState([]);
-
   //랭킹용 데이터들
   const [likeList, setLikeList] = useState([]);
   const [reviewList, setReviewList] = useState([]);
@@ -61,7 +60,7 @@ export default function MyPage() {
 
     //평균값
     average().then(res => {
-      console.log(res);
+      //console.log(res);
 
       res.forEach(data => {
         if (data.TYPE === "USER") {
@@ -97,9 +96,6 @@ export default function MyPage() {
           ...spaceData,
           { space: data.region_name, count: data.count },
         ]);
-      });
-      spaceData.sort(function (a, b) {
-        return b.count - a.count;
       });
     });
     mylike().then(res => {
@@ -155,10 +151,10 @@ export default function MyPage() {
                     id="btnSummary"
                     size="large"
                   >
-                    <BarChartIcon sx={{ fontSize: 40, color: "#fa7070" }} />
+                    <BarChartIcon sx={{ fontSize: 40, color: "#ffa500" }} />
                   </IconButton>
                   <IconButton onClick={onClickList}>
-                    <StarIcon sx={{ fontSize: 40, color: "#ffa500" }} />
+                    <StarIcon sx={{ fontSize: 40, color: "gray" }} />
                   </IconButton>
                 </div>
               </div>
@@ -178,22 +174,22 @@ export default function MyPage() {
   } else {
     return (
       <StyledWrapper>
-        <Header />
+        <Nav />
         <div id="main">
           <div id="mainPage">
             <Card>
               <div id="mp_header">
-                <h1 id="nameText">{userName}님 리뷰</h1>
+                <h1 id="nameText">{userName}님의 기록</h1>
                 <div id="btnGroup">
                   <IconButton
                     onClick={onClickSummary}
                     id="btnSummary"
                     size="large"
                   >
-                    <BarChartIcon sx={{ fontSize: 40, color: "#ffa500" }} />
+                    <BarChartIcon sx={{ fontSize: 40, color: "#gray" }} />
                   </IconButton>
                   <IconButton onClick={onClickList}>
-                    <StarIcon sx={{ fontSize: 40, color: "#fa7070" }} />
+                    <StarIcon sx={{ fontSize: 40, color: "#ffa500" }} />
                   </IconButton>
                 </div>
               </div>

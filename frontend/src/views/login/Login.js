@@ -43,7 +43,6 @@ export default function Login() {
             } else {
               navigate(-1);
             }
-            swal("Welcome!", "로그인 성공", "success");
           } else {
             swal("Error!", "아이디 또는 비밀번호 오류입니다.", "error");
           }

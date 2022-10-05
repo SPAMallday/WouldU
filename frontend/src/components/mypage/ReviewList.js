@@ -155,15 +155,19 @@ export default function ReviewList(prop) {
         <div id="space">
           <div id="itemlist"></div>
         </div>
-        <Swiper
-          id="swiper"
-          modules={[Navigation]}
-          spaceBetween={50}
-          slidesPerView={3}
-          navigation
-        >
-          {like()}
-        </Swiper>
+        {prop.reviewList.length > 0 ? (
+          <Swiper
+            id="swiper"
+            modules={[Navigation]}
+            spaceBetween={50}
+            slidesPerView={3}
+            navigation
+          >
+            {like()}
+          </Swiper>
+        ) : (
+          <div id="reviewnull">평가하신 술이 없습니다.😥</div>
+        )}
       </div>
     </StyledWrapper>
   );
@@ -284,5 +288,8 @@ const StyledWrapper = styled.div`
 
   .swiper-wrapper {
     margin-left: 50px;
+  }
+  #reviewnull {
+    font-size: 30px;
   }
 `;
