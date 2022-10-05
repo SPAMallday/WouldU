@@ -30,7 +30,6 @@ export default function MyPage() {
   const [rateData, setRateData] = useState([]);
   const [otherrateData, setotherRateData] = useState([]);
   const [spaceData, setSpaceData] = useState([]);
-
   //랭킹용 데이터들
   const [likeList, setLikeList] = useState([]);
   const [reviewList, setReviewList] = useState([]);
@@ -61,7 +60,7 @@ export default function MyPage() {
 
     //평균값
     average().then(res => {
-      console.log(res);
+      //console.log(res);
 
       res.forEach(data => {
         if (data.TYPE === "USER") {
@@ -97,9 +96,6 @@ export default function MyPage() {
           ...spaceData,
           { space: data.region_name, count: data.count },
         ]);
-      });
-      spaceData.sort(function (a, b) {
-        return b.count - a.count;
       });
     });
     mylike().then(res => {

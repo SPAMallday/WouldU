@@ -15,12 +15,20 @@ import { Navigation } from "swiper";
 
 export default function MyCollection(prop) {
   const [rank, setRank] = useState();
+  const [max, setMax] = useState(0);
+
   useEffect(() => {
     if (prop.spaceData && prop.spaceData.length > 0) {
       prop.spaceData.sort(function (a, b) {
         return b.space - a.space;
       });
       setRank(prop.spaceData);
+
+      for (var i = 0; i < prop.spaceData.length; i++) {
+        if (max < prop.spaceData[i].count) {
+          setMax(prop.spaceData[i].count);
+        }
+      }
     }
   }, [prop, rank]);
 
@@ -39,7 +47,7 @@ export default function MyCollection(prop) {
             >
               <div id="space">
                 <SwiperSlide>
-                  <Earth count={rank[0].count}>
+                  <Earth count={parseInt(rank[0].count / (max / 4))}>
                     <div id="textCount">{rank[0].count} 개</div>
                     <img src={earth} alt="지구" id="P_earth" />
                     <h5>{rank[0].space}</h5>
@@ -47,7 +55,7 @@ export default function MyCollection(prop) {
                 </SwiperSlide>
                 {rank[1] ? (
                   <SwiperSlide>
-                    <Planet count={rank[1].count}>
+                    <Planet count={parseInt(rank[1].count / (max / 4))}>
                       <div id="textCount">{rank[1].count} 개</div>
                       <img src={planet1} alt="행성" id="P_planet" />
                       <h5>{rank[1].space}</h5>
@@ -56,7 +64,7 @@ export default function MyCollection(prop) {
                 ) : null}
                 {rank[2] ? (
                   <SwiperSlide>
-                    <Planet count={rank[2].count}>
+                    <Planet count={parseInt(rank[2].count / (max / 4))}>
                       <div id="textCount">{rank[2].count} 개</div>
                       <img src={planet2} alt="행성" id="P_planet" />
                       <h5>{rank[2].space}</h5>
@@ -65,7 +73,7 @@ export default function MyCollection(prop) {
                 ) : null}
                 {rank[3] ? (
                   <SwiperSlide>
-                    <Planet count={rank[3].count}>
+                    <Planet count={parseInt(rank[3].count / (max / 4))}>
                       <div id="textCount">{rank[3].count} 개</div>
                       <img src={planet3} alt="행성" id="P_planet" />
                       <h5>{rank[3].space}</h5>
@@ -74,7 +82,7 @@ export default function MyCollection(prop) {
                 ) : null}
                 {rank[4] ? (
                   <SwiperSlide>
-                    <Planet count={rank[4].count}>
+                    <Planet count={parseInt(rank[4].count / (max / 4))}>
                       <div id="textCount">{rank[4].count} 개</div>
                       <img src={planet4} alt="행성" id="P_planet" />
                       <h5>{rank[4].space}</h5>
@@ -83,7 +91,7 @@ export default function MyCollection(prop) {
                 ) : null}
                 {rank[5] ? (
                   <SwiperSlide>
-                    <Planet count={rank[5].count}>
+                    <Planet count={parseInt(rank[5].count / (max / 4))}>
                       <div id="textCount">{rank[5].count} 개</div>
                       <img src={planet5} alt="행성" id="P_planet" />
                       <h5>{rank[5].space}</h5>
@@ -92,7 +100,7 @@ export default function MyCollection(prop) {
                 ) : null}
                 {rank[6] ? (
                   <SwiperSlide>
-                    <Planet count={rank[6].count}>
+                    <Planet count={parseInt(rank[6].count / (max / 4))}>
                       <div id="textCount">{rank[6].count} 개</div>
                       <img src={planet6} alt="행성" id="P_planet" />
                       <h5>{rank[6].space}</h5>
@@ -101,7 +109,7 @@ export default function MyCollection(prop) {
                 ) : null}
                 {rank[7] ? (
                   <SwiperSlide>
-                    <Planet count={rank[7].count}>
+                    <Planet count={parseInt(rank[7].count / (max / 4))}>
                       <div id="textCount">{rank[7].count} 개</div>
                       <img src={planet7} alt="행성" id="P_planet" />
                       <h5>{rank[7].space}</h5>
@@ -110,7 +118,7 @@ export default function MyCollection(prop) {
                 ) : null}
                 {rank[8] ? (
                   <SwiperSlide>
-                    <Planet count={rank[8].count}>
+                    <Planet count={parseInt(rank[8].count / (max / 4))}>
                       <div id="textCount">{rank[8].count} 개</div>
                       <img src={planet8} alt="행성" id="P_planet" />
                       <h5>{rank[8].space}</h5>
@@ -148,7 +156,15 @@ export default function MyCollection(prop) {
 const Earth = styled.div`
   #P_earth {
     width: ${props =>
-      props.count > 3 ? (props.count > 6 ? "300px" : "200px") : "100px"};
+      props.count !== 0
+        ? props.count !== 1
+          ? props.count !== 2
+            ? props.count !== 3
+              ? "300px"
+              : "250px"
+            : "200px"
+          : "150px"
+        : "100px"};
   }
 
   display: inline-block;
@@ -169,7 +185,15 @@ const Earth = styled.div`
 const Planet = styled.div`
   #P_planet {
     width: ${props =>
-      props.count > 3 ? (props.count > 6 ? "300px" : "200px") : "100px"};
+      props.count !== 0
+        ? props.count !== 1
+          ? props.count !== 2
+            ? props.count !== 3
+              ? "300px"
+              : "250px"
+            : "200px"
+          : "150px"
+        : "100px"};
   }
 
   display: inline-block;
