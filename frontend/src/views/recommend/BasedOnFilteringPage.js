@@ -157,7 +157,7 @@ const StyledWrapper = styled.div`
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
-    height: 100%;
+    height: 100vh;
   }
   #main {
     display: flex;

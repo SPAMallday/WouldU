@@ -67,6 +67,8 @@ const StyledWrapper = styled.div`
   #similartitle {
     font-size: 24px;
     margin: 10px;
+    word-break: keep-all;
+    text-align: center;
   }
 
   #similar {
