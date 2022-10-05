@@ -71,16 +71,16 @@ export default function SelectType(prop) {
           <Slider
             defaultValue={3}
             getAriaValueText={valuetext}
-            onChange={prop.handleChange1}
+            onChange={prop.handleChange}
             valueLabelDisplay="auto"
             marks={[
               {
                 value: 0,
-                label: prop.selectText.handle1Text[0],
+                label: "쓴맛이 좋아요!",
               },
               {
                 value: 5,
-                label: prop.selectText.handle1Text[1],
+                label: "단맛이 좋아요!",
               },
             ]}
             min={0}
@@ -95,16 +95,16 @@ export default function SelectType(prop) {
           <Slider
             defaultValue={3}
             getAriaValueText={valuetext}
-            onChange={prop.handleChange2}
+            onChange={prop.handleChange1}
             valueLabelDisplay="auto"
             marks={[
               {
                 value: 0,
-                label: prop.selectText.handle2Text[0],
+                label: "신맛은 싫어요!",
               },
               {
                 value: 5,
-                label: prop.selectText.handle2Text[1],
+                label: "셔야 맛이죠!",
               },
             ]}
             min={0}
@@ -119,16 +119,16 @@ export default function SelectType(prop) {
           <Slider
             defaultValue={3}
             getAriaValueText={valuetext}
-            onChange={prop.handleChange3}
+            onChange={prop.handleChange2}
             valueLabelDisplay="auto"
             marks={[
               {
                 value: 1,
-                label: prop.selectText.handle3Text[0],
+                label: "아주 가볍게!",
               },
               {
                 value: 5,
-                label: prop.selectText.handle3Text[1],
+                label: "아주 무겁게!",
               },
             ]}
             min={1}
@@ -143,16 +143,16 @@ export default function SelectType(prop) {
           <Slider
             defaultValue={3}
             getAriaValueText={valuetext}
-            onChange={prop.handleChange4}
+            onChange={prop.handleChange3}
             valueLabelDisplay="auto"
             marks={[
               {
                 value: 1,
-                label: prop.selectText.handle4Text[0],
+                label: "약한 향!",
               },
               {
                 value: 5,
-                label: prop.selectText.handle4Text[1],
+                label: "강한 향!",
               },
             ]}
             min={1}

@@ -35,24 +35,17 @@ export default function SendReviewDialog(props) {
   const [sour, setSour] = useState(3);
   const [body, setBody] = useState(3);
   const [smell, setSmell] = useState(3);
-  // SelectType Text  
-  const [selectText, setSelectText] = useState({
-    handle1Text : ["써요!", "달아요!"],
-    handle2Text : ["안셔요!", "셔요!"],
-    handle3Text : ["가벼워요!", "무거워요!"],
-    handle4Text : ["약한 향!", "강한 향!"],
-  });
 
-  const handleChange1 = (event, newValue) => {
+  const handleChange = (event, newValue) => {
     setSweet(newValue);
   };
-  const handleChange2 = (event, newValue) => {
+  const handleChange1 = (event, newValue) => {
     setSour(newValue);
   };
-  const handleChange3 = (event, newValue) => {
+  const handleChange2 = (event, newValue) => {
     setBody(newValue);
   };
-  const handleChange4 = (event, newValue) => {
+  const handleChange3 = (event, newValue) => {
     setSmell(newValue);
   };
 
@@ -137,11 +130,10 @@ export default function SendReviewDialog(props) {
           <div id="main">
             <div>
               <SelectType
+                handleChange={handleChange}
                 handleChange1={handleChange1}
                 handleChange2={handleChange2}
                 handleChange3={handleChange3}
-                handleChange4={handleChange4}
-                selectText={selectText}
               />
             </div>
             <div id="text-font">
