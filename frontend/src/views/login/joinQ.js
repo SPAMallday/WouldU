@@ -6,7 +6,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Button from "@mui/material/Button";
-import Header from "components/nav/Header";
 import { useLocation, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { join } from "../../api/userAPI";
@@ -115,7 +114,7 @@ export default function JoinQ() {
             swal({
               confirmButtonColor: "#fe8f34",
               title: "1유형입니다",
-              text: "혼자서 먹는걸 선호하는 타입 :)\n 향과 맛을 중요시하시는 분이군요?",
+              text: "혼자서 먹는걸 선호하는 타입 😎\n 맛과 향을 중요시하시는 분이군요?",
               icon: "success",
               buttons: {
                 confirm: {
@@ -130,7 +129,7 @@ export default function JoinQ() {
             swal({
               confirmButtonColor: "#fe8f34",
               title: "2유형입니다",
-              text: "여럿이서 먹는걸 선호하는 타입 :)\n 향과 맛을 중요시하시는 분이군요?",
+              text: "혼자서 먹는걸 선호하는 타입 😎\n 맛과 향을 신경쓰지 않는 분이군요?",
               icon: "success",
               buttons: {
                 confirm: {
@@ -144,7 +143,7 @@ export default function JoinQ() {
             swal({
               confirmButtonColor: "#fe8f34",
               title: "3유형입니다",
-              text: "혼자서 먹는걸 선호하는 타입 :)\n 자극적인걸 싫어하시는 분이군요?",
+              text: "여럿이서 먹는걸 선호하는 타입 😎\n 맛과 향을 중요시하시는 분이군요?",
               icon: "success",
               buttons: {
                 confirm: {
@@ -158,7 +157,7 @@ export default function JoinQ() {
             swal({
               confirmButtonColor: "#fe8f34",
               title: "4유형입니다",
-              text: "여럿이서 먹는걸 선호하는 타입 :)\n 자극적인걸 싫어하시는 분이군요?",
+              text: "여럿이서 먹는걸 선호하는 타입 😎\n 맛과 향을 신경쓰지 않는 분이군요?",
               icon: "success",
               buttons: {
                 confirm: {

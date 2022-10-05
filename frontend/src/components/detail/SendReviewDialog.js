@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -28,7 +27,7 @@ export default function SendReviewDialog(props) {
   const { openReview, setOpenReview } = props;
 
   //평가
-  const [value, setValue] = useState(3);
+  const [value, setValue] = useState(0);
   //한줄평
   const [comment, setComment] = useState("");
   //맛선택
@@ -55,38 +54,46 @@ export default function SendReviewDialog(props) {
   };
 
   const handleOk = () => {
-    const data = {
-      user_no: sessionStorage.getItem("no"),
-      alcohol_no: props.alcohol.alco_no,
-      score: value,
-      comment: comment,
-      sweet: sweet,
-      sour: sour,
-      scent: smell,
-      body: body,
-    };
-    console.log(sweet, sour, body, smell, value, comment);
-    alcoholreview(data).then(res => {
-      if (res === "success") {
-        swal({
-          title: "Thank you!",
-          text: "리뷰 작성이 완료되었습니다.",
-          icon: "success",
-          button: {
-            text: "확인",
-          },
-        });
-        setOpenReview(false);
-        reviewalcohol(props.alcohol.alco_no).then(res => {
-          props.setReview(res);
-        });
-        alcoholDetail(props.alcohol.alco_no).then(res => {
-          props.setAlcohol(res);
-        });
+    if (value === 0 || value === null) {
+      swal("Error!", "평점을 입력해주세요!", "info");
+      //console.log(comment.trimStart().trimEnd());
+    } else {
+      if (comment.trimStart().trimEnd() === "") {
+        swal("Error!", "다른 유저들을 위해 한줄평을 입력해주세요!", "info");
       } else {
-        swal("Error!", "리뷰 작성 실패!!", "error");
+        const data = {
+          user_no: sessionStorage.getItem("no"),
+          alcohol_no: props.alcohol.alco_no,
+          score: value,
+          comment: comment.trimStart().trimEnd(),
+          sweet: sweet,
+          sour: sour,
+          scent: smell,
+          body: body,
+        };
+        alcoholreview(data).then(res => {
+          if (res === "success") {
+            swal({
+              title: "Thank you!",
+              text: "리뷰 작성이 완료되었습니다.",
+              icon: "success",
+              button: {
+                text: "확인",
+              },
+            });
+            setOpenReview(false);
+            reviewalcohol(props.alcohol.alco_no).then(res => {
+              props.setReview(res);
+            });
+            alcoholDetail(props.alcohol.alco_no).then(res => {
+              props.setAlcohol(res);
+            });
+          } else {
+            swal("Error!", "리뷰 작성 실패!!", "error");
+          }
+        });
       }
-    });
+    }
   };
 
   const onChangeValue = (event, newValue) => {
@@ -111,51 +118,34 @@ export default function SendReviewDialog(props) {
           &lt; 리뷰 작성하기 &gt;
         </DialogTitle>
       </CustomStyle>
-      <DialogContent>
-        <DialogContentText sx={{ fontFamily: "GD", fontSize: "18px" }}>
+      <DialogContent id="scrollBar">
+        <DialogContentText
+          sx={{ fontFamily: "GD", fontSize: "18px", textAlign: "center" }}
+        >
           "{props.alcohol.alco_name}"을(를) 마셔본 우주 유저의 경험은
           소중합니다.
         </DialogContentText>
-        <Box
-          noValidate
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            m: "auto",
-            width: "fit-content",
-          }}
-        >
-          <StyledWrapper>
-            <div id="main">
-              <div id="ratingForm">
-                <div id="imgBox">
-                  <img src={props.alcohol.alco_img} alt="술" id="img_sul" />
-                </div>
-                <div id="detailBox">
-                  <h5 id="text_title">이름 : {props.alcohol.alco_name}</h5>
-                  <h5 id="text_sul">주종 : {props.alcohol.alco_type}</h5>
-                  <h5 id="text_sul">도수 : {props.alcohol.abv}도</h5>
-                </div>
-              </div>
-              <div>
-                <SelectType
-                  handleChange={handleChange}
-                  handleChange1={handleChange1}
-                  handleChange2={handleChange2}
-                  handleChange3={handleChange3}
-                />
-              </div>
-              <div id="text-font">
-                <StarComment
-                  value={value}
-                  onChangeValue={onChangeValue}
-                  comment={comment}
-                  onChangeComment={onChangeComment}
-                />
-              </div>
+
+        <StyledWrapper>
+          <div id="main">
+            <div>
+              <SelectType
+                handleChange={handleChange}
+                handleChange1={handleChange1}
+                handleChange2={handleChange2}
+                handleChange3={handleChange3}
+              />
             </div>
-          </StyledWrapper>
-        </Box>
+            <div id="text-font">
+              <StarComment
+                value={value}
+                onChangeValue={onChangeValue}
+                comment={comment}
+                onChangeComment={onChangeComment}
+              />
+            </div>
+          </div>
+        </StyledWrapper>
       </DialogContent>
       <DialogActions>
         <Button
