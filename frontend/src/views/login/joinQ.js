@@ -10,6 +10,7 @@ import Header from "components/nav/Header";
 import { useLocation, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import { join } from "../../api/userAPI";
+import Nav from "components/nav/Nav";
 
 export default function JoinQ() {
   const navigate = useNavigate();
@@ -112,58 +113,59 @@ export default function JoinQ() {
         if (res.result === "success") {
           if (res.user_kind === "1유형") {
             swal({
+              confirmButtonColor: "#fe8f34",
               title: "1유형입니다",
               text: "혼자서 먹는걸 선호하는 타입 :)\n 향과 맛을 중요시하시는 분이군요?",
               icon: "success",
               buttons: {
                 confirm: {
-                  text: "확인",
+                  text: "로그인",
+                  className: "confirmBtn",
                 },
               },
             }).then(() => {
-              swal("Success!", "회원가입 완료!", "success");
               navigate("/login", { state: { fromjoin: true } });
             });
           } else if (res.user_kind === "2유형") {
             swal({
+              confirmButtonColor: "#fe8f34",
               title: "2유형입니다",
               text: "여럿이서 먹는걸 선호하는 타입 :)\n 향과 맛을 중요시하시는 분이군요?",
               icon: "success",
               buttons: {
                 confirm: {
-                  text: "확인",
+                  text: "로그인",
                 },
               },
             }).then(() => {
-              swal("Success!", "회원가입 완료!", "success");
               navigate("/login", { state: { fromjoin: true } });
             });
           } else if (res.user_kind === "3유형") {
             swal({
+              confirmButtonColor: "#fe8f34",
               title: "3유형입니다",
               text: "혼자서 먹는걸 선호하는 타입 :)\n 자극적인걸 싫어하시는 분이군요?",
               icon: "success",
               buttons: {
                 confirm: {
-                  text: "확인",
+                  text: "로그인",
                 },
               },
             }).then(() => {
-              swal("Success!", "회원가입 완료!", "success");
               navigate("/login", { state: { fromjoin: true } });
             });
           } else {
             swal({
+              confirmButtonColor: "#fe8f34",
               title: "4유형입니다",
               text: "여럿이서 먹는걸 선호하는 타입 :)\n 자극적인걸 싫어하시는 분이군요?",
               icon: "success",
               buttons: {
                 confirm: {
-                  text: "확인",
+                  text: "로그인",
                 },
               },
             }).then(() => {
-              swal("Success!", "회원가입 완료!", "success");
               navigate("/login", { state: { fromjoin: true } });
             });
           }
@@ -178,7 +180,7 @@ export default function JoinQ() {
 
   return (
     <StyledWrapper>
-      <Header />
+      <Nav />
       <div id="bigdiv">
         <div id="main">
           <h2>&lt;음주유형검사&gt;</h2>
@@ -518,7 +520,6 @@ export default function JoinQ() {
 }
 
 const StyledWrapper = styled.div`
-  background-color: #f7ecde;
   h2 {
     margin-top: 30px;
   }
@@ -534,13 +535,12 @@ const StyledWrapper = styled.div`
   }
   #main {
     text-align: center;
+    min-width: 600px;
     width: 40vw;
     margin: 10px;
     padding: 10px;
-    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
     border-style: solid;
     border-width: 2px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     font-family: "GD";
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     box-sizing: border-box;
@@ -550,15 +550,10 @@ const StyledWrapper = styled.div`
     border-top-right-radius: 15px 225px;
 
     flex-direction: column;
-    background-color: #dfe8cc;
+    background-color: #fcf8e8;
 
     justify-content: center;
     align-items: center;
-  }
-
-  #surveyBox {
-    width: 500px;
-    display: inline-block;
   }
 
   #radioGroup {
@@ -576,11 +571,6 @@ const StyledWrapper = styled.div`
 
   #inputBox {
     width: 300px;
-    margin: 40px auto;
-  }
-
-  #btBox {
-    margin: 40px;
   }
 
   #btn_join {
@@ -590,16 +580,19 @@ const StyledWrapper = styled.div`
     color: white;
     font-size: 24px;
     font-family: "GD";
-    background-color: #367e18;
-  }
-  #btn_join1 {
-    width: 170px;
+    background-color: #fe8f34;
   }
 
-  #surveyForm {
-    display: inline-block;
-    width: 600px;
+  #btn_join1 {
+    width: 170px;
+    font-size: 24px;
+    font-family: "GD";
+    color: white;
+    border: solid #dbc8ac;
+    border-radius: 10px;
+    background-color: #d8d8d8;
   }
+
   #btBox {
     margin-top: 40px;
     margin-bottom: 30px;
@@ -610,5 +603,13 @@ const StyledWrapper = styled.div`
 
   .MuiTypography-root {
     font-family: "GD";
+  }
+
+  #surveyBox div div label {
+    word-break: keep-all;
+  }
+
+  .confirmBtn {
+    background-color: #fe8f34;
   }
 `;

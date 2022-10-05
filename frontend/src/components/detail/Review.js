@@ -48,6 +48,7 @@ const StyledWrapper = styled.div`
     border-radius: 10px;
     background-color: #fff1f0;
     padding: 5px;
+    padding-bottom: 30px;
   }
 
   #reviewtitle {

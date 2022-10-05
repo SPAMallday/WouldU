@@ -11,7 +11,7 @@ import {
 } from "../../api/recommendAPI";
 import Nav from "components/nav/Nav";
 import RadarChart from "components/detail/RadarChart";
-import { Box, Divider, Grid, Stack } from "@mui/material";
+import { Box, Grid, Stack } from "@mui/material";
 
 import chartSVG from "assets/img/svg/chart.svg";
 import followSVG from "assets/img/svg/following.svg";
