@@ -36,7 +36,7 @@ export default function MyCollection(prop) {
     if (rank && rank.length > 0) {
       return (
         <StyledWrapper>
-          <h3 id="title">{prop.userName}님이 먹은 술 </h3>
+          <h3 id="title">{prop.userName}님이 마신 술은 여기에서 왔어요! </h3>
           <div id="main2">
             <Swiper
               modules={[Navigation]}
@@ -134,7 +134,7 @@ export default function MyCollection(prop) {
   } else {
     return (
       <StyledWrapper>
-        <h3 id="title">{prop.userName}님이 먹은 술 </h3>
+        <h3 id="title">{prop.userName}님이 먹은 술은 여기에서 왔어요! </h3>
         <div id="main2">
           <Swiper
             modules={[Navigation]}

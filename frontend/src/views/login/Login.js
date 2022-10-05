@@ -124,10 +124,13 @@ const StyledWrapper = styled.div`
     justify-content: center;
   }
 
-  .css-rb59ar-MuiPaper-root-MuiCard-root {
+  #main .MuiCard-root {
     margin: 0 auto;
     width: 1200px;
     font-family: "GD";
+    border-color: #363636;
+    border-style: solid;
+    border-width: 2px;
     border-bottom-left-radius: 15px 255px;
     border-bottom-right-radius: 225px 15px;
     border-top-left-radius: 255px 15px;

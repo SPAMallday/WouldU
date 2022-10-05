@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import swal from "sweetalert";
 import { mydelete, myreview } from "../../api/myPageAPI";
-import removeicon from "assets/img/removeicon.png"
+import removeicon from "assets/img/removeicon.png";
 import { useNavigate } from "react-router-dom";
 
 // Import Swiper styles
@@ -92,7 +92,6 @@ export default function ReviewList(prop) {
         <SwiperSlide key={i}>
           <div id="bigItem">
             <Card
-              
               sx={{
                 maxWidth: 300,
               }}
@@ -105,39 +104,43 @@ export default function ReviewList(prop) {
                   alt="삭제"
                   onClick={() => onClickItem(prop.reviewList[i])}
                 />
-                <div onClick={() => onClickItemToNavigateDetail(prop.reviewList[i])}>
-                <div id="image-arrange">
-                  <div id="image-frame">
-                    <CardMedia
-                      component="img"
-                      alt="술"
-                      id="imgSool"
-                      image={prop.reviewList[i].alcohol_image}
-                    />
+                <div
+                  onClick={() =>
+                    onClickItemToNavigateDetail(prop.reviewList[i])
+                  }
+                >
+                  <div id="image-arrange">
+                    <div id="image-frame">
+                      <CardMedia
+                        component="img"
+                        alt="술"
+                        id="imgSool"
+                        image={prop.reviewList[i].alcohol_image}
+                      />
+                    </div>
                   </div>
-                </div>
-                <CardContent>
-                  <Typography
-                    component="div"
-                    sx={{ fontSize: 20, fontFamily: "GD" }}
-                    id="alcohol-title"
-                  >
-                    {prop.reviewList[i].alcohol_name}
-                  </Typography>
-                  <Typography component="div" sx={{ fontSize: 20 }}>
-                    <h5 id="tx_star">평점 : </h5>
-                    <Rating
-                      name="read-only"
-                      value={prop.reviewList[i].score}
-                      readOnly
-                    />
-                  </Typography>
-                  <Typography component="div" sx={{ fontSize: 20 }}>
-                    <h5 id="tx_rating">
-                      한줄평 : {prop.reviewList[i].comment}
-                    </h5>
-                  </Typography>
-                </CardContent>
+                  <CardContent>
+                    <Typography
+                      component="div"
+                      sx={{ fontSize: 20, fontFamily: "GD" }}
+                      id="alcohol-title"
+                    >
+                      {prop.reviewList[i].alcohol_name}
+                    </Typography>
+                    <Typography component="div" sx={{ fontSize: 20 }}>
+                      <h5 id="tx_star">평점 : </h5>
+                      <Rating
+                        name="read-only"
+                        value={prop.reviewList[i].score}
+                        readOnly
+                      />
+                    </Typography>
+                    <Typography component="div" sx={{ fontSize: 20 }}>
+                      <h5 id="tx_rating">
+                        한줄평 : {prop.reviewList[i].comment}
+                      </h5>
+                    </Typography>
+                  </CardContent>
                 </div>
               </CardActionArea>
             </Card>
@@ -177,12 +180,10 @@ const StyledWrapper = styled.div`
   #main {
     margin-top: 60px;
     margin-bottom: 40px;
-    width: 1300px;
+    min-width: 1200px;
     height: 530px;
-    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
     border-style: solid;
     border-width: 2px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     font-family: "GD";
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     box-sizing: border-box;
@@ -191,7 +192,7 @@ const StyledWrapper = styled.div`
     border-top-left-radius: 255px 15px;
     border-top-right-radius: 15px 225px;
 
-    background-color: #f7ecde;
+    background-color: #fcf8e8;
   }
   #soolcard {
     border: 2px solid #e8c9a0;
@@ -205,10 +206,10 @@ const StyledWrapper = styled.div`
     :hover {
       box-shadow: rgba(0, 0, 0, 0.9) 0px 3px 8px;
       transform: scale(1.1);
-      background-color: #f2e0c9;
+      background-color: #ecdfc8;
     }
   }
-  
+
   #title {
     text-align: left;
     padding-top: 20px;
@@ -219,8 +220,8 @@ const StyledWrapper = styled.div`
     margin-top: 20px;
   }
   #alcohol-title {
-    overflow: hidden;     
-    text-overflow: ellipsis; 
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
   }
   #tx_rating {
@@ -232,7 +233,7 @@ const StyledWrapper = styled.div`
     font-family: "GD";
     height: 48px;
     max-height: 48px;
-    
+
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -281,15 +282,11 @@ const StyledWrapper = styled.div`
     border-radius: 10px;
   }
 
-  .css-o69gx8-MuiCardMedia-root {
-    width: unset;
-    margin: auto;
-  }
-
   .swiper-wrapper {
     margin-left: 50px;
   }
   #reviewnull {
+    margin-top: 15%;
     font-size: 30px;
   }
 `;

@@ -233,8 +233,6 @@ const StyledWrapper = styled.div`
   .MuiSlider-thumb {
     color: #1f4690;
   }
-  .css-8je8zh-MuiTouchRipple-root {
-  }
   .MuiButtonBase-root {
     background-color: #ffa500;
     font-family: "Jua";
