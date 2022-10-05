@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import Piechart from "./piechart";
 import Barchart from "./barchart";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import Box from "@mui/material/Box";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
@@ -48,11 +47,14 @@ export default function Chart(prop) {
                   <ToggleButton value="right">유저</ToggleButton>
                 </ToggleButtonGroup>
               </div>
+              {prop.cateData.length > 0 ? null : (
+                <div id="reviewnull1">완료된 리뷰가 없습니다.😥</div>
+              )}
               <Piechart cateData={prop.cateData} />
             </div>
           ) : (
             <div>
-              <h3 id="title">같은 유형 유저들의 주종 차트</h3>
+              <h3 id="title">같은 유형의 주종 차트</h3>
               <div style={{ textAlign: "right" }}>
                 <ToggleButtonGroup
                   value={alignment}
@@ -94,11 +96,17 @@ export default function Chart(prop) {
                   <ToggleButton value="right">유저</ToggleButton>
                 </ToggleButtonGroup>
               </div>
+              {prop.rateData.바디감 === 0 &&
+              prop.rateData.단맛 === 0 &&
+              prop.rateData.신맛 === 0 &&
+              prop.rateData.향 === 0 ? null : (
+                <div id="reviewnull">현재 등록된 평가가 없습니다.😥</div>
+              )}
               <Barchart rateData={prop.rateData} />
             </div>
           ) : (
             <div>
-              <h3 id="title">같은 유형 유저들이 먹은 술의 평균값</h3>
+              <h3 id="title">같은 유형이 먹은 술의 평균값</h3>
               <div style={{ textAlign: "right" }}>
                 <ToggleButtonGroup
                   value={alignment2}
@@ -139,6 +147,13 @@ const StyledWrapper = styled.div`
     display: flex;
 
     background-color: #f7ecde;
+  }
+  #reviewnull {
+    margin-bottom: -24px;
+  }
+  #reviewnull1 {
+    margin-top: 150px;
+    margin-bottom: -174px;
   }
 
   #tgbutton {

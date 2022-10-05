@@ -135,7 +135,9 @@ export default function MyCollection(prop) {
             navigation
             height={500}
           >
-            <div id="space"></div>
+            <div id="space">
+              <div id="reviewnull">등록된 술이 없습니다.😥</div>
+            </div>
           </Swiper>
         </div>
       </StyledWrapper>
@@ -228,5 +230,11 @@ const StyledWrapper = styled.div`
   .swiper-wrapper {
     margin-top: 60px;
     margin-bottom: 30px;
+  }
+
+  #reviewnull {
+    color: white;
+    font-size: 40px;
+    margin-top: -50px;
   }
 `;
