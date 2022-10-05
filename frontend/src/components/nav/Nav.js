@@ -44,8 +44,6 @@ export default function Nav(props) {
   let btns = {};
   if (props?.type === "main") {
     btns = mapping("w");
-    console.log("맵핑", mapping("w"));
-    console.log(btns);
   } else {
     btns = mapping("b");
   }

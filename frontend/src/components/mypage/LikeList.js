@@ -88,7 +88,7 @@ export default function LikeList(prop) {
 
 const StyledWrapper = styled.div`
   #main {
-    margin-top: 50px;
+    margin-top: 20px;
     width: 1300px;
     height: 450px;
     border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
@@ -103,7 +103,7 @@ const StyledWrapper = styled.div`
     border-top-left-radius: 255px 15px;
     border-top-right-radius: 15px 225px;
 
-    background-color: #f7ecde;
+    background-color: #fcf8e8;
   }
 
   #soolcard {
@@ -128,7 +128,7 @@ const StyledWrapper = styled.div`
     margin-top: 10px;
   }
 
-  .css-o69gx8-MuiCardMedia-root {
+  img.MuiCardMedia-root MuiCardMedia-media MuiCardMedia-img {
     width: unset;
     margin: auto;
   }
