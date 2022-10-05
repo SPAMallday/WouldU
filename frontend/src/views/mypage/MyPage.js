@@ -178,12 +178,12 @@ export default function MyPage() {
   } else {
     return (
       <StyledWrapper>
-        <Header />
+        <Nav />
         <div id="main">
           <div id="mainPage">
             <Card>
               <div id="mp_header">
-                <h1 id="nameText">{userName}님 리뷰</h1>
+                <h1 id="nameText">{userName}님의 기록</h1>
                 <div id="btnGroup">
                   <IconButton
                     onClick={onClickSummary}

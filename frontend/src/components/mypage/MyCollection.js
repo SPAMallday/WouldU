@@ -135,20 +135,7 @@ export default function MyCollection(prop) {
             navigation
             height={500}
           >
-            <div id="space">
-              <SwiperSlide>
-                <Earth count={7}>
-                  <img src={earth} alt="지구" id="P_earth" />
-                  <h5>지구</h5>
-                </Earth>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Planet count={5}>
-                  <img src={planet1} alt="행성" id="P_planet" />
-                  <h5>달</h5>
-                </Planet>
-              </SwiperSlide>
-            </div>
+            <div id="space"></div>
           </Swiper>
         </div>
       </StyledWrapper>

@@ -49,7 +49,6 @@ export default function Information(props) {
             setLike(0);
             setCount(count - 1);
           } else {
-            swal("Like!", "좋아요 추가 완료!", "success");
             setLike(1);
             setCount(count + 1);
           }
