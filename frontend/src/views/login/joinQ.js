@@ -122,7 +122,7 @@ export default function JoinQ() {
               },
             }).then(() => {
               swal("Success!", "회원가입 완료!", "success");
-              navigate("/login");
+              navigate("/login", { state: { fromjoin: true } });
             });
           } else if (res.user_kind === "2유형") {
             swal({
@@ -136,7 +136,7 @@ export default function JoinQ() {
               },
             }).then(() => {
               swal("Success!", "회원가입 완료!", "success");
-              navigate("/login");
+              navigate("/login", { state: { fromjoin: true } });
             });
           } else if (res.user_kind === "3유형") {
             swal({
@@ -150,7 +150,7 @@ export default function JoinQ() {
               },
             }).then(() => {
               swal("Success!", "회원가입 완료!", "success");
-              navigate("/login");
+              navigate("/login", { state: { fromjoin: true } });
             });
           } else {
             swal({
@@ -164,7 +164,7 @@ export default function JoinQ() {
               },
             }).then(() => {
               swal("Success!", "회원가입 완료!", "success");
-              navigate("/login");
+              navigate("/login", { state: { fromjoin: true } });
             });
           }
         } else {

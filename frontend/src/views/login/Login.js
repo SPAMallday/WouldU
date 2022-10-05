@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
 import Header from "components/nav/Header";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import swal from "sweetalert";
 import logo2 from "assets/img/logo2.png";
 import Card from "@mui/material/Card";
-import space from "assets/img/space_example.jpg";
 import { login } from "../../api/userAPI";
 
 export default function Login() {
+  const location = useLocation();
   const navigate = useNavigate();
+
   const [inputId, setInputId] = useState("");
   const [inputPw, setInputPw] = useState("");
 
@@ -35,7 +36,12 @@ export default function Login() {
             sessionStorage.setItem("ID", inputId);
             sessionStorage.setItem("no", res.user_no);
             sessionStorage.setItem("Nick", res.nickname);
-            navigate(-1);
+
+            if (location.state !== null) {
+              navigate("/");
+            } else {
+              navigate(-1);
+            }
             swal("Welcome!", "로그인 성공", "success");
           } else {
             swal("Error!", "아이디 또는 비밀번호 오류입니다.", "error");
@@ -96,9 +102,7 @@ export default function Login() {
               </div>
               <div id="textJoin">
                 <Link to="/join">
-                  <div id="h_join">
-                    회원가입
-                  </div>
+                  <div id="h_join">회원가입</div>
                 </Link>
               </div>
             </div>

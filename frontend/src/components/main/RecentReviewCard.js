@@ -21,6 +21,7 @@ export default function RecentReviewCard() {
           onClick={() => {
             onClick(item.alcohol_no);
           }}
+          id="grid-clickable"
         >
           <Typography display="inline-flex">
             &nbsp;{item.ranking}.&nbsp;
@@ -125,7 +126,8 @@ export default function RecentReviewCard() {
 //               {checkToday(reviewList[9].reg_date)}
 
 const StyledWrapper = styled.div`
-  width: 40vw;
+  width: 42vw;
+  min-width: 540px;
   height: 380px;
   margin: 10px;
   padding: 10px;
@@ -138,11 +140,15 @@ const StyledWrapper = styled.div`
   border-bottom-right-radius: 225px 15px;
   border-top-left-radius: 255px 15px;
   border-top-right-radius: 15px 225px;
+
   display: flex;
   flex-direction: column;
-
   justify-content: center;
   align-items: center;
+
+  #grid-clickable {
+    cursor: pointer;
+  }
 
   .gridItem {
     border: 2px solid #ffffff;

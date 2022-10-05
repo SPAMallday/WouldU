@@ -39,7 +39,7 @@ export default function SameType() {
     return (
       <StyledWrapper>
         <div id="main">
-          <h3 id="title">나와 비슷한 유저들이 고른 술</h3>
+          <h3 id="title">나와 비슷한 유저들이 선택한 전통주</h3>
           <Swiper
             id="swiper"
             modules={[Navigation]}
@@ -58,13 +58,18 @@ export default function SameType() {
                     id="soolcard"
                   >
                     <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="230"
-                        alt="술"
-                        id="imgSool"
-                        image={item.alcohol_image}
-                      />
+                      <div id="image-arrange">
+                        <div id="image-frame">
+                          <CardMedia
+                            component="img"
+                            width="220"
+                            height="220"
+                            alt="술"
+                            id="imgSool"
+                            image={item.alcohol_image}
+                          />
+                        </div>
+                      </div>
                       <CardContent>
                         <Typography
                           component="div"
@@ -77,7 +82,7 @@ export default function SameType() {
                           sx={{ fontSize: 20, fontFamily: "GD", mt: 2 }}
                           id="ratestars"
                         >
-                          <h4>평점 :</h4>
+                          <h4>평점 :&nbsp;</h4>
                           <Rating
                             name="read-only"
                             value={item.avg_score}
@@ -101,12 +106,11 @@ export default function SameType() {
 
 const StyledWrapper = styled.div`
   #main {
-    width: 1400px;
+    width: 90vw;
+    min-width: 1200px;
     height: 520px;
-    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
     border-style: solid;
     border-width: 2px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     font-family: "GD";
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     box-sizing: border-box;
@@ -114,8 +118,6 @@ const StyledWrapper = styled.div`
     border-bottom-right-radius: 225px 15px;
     border-top-left-radius: 255px 15px;
     border-top-right-radius: 15px 225px;
-
-    background-color: #ffe3e1;
     margin-bottom: 70px;
   }
   #title {
@@ -130,32 +132,56 @@ const StyledWrapper = styled.div`
     margin-top: 30px;
   }
 
+  #image-arrange {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #image-frame {
+    width: 250px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+  }
+
   #imgSool {
-    width: 100%;
-    height: 230px;
-    object-fit: scale-down;
+    width: 240px;
+    height: 240px;
+    margin: auto;
+    object-fit: contain;
+    border-radius: 10px;
   }
 
   #soolcard {
-    border: 2px solid #f09494;
-    border-radius: 5px;
     padding: 5px 5px;
     margin: 5px 0;
     width: 100%;
     display: flex;
     align-items: center;
-    background-color: #ffd1d1;
     :hover {
-      box-shadow: rgba(0, 0, 0, 0.9) 0px 3px 8px;
       transform: scale(1.1);
-      background-color: #ffd1e8;
+      // border: 2px solid D8D8D8;
+      border-radius: 5px;
+      background-color: #d8d8d8;
     }
   }
   #ratestars {
     display: flex;
     justify-content: center;
+    align-items: center;
   }
   #stars {
     margin-top: -3px;
+  }
+
+  .swiper-button-prev {
+    top: 42%;
+  }
+  .swiper-button-next {
+    top: 42%;
   }
 `;

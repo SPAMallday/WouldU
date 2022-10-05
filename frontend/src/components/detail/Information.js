@@ -8,37 +8,13 @@ import IconButton from "@mui/material/IconButton";
 import swal from "sweetalert";
 import React, { useState, useEffect } from "react";
 import heartdetailpage from "assets/img/heartdetailpage.png";
+import { Box } from "@mui/material";
 
 export default function Information(props) {
   const [like, setLike] = useState("");
   const [count, setCount] = useState("");
-  const [tasteData, setTasteData] = useState();
   useEffect(() => {
     setLike(props.alcohol.user_like);
-    if (props.alcohol.score >= 0) {
-      setTasteData([
-        {
-          taste: "평점",
-          전통주: Number(props.alcohol.score),
-        },
-        {
-          taste: "단맛",
-          전통주: Number(props.alcohol.sweet),
-        },
-        {
-          taste: "바디감",
-          전통주: Number(props.alcohol.body),
-        },
-        {
-          taste: "신맛",
-          전통주: Number(props.alcohol.sour),
-        },
-        {
-          taste: "향",
-          전통주: Number(props.alcohol.scent),
-        },
-      ]);
-    }
     setCount(props.alcohol.like_count);
   }, [props]);
 
@@ -95,9 +71,32 @@ export default function Information(props) {
   return (
     <StyledWrapper>
       <div id="picture-information">
-        <div id="picture">
-          <img src={props.alcohol.alco_img} alt={props.alcohol.alco_name} />
-        </div>
+        <Box>
+          <div id="picture">
+            <img src={props.alcohol.alco_img} alt={props.alcohol.alco_name} />
+          </div>
+          <div id="buttongroup-frame">
+            <div id="buttongroup">
+              <div>
+                <button id="goreview" onClick={handleReview}>
+                  리뷰 남기기
+                </button>
+                <SendReviewDialog
+                  openReview={openReview}
+                  setOpenReview={setOpenReview}
+                  alcohol={props.alcohol}
+                />
+              </div>
+              <button id="goshop">
+                <a
+                  href={`https://search.shopping.naver.com/search/all?query=${props.alcohol.alco_name}`}
+                >
+                  구매하러 가기
+                </a>
+              </button>
+            </div>
+          </div>
+        </Box>
         <div id="information">
           {like === 1 ? (
             <div id="divlike">
@@ -127,31 +126,7 @@ export default function Information(props) {
           )}
           <div id="information-desc">설명 : {props.alcohol.detail}</div>
           <div id="information-tags">{detailInformationTagslist}</div>
-          <div id="buttongroup-frame">
-            <div id="buttongroup">
-              <div>
-                <button id="goreview" onClick={handleReview}>
-                  리뷰 남기기
-                </button>
-                <SendReviewDialog
-                  openReview={openReview}
-                  setOpenReview={setOpenReview}
-                  alcohol={props.alcohol}
-                />
-              </div>
-              <button id="goshop">
-                <a
-                  href={`https://search.shopping.naver.com/search/all?query=${props.alcohol.alco_name}`}
-                >
-                  구매하러 가기
-                </a>
-              </button>
-            </div>
-          </div>
         </div>
-      </div>
-      <div id="information-chart">
-        <RadarChart tasteData={tasteData} />
       </div>
     </StyledWrapper>
   );
@@ -159,19 +134,15 @@ export default function Information(props) {
 
 const StyledWrapper = styled.div`
   font-family: "GD";
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  margin-top: 3%;
 
   #picture-information {
     display: flex;
-    border: 3px ridge #f5f0bb;
     margin: 10px 0px;
-    width: 80vw;
-    min-width: 1200px;
     border-radius: 10px;
+    background-color: #fcf9e6;
   }
+
   #picture {
     width: 300px;
     height: 300px;
@@ -184,6 +155,7 @@ const StyledWrapper = styled.div`
     margin-top: 20px;
     margin-left: 20px;
   }
+
   #picture img {
     width: 290px;
     height: 290px;
@@ -193,15 +165,13 @@ const StyledWrapper = styled.div`
   }
 
   #divlike {
+    position: absolute;
+    display: flex;
     text-align: right;
-    display: inline-block;
-    height: 0px;
+    align-items: center;
     font-size: larger;
-  }
-
-  #textCount {
-    display: inline-block;
-    font-family: "GD";
+    top: 5px;
+    right: 0;
   }
 
   #alcoholname {
@@ -212,8 +182,9 @@ const StyledWrapper = styled.div`
   #information {
     display: flex;
     flex-direction: column;
-    margin: 0px 10px 10px;
+    margin: 0px 20px 10px;
     font-size: 20px;
+    position: relative;
   }
   #information div {
     margin: 0px 5px 3px;
@@ -227,12 +198,14 @@ const StyledWrapper = styled.div`
   #buttongroup {
     display: flex;
     width: 300px;
+    margin-top: 50px;
+    justify-content: space-evenly;
   }
   #goshop {
     padding: 0px 15px;
     border-radius: 10px;
-    background-color: #b5fe83;
-    border: 2px solid #babd42;
+    background-color: #fcf8e8;
+    border: 2px solid #ecdfc8;
     height: 40px;
   }
   #goshop a {
@@ -243,30 +216,18 @@ const StyledWrapper = styled.div`
     height: 40px;
     padding: 0px 15px;
     border-radius: 10px;
-    background-color: #ffee63;
-    border: 2px solid #efd345;
+    background-color: #fcf8e8;
+    border: 2px solid #ecdfc8;
   }
-  // #information-desc {
-  //   overflow: hidden;
-  //   text-overflow: ellipsis;
-  //   display: -webkit-box;
-  //   -webkit-line-clamp: 3;
-  //   -webkit-box-orient: vertical;
-  //   line-height: 1.2em;
-  // }
+  #information-desc {
+    word-break: keep-all;
+  }
   #information-tags {
     margin-top: 10px;
     display: flex;
   }
   #information-tags div {
     margin-top: 10px;
-  }
-  #information-chart {
-    border: 3px ridge #f5f0bb;
-    margin: 10px 0px;
-    width: 80vw;
-    min-width: 1200px;
-    border-radius: 10px;
   }
 
   // 좋아요 버튼

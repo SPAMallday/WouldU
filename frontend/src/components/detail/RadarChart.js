@@ -27,7 +27,7 @@ export default function RadarChart(props) {
           dotSize={10}
           dotColor={{ theme: "background" }}
           dotBorderWidth={2}
-          colors={{ scheme: "nivo" }}
+          colors={{ scheme: "paired" }}
           blendMode="multiply"
           motionConfig="wobbly"
           animate={false}

@@ -17,6 +17,7 @@ import {
   mylike,
   myreview,
 } from "../../api/myPageAPI";
+import Nav from "components/nav/Nav";
 
 export default function MyPage() {
   const [userName, setUserName] = useState("");
@@ -142,7 +143,7 @@ export default function MyPage() {
   if (mpToggle) {
     return (
       <StyledWrapper>
-        <Header />
+        <Nav />
         <div id="main">
           <div id="mainPage">
             <Card>

@@ -5,7 +5,7 @@ import Nav from "components/nav/Nav";
 import PhotoCarousel from "components/main/PhotoCarousel";
 import PopularWordCard from "components/main/PopularWordCard";
 import RecentReviewCard from "components/main/RecentReviewCard";
-import SametypeUserCard_V2 from "components/main/SametypeUserCard";
+import SametypeUserCard from "components/main/SametypeUserCard";
 
 export default function MainPage() {
   return (
@@ -18,7 +18,7 @@ export default function MainPage() {
       </div>
 
       <div id="sametype">
-        <SametypeUserCard_V2 />
+        <SametypeUserCard />
       </div>
     </StyledWrapper>
   );
@@ -27,14 +27,16 @@ export default function MainPage() {
 const StyledWrapper = styled.div`
   #popularwordslist {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     margin-top: 40px;
+    padding: 0 5%;
   }
   #sametype {
     margin-top: 30px;
     text-align: center;
     display: flex;
     justify-content: center;
+    padding: 0 5%;
   }
 `;

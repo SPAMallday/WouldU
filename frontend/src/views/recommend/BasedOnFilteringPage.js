@@ -157,7 +157,7 @@ const StyledWrapper = styled.div`
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
-    height: 100vh;
+    height: 100%;
   }
   #main {
     display: flex;
@@ -186,6 +186,7 @@ const StyledWrapper = styled.div`
   }
   #searchForm {
     margin: auto;
+    margin-bottom: 30px;
     width: 600px;
     height: auto;
     border: 5px dashed #ffae6d;
