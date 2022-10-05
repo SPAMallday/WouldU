@@ -25,6 +25,7 @@ export default function Menu() {
     window.location.replace("/");
     swal("logout!", "로그아웃 완료", "success");
   };
+  
   return (
     <StyledWrapper>
       <div id="menubuttons">
