@@ -42,8 +42,8 @@ const Barchart = prop => {
         /**
          * chart 색상
          */
-        colors={["olive", "brown", "orange", "red", "white"]} // 커스터하여 사용할 때
-        // colors={{ scheme: 'nivo' }} // nivo에서 제공해주는 색상 조합 사용할 때
+        colors={["#d3a9ab", "#e4ced0", "#5a707e", "#62acb3", "#e3e3e3"]} // 커스터하여 사용할 때
+        // colors={{ scheme: "green_blue" }} // nivo에서 제공해주는 색상 조합 사용할 때
         /**
          * color 적용 방식
          */

@@ -18,6 +18,7 @@ import {
   myreview,
 } from "../../api/myPageAPI";
 import Nav from "components/nav/Nav";
+import { Typography } from "@mui/material";
 
 export default function MyPage() {
   const [userName, setUserName] = useState("");
@@ -144,7 +145,7 @@ export default function MyPage() {
           <div id="mainPage">
             <Card>
               <div id="mp_header">
-                <h1 id="nameText">{userName}님의 통계</h1>
+                <h1 id="nameText">{userName}님의 술바디</h1>
                 <div id="btnGroup">
                   <IconButton
                     onClick={onClickSummary}
@@ -179,7 +180,7 @@ export default function MyPage() {
           <div id="mainPage">
             <Card>
               <div id="mp_header">
-                <h1 id="nameText">{userName}님의 기록</h1>
+                <h1 id="nameText">{userName}님의 술장고</h1>
                 <div id="btnGroup">
                   <IconButton
                     onClick={onClickSummary}
@@ -207,27 +208,25 @@ export default function MyPage() {
 }
 
 const StyledWrapper = styled.div`
-  background-color: #fcfcfc;
   font-family: "GD";
   #main {
     text-align: center;
   }
 
-  .css-bhp9pd-MuiPaper-root-MuiCard-root {
-    background-color: #fcfcfc;
-    box-shadow: none;
-  }
   #mainPage {
     margin: auto;
     width: 1300px;
   }
+
+  #mainPage div.MuiPaper-root {
+    box-shadow: none;
+  }
+
   #mp_header {
     height: 100px;
     margin-top: 50px;
   }
-  #nameText {
-    padding-top: 40px;
-  }
+
   #btnGroup {
     text-align: right;
     margin-top: -20px;
@@ -235,6 +234,6 @@ const StyledWrapper = styled.div`
     margin-bottom: 10px;
   }
   #btnSummary {
-    margin-right: 50px;
+    margin-right: 1rem;
   }
 `;

@@ -58,7 +58,7 @@ const StyledWrapper = styled.div`
   #starBox {
     margin-top: 20px;
   }
-  .css-jue3ft-MuiRating-root {
+  #starBox div.MuiBox-root span {
     font-size: 3rem;
   }
   #hanmadi {
