@@ -105,69 +105,34 @@ export default function JoinQ() {
     };
 
     // 회원가입 axios 부분
+    let swal_text = ""
 
     join(data)
       .then(res => {
-        console.log(res);
         if (res.result === "success") {
-          if (res.user_kind === "1유형") {
-            swal({
-              confirmButtonColor: "#fe8f34",
-              title: "1유형입니다",
-              text: "혼자서 먹는걸 선호하는 타입 😎\n 맛과 향을 중요시하시는 분이군요?",
-              icon: "success",
-              buttons: {
-                confirm: {
-                  text: "로그인",
-                  className: "confirmBtn",
-                },
-              },
-            }).then(() => {
-              navigate("/login", { state: { fromjoin: true } });
-            });
-          } else if (res.user_kind === "2유형") {
-            swal({
-              confirmButtonColor: "#fe8f34",
-              title: "2유형입니다",
-              text: "혼자서 먹는걸 선호하는 타입 😎\n 맛과 향을 신경쓰지 않는 분이군요?",
-              icon: "success",
-              buttons: {
-                confirm: {
-                  text: "로그인",
-                },
-              },
-            }).then(() => {
-              navigate("/login", { state: { fromjoin: true } });
-            });
-          } else if (res.user_kind === "3유형") {
-            swal({
-              confirmButtonColor: "#fe8f34",
-              title: "3유형입니다",
-              text: "여럿이서 먹는걸 선호하는 타입 😎\n 맛과 향을 중요시하시는 분이군요?",
-              icon: "success",
-              buttons: {
-                confirm: {
-                  text: "로그인",
-                },
-              },
-            }).then(() => {
-              navigate("/login", { state: { fromjoin: true } });
-            });
+          if (res.user_kind[0] === "K1") {
+            swal_text = "혼자서 먹는걸 선호하는 타입 😎\n 맛과 향을 중요시하시는 분이군요?"
+          } else if (res.user_kind[0] === "K2") {
+            swal_text = "혼자서 먹는걸 선호하는 타입 😎\n 맛과 향을 신경쓰지 않는 분이군요?"
+          } else if (res.user_kind[0] === "K3") {
+            swal_text = "여럿이서 먹는걸 선호하는 타입 😎\n 맛과 향을 중요시하시는 분이군요?"
           } else {
-            swal({
-              confirmButtonColor: "#fe8f34",
-              title: "4유형입니다",
-              text: "여럿이서 먹는걸 선호하는 타입 😎\n 맛과 향을 신경쓰지 않는 분이군요?",
-              icon: "success",
-              buttons: {
-                confirm: {
-                  text: "로그인",
-                },
-              },
-            }).then(() => {
-              navigate("/login", { state: { fromjoin: true } });
-            });
+            swal_text = "여럿이서 먹는걸 선호하는 타입 😎\n 맛과 향을 신경쓰지 않는 분이군요?"
           }
+          swal({
+            confirmButtonColor: "#fe8f34",
+            title: res.user_kind[1],
+            text: swal_text,
+            icon: "success",
+            buttons: {
+              confirm: {
+                text: "로그인",
+                className: "confirmBtn",
+              },
+            },
+          }).then(() => {
+            navigate("/login", { state: { fromjoin: true } });
+          });          
         } else {
           swal("Fail!", "회원가입에 실패하였습니다", "error");
         }
