@@ -119,7 +119,7 @@ const StyledWrapper = styled.div`
   min-width: 540px;
   height: 380px;
   margin: 10px;
-  padding: 10px 1.5rem;
+  padding: 10px;
   border-style: solid;
   border-width: 2px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

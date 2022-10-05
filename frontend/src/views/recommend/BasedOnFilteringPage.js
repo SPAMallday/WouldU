@@ -27,13 +27,6 @@ export default function BasedonFilteringPage() {
   const [smell, setSmell] = useState(3);
   const [value, setValue] = useState([0, 50]);
   const [goToResult, setGoToResult] = useState(false);
-  // SelectType Text  
-  const [selectText, setSelectText] = useState({
-    handle1Text : ["쓴맛이 좋아요!", "단맛이 좋아요!"],
-    handle2Text : ["신맛은 싫어요!", "셔야 맛이죠!"],
-    handle3Text : ["아주 가볍게!", "아주 무겁게!"],
-    handle4Text : ["약한 향!", "강한 향!"],
-  });
 
   const onClick = () => {
     setGoToResult(true);
@@ -62,21 +55,21 @@ export default function BasedonFilteringPage() {
     },
   ];
 
-  const handleChange1 = (event, newValue) => {
+  const handleChange = (event, newValue) => {
     setSweet(newValue);
   };
-  const handleChange2 = (event, newValue) => {
+  const handleChange1 = (event, newValue) => {
     setSour(newValue);
   };
-  const handleChange3 = (event, newValue) => {
+  const handleChange2 = (event, newValue) => {
     setBody(newValue);
   };
-  const handleChange4 = (event, newValue) => {
+  const handleChange3 = (event, newValue) => {
     setSmell(newValue);
   };
 
   //도수
-  const handleChange5 = (event, newValue) => {
+  const handleChange4 = (event, newValue) => {
     setValue(newValue);
   };
 
@@ -99,11 +92,10 @@ export default function BasedonFilteringPage() {
             </div>
             <div id="searchForm">
               <SelectType
+                handleChange={handleChange}
                 handleChange1={handleChange1}
                 handleChange2={handleChange2}
                 handleChange3={handleChange3}
-                handleChange4={handleChange4}
-                selectText={selectText}
               />
               <div>
                 <h5 id="textSub">&lt;도수&gt;</h5>
@@ -112,7 +104,7 @@ export default function BasedonFilteringPage() {
                     getAriaLabel={() => "Temperature range"}
                     value={value}
                     getAriaValueText={valuetext}
-                    onChange={handleChange5}
+                    onChange={handleChange4}
                     valueLabelDisplay="auto"
                     marks={alcohol}
                     min={0}
