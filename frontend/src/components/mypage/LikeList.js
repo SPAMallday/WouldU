@@ -69,14 +69,18 @@ export default function LikeList(prop) {
     <StyledWrapper>
       <div id="main">
         <h3 id="title">좋아요 목록</h3>
-        <Swiper
-          modules={[Navigation]}
-          spaceBetween={0}
-          slidesPerView={5}
-          navigation
-        >
-          {like()}
-        </Swiper>
+        {prop.likeList.length > 0 ? (
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={0}
+            slidesPerView={5}
+            navigation
+          >
+            {like()}
+          </Swiper>
+        ) : (
+          <div id="reviewnull">좋아요 누른 술이 없습니다.😥</div>
+        )}
       </div>
     </StyledWrapper>
   );
@@ -137,5 +141,9 @@ const StyledWrapper = styled.div`
 
   .swiper-wrapper {
     height: 400px;
+  }
+
+  #reviewnull {
+    font-size: 30px;
   }
 `;

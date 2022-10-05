@@ -49,7 +49,6 @@ export default function Information(props) {
             setLike(0);
             setCount(count - 1);
           } else {
-            swal("Like!", "좋아요 추가 완료!", "success");
             setLike(1);
             setCount(count + 1);
           }
@@ -85,6 +84,8 @@ export default function Information(props) {
                   openReview={openReview}
                   setOpenReview={setOpenReview}
                   alcohol={props.alcohol}
+                  setReview={props.setReview}
+                  setAlcohol={props.setAlcohol}
                 />
               </div>
               <button id="goshop">
