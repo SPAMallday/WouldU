@@ -198,7 +198,7 @@ const StyledWrapper = styled.div`
   #buttongroup {
     display: flex;
     width: 300px;
-    margin-top: 50px;
+    margin-top: 1rem;
     justify-content: space-evenly;
   }
   #goshop {

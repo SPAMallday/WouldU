@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/effect-cards";
+import "swiper/css/navigation";
 
 export default function Similar({ alcohol, similar }) {
   const navigate = useNavigate();
@@ -16,14 +17,13 @@ export default function Similar({ alcohol, similar }) {
   return (
     <StyledWrapper>
       <div id="similarframe">
-        <div id="similartitle">
-          &lt; "{alcohol.alco_name}"와(과) 유사한 전통주 &gt;
-        </div>
+        <div id="similartitle">"{alcohol.alco_name}"와(과) 유사한 전통주</div>
         <div id="similarlist">
           <Swiper
             effect={"cards"}
-            grabCursor={true}
-            modules={[EffectCards, Autoplay]}
+            navigation={true}
+            // grabCursor={true}
+            modules={[EffectCards, Autoplay, Navigation]}
             autoplay={{
               delay: 2500,
               disableOnInteraction: false,
@@ -67,6 +67,8 @@ const StyledWrapper = styled.div`
   #similartitle {
     font-size: 24px;
     margin: 10px;
+    word-break: keep-all;
+    text-align: center;
   }
 
   #similar {
@@ -91,8 +93,10 @@ const StyledWrapper = styled.div`
     border-radius: 10px;
   }
   #name-sool {
+    text-align: center;
     margin: 10px;
     font-size: 18px;
+    word-break: keep-all;
   }
 
   .swiper {
@@ -107,5 +111,15 @@ const StyledWrapper = styled.div`
     border-radius: 18px;
     font-size: 22px;
     font-weight: bold;
+  }
+
+  .swiper-button-prev,
+  .swiper-rtl .swiper-button-next {
+    left: -70px;
+  }
+
+  .swiper-button-next,
+  .swiper-rtl .swiper-button-prev {
+    right: -70px;
   }
 `;

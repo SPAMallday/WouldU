@@ -6,6 +6,7 @@ import mousepointer from "assets/img/mousepointer.png";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import { Grid } from "@mui/material";
 
 /**
  * 리뷰를 한번도 하지 않은 유저에게는 '평가'만 활성화하여 보여지고, 안내 문구도 같이 출력해야 함
@@ -33,29 +34,33 @@ export default function RecommendIndex() {
   };
   return (
     <StyledWrapper>
-      <div id="mars" onClick={boe}>
-        <img src={planet2} alt="화성" />
-        <div id="text">추천 받으러 가는 행성</div>
-      </div>
-      <div id="jupiter" onClick={sfr}>
-        <img src={planet4} alt="목성" />
-        <div id="text">전통주 평가하는 행성</div>
-      </div>
-      <div id="saturn">
-        <Link to="/recommend/based-on-filtering">
-          <img src={planet3} alt="토성" />
-          <div id="text">간단히 추천해주는 행성</div>
-        </Link>
-      </div>
+      <Grid container columnGap={15}>
+        <Grid item xs>
+          <div id="mars" onClick={boe}>
+            <img src={planet2} alt="화성" />
+            <div id="text">추천 받으러 가는 행성</div>
+          </div>
+        </Grid>
+        <Grid item xs>
+          <div id="jupiter" onClick={sfr}>
+            <img src={planet4} alt="목성" />
+            <div id="text">전통주 평가하는 행성</div>
+          </div>
+        </Grid>
+        <Grid item xs>
+          <div id="saturn">
+            <Link to="/recommend/based-on-filtering">
+              <img src={planet3} alt="토성" />
+              <div id="text">간단히 추천해주는 행성</div>
+            </Link>
+          </div>
+        </Grid>
+      </Grid>
     </StyledWrapper>
   );
 }
 
 const StyledWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-
   img {
     width: 200px;
     height: 200px;
@@ -65,10 +70,6 @@ const StyledWrapper = styled.div`
     height: 250px;
   }
   #mars {
-    position: fixed;
-    top: 25vh;
-    left: 15vw;
-    width: 350px;
     height: 350px;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
@@ -82,10 +83,6 @@ const StyledWrapper = styled.div`
     transform: translateY(-18px);
   }
   #jupiter {
-    position: fixed;
-    top: 25vh;
-    left: 39.8vw;
-    width: 350px;
     height: 350px;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
@@ -99,11 +96,7 @@ const StyledWrapper = styled.div`
     transform: translateY(-18px);
   }
   #saturn {
-    position: fixed;
-    width: 350px;
     height: 350px;
-    top: 25vh;
-    left: 64.6vw;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
     display: flex;

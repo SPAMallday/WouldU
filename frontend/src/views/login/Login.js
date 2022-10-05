@@ -8,6 +8,7 @@ import swal from "sweetalert";
 import logo2 from "assets/img/logo2.png";
 import Card from "@mui/material/Card";
 import { login } from "../../api/userAPI";
+import Nav from "components/nav/Nav";
 
 export default function Login() {
   const location = useLocation();
@@ -57,7 +58,7 @@ export default function Login() {
 
   return (
     <StyledWrapper>
-      <Header />
+      <Nav />
       <div id="main">
         <Card variant="outlined" sx={{ width: 1300, mt: 10 }}>
           <img src={logo2} alt="logo"></img>
@@ -127,7 +128,6 @@ const StyledWrapper = styled.div`
   .css-rb59ar-MuiPaper-root-MuiCard-root {
     margin: 0 auto;
     width: 1200px;
-    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
     font-family: "GD";
     border-bottom-left-radius: 15px 255px;
     border-bottom-right-radius: 225px 15px;
@@ -137,7 +137,7 @@ const StyledWrapper = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: #f7ecde;
+    background-color: #FCF8E8;
   }
 
   #main img {
@@ -200,7 +200,7 @@ const StyledWrapper = styled.div`
   #btn_login {
     margin-top: 20px;
     width: 280px;
-    background-color: #ff7867;
+    background-color: #5783B2;
   }
 
   #loginForm {
@@ -212,7 +212,7 @@ const StyledWrapper = styled.div`
     width: 280px;
     height: 36.5px;
     margin: 0px 70px 70px;
-    background-color: #00c471;
+    background-color: #9DB7D2;
     color: white;
     display: inline-flex;
     align-items: center;

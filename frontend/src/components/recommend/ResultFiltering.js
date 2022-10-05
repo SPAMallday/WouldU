@@ -117,8 +117,6 @@ export default function ResultFiltering(props) {
 }
 
 const StyledWrapper = styled.div`
-  background-color: #f7ecde;
-  height: 88vh;
   font-family: "GD";
 
   #background {
@@ -156,7 +154,7 @@ const StyledWrapper = styled.div`
   #rocketframe {
     cursor: url(${mousepointer}) 50 50, auto;
     position: fixed;
-    top: 78vh;
+    top: 74vh;
     left: 0vw;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
@@ -184,11 +182,10 @@ const StyledWrapper = styled.div`
     cursor: url(${mousepointer}) 50 50, auto;
     font-family: "GD";
     font-size: 18px;
-    color: black;
-    background-color: #aac4ff;
+    color: white;
+    background-color: #9db7d2;
     margin-top: 10px;
     border-radius: 10px;
-    border: 3px solid #b1b2ff;
     display: inline-block;
     width: 120px;
     text-align: center;
