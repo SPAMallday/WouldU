@@ -43,7 +43,7 @@ const StyledWrapper = styled.div`
 
   #earth {
     position: fixed;
-    top: 78vh;
+    bottom: 5%;
     left: 0vw;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
@@ -68,7 +68,7 @@ const StyledWrapper = styled.div`
   #rocketframe {
     cursor: url(${mousepointer}) 50 50, auto;
     position: fixed;
-    top: 78vh;
+    bottom: 5%;
     right: 0vw;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;

@@ -1,12 +1,12 @@
 import React from "react";
-import carousel_element1 from "assets/img/text_carousel_element4.png";
-import carousel_element2 from "assets/img/text_carousel_element5.png";
-import carousel_element3 from "assets/img/text_carousel_element6.png";
+import carousel_element1 from "assets/img/carousel/text_carousel_element1.png";
+import carousel_element2 from "assets/img/carousel/text_carousel_element2.png";
+import carousel_element3 from "assets/img/carousel/text_carousel_element3.png";
 import styled from "styled-components";
 
 import Carousel from "react-bootstrap/Carousel";
 
-export default function PhotoCarousel_V2() {
+export default function PhotoCarousel() {
   return (
     <StyledWrapper>
       <Carousel
