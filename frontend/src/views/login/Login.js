@@ -168,6 +168,7 @@ const StyledWrapper = styled.div`
 
   #input_area {
     width: 250px;
+    font-family: "GD";
   }
 
   #input_area2 {
@@ -243,6 +244,10 @@ const StyledWrapper = styled.div`
   a {
     text-decoration: none;
     color: white;
+  }
+
+  .MuiInputBase-input {
+    font-family: "GD";
   }
 `;
 

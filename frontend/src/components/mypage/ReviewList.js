@@ -10,6 +10,8 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import swal from "sweetalert";
 import { mydelete, myreview } from "../../api/myPageAPI";
+import removeicon from "assets/img/removeicon.png"
+import { useNavigate } from "react-router-dom";
 
 // Import Swiper styles
 import "swiper/css";
@@ -21,6 +23,12 @@ import "swiper/css/navigation";
  * @returns
  */
 export default function ReviewList(prop) {
+  const navigate = useNavigate();
+  const onClickItemToNavigateDetail = item => {
+    //console.log(item);
+    navigate("/detail/" + item.alcohol_no);
+  };
+
   //리뷰 클릭시 dialog띄우기
   const onClickItem = item => {
     swal({
@@ -82,25 +90,37 @@ export default function ReviewList(prop) {
     for (let i = 0; i < prop.reviewList.length; i++) {
       result.push(
         <SwiperSlide key={i}>
-          <div id="bigItem" onClick={() => onClickItem(prop.reviewList[i])}>
+          <div id="bigItem">
             <Card
+              
               sx={{
                 maxWidth: 300,
               }}
               id="soolcard"
             >
               <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="230"
-                  alt="술"
-                  id="imgSool"
-                  image={prop.reviewList[i].alcohol_image}
+                <img
+                  id="removeicon"
+                  src={removeicon}
+                  alt="삭제"
+                  onClick={() => onClickItem(prop.reviewList[i])}
                 />
+                <div onClick={() => onClickItemToNavigateDetail(prop.reviewList[i])}>
+                <div id="image-arrange">
+                  <div id="image-frame">
+                    <CardMedia
+                      component="img"
+                      alt="술"
+                      id="imgSool"
+                      image={prop.reviewList[i].alcohol_image}
+                    />
+                  </div>
+                </div>
                 <CardContent>
                   <Typography
                     component="div"
                     sx={{ fontSize: 20, fontFamily: "GD" }}
+                    id="alcohol-title"
                   >
                     {prop.reviewList[i].alcohol_name}
                   </Typography>
@@ -118,6 +138,7 @@ export default function ReviewList(prop) {
                     </h5>
                   </Typography>
                 </CardContent>
+                </div>
               </CardActionArea>
             </Card>
           </div>
@@ -183,6 +204,7 @@ const StyledWrapper = styled.div`
       background-color: #f2e0c9;
     }
   }
+  
   #title {
     text-align: left;
     padding-top: 20px;
@@ -192,6 +214,11 @@ const StyledWrapper = styled.div`
     margin-bottom: 40px;
     margin-top: 20px;
   }
+  #alcohol-title {
+    overflow: hidden;     
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+  }
   #tx_rating {
     text-align: left;
     margin-top: 10px;
@@ -199,6 +226,14 @@ const StyledWrapper = styled.div`
     margin-left: 10px;
     margin-right: 10px;
     font-family: "GD";
+    height: 48px;
+    max-height: 48px;
+    
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 라인수 */
+    -webkit-box-orient: vertical;
   }
   #tx_star {
     text-align: left;
@@ -207,6 +242,39 @@ const StyledWrapper = styled.div`
     margin-left: 10px;
     margin-right: 10px;
     font-family: "GD";
+  }
+  #removeicon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0px;
+    :hover {
+      transform: scale(1.2);
+    }
+  }
+  #image-arrange {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #image-frame {
+    width: 220px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+
+  #imgSool {
+    width: 210px;
+    height: 210px;
+    margin: auto;
+    object-fit: contain;
+    border-radius: 10px;
   }
 
   .css-o69gx8-MuiCardMedia-root {

@@ -390,6 +390,9 @@ const StyledWrapper = styled.div`
 
   #btn_next {
     width: 170px;
+    border: solid #dbc8ac;
+    border-radius: 10px;
+    color: white;
     font-size: 24px;
     background-color: #ecdfc8;
     color: black;

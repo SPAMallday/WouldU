@@ -1,15 +1,16 @@
 import json
-from user.models import User
-from .models import Alcohol, Alcohol_recommend, Alcohol_score1,Alcohol_score2, Alcohol_score3,Alcohol_score4
+from apps.user.models import User, User_kind_code
+from .models import Alcohol, Alcohol_code, Alcohol_recommend, Alcohol_score1,Alcohol_score2, Alcohol_score3,Alcohol_score4
 from apps.wouldU.serializers import ReviewSerializer
 from django.db import connection
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
-from apps.mypage.models import Alcohol_like
+from apps.mypage.models import Alcohol_like, User_alcohol, User_group_figure
 from django.http.response import JsonResponse
 from rest_framework.response import Response
 from django.core import serializers
 from .functions.recommend_CB import alcohol_rec
+from .serializer import UserAlcoholSerializer
 
 
 # Create your views here.
@@ -51,7 +52,7 @@ def alcoDetails(request):
             else : 
                 like=0
     
-
+    
     alco_no = datas[0]
     if (datas[18] == 0):
         score = 0
@@ -69,7 +70,7 @@ def alcoDetails(request):
         'like_count' : datas[7],
         'food' : datas[8].replace("|", ","),
         'tag' : datas[9].replace("|", ","),
-        'size' : datas[11].replace("|", ","),
+        'size' : datas[10].replace("|", ","),
         'sweet' : datas[13],
         'sour' : datas[14],
         'scent' : datas[15],
@@ -133,10 +134,39 @@ def alcoPostReview(request):
     alcohol_score = alcohol['fields']['score']
     alcohol_count= alcohol['fields']['count']
     
+    alcos=Alcohol.objects.get(alcohol_no = alco_no.alcohol_no).alcohol_code #주종
+    alco_code=alcos.alcohol_code
     #사용자 유형 
     user_kind = json.loads(serializers.serialize("json", User.objects.filter(user_no = user_no.user_no), fields={'user_kind'}))[0]['fields']['user_kind']
+    
+    sweet = request.data['sweet']
+    sour = request.data['sour']
+    body = request.data['body']
+    scent= request.data['scent']
 
-    print(user_kind)
+    group = User_group_figure.objects.filter(user_kind = user_kind)
+    gt = group[0].alcohol_taste_figure
+    ga = group[0].alcohol_type_figure
+    if(score >= 3):
+        if(alco_code=='A1'):
+            ga[0]+=1
+        elif(alco_code=='A2'):
+            ga[1]+=1
+        elif(alco_code=='A3'):
+            ga[2]+=1
+        elif(alco_code=='A4'):
+            ga[3]+=1
+        elif(alco_code=='A5'):
+            ga[4]+=1
+
+    gt[0] +=sweet
+    gt[1] +=sour
+    gt[2] +=body
+    gt[3] +=scent
+    gt[4] +=1
+    group.update(alcohol_type_figure=ga, alcohol_taste_figure = gt)
+
+
     if(review.is_valid()):
         review.save()
         alco.update(score=alcohol_score+score, count = alcohol_count+1)
@@ -151,6 +181,12 @@ def alcoPostReview(request):
     elif(user_kind =='K4'):
         kind_score_cal(Alcohol_score4, alco_no, score)
 
+
+    is_row= User_alcohol.objects.filter(alcohol_no = alco_no, user_no= user_no)
+    if(is_row.exists()):
+        is_row.update(score=score)
+    else :
+        User_alcohol.objects.create(score=score, alcohol_no = alco_no, user_no= user_no)
 
     return Response("success")      
 
@@ -230,7 +266,14 @@ def alcoReviewAPI(request, alcohol_no):
 def RankByUserKind(request, user_no):
     user_kind = User.objects.get(user_no = user_no).user_kind.kind_code
     cursor = connection.cursor()
-    sql1 = "SELECT a.alcohol_no, a.alcohol_name, (s.total_score DIV s.count) as avg_score, CONCAT('https://a402o1a4.s3.ap-northeast-2.amazonaws.com/', a.alcohol_no, '.png') as alcohol_image FROM alcohol a JOIN "
+    sql1 = """SELECT a.alcohol_no
+                   , a.alcohol_name
+                   , a.brewery
+                   , a.abv
+                   , replace(a.size, "|", ", ") as size
+                   , (s.total_score DIV s.count) as avg_score
+                   , CONCAT('https://a402o1a4.s3.ap-northeast-2.amazonaws.com/', a.alcohol_no, '.png') as alcohol_image 
+                FROM alcohol a JOIN """
     if(user_kind =='K1'):
         sql2="alcohol_score1 "
     elif(user_kind =='K2'):
@@ -241,14 +284,11 @@ def RankByUserKind(request, user_no):
         sql2="alcohol_score4 "
     sql3 = "s ON s.alcohol_no = a.alcohol_no ORDER BY -avg_score LIMIT 0, 10"
 
-    sql = sql1+sql2+sql3
+    sql = sql1 + sql2 + sql3
     cursor.execute(sql)
 
     results= [dict((cursor.description[i][0], value) for i,value in enumerate(row)) \
             for row in cursor.fetchall()]
-
-    if results != None and len(results) > 0:
-        result = results[0]
     
     return Response(results)
 

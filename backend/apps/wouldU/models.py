@@ -1,8 +1,8 @@
 from email.policy import default
 from django.db import models
 
-from user.models import User, User_kind_code
-from alcohol.models import Alcohol
+from apps.user.models import User, User_kind_code
+from apps.alcohol.models import Alcohol
 
 
 class Ranking(models.Model):

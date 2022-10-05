@@ -186,6 +186,7 @@ const StyledWrapper = styled.div`
     width: 280px;
   }
   #searchForm {
+    cursor: auto;
     margin: auto;
     margin-bottom: 30px;
     width: 600px;

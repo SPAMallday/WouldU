@@ -62,7 +62,12 @@ class ItemCF:
             rating = self.sool_user_rating.loc[already_drink[0], user_no]
             flag = True if rating < 3 else False
             # False를 입력값으로 주면 해당 술과 반대되는 술을 추천
-            res = self.recomm_sool_by_item_no(already_drink[0], drink_filter, flag)
+            res_list = self.recomm_sool_by_item_no(already_drink[0], drink_filter, flag)
+
+            if len(res_list) < target_cnt:
+                res = res_list[:]
+            else:
+                res = res_list[:target_cnt]
 
         elif len(already_drink) == 2:
             rec_res = []

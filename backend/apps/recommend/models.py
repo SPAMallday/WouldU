@@ -1,6 +1,6 @@
 from django.db import models
-from alcohol.models import Alcohol
-from user.models import User
+from apps.alcohol.models import Alcohol
+from apps.user.models import User
 
 # Create your models here.
 
