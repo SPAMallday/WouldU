@@ -77,11 +77,11 @@ def get_recom_user(request, user_no):
                                FROM recommend_mf
                                WHERE user_no = {user_no}
                                ''')
-    mf_sool_list_str = cursor.fetchone()[0]  # 배열 형태의 문자열 그대로 반환될 것 "[1,2,3,4,5]"
-
+    q_res = cursor.fetchone()  # 값이 있다면 배열 형태의 문자열 그대로 반환될 것 "[1,2,3,4,5]"
 
     # MF 결과값이 있는 경우
-    if len(mf_sool_list_str) != 0:
+    if q_res is not None:
+        mf_sool_list_str = q_res[0]
         # 문자열을 배열 기본형으로 변환
         mf_sool_list = ast.literal_eval(mf_sool_list_str)
 
