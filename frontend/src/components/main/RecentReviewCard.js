@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import newtag from "assets/img/newtag.png";
-import { Grid, Typography } from "@mui/material";
+import { Box, Grid, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { recentReview } from "../../api/mainpageAPI";
 
@@ -16,18 +16,30 @@ export default function RecentReviewCard() {
     const convert = list.map((item, index) => {
       return (
         <Grid
+          container
+          direction="row"
           key={index}
           className="gridItem"
           onClick={() => {
             onClick(item.alcohol_no);
           }}
-          id="grid-clickable"
         >
-          <Typography display="inline-flex">
+          <Grid
+            item
+            xs
+            sx={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              fontSize: "18px",
+            }}
+          >
             &nbsp;{item.ranking}.&nbsp;
             {item.alcohol_name}
-          </Typography>
-          {checkToday(item.reg_date)}
+          </Grid>
+          <Grid item xs={2} textAlign="center" alignItems="center">
+            {checkToday(item.reg_date)}
+          </Grid>
         </Grid>
       );
     });
@@ -68,11 +80,7 @@ export default function RecentReviewCard() {
       todayMonth === Number(date.slice(5, 7)) &&
       todayDate === Number(date.slice(8, 10))
     ) {
-      return (
-        <div>
-          <img src={newtag} alt="신규" />
-        </div>
-      );
+      return <img src={newtag} alt="신규" />;
     }
   };
 
@@ -86,31 +94,22 @@ export default function RecentReviewCard() {
           justifyContent="center"
           alignItems="flex-start"
           columnGap={2}
+          flexWrap="nowrap"
         >
-          <Grid
-            xs
-            item
-            container
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-          >
-            {reviewList[0].map(item => {
-              return item;
-            })}
-          </Grid>
-          {reviewList[1]?.length > 0 ? (
-            <Grid
-              xs
-              item
-              container
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
-            >
-              {reviewList[1].map(item => {
+          <Grid xs={6} item>
+            <Stack>
+              {reviewList[0].map(item => {
                 return item;
               })}
+            </Stack>
+          </Grid>
+          {reviewList[1]?.length > 0 ? (
+            <Grid xs={6} item>
+              <Stack>
+                {reviewList[1].map(item => {
+                  return item;
+                })}
+              </Stack>
             </Grid>
           ) : null}
         </Grid>
@@ -146,17 +145,13 @@ const StyledWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  #grid-clickable {
-    cursor: pointer;
-  }
-
   .gridItem {
+    cursor: pointer;
     border: 2px solid #ffffff;
     border-radius: 5px;
     padding: 5px 5px;
     margin: 5px 0;
     width: 100%;
-    display: flex;
     align-items: center;
     justify-content: space-between;
 
@@ -174,10 +169,6 @@ const StyledWrapper = styled.div`
   }
 
   img {
-    width: 24px;
-    margin-right: 7px;
-  }
-  div img {
-    margin-left: 7px;
+    width: 28px;
   }
 `;
