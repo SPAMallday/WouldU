@@ -56,7 +56,7 @@ export default function Chart(prop) {
             </div>
           ) : (
             <div>
-              <h3 id="title">같은 유형의 주종 차트</h3>
+              <h3 id="title">"{prop.cateName}" 유형의 주종 차트</h3>
 
               {prop.othercateData.length > 0 ? null : (
                 <div id="reviewnull1">완료된 리뷰가 없습니다.😥</div>
@@ -79,17 +79,6 @@ export default function Chart(prop) {
           {alignment2 === "left" ? (
             <div>
               <h3 id="title">{prop.userName}님이 먹은 술의 평균값</h3>
-              {/* <div style={{ textAlign: "right" }}>
-                <ToggleButtonGroup
-                  value={alignment2}
-                  exclusive
-                  onChange={handleAlignment2}
-                  id="tgbutton"
-                >
-                  <ToggleButton value="left">MY</ToggleButton>
-                  <ToggleButton value="right">유형별</ToggleButton>
-                </ToggleButtonGroup>
-              </div> */}
               {prop.rateData && prop.rateData.length > 0 ? (
                 prop.rateData[0].rating === 0 ? (
                   <div id="reviewnull">현재 등록된 평가가 없습니다.😥</div>
@@ -99,7 +88,7 @@ export default function Chart(prop) {
             </div>
           ) : (
             <div>
-              <h3 id="title">같은 유형이 먹은 술의 평균값</h3>
+              <h3 id="title">"{prop.cateName}" 유형이 먹은 술의 평균값</h3>
 
               <Barchart rateData={prop.otherrateData} />
             </div>
