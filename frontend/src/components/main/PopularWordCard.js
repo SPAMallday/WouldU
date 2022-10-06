@@ -11,7 +11,7 @@ import eight from "assets/img/number/eight.png";
 import nine from "assets/img/number/nine.png";
 import ten from "assets/img/number/ten.png";
 import { useNavigate } from "react-router-dom";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material";
 import { likeRanking } from "../../api/mainpageAPI";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper";
@@ -31,15 +31,27 @@ export default function PopularWordCard() {
     const convert = list.map((item, index) => {
       return (
         <Grid
+          container
+          direction="row"
           key={index}
           className="gridItem"
           onClick={() => {
             onClick(item.alcohol_no);
           }}
-          id="grid-clickable"
         >
-          <img src={imgList[index]} alt={index + 1} />
-          <Typography display="inline-flex">{item.alcohol_name}</Typography>
+          <Grid
+            item
+            xs
+            sx={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              fontSize: "18px",
+            }}
+          >
+            <img src={imgList[index]} alt={index + 1} />
+            {item.alcohol_name}
+          </Grid>
         </Grid>
       );
     });
@@ -79,31 +91,22 @@ export default function PopularWordCard() {
           justifyContent="center"
           alignItems="flex-start"
           columnGap={2}
+          flexWrap="nowrap"
         >
-          <Grid
-            xs
-            item
-            container
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-          >
-            {popularList[0].map(item => {
-              return item;
-            })}
-          </Grid>
-          {popularList[1]?.length > 0 ? (
-            <Grid
-              xs
-              item
-              container
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
-            >
-              {popularList[1].map(item => {
+          <Grid xs={6} item>
+            <Stack>
+              {popularList[0].map(item => {
                 return item;
               })}
+            </Stack>
+          </Grid>
+          {popularList[1]?.length > 0 ? (
+            <Grid xs={6} item>
+              <Stack>
+                {popularList[1].map(item => {
+                  return item;
+                })}
+              </Stack>
             </Grid>
           ) : null}
         </Grid>
@@ -136,11 +139,8 @@ const StyledWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  #grid-clickable {
-    cursor: pointer;
-  }
-
   .gridItem {
+    cursor: pointer;
     border: 2px solid #ecdfc8;
     border-radius: 5px;
     padding: 5px 5px;
