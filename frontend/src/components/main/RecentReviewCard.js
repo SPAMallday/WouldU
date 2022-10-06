@@ -27,7 +27,7 @@ export default function RecentReviewCard() {
             &nbsp;{item.ranking}.&nbsp;
             {item.alcohol_name}
           </Typography>
-          {/* {checkToday(item.reg_date)} */}
+          {checkToday(item.reg_date)}
         </Grid>
       );
     });
