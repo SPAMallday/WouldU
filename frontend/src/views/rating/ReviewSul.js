@@ -60,12 +60,12 @@ export default function ReviewBefore() {
   }, []);
 
   const onClick = () => {
-    console.log(sweet);
-    console.log(sour);
-    console.log(body);
-    console.log(smell);
-    console.log(value);
-    console.log(comment);
+    // console.log(sweet);
+    // console.log(sour);
+    // console.log(body);
+    // console.log(smell);
+    // console.log(value);
+    // console.log(comment);
   };
 
   const onClickD = () => {

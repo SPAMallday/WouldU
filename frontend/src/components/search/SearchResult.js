@@ -19,7 +19,7 @@ export default function SearchResult({ searchData, params, setParams }) {
 
   useEffect(() => {
     if (searchData.length > 0) {
-      console.log(searchData[0].total_count);
+      // console.log(searchData[0].total_count);
       setTotalPage(searchData[0].total_count);
     }
   }, [searchData]);

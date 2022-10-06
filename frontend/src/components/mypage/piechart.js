@@ -4,11 +4,11 @@ import { ResponsivePie } from "@nivo/pie";
 const Piechart = prop => {
   const handle = {
     padClick: data => {
-      console.log(data);
+      // console.log(data);
     },
 
     legendClick: data => {
-      console.log(data);
+      // console.log(data);
     },
   };
 

@@ -23,7 +23,7 @@ export const recentReview = async () => {
     const res = await apiClient.get(`/review-ranking`);
     return res.data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
@@ -33,6 +33,6 @@ export const likeRanking = async () => {
     const res = await apiClient.get(`/like-ranking`);
     return res.data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };

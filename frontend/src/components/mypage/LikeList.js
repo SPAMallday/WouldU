@@ -21,7 +21,7 @@ import "swiper/css/navigation";
 export default function LikeList(prop) {
   const navigate = useNavigate();
   const onClickItem = item => {
-    console.log(item);
+    // console.log(item);
     navigate("/detail/" + item.alcohol_no);
   };
 

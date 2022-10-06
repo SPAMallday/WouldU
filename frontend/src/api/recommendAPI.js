@@ -12,7 +12,7 @@ export const userRecom = async () => {
     const res = await apiClient.get(`/recommend/user/${user_no}`);
     return res.data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
@@ -29,7 +29,7 @@ export const alcoholDetail = async al_no => {
     );
     return res.data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
@@ -39,7 +39,7 @@ export const alcoholreview = async data => {
     const res = await apiClient.post(`/alcohol/review`, data);
     return res.data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
@@ -49,7 +49,7 @@ export const alcoholLike = async data => {
     const res = await apiClient.post(`/alcohol/like`, data);
     return res.data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
@@ -59,7 +59,7 @@ export const similaralcohol = async no => {
     const res = await apiClient.get(`/alcohol/similar-alcohol/${no}`);
     return res.data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
@@ -69,7 +69,7 @@ export const reviewalcohol = async no => {
     const res = await apiClient.get(`alcohol/review/${no}`);
     return res.data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
@@ -79,7 +79,7 @@ export const onceRecom = async data => {
     const res = await apiClient.post(`/recommend/once`, data);
     return res.data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
@@ -95,7 +95,7 @@ export const getRecord = async data => {
     });
     return res.data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
@@ -112,7 +112,7 @@ export const makeRecord = async data => {
     });
     return res;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return err.response;
   }
 };

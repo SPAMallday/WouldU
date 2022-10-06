@@ -72,14 +72,14 @@ export default function ReviewList(prop) {
               });
             })
             .catch(err => {
-              console.log(err);
+              // console.log(err);
             });
 
           break;
         case "NO":
           break;
         default:
-          console.log("error");
+        // console.log("error");
       }
     });
   };

@@ -4,11 +4,11 @@ import { ResponsiveBar } from "@nivo/bar";
 const Barchart = prop => {
   const handle = {
     barClick: data => {
-      console.log(data);
+      // console.log(data);
     },
 
     legendClick: data => {
-      console.log(data);
+      // console.log(data);
     },
   };
 
