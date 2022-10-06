@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from recommend.views import mf_renew
+from apps.recommend.views import mf_renew
 
 
 class Command(BaseCommand):
