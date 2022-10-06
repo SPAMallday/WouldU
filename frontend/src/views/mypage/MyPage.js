@@ -28,6 +28,8 @@ export default function MyPage() {
   const [mycateData, setmyCateData] = useState([]);
   const [othercateData, setotherCateData] = useState([]);
 
+  const [cateName, setCateName] = useState("");
+
   const [rateData, setRateData] = useState([]);
   const [otherrateData, setotherRateData] = useState([]);
   const [spaceData, setSpaceData] = useState([]);
@@ -49,6 +51,10 @@ export default function MyPage() {
             { id: data.alcohol_type, value: data.count },
           ]);
         } else {
+          if (cateName === "") {
+            setCateName(data.TYPE);
+          }
+
           if (data.count > 0) {
             setotherCateData(cateData => [
               ...cateData,
@@ -161,6 +167,7 @@ export default function MyPage() {
               </div>
               <Chart
                 userName={userName}
+                cateName={cateName}
                 cateData={mycateData}
                 rateData={rateData}
                 othercateData={othercateData}
