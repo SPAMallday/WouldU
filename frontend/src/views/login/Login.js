@@ -175,6 +175,7 @@ const StyledWrapper = styled.div`
 
   #input_area2 {
     width: 250px;
+    font-family: "GD";
   }
 
   #inputH {

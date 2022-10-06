@@ -103,6 +103,7 @@ const PgStyle = styled.div`
   }
 
   ul.pagination li {
+    cursor: pointer;
     display: inline-block;
     width: 40px;
     height: 40px;
