@@ -158,7 +158,7 @@ export default function MyPage() {
                     id="btnSummary"
                     size="large"
                   >
-                    <BarChartIcon sx={{ fontSize: 40, color: "#ffa500" }} />
+                    <BarChartIcon sx={{ fontSize: 40, color: "#F1A7AC" }} />
                   </IconButton>
                   <IconButton onClick={onClickList}>
                     <StarIcon sx={{ fontSize: 40, color: "gray" }} />
@@ -197,7 +197,7 @@ export default function MyPage() {
                     <BarChartIcon sx={{ fontSize: 40, color: "#gray" }} />
                   </IconButton>
                   <IconButton onClick={onClickList}>
-                    <StarIcon sx={{ fontSize: 40, color: "#ffa500" }} />
+                    <StarIcon sx={{ fontSize: 40, color: "#F8CD77" }} />
                   </IconButton>
                 </div>
               </div>
