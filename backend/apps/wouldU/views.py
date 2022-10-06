@@ -43,20 +43,38 @@ def RankingAPI(request):
 @permission_classes([AllowAny])
 def RecentReviewAPI(request):
     cursor = connection.cursor()
-    cursor.execute('''SELECT a.alcohol_no
-                           , a.alcohol_name
-                           , @ROWNUM := @ROWNUM + 1 ranking
-                        FROM (SELECT distinct b.alcohol_no
-                                   , b.alcohol_name as alcohol_name
-                                FROM review a
-                                   , alcohol b
-                               WHERE 1=1
-                                 AND a.alcohol_no = b.alcohol_no
-                               ORDER BY a.reg_date desc 
-                               LIMIT 0, 10 
+    # cursor.execute('''SELECT a.alcohol_no
+    #                        , a.alcohol_name
+    #                        , @ROWNUM := @ROWNUM + 1 ranking
+    #                     FROM (SELECT distinct b.alcohol_no
+    #                                , b.alcohol_name as alcohol_name
+    #                             FROM review a
+    #                                , alcohol b
+    #                            WHERE 1=1
+    #                              AND a.alcohol_no = b.alcohol_no
+    #                            ORDER BY a.reg_date desc 
+    #                            LIMIT 0, 10 
+    #                          ) a
+    #                        , (SELECT @ROWNUM := 0) b
+    #                 ''')
+    cursor.execute('''SELECT a.*				
+                           , @ROWNUM := @ROWNUM + 1 ranking  
+                        FROM (SELECT *
+                                FROM (SELECT b.alcohol_no
+                                           , b.alcohol_name as alcohol_name
+                                           , a.reg_date
+                                       FROM review a
+                                           , alcohol b
+                                       WHERE 1=1
+                                         AND a.alcohol_no = b.alcohol_no
+                                       ORDER BY a.reg_date desc 
+                                     ) a
+                               GROUP BY a.alcohol_no, a.alcohol_name
                              ) a
-                           , (SELECT @ROWNUM := 0) b
-                    ''')
+                           , (SELECT @ROWNUM := 0) b   
+                       LIMIT 0, 10
+                     ;
+                  ''')
 #     try:
 #         cursor.execute(query)
 #     except:
