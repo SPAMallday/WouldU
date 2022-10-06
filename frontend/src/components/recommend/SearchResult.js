@@ -30,6 +30,7 @@ export default function SearchResult(props) {
             searchData.map(result => (
               <div
                 key={`detail + ${result.alcohol_no}`}
+                id="result-one"
                 onClick={() => {
                   setHandleClick(true);
                   setReviewTarget({
@@ -87,6 +88,9 @@ const StyledWrapper = styled.div`
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 20px;
+  }
+  #result-one {
+    cursor: pointer;
   }
 `;
 
