@@ -55,7 +55,7 @@ def MyFavAlcoholAPI(request):
                         WHERE 1=1
                           AND a.user_no = {user_no}
                           AND a.user_kind = b.user_kind_code
-                          AND a.user_kind = c.user_kind_code
+                          AND a.user_kind = c.kind_code
                     ''')
     kind_result = cursor.fetchone()
     user_kind = kind_result[0]
@@ -104,7 +104,7 @@ def MyAlcoholStatisticsAPI(request):
                         WHERE 1=1
                           AND a.user_no = {user_no}
                           AND a.user_kind = b.user_kind_code
-                          AND a.user_kind = c.user_kind_code
+                          AND a.user_kind = c.kind_code
                     ''')
     kind_result = cursor.fetchone()
     user_kind = kind_result[0]
