@@ -22,11 +22,11 @@ export default function SearchForRecommendPage() {
   });
 
   useEffect(() => {
-    console.log(params);
+    // console.log(params);
     search(params).then(res => {
       setSearchData(res);
 
-      console.log(res);
+      // console.log(res);
     });
   }, [params]);
 

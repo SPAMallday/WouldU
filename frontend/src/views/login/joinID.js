@@ -60,7 +60,7 @@ export default function JoinID() {
   // 비밀번호 확인용
   /** 
   useEffect(() => {
-    console.log(inputPWD);
+    // console.log(inputPWD);
     if(inputPw === inputPWD){
       setPassOk(true);
     }else {
@@ -157,7 +157,7 @@ export default function JoinID() {
       }
     } else {
       swal("Error!", "아이디 중복확인 필수!", "error");
-      console.log(false);
+      // console.log(false);
       //이동막기
       event.preventDefault();
     }

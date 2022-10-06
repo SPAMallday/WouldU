@@ -6,7 +6,7 @@ export default function RadarChart(props) {
 
   useEffect(() => {
     if (props === undefined) {
-      console.log("unde");
+      // console.log("unde");
     } else {
       setData(props.tasteData);
     }

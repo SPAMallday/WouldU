@@ -40,7 +40,7 @@ export default function ResultFiltering(props) {
       .fill()
       .map((v, i) => i + low);
 
-    console.log(convValue);
+    // console.log(convValue);
 
     onceRecom({
       sweet: Number(sweet),

@@ -19,11 +19,11 @@ export default function SearchPage() {
   // 정렬 버튼이 아직 없어서 그 부분 추가 안했음
   // 추가 하게 되면 sort <- 부분을 바꿔주면 됨
   useEffect(() => {
-    console.log(params);
+    // console.log(params);
     search(params).then(res => {
       setSearchData(res);
 
-      console.log(res);
+      // console.log(res);
     });
   }, [params]);
 

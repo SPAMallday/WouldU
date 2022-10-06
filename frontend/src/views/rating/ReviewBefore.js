@@ -33,7 +33,7 @@ export default function ReviewBefore() {
   }, []);
 
   const onClick = () => {
-    console.log(comment);
+    // console.log(comment);
   };
 
   const onClickD = () => {

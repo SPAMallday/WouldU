@@ -36,7 +36,7 @@ export default function BasedOnEvaluationPage() {
           "error",
         );
         userRank().then(res => {
-          console.log(res);
+          // console.log(res);
           setAlcohol([]);
 
           res.forEach((data, i) => {

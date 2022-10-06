@@ -22,11 +22,11 @@ export default function SearchOnce() {
   const [value, setValue] = useState([20, 30]);
 
   const onClick = () => {
-    console.log(sweet);
-    console.log(sour);
-    console.log(body);
-    console.log(smell);
-    console.log(value);
+    // console.log(sweet);
+    // console.log(sour);
+    // console.log(body);
+    // console.log(smell);
+    // console.log(value);
   };
 
   const alchol = [

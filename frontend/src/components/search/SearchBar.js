@@ -18,7 +18,7 @@ export default function SearchBar(props) {
   };
 
   const handleSubmitButton = () => {
-    console.log(searchQuery);
+    // console.log(searchQuery);
 
     setParams(prevState => ({ ...prevState, name: searchQuery, page: 1 }));
   };

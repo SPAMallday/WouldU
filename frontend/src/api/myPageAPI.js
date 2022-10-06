@@ -8,7 +8,7 @@ export const category = async () => {
     const res = await apiClient.get(`/mypage/my-fav-alcohol`);
     return res.data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
@@ -18,7 +18,7 @@ export const average = async () => {
     const res = await apiClient.get(`/mypage/my-alcohol`);
     return res.data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
@@ -28,7 +28,7 @@ export const space = async () => {
     const res = await apiClient.get(`/mypage/region`);
     return res.data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
@@ -38,7 +38,7 @@ export const mylike = async () => {
     const res = await apiClient.get(`/mypage/my-fav-list`);
     return res.data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
@@ -48,7 +48,7 @@ export const myreview = async () => {
     const res = await apiClient.get(`/mypage/my-review-list`);
     return res.data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
 
@@ -58,6 +58,6 @@ export const mydelete = async no => {
     const res = await apiClient.delete(`/mypage/review/${no}`);
     return res.data;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
