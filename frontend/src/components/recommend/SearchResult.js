@@ -79,7 +79,7 @@ const StyledWrapper = styled.div`
   width: 1800px;
   height: 620px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 
   #result {
