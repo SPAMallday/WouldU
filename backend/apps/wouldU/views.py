@@ -59,17 +59,15 @@ def RecentReviewAPI(request):
     #                 ''')
     cursor.execute('''SELECT a.*				
                            , @ROWNUM := @ROWNUM + 1 ranking  
-                        FROM (SELECT *
-                                FROM (SELECT b.alcohol_no
-                                           , b.alcohol_name as alcohol_name
-                                           , a.reg_date
-                                       FROM review a
-                                           , alcohol b
-                                       WHERE 1=1
-                                         AND a.alcohol_no = b.alcohol_no
-                                       ORDER BY a.reg_date desc 
-                                     ) a
-                               GROUP BY a.alcohol_no, a.alcohol_name
+                        FROM (SELECT b.alcohol_no
+                                   , b.alcohol_name as alcohol_name
+                                   , max(a.reg_date)
+                                FROM review a
+                                   , alcohol b
+                               WHERE 1=1
+                                 AND a.alcohol_no = b.alcohol_no
+                               GROUP BY b.alcohol_no, b.alcohol_name
+                               ORDER BY a.reg_date desc 
                              ) a
                            , (SELECT @ROWNUM := 0) b   
                        LIMIT 0, 10
