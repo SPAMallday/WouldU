@@ -144,6 +144,7 @@ const StyledWrapper = styled.div`
   }
 
   #reviewnull {
+    margin-top: 10%;
     font-size: 30px;
   }
 `;

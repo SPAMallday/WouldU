@@ -186,6 +186,7 @@ const StyledWrapper = styled.div`
     margin: 0px 20px 10px;
     font-size: 20px;
     position: relative;
+    width: 100%;
   }
   #information div {
     margin: 0px 5px 3px;
