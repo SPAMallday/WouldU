@@ -200,6 +200,7 @@ const StyledWrapper = styled.div`
     display: flex;
     width: 300px;
     margin-top: 1rem;
+    margin-bottom: 1rem;
     justify-content: space-evenly;
   }
   #goshop {
