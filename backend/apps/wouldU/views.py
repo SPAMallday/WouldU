@@ -61,13 +61,13 @@ def RecentReviewAPI(request):
                            , @ROWNUM := @ROWNUM + 1 ranking  
                         FROM (SELECT b.alcohol_no
                                    , b.alcohol_name as alcohol_name
-                                   , max(a.reg_date) as reg_date
+                                   , MAX(a.reg_date) as reg_date
                                 FROM review a
                                    , alcohol b
                                WHERE 1=1
                                  AND a.alcohol_no = b.alcohol_no
                                GROUP BY b.alcohol_no, b.alcohol_name
-                               ORDER BY a.reg_date desc 
+                               ORDER BY MAX(a.reg_date) desc 
                              ) a
                            , (SELECT @ROWNUM := 0) b   
                        LIMIT 0, 10
